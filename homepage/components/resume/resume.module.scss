@@ -1,0 +1,11 @@
+.line {
+  line-height: 1.5;
+  max-width: 50%; // Default size for phone-sized screens.
+  text-align: center;
+}
+
+@media (min-width: 500px) {
+  .line {
+    max-width: 33%;
+  }
+}
