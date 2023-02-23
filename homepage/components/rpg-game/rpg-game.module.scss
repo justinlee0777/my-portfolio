@@ -1,7 +1,21 @@
-.rpgGame {
-  background-color: white;
-  flex: 1;
+.content {
   height: 66vh;
   max-height: 600px;
+  position: relative;
   width: 90%;
+}
+
+.rpgGame {
+  background-color: white;
+  height: 100%;
+  width: 100%;
+}
+
+.outOfFocusMessage {
+  left: 50%;
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  user-select: none;
 }
