@@ -1,7 +1,7 @@
-import DeveloperDescription from "./components/developer-description/developer-description";
-import Resume from "./components/resume/resume";
-import RpgGame from "./components/rpg-game/rpg-game";
-import Slide from "./components/slide/slide";
+import DeveloperDescription from './components/developer-description/developer-description';
+import Resume from './components/resume/resume';
+import RpgGame from './components/rpg-game/rpg-game';
+import Slide from './components/slide/slide';
 
 function HomePage() {
   const content = [

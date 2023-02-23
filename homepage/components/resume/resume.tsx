@@ -1,4 +1,4 @@
-import styles from "./resume.module.scss";
+import styles from './resume.module.scss';
 
 export default function Resume(): JSX.Element {
   return (
@@ -8,17 +8,17 @@ export default function Resume(): JSX.Element {
         host it myself. All for fun.
       </p>
       <p className={styles.line}>
-        I have worked with{" "}
+        I have worked with{' '}
         <a href="https://www.unboundcommerce.com" rel="noopener noreferrer">
           Unbound Commerce
-        </a>{" "}
-        and{" "}
+        </a>{' '}
+        and{' '}
         <a
           href="https://www.sap.com/products/crm/e-commerce-platforms.html"
           rel="noopener noreferrer"
         >
           SAP
-        </a>{" "}
+        </a>{' '}
         to make B2B websites a bit more complex than this one.
       </p>
       <p className={styles.line}>Though these are more fun.</p>

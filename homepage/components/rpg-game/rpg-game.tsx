@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import styles from "./rpg-game.module.scss";
+import { useEffect, useState } from 'react';
+import styles from './rpg-game.module.scss';
 
-const iframeId = "rpg-game-iframe";
+const iframeId = 'rpg-game-iframe';
 
 export default function RpgGame(): JSX.Element {
   const [gameOpened, setGameOpened] = useState<boolean>(false);
@@ -24,11 +24,11 @@ export default function RpgGame(): JSX.Element {
   useEffect(() => {
     // Block scrolling if iframe is focused.
     if (focused) {
-      document.body.style.overflow = "hidden";
+      document.body.style.overflow = 'hidden';
 
       // If the user tries to scroll outside of the iframe with their mouse wheel, we lose focus on the iframe.
       document.body.addEventListener(
-        "mousewheel",
+        'mousewheel',
         () => {
           iframeRef?.blur();
           setFocused(false);
@@ -36,7 +36,7 @@ export default function RpgGame(): JSX.Element {
         { passive: true, once: true }
       );
     } else {
-      document.body.style.overflow = "";
+      document.body.style.overflow = '';
     }
   }, [focused]);
 

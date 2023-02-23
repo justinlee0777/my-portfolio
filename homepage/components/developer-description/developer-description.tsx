@@ -1,4 +1,4 @@
-import styles from "./developer-description.module.scss";
+import styles from './developer-description.module.scss';
 
 export default function DeveloperDescription(): JSX.Element {
   return (
