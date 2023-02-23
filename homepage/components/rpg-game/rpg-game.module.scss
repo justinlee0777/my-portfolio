@@ -5,6 +5,13 @@
   width: 90%;
 }
 
+.openGame {
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .rpgGame {
   background-color: white;
   height: 100%;

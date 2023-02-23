@@ -55,7 +55,7 @@ export default function RpgGame(): JSX.Element {
     }
 
     content = (
-      <div className={styles.content}>
+      <>
         {outOfFocusMessage}
         <iframe
           id={iframeId}
@@ -64,18 +64,22 @@ export default function RpgGame(): JSX.Element {
           src="/rpg-game/index.html"
           ref={(ref) => (iframeRef = ref)}
         />
-      </div>
+      </>
     );
   } else {
     content = (
-      <button onClick={() => setGameOpened(true)}>Click to play</button>
+      <button className={styles.openGame} onClick={() => setGameOpened(true)}>
+        Click to play
+      </button>
     );
   }
+
+  const contentContainer = <div className={styles.content}>{content}</div>;
 
   return (
     <>
       <h2>Puzzle-like Role Playing Game</h2>
-      {content}
+      {contentContainer}
     </>
   );
 }
