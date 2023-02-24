@@ -1,4 +1,5 @@
 import { renderToString } from 'react-dom/server';
+import { Theme } from './theme.enum';
 
 interface Link {
   /** Use ${link text content} to replace with links. The number of ${link text content} should be equal to the number of elements in the 'urls', and the order should be the same. */
@@ -50,12 +51,18 @@ export interface RpgGameConfig {
 }
 
 export interface HomepageConfig {
+  defaults: {
+    theme: Theme;
+  };
   developerDescription: DeveloperDescriptionConfig;
   resume: ResumeConfig;
   rpgGame: RpgGameConfig;
 }
 
 export const homepageConfig: HomepageConfig = {
+  defaults: {
+    theme: Theme.SEA,
+  },
   developerDescription: {
     textContent: {
       name: 'Justin Lee',

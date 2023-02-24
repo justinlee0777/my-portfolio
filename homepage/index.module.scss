@@ -1,0 +1,20 @@
+.homepage {
+  transition: 1s color, 1s background-color;
+}
+
+.theme {
+  &-Sea {
+    background-color: seashell;
+    color: seagreen;
+  }
+
+  &-StarryNight {
+    background-color: midnightblue;
+    color: ivory;
+  }
+
+  &-SalmonBisque {
+    background-color: bisque;
+    color: salmon;
+  }
+}
