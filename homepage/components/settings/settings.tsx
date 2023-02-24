@@ -1,33 +1,35 @@
 import styles from './settings.module.scss';
 
 import { Theme } from '../../theme.enum';
+import RadioGroup, {
+  RadioGroupOption,
+} from '../../../components/radiogroup/radiogroup';
 
 export interface SettingsProps {
+  selectedOption: string;
   onThemeChange: (theme: Theme) => void;
 }
 
 export default function Settings({
+  selectedOption,
   onThemeChange,
 }: SettingsProps): JSX.Element {
   const themes = Object.entries(Theme);
 
-  const themeOptions = themes.map((theme) => (
-    <option value={theme[0]} key={theme[1]}>
-      {theme[1]}
-    </option>
-  ));
+  const themingOptions: Array<RadioGroupOption> = themes.map((theme) => ({
+    key: theme[1],
+    label: theme[1],
+    value: theme[0],
+  }));
 
   const themingSelect = (
-    <>
-      <label htmlFor="theming-select">Theming</label>...
-      <select
-        id="theming-select"
-        className={styles.selectTheme}
-        onInput={(event) => onThemeChange(Theme[event.currentTarget.value])}
-      >
-        {themeOptions}
-      </select>
-    </>
+    <RadioGroup
+      legend="Theming"
+      name="theming"
+      options={themingOptions}
+      selectedOption={selectedOption}
+      onSelect={(themeKey) => onThemeChange(Theme[themeKey])}
+    />
   );
 
   return (

@@ -1,0 +1,34 @@
+.radioGroupContainer {
+  font-size: 12px;
+  position: relative;
+}
+
+.radioGroup {
+  border-style: solid;
+  border-width: 2px;
+  transition: 0.5s border, 0.5s padding;
+
+  &Unopened {
+    border: 0;
+    padding: 0;
+  }
+}
+
+.expand {
+  background: transparent;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 50%;
+  font-weight: bold;
+  height: 24px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform: rotate(135deg);
+  transition: 0.5s transform;
+  width: 24px;
+
+  &Unactivated {
+    transform: rotate(0deg);
+  }
+}

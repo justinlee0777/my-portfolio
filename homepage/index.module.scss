@@ -4,17 +4,53 @@
 
 .theme {
   &-Sea {
-    background-color: seashell;
-    color: seagreen;
+    $backgroundColor: seashell;
+    $color: seagreen;
+
+    background-color: $backgroundColor;
+    color: $color;
+
+    button {
+      background-color: $backgroundColor;
+      color: $color;
+    }
+
+    * {
+      border-color: $color;
+    }
   }
 
   &-StarryNight {
-    background-color: midnightblue;
-    color: ivory;
+    $backgroundColor: midnightblue;
+    $color: ivory;
+
+    background-color: $backgroundColor;
+    color: $color;
+
+    button {
+      background-color: $backgroundColor;
+      color: $color;
+    }
+
+    * {
+      border-color: $color;
+    }
   }
 
   &-SalmonBisque {
-    background-color: bisque;
-    color: salmon;
+    $backgroundColor: bisque;
+    $color: salmon;
+
+    background-color: $backgroundColor;
+    color: $color;
+
+    button {
+      background-color: $backgroundColor;
+      color: $color;
+    }
+
+    * {
+      border-color: $color;
+    }
   }
 }

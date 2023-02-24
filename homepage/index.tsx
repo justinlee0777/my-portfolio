@@ -17,7 +17,11 @@ function HomePage() {
       key="developer-description"
       config={homepageConfig.developerDescription}
     />,
-    <Settings key="settings" onThemeChange={(theme) => setTheme(theme)} />,
+    <Settings
+      key="settings"
+      selectedOption={theme}
+      onThemeChange={(theme) => setTheme(theme)}
+    />,
     <RpgGame key="rpg-game" config={homepageConfig.rpgGame} />,
     <Resume key="resume" config={homepageConfig.resume} />,
   ];
