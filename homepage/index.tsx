@@ -2,12 +2,16 @@ import DeveloperDescription from './components/developer-description/developer-d
 import Resume from './components/resume/resume';
 import RpgGame from './components/rpg-game/rpg-game';
 import Slide from './components/slide/slide';
+import { homepageConfig } from './homepage.config';
 
 function HomePage() {
   const content = [
-    <DeveloperDescription key="developer-description" />,
-    <RpgGame key="rpg-game" />,
-    <Resume key="resume" />,
+    <DeveloperDescription
+      key="developer-description"
+      config={homepageConfig.developerDescription}
+    />,
+    <RpgGame key="rpg-game" config={homepageConfig.rpgGame} />,
+    <Resume key="resume" config={homepageConfig.resume} />,
   ];
 
   const slides = content.map((component, i) => (

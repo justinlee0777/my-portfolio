@@ -1,9 +1,15 @@
 import { useEffect, useState } from 'react';
+
+import { RpgGameConfig } from '../../homepage.config';
 import styles from './rpg-game.module.scss';
 
 const iframeId = 'rpg-game-iframe';
 
-export default function RpgGame(): JSX.Element {
+export default function RpgGame({
+  config,
+}: {
+  config: RpgGameConfig;
+}): JSX.Element {
   const [gameOpened, setGameOpened] = useState<boolean>(false);
   const [focused, setFocused] = useState<boolean>(false);
 
@@ -49,7 +55,7 @@ export default function RpgGame(): JSX.Element {
           className={styles.outOfFocusMessage}
           onClick={() => iframeRef?.focus()}
         >
-          You have lost control of the game. Please click to continue playing.
+          {config.textContent.outOfFocusMessage}
         </span>
       );
     }
@@ -61,7 +67,7 @@ export default function RpgGame(): JSX.Element {
           id={iframeId}
           className={styles.rpgGame}
           style={{ opacity: focused ? 1 : 0.5 }}
-          src="/rpg-game/index.html"
+          src={config.iframeUrl}
           ref={(ref) => (iframeRef = ref)}
         />
       </>
@@ -69,7 +75,7 @@ export default function RpgGame(): JSX.Element {
   } else {
     content = (
       <button className={styles.openGame} onClick={() => setGameOpened(true)}>
-        Click to play
+        {config.textContent.buttonText}
       </button>
     );
   }
@@ -78,7 +84,7 @@ export default function RpgGame(): JSX.Element {
 
   return (
     <>
-      <h2>Puzzle-like Role Playing Game</h2>
+      <h2>{config.textContent.header}</h2>
       {contentContainer}
     </>
   );
