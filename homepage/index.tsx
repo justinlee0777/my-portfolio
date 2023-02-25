@@ -12,10 +12,12 @@ import { SlideAnimation } from './slide-animation.enum';
 
 export interface HomepageProps {
   generatedProfilePictureUrl: string;
+  profilePicturePrompt: string;
 }
 
 export default function HomePage({
   generatedProfilePictureUrl,
+  profilePicturePrompt,
 }: HomepageProps): JSX.Element {
   const [theme, setTheme] = useState(homepageConfig.defaults.theme);
   const [animation, setAnimation] = useState(homepageConfig.defaults.animation);
@@ -65,6 +67,7 @@ export default function HomePage({
       key="developer-description"
       config={homepageConfig.developerDescription}
       generatedProfilePictureUrl={generatedProfilePictureUrl}
+      profilePicturePrompt={profilePicturePrompt}
     />,
     <Settings
       key="settings"

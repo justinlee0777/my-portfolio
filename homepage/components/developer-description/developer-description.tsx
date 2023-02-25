@@ -7,9 +7,11 @@ import { DeveloperDescriptionConfig } from '../../homepage.config';
 export default function DeveloperDescription({
   config,
   generatedProfilePictureUrl,
+  profilePicturePrompt,
 }: {
   config: DeveloperDescriptionConfig;
   generatedProfilePictureUrl: string;
+  profilePicturePrompt: string;
 }): JSX.Element {
   const [captionShown, setCaptionShown] = useState(false);
 
@@ -37,7 +39,7 @@ export default function DeveloperDescription({
         height={256}
       />
       <figcaption className={captionClassName}>
-        {config.textContent.profileCaption}
+        {config.textContent.profileCaption}: "{profilePicturePrompt}"
       </figcaption>
     </>
   );
