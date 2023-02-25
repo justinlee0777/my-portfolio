@@ -5,8 +5,10 @@ import RadioGroup, {
   RadioGroupOption,
 } from '../../../components/radiogroup/radiogroup';
 import { SlideAnimation } from '../../slide-animation.enum';
+import { SettingsConfig } from '../../homepage.config';
 
 export interface SettingsProps {
+  config: SettingsConfig;
   selectedTheme: string;
   selectedAnimation: string;
   onThemeChange: (theme: Theme) => void;
@@ -14,6 +16,7 @@ export interface SettingsProps {
 }
 
 export default function Settings({
+  config,
   selectedTheme,
   selectedAnimation,
   onThemeChange,
@@ -62,13 +65,10 @@ export default function Settings({
 
   return (
     <>
-      <h2 className={styles.settingsHeader}>What do you think of the site?</h2>
-      <h3>Doesn't look good?</h3>
+      <h2 className={styles.settingsHeader}>{config.textContent.header}</h2>
+      <h3>{config.textContent.subheader}</h3>
       <div>
-        <p>
-          You can change certain things with the site to suit your liking. Such
-          as...
-        </p>
+        <p>{config.textContent.prompt}</p>
         {themingSelect}
         {animationSelect}
       </div>

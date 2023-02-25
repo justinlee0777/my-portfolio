@@ -7,15 +7,17 @@ import Resume from './components/resume/resume';
 import RpgGame from './components/rpg-game/rpg-game';
 import Settings from './components/settings/settings';
 import Slide from './components/slide/slide';
-import { homepageConfig } from './homepage.config';
 import { SlideAnimation } from './slide-animation.enum';
+import { HomepageConfig } from './homepage.config';
 
 export interface HomepageProps {
+  homepageConfig: HomepageConfig;
   generatedProfilePictureUrl: string;
   profilePicturePrompt: string;
 }
 
 export default function HomePage({
+  homepageConfig,
   generatedProfilePictureUrl,
   profilePicturePrompt,
 }: HomepageProps): JSX.Element {
@@ -71,6 +73,7 @@ export default function HomePage({
     />,
     <Settings
       key="settings"
+      config={homepageConfig.settings}
       selectedTheme={theme}
       selectedAnimation={animation}
       onThemeChange={(theme) => setTheme(theme)}

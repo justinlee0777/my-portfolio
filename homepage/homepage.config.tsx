@@ -37,6 +37,14 @@ export interface DeveloperDescriptionConfig {
   };
 }
 
+export interface SettingsConfig {
+  textContent: {
+    header: string;
+    subheader: string;
+    prompt: string;
+  };
+}
+
 export interface ResumeConfig {
   textContent: {
     lines: Array<string | Link>;
@@ -58,47 +66,7 @@ export interface HomepageConfig {
     animation: SlideAnimation;
   };
   developerDescription: DeveloperDescriptionConfig;
+  settings: SettingsConfig;
   resume: ResumeConfig;
   rpgGame: RpgGameConfig;
 }
-
-export const homepageConfig: HomepageConfig = {
-  defaults: {
-    theme: Theme.SEA,
-    animation: SlideAnimation.NONE,
-  },
-  developerDescription: {
-    textContent: {
-      name: 'Justin Lee',
-      prompt: 'Who am I?',
-      tongueInCheck: 'Good question. I also am looking for that answer.',
-      profileCaption: 'Profile picture courtesy of OpenAI',
-    },
-  },
-  resume: {
-    textContent: {
-      lines: [
-        'I am a web developer. I built this site using React and Next.js, and I host it myself. All for fun.',
-        {
-          templateString:
-            'I have worked with ${Unbound Commerce} and ${SAP} to make B2B websites a bit more complex than this one.',
-          urls: [
-            'https://www.unboundcommerce.com',
-            'https://www.sap.com/products/crm/e-commerce-platforms.html',
-          ],
-        },
-        'Though these are more fun.',
-        'I loathe handing out résumés. The work is always more interesting. Contact me at _blank_ if the site amuses you or for anything else.',
-      ],
-    },
-  },
-  rpgGame: {
-    textContent: {
-      header: 'Puzzle-Like Role Playing Game',
-      outOfFocusMessage:
-        'You have lost control of the game. Please click to continue playing.',
-      buttonText: 'Click to play',
-    },
-    iframeUrl: '/rpg-game/index.html',
-  },
-};
