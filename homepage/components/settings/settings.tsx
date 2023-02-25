@@ -62,7 +62,7 @@ export default function Settings({
 
   return (
     <>
-      <h2>What do you think of the site?</h2>
+      <h2 className={styles.settingsHeader}>What do you think of the site?</h2>
       <h3>Doesn't look good?</h3>
       <div>
         <p>
