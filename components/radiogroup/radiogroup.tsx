@@ -9,6 +9,7 @@ export interface RadioGroupOption {
 }
 
 export interface RadioGroupProps {
+  className: string;
   legend: string;
   name: string;
   options: Array<RadioGroupOption>;
@@ -17,6 +18,7 @@ export interface RadioGroupProps {
 }
 
 export default function RadioGroup({
+  className,
   legend,
   name,
   options,
@@ -32,18 +34,17 @@ export default function RadioGroup({
 
   if (opened) {
     radioOptions = options.map((option) => (
-      <>
+      <div key={option.key} style={{ display: 'inline-block' }}>
         <input
           type="radio"
           id={option.key}
           name={name}
           value={option.value}
-          key={option.key}
           checked={option.key === selectedOption}
-          onClick={() => onSelect(option.value)}
+          onChange={() => onSelect(option.value)}
         />
         <label htmlFor={option.key}>{option.label}</label>
-      </>
+      </div>
     ));
   } else {
     radioGroupClassName = `${radioGroupClassName} ${styles.radioGroupUnopened}`;
@@ -51,7 +52,7 @@ export default function RadioGroup({
   }
 
   return (
-    <div className={styles.radioGroupContainer}>
+    <div className={`${styles.radioGroupContainer} ${className}`}>
       <fieldset className={radioGroupClassName}>
         <legend>{legend}</legend>
         {radioOptions}

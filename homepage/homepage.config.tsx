@@ -1,4 +1,5 @@
 import { renderToString } from 'react-dom/server';
+import { SlideAnimation } from './slide-animation.enum';
 import { Theme } from './theme.enum';
 
 interface Link {
@@ -53,6 +54,7 @@ export interface RpgGameConfig {
 export interface HomepageConfig {
   defaults: {
     theme: Theme;
+    animation: SlideAnimation;
   };
   developerDescription: DeveloperDescriptionConfig;
   resume: ResumeConfig;
@@ -62,6 +64,7 @@ export interface HomepageConfig {
 export const homepageConfig: HomepageConfig = {
   defaults: {
     theme: Theme.SEA,
+    animation: SlideAnimation.NONE,
   },
   developerDescription: {
     textContent: {
