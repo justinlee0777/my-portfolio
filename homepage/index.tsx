@@ -10,7 +10,13 @@ import Slide from './components/slide/slide';
 import { homepageConfig } from './homepage.config';
 import { SlideAnimation } from './slide-animation.enum';
 
-export default function HomePage(): JSX.Element {
+export interface HomepageProps {
+  generatedProfilePictureUrl: string;
+}
+
+export default function HomePage({
+  generatedProfilePictureUrl,
+}: HomepageProps): JSX.Element {
   const [theme, setTheme] = useState(homepageConfig.defaults.theme);
   const [animation, setAnimation] = useState(homepageConfig.defaults.animation);
   const [animatedSlides, setAnimatedSlides] = useState<Array<string>>([]);
@@ -58,6 +64,7 @@ export default function HomePage(): JSX.Element {
     <DeveloperDescription
       key="developer-description"
       config={homepageConfig.developerDescription}
+      generatedProfilePictureUrl={generatedProfilePictureUrl}
     />,
     <Settings
       key="settings"

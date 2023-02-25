@@ -33,6 +33,7 @@ export interface DeveloperDescriptionConfig {
     name: string;
     prompt: string;
     tongueInCheck: string;
+    profileCaption: string;
   };
 }
 
@@ -71,6 +72,7 @@ export const homepageConfig: HomepageConfig = {
       name: 'Justin Lee',
       prompt: 'Who am I?',
       tongueInCheck: 'Good question. I also am looking for that answer.',
+      profileCaption: 'Profile picture courtesy of OpenAI',
     },
   },
   resume: {

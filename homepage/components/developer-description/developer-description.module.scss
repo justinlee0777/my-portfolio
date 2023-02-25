@@ -3,3 +3,19 @@
 .developerTongueInCheck {
   text-align: center;
 }
+
+.generatedProfilePicture {
+  border-radius: 50%;
+}
+
+.profileCaption {
+  font-size: 12px;
+  margin-top: 12px;
+  // initial
+  opacity: 0;
+  transition: 1s opacity;
+
+  &Shown {
+    opacity: 1;
+  }
+}
