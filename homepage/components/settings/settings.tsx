@@ -6,61 +6,77 @@ import RadioGroup, {
 } from '../../../components/radiogroup/radiogroup';
 import { SlideAnimation } from '../../slide-animation.enum';
 import { SettingsConfig } from '../../homepage.config';
+import { Font } from '../../font.enum';
 
 export interface SettingsProps {
   config: SettingsConfig;
+  selectedFont: string;
   selectedTheme: string;
   selectedAnimation: string;
+  onFontChange: (font: Font) => void;
   onThemeChange: (theme: Theme) => void;
   onAnimationChange: (animation: SlideAnimation) => void;
 }
 
+interface SettingsSection {
+  enumeratedType: { [key: string]: string };
+  legend: string;
+  selectedValue: string;
+  onChange: (value: string) => void;
+}
+
 export default function Settings({
   config,
+  selectedFont,
   selectedTheme,
   selectedAnimation,
+  onFontChange,
   onThemeChange,
   onAnimationChange,
 }: SettingsProps): JSX.Element {
-  const themes = Object.entries(Theme);
-  const slideAnimations = Object.entries(SlideAnimation);
+  const sections: Array<SettingsSection> = [
+    {
+      enumeratedType: Font,
+      legend: 'Font',
+      selectedValue: selectedFont,
+      onChange: onFontChange,
+    },
+    {
+      enumeratedType: Theme,
+      legend: 'Theming',
+      selectedValue: selectedTheme,
+      onChange: onThemeChange,
+    },
+    {
+      enumeratedType: SlideAnimation,
+      legend: 'Animation',
+      selectedValue: selectedAnimation,
+      onChange: onAnimationChange,
+    },
+  ];
 
-  const themingOptions: Array<RadioGroupOption> = themes.map((theme) => ({
-    key: theme[1],
-    label: theme[1],
-    value: theme[0],
-  }));
+  const selects = sections.map(
+    ({ enumeratedType, legend, selectedValue, onChange }) => {
+      const values = Object.entries(enumeratedType);
 
-  const themingSelect = (
-    <RadioGroup
-      className={styles.selectGroup}
-      legend="Theming"
-      name="theming"
-      key="theming"
-      options={themingOptions}
-      selectedOption={selectedTheme}
-      onSelect={(themeKey) => onThemeChange(Theme[themeKey])}
-    />
-  );
+      const options: Array<RadioGroupOption> = values.map((value) => ({
+        key: value[1],
+        label: value[1],
+        value: value[0],
+      }));
 
-  const animationOptions: Array<RadioGroupOption> = slideAnimations.map(
-    (slideAnimation) => ({
-      key: slideAnimation[1],
-      label: slideAnimation[1],
-      value: slideAnimation[0],
-    })
-  );
-
-  const animationSelect = (
-    <RadioGroup
-      className={styles.selectGroup}
-      legend="Animation"
-      name="animation"
-      key="animation"
-      options={animationOptions}
-      selectedOption={selectedAnimation}
-      onSelect={(animation) => onAnimationChange(SlideAnimation[animation])}
-    />
+      return (
+        <RadioGroup
+          className={styles.selectGroup}
+          legend={legend}
+          name={legend.toLowerCase()}
+          key={legend.toLowerCase()}
+          options={options}
+          selectedOption={selectedValue}
+          onSelect={(key) => onChange(enumeratedType[key])}
+        />
+      );
+    }
   );
 
   return (
@@ -69,8 +85,7 @@ export default function Settings({
       <h3>{config.textContent.subheader}</h3>
       <div>
         <p>{config.textContent.prompt}</p>
-        {themingSelect}
-        {animationSelect}
+        {selects}
       </div>
     </>
   );

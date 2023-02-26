@@ -1,4 +1,6 @@
 import { renderToString } from 'react-dom/server';
+
+import { Font } from './font.enum';
 import { SlideAnimation } from './slide-animation.enum';
 import { Theme } from './theme.enum';
 
@@ -62,6 +64,7 @@ export interface RpgGameConfig {
 
 export interface HomepageConfig {
   defaults: {
+    font: Font;
     theme: Theme;
     animation: SlideAnimation;
   };

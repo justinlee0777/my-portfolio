@@ -21,6 +21,7 @@ export default function HomePage({
   generatedProfilePictureUrl,
   profilePicturePrompt,
 }: HomepageProps): JSX.Element {
+  const [font, setFont] = useState(homepageConfig.defaults.font);
   const [theme, setTheme] = useState(homepageConfig.defaults.theme);
   const [animation, setAnimation] = useState(homepageConfig.defaults.animation);
   const [animatedSlides, setAnimatedSlides] = useState<Array<string>>([]);
@@ -74,8 +75,10 @@ export default function HomePage({
     <Settings
       key="settings"
       config={homepageConfig.settings}
+      selectedFont={font}
       selectedTheme={theme}
       selectedAnimation={animation}
+      onFontChange={(font) => setFont(font)}
       onThemeChange={(theme) => setTheme(theme)}
       onAnimationChange={(animation) => {
         if (isFancyAnimation) {
@@ -108,10 +111,14 @@ export default function HomePage({
     );
   });
 
+  const fontClass = styles[`font-${font.replace(/ /g, '')}`];
   const themeClass = styles[`theme-${theme.replace(' ', '')}`];
 
   return (
-    <div className={`${styles.homepage} ${themeClass}`} ref={homepageRef}>
+    <div
+      className={`${styles.homepage} ${themeClass} ${fontClass}`}
+      ref={homepageRef}
+    >
       {slides}
     </div>
   );
