@@ -37,9 +37,21 @@
   }
 }
 
+.loadingScreen {
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
 .font {
   &-Arial {
     font-family: Arial, sans-serif;
+  }
+
+  &-Roboto {
+    font-family: 'Roboto', sans-serif;
   }
 
   &-ComicSansMS {
@@ -47,79 +59,39 @@
   }
 }
 
+@mixin applyTheme($backgroundColor, $color) {
+  background-color: $backgroundColor;
+  color: $color;
+
+  button,
+  .loadingScreen {
+    background-color: $backgroundColor;
+  }
+
+  button,
+  a {
+    color: $color;
+  }
+
+  input[type='radio'] {
+    accent-color: $color;
+  }
+
+  * {
+    border-color: $color;
+  }
+}
+
 .theme {
   &-Sea {
-    $backgroundColor: seashell;
-    $color: seagreen;
-
-    background-color: $backgroundColor;
-    color: $color;
-
-    button {
-      background-color: $backgroundColor;
-    }
-
-    button,
-    a {
-      color: $color;
-    }
-
-    input[type='radio'] {
-      accent-color: $color;
-    }
-
-    * {
-      border-color: $color;
-    }
+    @include applyTheme(seashell, seagreen);
   }
 
   &-StarryNight {
-    $backgroundColor: midnightblue;
-    $color: ivory;
-
-    background-color: $backgroundColor;
-    color: $color;
-
-    button {
-      background-color: $backgroundColor;
-    }
-
-    button,
-    a {
-      color: $color;
-    }
-
-    input[type='radio'] {
-      accent-color: $color;
-    }
-
-    * {
-      border-color: $color;
-    }
+    @include applyTheme(midnightblue, ivory);
   }
 
   &-SalmonBisque {
-    $backgroundColor: bisque;
-    $color: salmon;
-
-    background-color: $backgroundColor;
-    color: $color;
-
-    button {
-      background-color: $backgroundColor;
-    }
-
-    button,
-    a {
-      color: $color;
-    }
-
-    input[type='radio'] {
-      accent-color: $color;
-    }
-
-    * {
-      border-color: $color;
-    }
+    @include applyTheme(bisque, salmon);
   }
 }

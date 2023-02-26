@@ -1,0 +1,17 @@
+.loadingIcon {
+  display: flex;
+  flex-direction: row;
+  margin-top: 32px;
+}
+
+.loadingTick {
+  border-style: solid;
+  border-width: 6px;
+  height: 24px;
+  margin: 0 8px;
+  transition: 0.333s transform;
+
+  &.animated {
+    transform: translateY(-24px);
+  }
+}

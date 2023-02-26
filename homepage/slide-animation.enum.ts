@@ -4,3 +4,7 @@ export enum SlideAnimation {
   SWEEPY = 'Sweepy',
   // SCROLL_HIJACK = 'Scroll Hijack',
 }
+
+export function isFancyAnimation(animation: SlideAnimation): boolean {
+  return animation !== SlideAnimation.NONE;
+}

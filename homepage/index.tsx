@@ -7,8 +7,11 @@ import Resume from './components/resume/resume';
 import RpgGame from './components/rpg-game/rpg-game';
 import Settings from './components/settings/settings';
 import Slide from './components/slide/slide';
-import { SlideAnimation } from './slide-animation.enum';
+import { isFancyAnimation, SlideAnimation } from './slide-animation.enum';
 import { HomepageConfig } from './homepage.config';
+import LoadingScreen from './components/loading-screen/loading-screen';
+import { needsLoading } from './font.enum';
+import { loadFont } from './load-font.function';
 
 export interface HomepageProps {
   homepageConfig: HomepageConfig;
@@ -24,12 +27,24 @@ export default function HomePage({
   const [font, setFont] = useState(homepageConfig.defaults.font);
   const [theme, setTheme] = useState(homepageConfig.defaults.theme);
   const [animation, setAnimation] = useState(homepageConfig.defaults.animation);
+
+  const [loading, setLoading] = useState(false);
   const [animatedSlides, setAnimatedSlides] = useState<Array<string>>([]);
 
   const homepageRef = useRef<HTMLDivElement>(null);
 
   let intersectionObserver: IntersectionObserver;
 
+  // Loading fonts
+  useEffect(() => {
+    if (loading) {
+      loadFont(font).then(() => {
+        setLoading(false);
+      });
+    }
+  }, [loading, font]);
+
+  // Animating slides when the user scrolls over them
   useEffect(() => {
     if (isFancyAnimation(animation)) {
       const intersectedSlides: Array<string> = [];
@@ -65,6 +80,19 @@ export default function HomePage({
     }
   }, [animation, animatedSlides]);
 
+  let loadingScreen: JSX.Element;
+
+  if (loading) {
+    loadingScreen = (
+      <Slide
+        className={`${styles.slide} ${styles.loadingScreen}`}
+        key="loading-screen"
+      >
+        <LoadingScreen />
+      </Slide>
+    );
+  }
+
   const content = [
     <DeveloperDescription
       key="developer-description"
@@ -78,7 +106,10 @@ export default function HomePage({
       selectedFont={font}
       selectedTheme={theme}
       selectedAnimation={animation}
-      onFontChange={(font) => setFont(font)}
+      onFontChange={(font) => {
+        setFont(font);
+        setLoading(needsLoading(font));
+      }}
       onThemeChange={(theme) => setTheme(theme)}
       onAnimationChange={(animation) => {
         if (isFancyAnimation) {
@@ -120,10 +151,7 @@ export default function HomePage({
       ref={homepageRef}
     >
       {slides}
+      {loadingScreen}
     </div>
   );
-}
-
-function isFancyAnimation(animation: SlideAnimation): boolean {
-  return animation !== SlideAnimation.NONE;
 }
