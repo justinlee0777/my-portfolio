@@ -1,13 +1,14 @@
 import styles from './index.module.scss';
 
 import { useEffect, useRef, useState } from 'react';
+import classnames from 'classnames';
 
 import DeveloperDescription from './components/developer-description/developer-description';
 import Resume from './components/resume/resume';
 import RpgGame from './components/rpg-game/rpg-game';
 import Settings from './components/settings/settings';
 import Slide from './components/slide/slide';
-import { isFancyAnimation, SlideAnimation } from './slide-animation.enum';
+import { isFancyAnimation } from './slide-animation.enum';
 import { HomepageConfig } from './homepage.config';
 import LoadingScreen from './components/loading-screen/loading-screen';
 import { needsLoading } from './font.enum';
@@ -125,18 +126,20 @@ export default function HomePage({
 
   const slides = content.map((component, i) => {
     const id = `slide-${i}`;
-    const activated = animatedSlides.includes(id)
-      ? `slide-${animation.replace(' ', '')}-activated`
-      : '';
+
+    const animationString = animation.replace(' ', '');
+
+    const slideClassName = classnames(
+      styles.slide,
+      styles[`slide-${animationString}`],
+      {
+        [styles[`slide-${animationString}-activated`]]:
+          animatedSlides.includes(id),
+      }
+    );
 
     return (
-      <Slide
-        className={`${styles.slide} ${
-          styles[`slide-${animation.replace(' ', '')}`]
-        } ${styles[activated]}`}
-        id={id}
-        key={`slide-${i}`}
-      >
+      <Slide className={slideClassName} id={id} key={`slide-${i}`}>
         {component}
       </Slide>
     );
