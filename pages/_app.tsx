@@ -20,6 +20,7 @@ import {
   getPageDefaults,
   setPageDefaults,
 } from '../config/get-page-defaults.function';
+import OpenSettings from '../components/open-settings/open-settings';
 
 export default function MyApp({ Component, pageProps }): JSX.Element {
   const config: PageConfig = pageProps.pageConfig;
@@ -94,8 +95,21 @@ export default function MyApp({ Component, pageProps }): JSX.Element {
     },
   };
 
+  let settingsIcon: JSX.Element;
+
+  if (pageProps.openSettingsConfig) {
+    settingsIcon = (
+      <OpenSettings
+        className={styles.settingsMenu}
+        config={pageProps.openSettingsConfig}
+        {...stateProps}
+      />
+    );
+  }
+
   return (
     <div className={pageClassnames}>
+      {settingsIcon}
       <Component {...pageProps} {...stateProps} />
       {loadingScreen}
     </div>

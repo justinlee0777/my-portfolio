@@ -1,16 +1,14 @@
 import styles from './settings.module.scss';
 
-import RadioGroup, {
-  RadioGroupOption,
-} from '../../../components/radiogroup/radiogroup';
-import { SettingsConfig } from '../../homepage.config';
-import { Font, SlideAnimation, Theme } from '../../../config';
+import RadioGroup, { RadioGroupOption } from '../radiogroup/radiogroup';
+import { Font, SlideAnimation, Theme } from '../../config';
+import { SettingsConfig } from '../../config/settings.config';
 
 export interface SettingsProps {
   config: SettingsConfig;
-  selectedFont: string;
-  selectedTheme: string;
-  selectedAnimation: string;
+  font: string;
+  theme: string;
+  animation: string;
   onFontChange: (font: Font) => void;
   onThemeChange: (theme: Theme) => void;
   onAnimationChange: (animation: SlideAnimation) => void;
@@ -25,9 +23,9 @@ interface SettingsSection {
 
 export default function Settings({
   config,
-  selectedFont,
-  selectedTheme,
-  selectedAnimation,
+  font,
+  theme,
+  animation,
   onFontChange,
   onThemeChange,
   onAnimationChange,
@@ -36,19 +34,19 @@ export default function Settings({
     {
       enumeratedType: Font,
       legend: 'Font',
-      selectedValue: selectedFont,
+      selectedValue: font,
       onChange: onFontChange,
     },
     {
       enumeratedType: Theme,
       legend: 'Theming',
-      selectedValue: selectedTheme,
+      selectedValue: theme,
       onChange: onThemeChange,
     },
     {
       enumeratedType: SlideAnimation,
       legend: 'Animation',
-      selectedValue: selectedAnimation,
+      selectedValue: animation,
       onChange: onAnimationChange,
     },
   ];

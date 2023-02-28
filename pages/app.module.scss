@@ -1,4 +1,5 @@
 .page {
+  position: relative;
   transition: 1s color, 1s background-color;
 
   a {
@@ -28,13 +29,20 @@
   width: 100%;
 }
 
+.settingsMenu {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
 @mixin applyTheme($backgroundColor, $color) {
   background-color: $backgroundColor;
   color: $color;
 
   button,
   td,
-  .loadingScreen {
+  .loadingScreen,
+  .settingsMenu {
     background-color: $backgroundColor;
   }
 

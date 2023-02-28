@@ -1,0 +1,57 @@
+$iconWidth: 36px;
+$animationTime: 1s;
+
+.menu {
+  box-sizing: border-box;
+  height: 100%;
+  padding: 8px;
+  transform: translateX(calc(100% - ($iconWidth * 2)));
+  transition: $animationTime transform ease-in, $animationTime box-shadow;
+  width: 33%;
+}
+
+.menuOpened {
+  box-shadow: -2px 0px 4px rgb(0 0 0 / 20%);
+  transform: none;
+
+  .settings {
+    opacity: 1;
+  }
+
+  .menuTriangle {
+    transform: scale(-1, -1) translateX(-50%);
+  }
+}
+
+.menuIcon {
+  align-items: center;
+  border-style: solid;
+  display: flex;
+  flex-direction: row;
+  height: $iconWidth;
+  margin: 18px 18px 0 0;
+  padding: 0;
+  width: $iconWidth;
+}
+
+.menuTriangle {
+  border-color: transparent currentColor transparent transparent;
+
+  border-width: 8px;
+  border-style: solid;
+
+  transition: $animationTime transform;
+}
+
+.menuLine {
+  align-self: stretch;
+  border-left-width: 1px;
+  border-style: solid;
+  margin-left: auto;
+  margin-right: 8px;
+}
+
+.settings {
+  opacity: 0;
+  transition: $animationTime opacity;
+}

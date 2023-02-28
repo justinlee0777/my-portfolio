@@ -1,5 +1,3 @@
-import styles from './index.module.scss';
-
 import { BuzzwordBingo } from 'buzzword-bingo-generator';
 
 import Slide from '../components/slide/slide';

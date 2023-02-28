@@ -1,5 +1,7 @@
 import { renderToString } from 'react-dom/server';
 
+import { SettingsConfig } from '../config/settings.config';
+
 interface Link {
   /** Use ${link text content} to replace with links. The number of ${link text content} should be equal to the number of elements in the 'urls', and the order should be the same. */
   templateString: string;
@@ -32,14 +34,6 @@ export interface DeveloperDescriptionConfig {
     prompt: string;
     tongueInCheck: string;
     profileCaption: string;
-  };
-}
-
-export interface SettingsConfig {
-  textContent: {
-    header: string;
-    subheader: string;
-    prompt: string;
   };
 }
 

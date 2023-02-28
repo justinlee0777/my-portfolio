@@ -6,7 +6,7 @@ import classnames from 'classnames';
 import DeveloperDescription from './components/developer-description/developer-description';
 import Resume from './components/resume/resume';
 import RpgGame from './components/rpg-game/rpg-game';
-import Settings from './components/settings/settings';
+import Settings from '../components/settings/settings';
 import Slide from '../components/slide/slide';
 import { HomepageConfig } from './homepage.config';
 import { Theme, isFancyAnimation, SlideAnimation, Font } from '../config';
@@ -91,9 +91,9 @@ export default function HomePage({
     <Settings
       key="settings"
       config={homepageConfig.settings}
-      selectedFont={font}
-      selectedTheme={theme}
-      selectedAnimation={animation}
+      font={font}
+      theme={theme}
+      animation={animation}
       onFontChange={onFontChange}
       onThemeChange={onThemeChange}
       onAnimationChange={(animation) => {
