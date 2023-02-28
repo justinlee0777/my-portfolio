@@ -1,18 +1,20 @@
 $iconWidth: 36px;
+$iconMargin: 18px;
 $animationTime: 1s;
 
 .menu {
+  background-color: transparent;
   box-sizing: border-box;
-  height: 100%;
   padding: 8px;
-  transform: translateX(calc(100% - ($iconWidth * 2)));
-  transition: $animationTime transform ease-in, $animationTime box-shadow;
-  width: 33%;
+  transition: $animationTime width ease-in, $animationTime box-shadow,
+    $animationTime background-color;
+  width: $iconWidth + $iconMargin;
 }
 
 .menuOpened {
+  background-color: currentColor;
   box-shadow: -2px 0px 4px rgb(0 0 0 / 20%);
-  transform: none;
+  width: 33%;
 
   .settings {
     opacity: 1;
@@ -29,7 +31,7 @@ $animationTime: 1s;
   display: flex;
   flex-direction: row;
   height: $iconWidth;
-  margin: 18px 18px 0 0;
+  margin: $iconMargin $iconMargin 0 0;
   padding: 0;
   width: $iconWidth;
 }

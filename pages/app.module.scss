@@ -1,4 +1,7 @@
 .page {
+  display: flex;
+  flex-direction: row;
+  padding: 18px;
   position: relative;
   transition: 1s color, 1s background-color;
 
@@ -30,9 +33,7 @@
 }
 
 .settingsMenu {
-  position: absolute;
-  right: 0;
-  top: 0;
+  flex: none;
 }
 
 @mixin applyTheme($backgroundColor, $color) {
@@ -41,13 +42,15 @@
 
   button,
   td,
+  input,
   .loadingScreen,
   .settingsMenu {
     background-color: $backgroundColor;
   }
 
   button,
-  a {
+  a,
+  input {
     color: $color;
   }
 

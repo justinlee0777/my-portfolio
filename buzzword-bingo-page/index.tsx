@@ -6,7 +6,7 @@ import Slide from '../components/slide/slide';
 
 export default function BuzzwordBingoPage() {
   return (
-    <Slide>
+    <Slide className={styles.slide}>
       <>
         <h1>Buzzword bingo</h1>
         <div className={styles.explanation}>
