@@ -1,9 +1,5 @@
 import { renderToString } from 'react-dom/server';
 
-import { Font } from './font.enum';
-import { SlideAnimation } from './slide-animation.enum';
-import { Theme } from './theme.enum';
-
 interface Link {
   /** Use ${link text content} to replace with links. The number of ${link text content} should be equal to the number of elements in the 'urls', and the order should be the same. */
   templateString: string;
@@ -63,11 +59,6 @@ export interface RpgGameConfig {
 }
 
 export interface HomepageConfig {
-  defaults: {
-    font: Font;
-    theme: Theme;
-    animation: SlideAnimation;
-  };
   developerDescription: DeveloperDescriptionConfig;
   settings: SettingsConfig;
   resume: ResumeConfig;

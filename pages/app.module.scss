@@ -1,0 +1,80 @@
+.page {
+  transition: 1s color, 1s background-color;
+
+  a {
+    font-weight: bold;
+  }
+}
+
+.font {
+  &-Arial {
+    font-family: Arial, sans-serif;
+  }
+
+  &-Roboto {
+    font-family: 'Roboto', sans-serif;
+  }
+
+  &-ComicSansMS {
+    font-family: 'Comic Sans MS', sans-serif;
+  }
+}
+
+.loadingScreen {
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+@mixin applyTheme($backgroundColor, $color) {
+  background-color: $backgroundColor;
+  color: $color;
+
+  button,
+  .loadingScreen {
+    background-color: $backgroundColor;
+  }
+
+  button,
+  a {
+    color: $color;
+  }
+
+  input[type='radio'] {
+    accent-color: $color;
+  }
+
+  * {
+    border-color: $color;
+  }
+}
+
+.theme {
+  &-Sea {
+    @include applyTheme(seashell, seagreen);
+  }
+
+  &-StarryNight {
+    @include applyTheme(midnightblue, ivory);
+  }
+
+  &-SalmonBisque {
+    @include applyTheme(bisque, salmon);
+  }
+}
+
+.theme {
+  &-Sea {
+    @include applyTheme(seashell, seagreen);
+  }
+
+  &-StarryNight {
+    @include applyTheme(midnightblue, ivory);
+  }
+
+  &-SalmonBisque {
+    @include applyTheme(bisque, salmon);
+  }
+}

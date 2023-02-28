@@ -1,14 +1,6 @@
-import { Font } from './font.enum';
 import { HomepageConfig } from './homepage.config';
-import { SlideAnimation } from './slide-animation.enum';
-import { Theme } from './theme.enum';
 
 export const homepageConfig: HomepageConfig = {
-  defaults: {
-    font: Font.ARIAL,
-    theme: Theme.SEA,
-    animation: SlideAnimation.NONE,
-  },
   developerDescription: {
     textContent: {
       name: 'Justin Lee',

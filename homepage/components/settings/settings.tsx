@@ -1,12 +1,10 @@
 import styles from './settings.module.scss';
 
-import { Theme } from '../../theme.enum';
 import RadioGroup, {
   RadioGroupOption,
 } from '../../../components/radiogroup/radiogroup';
-import { SlideAnimation } from '../../slide-animation.enum';
 import { SettingsConfig } from '../../homepage.config';
-import { Font } from '../../font.enum';
+import { Font, SlideAnimation, Theme } from '../../../config';
 
 export interface SettingsProps {
   config: SettingsConfig;

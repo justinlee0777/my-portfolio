@@ -7,43 +7,43 @@ import DeveloperDescription from './components/developer-description/developer-d
 import Resume from './components/resume/resume';
 import RpgGame from './components/rpg-game/rpg-game';
 import Settings from './components/settings/settings';
-import Slide from './components/slide/slide';
-import { isFancyAnimation } from './slide-animation.enum';
+import Slide from '../components/slide/slide';
 import { HomepageConfig } from './homepage.config';
-import LoadingScreen from './components/loading-screen/loading-screen';
-import { needsLoading } from './font.enum';
-import { loadFont } from './load-font.function';
+import { Theme, isFancyAnimation, SlideAnimation, Font } from '../config';
 
 export interface HomepageProps {
   homepageConfig: HomepageConfig;
+
   generatedProfilePictureUrl: string;
   profilePicturePrompt: string;
+
+  font: Font;
+  theme: Theme;
+  animation: SlideAnimation;
+
+  onFontChange: (font: Font) => void;
+  onThemeChange: (theme: Theme) => void;
+  onAnimationChange: (animation: SlideAnimation) => void;
 }
 
 export default function HomePage({
   homepageConfig,
   generatedProfilePictureUrl,
   profilePicturePrompt,
-}: HomepageProps): JSX.Element {
-  const [font, setFont] = useState(homepageConfig.defaults.font);
-  const [theme, setTheme] = useState(homepageConfig.defaults.theme);
-  const [animation, setAnimation] = useState(homepageConfig.defaults.animation);
 
-  const [loading, setLoading] = useState(false);
+  font,
+  theme,
+  animation,
+
+  onFontChange,
+  onThemeChange,
+  onAnimationChange,
+}: HomepageProps): JSX.Element {
   const [animatedSlides, setAnimatedSlides] = useState<Array<string>>([]);
 
   const homepageRef = useRef<HTMLDivElement>(null);
 
   let intersectionObserver: IntersectionObserver;
-
-  // Loading fonts
-  useEffect(() => {
-    if (loading) {
-      loadFont(font).then(() => {
-        setLoading(false);
-      });
-    }
-  }, [loading, font]);
 
   // Animating slides when the user scrolls over them
   useEffect(() => {
@@ -81,19 +81,6 @@ export default function HomePage({
     }
   }, [animation, animatedSlides]);
 
-  let loadingScreen: JSX.Element;
-
-  if (loading) {
-    loadingScreen = (
-      <Slide
-        className={`${styles.slide} ${styles.loadingScreen}`}
-        key="loading-screen"
-      >
-        <LoadingScreen />
-      </Slide>
-    );
-  }
-
   const content = [
     <DeveloperDescription
       key="developer-description"
@@ -107,16 +94,10 @@ export default function HomePage({
       selectedFont={font}
       selectedTheme={theme}
       selectedAnimation={animation}
-      onFontChange={(font) => {
-        setFont(font);
-        setLoading(needsLoading(font));
-      }}
-      onThemeChange={(theme) => setTheme(theme)}
+      onFontChange={onFontChange}
+      onThemeChange={onThemeChange}
       onAnimationChange={(animation) => {
-        if (isFancyAnimation) {
-          document.documentElement.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-        setAnimation(animation);
+        onAnimationChange(animation);
         setAnimatedSlides([]);
       }}
     />,
@@ -145,16 +126,9 @@ export default function HomePage({
     );
   });
 
-  const fontClass = styles[`font-${font.replace(/ /g, '')}`];
-  const themeClass = styles[`theme-${theme.replace(' ', '')}`];
-
   return (
-    <div
-      className={`${styles.homepage} ${themeClass} ${fontClass}`}
-      ref={homepageRef}
-    >
+    <div className={`${styles.homepage}`} ref={homepageRef}>
       {slides}
-      {loadingScreen}
     </div>
   );
 }
