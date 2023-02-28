@@ -126,9 +126,5 @@ export default function HomePage({
     );
   });
 
-  return (
-    <div className={`${styles.homepage}`} ref={homepageRef}>
-      {slides}
-    </div>
-  );
+  return <>{slides}</>;
 }
