@@ -126,5 +126,5 @@ export default function HomePage({
     );
   });
 
-  return <>{slides}</>;
+  return <div ref={homepageRef}>{slides}</div>;
 }

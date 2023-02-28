@@ -3,6 +3,7 @@ import styles from './app.module.scss';
 
 import { useEffect, useState } from 'react';
 import classNames from 'classnames';
+import { cloneDeep } from 'lodash-es';
 
 import {
   Font,
@@ -15,6 +16,10 @@ import {
 } from '../config';
 import LoadingScreen from '../components/loading-screen/loading-screen';
 import Slide from '../components/slide/slide';
+import {
+  getPageDefaults,
+  setPageDefaults,
+} from '../config/get-page-defaults.function';
 
 export default function MyApp({ Component, pageProps }): JSX.Element {
   const config: PageConfig = pageProps.pageConfig;
@@ -23,6 +28,27 @@ export default function MyApp({ Component, pageProps }): JSX.Element {
   const [animation, setAnimation] = useState(config.defaults.animation);
 
   const [loading, setLoading] = useState(false);
+
+  // Getting saved page defaults from storage
+  useEffect(() => {
+    const savedPageConfig = getPageDefaults();
+
+    if (savedPageConfig) {
+      setFont(savedPageConfig.defaults.font);
+      setTheme(savedPageConfig.defaults.theme);
+      setAnimation(savedPageConfig.defaults.animation);
+    }
+  }, []);
+
+  // Saving page defaults into session storage
+  useEffect(() => {
+    const clonedPageConfig = cloneDeep(config);
+    clonedPageConfig.defaults.font = font;
+    clonedPageConfig.defaults.theme = theme;
+    clonedPageConfig.defaults.animation = animation;
+
+    setPageDefaults(clonedPageConfig);
+  }, [font, theme, animation]);
 
   // Loading fonts
   useEffect(() => {
