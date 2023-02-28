@@ -10,6 +10,7 @@ import Settings from '../components/settings/settings';
 import Slide from '../components/slide/slide';
 import { HomepageConfig } from './homepage.config';
 import { Theme, isFancyAnimation, SlideAnimation, Font } from '../config';
+import { BuzzwordBingoLink } from './components/buzzword-bingo/buzzword-bingo-link';
 
 export interface HomepageProps {
   homepageConfig: HomepageConfig;
@@ -102,6 +103,7 @@ export default function HomePage({
       }}
     />,
     <RpgGame key="rpg-game" config={homepageConfig.rpgGame} />,
+    <BuzzwordBingoLink key="buzzword-bingo-link" />,
     <Resume key="resume" config={homepageConfig.resume} />,
   ];
 
@@ -126,5 +128,9 @@ export default function HomePage({
     );
   });
 
-  return <div ref={homepageRef}>{slides}</div>;
+  return (
+    <div className={styles.homepage} ref={homepageRef}>
+      {slides}
+    </div>
+  );
 }
