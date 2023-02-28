@@ -21,7 +21,18 @@ export default function BuzzwordBingoPage() {
           </p>
           <p>Though I use it for things I enjoy as well.</p>
         </div>
-        <BuzzwordBingo />
+        <BuzzwordBingo
+          defaultFiles={[
+            {
+              name: 'Baseball',
+              path: '/bingosheets/baseball-bingo.txt',
+            },
+            {
+              name: 'Key and Peele',
+              path: '/bingosheets/key-peele-bingo.txt',
+            },
+          ]}
+        />
       </>
     </Slide>
   );

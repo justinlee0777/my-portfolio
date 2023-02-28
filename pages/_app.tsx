@@ -109,8 +109,8 @@ export default function MyApp({ Component, pageProps }): JSX.Element {
 
   return (
     <div className={pageClassnames}>
-      {settingsIcon}
       <Component {...pageProps} {...stateProps} />
+      {settingsIcon}
       {loadingScreen}
     </div>
   );

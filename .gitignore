@@ -7,3 +7,5 @@ out
 public/rpg-game
 
 .env
+
+.DS_Store
