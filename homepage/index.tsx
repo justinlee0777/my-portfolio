@@ -133,6 +133,11 @@ export default function HomePage({
           name="description"
           content="Tongue-in-cheek portfolio site for Justin Lee, web developer. Contains open-source apps like an RPG and buzzword bingo."
         />
+        <meta property="og:title" content="Justin Lee - Web Developer" />
+        <meta
+          property="og:description"
+          content="Tongue-in-cheek portfolio site for Justin Lee, web developer. Contains open-source apps like an RPG and buzzword bingo."
+        />
       </Head>
       <div className={styles.homepage} ref={homepageRef}>
         {slides}

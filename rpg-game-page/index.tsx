@@ -15,9 +15,14 @@ export default function BuzzwordBingoPage({ rpgGameConfig }: RpgGameProps) {
     <Slide className={styles.slide}>
       <>
         <Head>
-          <title>Buzzword Bingo Generator</title>
+          <title>Turn-based RPG</title>
           <meta
             name="description"
+            content="Turn-based role playing game. Only the battle system is anywhere complete."
+          />
+          <meta property="og:title" content="Turn-based RPG" />
+          <meta
+            property="og:description"
             content="Turn-based role playing game. Only the battle system is anywhere complete."
           />
         </Head>

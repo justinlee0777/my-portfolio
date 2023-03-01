@@ -22,6 +22,11 @@ export default function BuzzwordBingoPage({
             name="description"
             content="Web app to generate buzzword bingo sheets."
           />
+          <meta property="og:title" content="Buzzword Bingo Generator" />
+          <meta
+            property="og:description"
+            content="Web app to generate buzzword bingo sheets."
+          />
         </Head>
         <h1 className={styles.header}>
           {buzzwordBingoConfig.textContent.header}

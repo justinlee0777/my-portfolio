@@ -155,7 +155,7 @@ function RegularPage({
             isHome: true,
           },
           {
-            displayName: 'Buzzword bingo',
+            displayName: 'Buzzword Bingo',
             url: '/buzzword-bingo',
           },
           {
