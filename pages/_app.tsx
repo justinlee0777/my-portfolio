@@ -21,9 +21,51 @@ import {
   setPageDefaults,
 } from '../config/get-page-defaults.function';
 import OpenSettings from '../components/open-settings/open-settings';
+import { HomepageConfig } from '../homepage/homepage.config';
+import { OpenSettingsConfig } from '../config/open-settings.config';
 
-export default function MyApp({ Component, pageProps }): JSX.Element {
-  const config: PageConfig = pageProps.pageConfig;
+interface HomepageProps {
+  pageConfig: PageConfig;
+  homepageConfig: HomepageConfig;
+  generatedProfilePictureUrl: string;
+  profilePicturePrompt: string;
+}
+
+interface BuzzwordBingoProps {
+  pageConfig: PageConfig;
+  openSettingsConfig?: OpenSettingsConfig;
+}
+
+interface ErrorPageProps {
+  statusCode: number;
+}
+
+type MyAppProps = HomepageProps | BuzzwordBingoProps | ErrorPageProps;
+
+type RegularAppProps = HomepageProps | BuzzwordBingoProps;
+
+export default function MyApp({
+  Component,
+  pageProps,
+}: {
+  Component;
+  pageProps: MyAppProps;
+}): JSX.Element {
+  if ('statusCode' in pageProps) {
+    return <Component {...pageProps} />;
+  } else {
+    return <RegularPage Component={Component} pageProps={pageProps} />;
+  }
+}
+
+function RegularPage({
+  Component,
+  pageProps,
+}: {
+  Component;
+  pageProps: RegularAppProps;
+}): JSX.Element {
+  const config = pageProps.pageConfig;
   const [font, setFont] = useState(config.defaults.font);
   const [theme, setTheme] = useState(config.defaults.theme);
   const [animation, setAnimation] = useState(config.defaults.animation);
@@ -49,7 +91,7 @@ export default function MyApp({ Component, pageProps }): JSX.Element {
     clonedPageConfig.defaults.animation = animation;
 
     setPageDefaults(clonedPageConfig);
-  }, [font, theme, animation]);
+  }, [config, font, theme, animation]);
 
   // Loading fonts
   useEffect(() => {
@@ -97,7 +139,7 @@ export default function MyApp({ Component, pageProps }): JSX.Element {
 
   let settingsIcon: JSX.Element;
 
-  if (pageProps.openSettingsConfig) {
+  if ('openSettingsConfig' in pageProps) {
     settingsIcon = (
       <OpenSettings
         className={styles.settingsMenu}

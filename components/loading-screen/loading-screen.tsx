@@ -30,7 +30,7 @@ export default function LoadingScreen() {
 
   return (
     <>
-      <p>We're preparing your changes...</p>
+      <p>We&apos;re preparing your changes...</p>
       <div className={styles.loadingIcon}>{loadingTicks}</div>
     </>
   );
