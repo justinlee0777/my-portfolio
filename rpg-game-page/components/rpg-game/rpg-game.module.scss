@@ -5,29 +5,6 @@
   width: 90%;
 }
 
-.openGame {
-  aspect-ratio: 1 / 1;
-  border-radius: 50%;
-  border-style: solid;
-  left: 50%;
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 50%; // default
-}
-
-@media (min-width: 800px) {
-  .openGame {
-    width: 33%;
-  }
-}
-
-@media (min-width: 1200px) {
-  .openGame {
-    width: 16%;
-  }
-}
-
 .rpgGame {
   background-color: white;
   height: 100%;
@@ -35,6 +12,10 @@
 }
 
 .rpgGameHeader {
+  text-align: center;
+}
+
+.rpgGameExplanation {
   text-align: center;
 }
 

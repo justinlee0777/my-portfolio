@@ -6,7 +6,6 @@ import Head from 'next/head';
 
 import DeveloperDescription from './components/developer-description/developer-description';
 import Resume from './components/resume/resume';
-import RpgGame from './components/rpg-game/rpg-game';
 import Settings from '../components/settings/settings';
 import Slide from '../components/slide/slide';
 import { HomepageConfig } from './homepage.config';
@@ -103,7 +102,6 @@ export default function HomePage({
         setAnimatedSlides([]);
       }}
     />,
-    <RpgGame key="rpg-game" config={homepageConfig.rpgGame} />,
     <BuzzwordBingoLink key="buzzword-bingo-link" />,
     <Resume key="resume" config={homepageConfig.resume} />,
   ];

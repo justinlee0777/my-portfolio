@@ -44,22 +44,8 @@ export interface ResumeConfig {
   };
 }
 
-export interface RpgGameConfig {
-  textContent: {
-    header: string;
-    subheader: string;
-    outOfFocusMessage: string;
-    buttonText: string;
-  };
-  aria: {
-    buttonLabel: string;
-  };
-  iframeUrl: string;
-}
-
 export interface HomepageConfig {
   developerDescription: DeveloperDescriptionConfig;
   settings: SettingsConfig;
   resume: ResumeConfig;
-  rpgGame: RpgGameConfig;
 }
