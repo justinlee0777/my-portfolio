@@ -164,11 +164,11 @@ function RegularPage({
           },
         ]}
       />
-      <div className={styles.pageContent}>
+      <main id="main-content" className={styles.pageContent}>
         <Component {...pageProps} {...stateProps} />
         {settingsIcon}
         {loadingScreen}
-      </div>
+      </main>
     </div>
   );
 }

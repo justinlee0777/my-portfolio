@@ -17,6 +17,9 @@ export function Navigation({ links, className }: NavigationProps): JSX.Element {
 
   return (
     <nav className={navigationClassName}>
+      <a className={styles.skipLink} href="#maincontent">
+        Skip to main content
+      </a>
       {links.map((link) => (
         <Link
           className={classNames(styles.navigationLink, {
