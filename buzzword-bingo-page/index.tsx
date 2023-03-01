@@ -1,6 +1,6 @@
 import styles from './index.module.scss';
 
-import { BuzzwordBingo } from 'buzzword-bingo-generator';
+import BuzzwordBingo from 'buzzword-bingo-generator';
 import Head from 'next/head';
 
 import Slide from '../components/slide/slide';
