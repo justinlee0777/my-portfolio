@@ -10,7 +10,6 @@ import Settings from '../components/settings/settings';
 import Slide from '../components/slide/slide';
 import { HomepageConfig } from './homepage.config';
 import { Theme, isFancyAnimation, SlideAnimation, Font } from '../config';
-import { BuzzwordBingoLink } from './components/buzzword-bingo/buzzword-bingo-link';
 
 export interface HomepageProps {
   homepageConfig: HomepageConfig;
@@ -102,7 +101,6 @@ export default function HomePage({
         setAnimatedSlides([]);
       }}
     />,
-    <BuzzwordBingoLink key="buzzword-bingo-link" />,
     <Resume key="resume" config={homepageConfig.resume} />,
   ];
 
