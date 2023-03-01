@@ -23,10 +23,14 @@ export default function BuzzwordBingoPage({
             content="Web app to generate buzzword bingo sheets."
           />
         </Head>
-        <h1>{buzzwordBingoConfig.textContent.header}</h1>
+        <h1 className={styles.header}>
+          {buzzwordBingoConfig.textContent.header}
+        </h1>
         <div className={styles.explanation}>
           {buzzwordBingoConfig.textContent.explanation.map((line, i) => (
-            <p key={i}>{line}</p>
+            <p className={styles.explanationLine} key={i}>
+              {line}
+            </p>
           ))}
         </div>
         <BuzzwordBingo

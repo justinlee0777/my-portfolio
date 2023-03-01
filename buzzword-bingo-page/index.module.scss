@@ -1,8 +1,28 @@
+.header {
+  text-align: center;
+}
+
 .slide {
   flex: 1;
+  justify-content: flex-start;
   overflow-x: hidden;
+  padding: 18px;
 }
 
 .explanation {
   max-width: 50%;
+}
+
+@media (max-width: 800px) {
+  .slide {
+    align-items: stretch;
+  }
+
+  .explanation {
+    max-width: none;
+
+    &Line {
+      text-align: center;
+    }
+  }
 }

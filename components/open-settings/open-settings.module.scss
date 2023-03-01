@@ -20,6 +20,25 @@ $animationTime: 1s;
   }
 }
 
+@media (max-width: 800px) {
+  .menu {
+    height: $iconWidth + $iconMargin;
+
+    &,
+    &.menuOpened {
+      width: 100%;
+    }
+
+    &.menuOpened {
+      height: auto;
+    }
+
+    &Icon {
+      transform: rotate(270deg);
+    }
+  }
+}
+
 .menuOpened {
   background-color: currentColor;
   box-shadow: -2px 0px 4px rgb(0 0 0 / 20%);
