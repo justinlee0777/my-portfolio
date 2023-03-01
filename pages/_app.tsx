@@ -22,6 +22,7 @@ import {
 import OpenSettings from '../components/open-settings/open-settings';
 import { HomepageConfig } from '../homepage/homepage.config';
 import { OpenSettingsConfig } from '../config/open-settings.config';
+import { Navigation } from '../components/navigation/navigation';
 
 interface HomepageProps {
   pageConfig: PageConfig;
@@ -145,9 +146,29 @@ function RegularPage({
 
   return (
     <div className={pageClassnames}>
-      <Component {...pageProps} {...stateProps} />
-      {settingsIcon}
-      {loadingScreen}
+      <Navigation
+        className={styles.pageNavigation}
+        links={[
+          {
+            displayName: 'Justin Lee',
+            url: '/',
+            isHome: true,
+          },
+          {
+            displayName: 'Buzzword bingo',
+            url: '/buzzword-bingo',
+          },
+          {
+            displayName: 'RPG',
+            url: '/rpg-game',
+          },
+        ]}
+      />
+      <div className={styles.pageContent}>
+        <Component {...pageProps} {...stateProps} />
+        {settingsIcon}
+        {loadingScreen}
+      </div>
     </div>
   );
 }

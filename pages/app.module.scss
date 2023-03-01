@@ -1,16 +1,31 @@
 .page {
+  position: relative;
+
+  a:not([target='_blank']) {
+    text-decoration: none;
+
+    &:focus,
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.pageContent {
   display: flex;
   flex-direction: row;
   position: relative;
   transition: 1s color, 1s background-color;
+}
 
-  a {
-    font-weight: bold;
-  }
+.pageNavigation {
+  position: sticky;
+  top: 0;
+  z-index: 1;
 }
 
 @media (max-width: 800px) {
-  .page {
+  .pageContent {
     flex-direction: column-reverse;
   }
 }
@@ -41,22 +56,26 @@
   flex: none;
 }
 
-@mixin applyTheme($backgroundColor, $color) {
+@mixin applyTheme($backgroundColor, $color, $linkColor) {
   background-color: $backgroundColor;
   color: $color;
 
   button,
   td,
   input,
+  .pageNavigation,
   .loadingScreen,
   .settingsMenu {
     background-color: $backgroundColor;
   }
 
   button,
-  a,
   input {
     color: $color;
+  }
+
+  a {
+    color: $linkColor;
   }
 
   input[type='radio'] {
@@ -70,18 +89,18 @@
 
 .theme {
   &-Ulysses {
-    @include applyTheme(#004c98, white);
+    @include applyTheme(#004c98, white, #61a0ff);
   }
 
   &-Sea {
-    @include applyTheme(seashell, seagreen);
+    @include applyTheme(seashell, seagreen, black);
   }
 
   &-StarryNight {
-    @include applyTheme(midnightblue, ivory);
+    @include applyTheme(midnightblue, ivory, #919191);
   }
 
   &-SalmonBisque {
-    @include applyTheme(bisque, salmon);
+    @include applyTheme(bisque, salmon, black);
   }
 }

@@ -60,6 +60,7 @@ export default function RpgGame({
       <iframe
         id={iframeId}
         className={styles.rpgGame}
+        title="Role-playing browser game"
         style={{ opacity: focused ? 1 : 0.5 }}
         src={config.iframeUrl}
         ref={(ref) => (iframeRef = ref)}
