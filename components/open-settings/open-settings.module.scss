@@ -9,6 +9,15 @@ $animationTime: 1s;
   transition: $animationTime width ease-in, $animationTime box-shadow,
     $animationTime background-color;
   width: $iconWidth + $iconMargin;
+
+  & &Triangle {
+    border-color: transparent currentColor transparent transparent;
+
+    border-width: 8px;
+    border-style: solid;
+
+    transition: $animationTime transform;
+  }
 }
 
 .menuOpened {
@@ -34,15 +43,6 @@ $animationTime: 1s;
   margin: $iconMargin $iconMargin 0 0;
   padding: 0;
   width: $iconWidth;
-}
-
-.menuTriangle {
-  border-color: transparent currentColor transparent transparent;
-
-  border-width: 8px;
-  border-style: solid;
-
-  transition: $animationTime transform;
 }
 
 .menuLine {

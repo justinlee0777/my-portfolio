@@ -1,5 +1,6 @@
 export enum Theme {
-  SEA = 'Sea',
+  ULYSSES = 'Ulysses',
   STARRY_NIGHT = 'Starry Night',
+  SEA = 'Sea',
   SALMON_BISQUE = 'Salmon Bisque',
 }

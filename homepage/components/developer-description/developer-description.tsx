@@ -35,6 +35,7 @@ export default function DeveloperDescription({
       <img
         className={styles.generatedProfilePicture}
         src={generatedProfilePictureUrl}
+        alt={config.textContent.profileDescription}
         width={256}
         height={256}
       />

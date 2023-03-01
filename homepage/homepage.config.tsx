@@ -34,6 +34,7 @@ export interface DeveloperDescriptionConfig {
     prompt: string;
     tongueInCheck: string;
     profileCaption: string;
+    profileDescription: string;
   };
 }
 

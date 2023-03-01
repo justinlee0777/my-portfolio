@@ -64,20 +64,10 @@
 }
 
 .theme {
-  &-Sea {
-    @include applyTheme(seashell, seagreen);
+  &-Ulysses {
+    @include applyTheme(#004c98, white);
   }
 
-  &-StarryNight {
-    @include applyTheme(midnightblue, ivory);
-  }
-
-  &-SalmonBisque {
-    @include applyTheme(bisque, salmon);
-  }
-}
-
-.theme {
   &-Sea {
     @include applyTheme(seashell, seagreen);
   }
