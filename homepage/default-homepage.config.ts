@@ -32,7 +32,15 @@ export const homepageConfig: HomepageConfig = {
           ],
         },
         'Though these are more fun.',
-        'Contact me at _blank_ if the site amuses you or for anything else.',
+        {
+          templateString:
+            'Contact me at ${leej40@outlook.com} if the site amuses you or for anything else.',
+          urls: ['mailto:leej40@outlook.com'],
+        },
+        {
+          templateString: 'The site is stored on ${GitHub}.',
+          urls: ['https://github.com/justinlee0777'],
+        },
       ],
     },
   },

@@ -17,7 +17,7 @@ export function createLinkElement(link: Link): string {
     const text = searchTerm.replace(/[\$\{\}]/g, '');
 
     const htmlString = renderToString(
-      <a href={url} rel="noopener noreferrer">
+      <a href={url} rel="noopener noreferrer" target="_blank">
         {text}
       </a>
     );
