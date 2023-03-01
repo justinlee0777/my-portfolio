@@ -51,10 +51,15 @@ export default function MyApp({
   Component;
   pageProps: MyAppProps;
 }): JSX.Element {
-  if ('statusCode' in pageProps) {
+  if ('statusCode' in pageProps && pageProps.statusCode >= 400) {
     return <Component {...pageProps} />;
   } else {
-    return <RegularPage Component={Component} pageProps={pageProps} />;
+    return (
+      <RegularPage
+        Component={Component}
+        pageProps={pageProps as RegularAppProps}
+      />
+    );
   }
 }
 

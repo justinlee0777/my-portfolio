@@ -3,6 +3,7 @@ node_modules
 .next
 
 out
+out.zip
 
 public/rpg-game-source
 

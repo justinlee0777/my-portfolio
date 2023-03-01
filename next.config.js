@@ -4,6 +4,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 });
 
 const config = {
+  trailingSlash: true,
   webpack: (config) => {
     return {
       ...config,
