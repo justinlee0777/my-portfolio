@@ -89,6 +89,7 @@ export default function RpgGame({
   return (
     <>
       <h2 className={styles.rpgGameHeader}>{config.textContent.header}</h2>
+      <h3>{config.textContent.subheader}</h3>
       {contentContainer}
     </>
   );

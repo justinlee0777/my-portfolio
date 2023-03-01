@@ -47,6 +47,7 @@ export interface ResumeConfig {
 export interface RpgGameConfig {
   textContent: {
     header: string;
+    subheader: string;
     outOfFocusMessage: string;
     buttonText: string;
   };
