@@ -30,7 +30,7 @@ export const homepageConfig: HomepageConfig = {
           ],
         },
         'Though these are more fun.',
-        'I loathe handing out résumés. The work is always more interesting. Contact me at _blank_ if the site amuses you or for anything else.',
+        'Contact me at _blank_ if the site amuses you or for anything else.',
       ],
     },
   },

@@ -2,6 +2,7 @@ import styles from './index.module.scss';
 
 import { useEffect, useRef, useState } from 'react';
 import classnames from 'classnames';
+import Head from 'next/head';
 
 import DeveloperDescription from './components/developer-description/developer-description';
 import Resume from './components/resume/resume';
@@ -129,8 +130,17 @@ export default function HomePage({
   });
 
   return (
-    <div className={styles.homepage} ref={homepageRef}>
-      {slides}
-    </div>
+    <>
+      <Head>
+        <title>Justin Lee - Web Developer</title>
+        <meta
+          name="description"
+          content="Tongue-in-cheek portfolio site for Justin Lee, web developer. Contains open-source apps like an RPG and buzzword bingo."
+        />
+      </Head>
+      <div className={styles.homepage} ref={homepageRef}>
+        {slides}
+      </div>
+    </>
   );
 }

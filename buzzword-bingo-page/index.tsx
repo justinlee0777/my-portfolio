@@ -1,6 +1,7 @@
 import styles from './index.module.scss';
 
 import { BuzzwordBingo } from 'buzzword-bingo-generator';
+import Head from 'next/head';
 
 import Slide from '../components/slide/slide';
 
@@ -8,6 +9,13 @@ export default function BuzzwordBingoPage() {
   return (
     <Slide className={styles.slide}>
       <>
+        <Head>
+          <title>Buzzword Bingo Generator</title>
+          <meta
+            name="description"
+            content="Web app to generate buzzword bingo sheets."
+          />
+        </Head>
         <h1>Buzzword bingo</h1>
         <div className={styles.explanation}>
           <p>
