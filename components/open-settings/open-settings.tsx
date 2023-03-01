@@ -14,6 +14,7 @@ export interface OpenSettingsProps extends Omit<SettingsProps, 'config'> {
 
 export default function OpenSettings({
   className,
+  config,
   ...settingsProps
 }: OpenSettingsProps): JSX.Element {
   const [opened, setOpened] = useState(false);
@@ -24,12 +25,18 @@ export default function OpenSettings({
 
   return (
     <div className={menuClassName}>
-      <button className={styles.menuIcon} onClick={() => setOpened(!opened)}>
+      <button
+        className={styles.menuIcon}
+        aria-label={
+          opened ? config.aria.collapseLabel : config.aria.expandLabel
+        }
+        onClick={() => setOpened(!opened)}
+      >
         <div className={styles.menuTriangle}></div>
         <div className={styles.menuLine}></div>
       </button>
-      <div className={styles.settings}>
-        <Settings {...settingsProps} config={settingsProps.config.settings} />
+      <div className={styles.settings} tabIndex={Number(opened) - 1}>
+        <Settings {...settingsProps} config={config.settings} />
       </div>
     </div>
   );

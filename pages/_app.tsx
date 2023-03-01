@@ -7,7 +7,6 @@ import { cloneDeep } from 'lodash-es';
 
 import {
   Font,
-  isFancyAnimation,
   loadFont,
   needsLoading,
   PageConfig,
@@ -129,12 +128,7 @@ function RegularPage({
       setLoading(needsLoading(font));
     },
     onThemeChange: (theme: Theme) => setTheme(theme),
-    onAnimationChange: (animation: SlideAnimation) => {
-      if (isFancyAnimation(animation)) {
-        document.documentElement.scrollTo({ top: 0, behavior: 'smooth' });
-      }
-      setAnimation(animation);
-    },
+    onAnimationChange: (animation: SlideAnimation) => setAnimation(animation),
   };
 
   let settingsIcon: JSX.Element;

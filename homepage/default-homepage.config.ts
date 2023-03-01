@@ -43,6 +43,9 @@ export const homepageConfig: HomepageConfig = {
         'You have lost control of the game. Please click to continue playing.',
       buttonText: 'Click to play',
     },
+    aria: {
+      buttonLabel: 'Click to play role-playing game',
+    },
     iframeUrl: '/rpg-game/index.html',
   },
 };

@@ -74,7 +74,11 @@ export default function RpgGame({
     );
   } else {
     content = (
-      <button className={styles.openGame} onClick={() => setGameOpened(true)}>
+      <button
+        className={styles.openGame}
+        aria-label={config.aria.buttonLabel}
+        onClick={() => setGameOpened(true)}
+      >
         {config.textContent.buttonText}
       </button>
     );

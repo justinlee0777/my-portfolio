@@ -50,6 +50,9 @@ export interface RpgGameConfig {
     outOfFocusMessage: string;
     buttonText: string;
   };
+  aria: {
+    buttonLabel: string;
+  };
   iframeUrl: string;
 }
 

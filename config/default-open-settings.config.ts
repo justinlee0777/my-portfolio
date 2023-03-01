@@ -8,4 +8,8 @@ export const defaultOpenSettingsConfig: OpenSettingsConfig = {
       prompt: '',
     },
   },
+  aria: {
+    expandLabel: 'Expand app settings menu',
+    collapseLabel: 'Collapse app settings menu',
+  },
 };
