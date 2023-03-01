@@ -20,13 +20,17 @@
   border-style: solid;
   border-width: 2px;
   border-radius: 50%;
+  font-size: 12px;
   font-weight: bold;
+  line-height: 12px;
   height: 24px;
+  padding: 0;
   position: absolute;
   right: 0;
   top: 0;
   transform: rotate(135deg);
   transition: 0.5s transform;
+  vertical-align: middle;
   width: 24px;
 
   &Unactivated {
