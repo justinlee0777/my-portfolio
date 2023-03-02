@@ -21,15 +21,11 @@ describe('loadFont()', () => {
   }
   global.FontFace = <any>MockFontFace;
 
-  const mockDocument: any = {
-    fonts: {
-      add: jest
-        .fn()
-        .mockImplementationOnce((fontFace) => addedFonts.push(fontFace)),
-    },
+  (<any>document.fonts) = {
+    add: jest
+      .fn()
+      .mockImplementationOnce((fontFace) => addedFonts.push(fontFace)),
   };
-
-  global.document = mockDocument;
 
   test('loads a font', async () => {
     await loadFont(Font.ROBOTO);

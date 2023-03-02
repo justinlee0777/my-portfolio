@@ -1,3 +1,5 @@
+import classNames from 'classnames';
+
 import styles from './slide.module.scss';
 
 export interface SlideProps {
@@ -11,8 +13,10 @@ export default function Slide({
   children,
   id,
 }: SlideProps): JSX.Element {
+  const slideClassName = classNames(styles.slide, className);
+
   return (
-    <div className={`${styles.slide} ${className ?? ''}`} id={id}>
+    <div className={slideClassName} id={id}>
       {children}
     </div>
   );
