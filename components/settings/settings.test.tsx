@@ -1,0 +1,129 @@
+jest.mock(
+  '../radiogroup/radiogroup',
+  () =>
+    ({ options, selectedOption, onSelect }) => {
+      return (
+        <>
+          <span>Selected: {selectedOption}</span>
+          {options.map((option) => (
+            <button key={option.key} onClick={() => onSelect(option.value)}>
+              {option.label}
+            </button>
+          ))}
+        </>
+      );
+    }
+);
+
+jest.mock('react-dom/server', () => {
+  return {
+    __esModule: true,
+    renderToString: () =>
+      '<a href="http://example.com">Marquees are great.</a>',
+  };
+});
+
+import {
+  fireEvent,
+  render,
+  RenderResult,
+  screen,
+} from '@testing-library/react';
+
+import { Font, SlideAnimation, Theme } from '../../config';
+import { SettingsConfig } from '../../config/settings.config';
+import Settings from './settings';
+
+describe('<Settings/>', () => {
+  const config: SettingsConfig = {
+    textContent: {
+      header: 'Settings',
+      subheader: 'Sub-Settings',
+      prompt: 'Change up them settings.',
+      marqueeExplanation: {
+        templateString: 'Marquees are great.',
+        urls: [],
+      },
+    },
+  };
+
+  const font = Font.ROBOTO;
+  const theme = Theme.STARRY_NIGHT;
+  const animation = SlideAnimation.SWEEPY;
+
+  let onFontChange = jest.fn();
+  let onThemeChange = jest.fn();
+  let onAnimationChange = jest.fn();
+
+  let renderResult: RenderResult;
+
+  beforeEach(() => {
+    renderResult = render(
+      <Settings
+        config={config}
+        font={font}
+        theme={theme}
+        animation={animation}
+        onFontChange={onFontChange}
+        onThemeChange={onThemeChange}
+        onAnimationChange={onAnimationChange}
+      />
+    );
+  });
+
+  test('renders', () => {
+    const header = screen.queryByText('Settings');
+    expect(header).toBeTruthy();
+    expect(header.tagName).toBe('H2');
+
+    const subheader = screen.queryByText('Sub-Settings');
+    expect(subheader).toBeTruthy();
+    expect(subheader.tagName).toBe('H3');
+
+    const prompt = screen.queryByText('Change up them settings.');
+    expect(prompt).toBeTruthy();
+
+    const selectedFont = screen.queryByText('Selected: Roboto');
+    expect(selectedFont).toBeTruthy();
+
+    const selectedTheme = screen.queryByText('Selected: Starry Night');
+    expect(selectedTheme).toBeTruthy();
+
+    const selectedAnimation = screen.queryByText('Selected: Sweepy');
+    expect(selectedAnimation).toBeTruthy();
+  });
+
+  test('renders and changes settings', async () => {
+    const clickedFont = screen.queryByText('Arial');
+    fireEvent.click(clickedFont);
+
+    expect(onFontChange.mock.calls[0]).toEqual([Font.ARIAL]);
+
+    const clickedTheme = screen.queryByText('Sea');
+    fireEvent.click(clickedTheme);
+
+    expect(onThemeChange.mock.calls[0]).toEqual([Theme.SEA]);
+
+    const clickedAnimation = screen.queryByText('Swoopy');
+    fireEvent.click(clickedAnimation);
+
+    expect(onAnimationChange.mock.calls[0]).toEqual([SlideAnimation.SWOOPY]);
+  });
+
+  test('renders and shows marquee explanation', () => {
+    renderResult.rerender(
+      <Settings
+        config={config}
+        font={font}
+        theme={theme}
+        animation={SlideAnimation.MARQUEE}
+        onFontChange={onFontChange}
+        onThemeChange={onThemeChange}
+        onAnimationChange={onAnimationChange}
+      />
+    );
+
+    const marqueeExplanation = screen.queryByText('Marquees are great.');
+    expect(marqueeExplanation).toBeTruthy();
+  });
+});
