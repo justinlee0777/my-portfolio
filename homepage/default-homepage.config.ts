@@ -38,7 +38,7 @@ export const homepageConfig: HomepageConfig = {
           urls: ['mailto:leej40@outlook.com'],
         },
         {
-          templateString: 'The site is stored on ${GitHub}.',
+          templateString: 'The source code of the site is on ${GitHub}.',
           urls: ['https://github.com/justinlee0777'],
         },
       ],
