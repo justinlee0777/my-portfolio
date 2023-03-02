@@ -4,6 +4,10 @@ import { SlideAnimation } from './slide-animation.enum';
 import { Theme } from './theme.enum';
 
 describe('getPageDefaults() and setPageDefaults()', () => {
+  afterEach(() => {
+    jest.resetModules();
+  });
+
   test('gets and sets values into storage', () => {
     expect(getPageDefaults()).toBeNull();
 

@@ -5,7 +5,13 @@ jest.mock('react-dom/server', () => {
   };
 });
 
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import {
+  cleanup,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from '@testing-library/react';
 
 import { DeveloperDescriptionConfig } from '../../homepage.config';
 import DeveloperDescription from './developer-description';
@@ -28,6 +34,11 @@ describe('<DeveloperDescription/>', () => {
   const generatedProfilePictureUrl =
     'https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Images_in_HTML/image-with-title.png';
   const profilePicturePrompt = 'This is a good photo of Bob.';
+
+  afterEach(() => {
+    cleanup();
+    jest.resetModules();
+  });
 
   test('renders', async () => {
     render(

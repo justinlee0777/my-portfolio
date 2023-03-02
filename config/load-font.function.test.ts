@@ -27,6 +27,10 @@ describe('loadFont()', () => {
       .mockImplementationOnce((fontFace) => addedFonts.push(fontFace)),
   };
 
+  afterEach(() => {
+    jest.resetModules();
+  });
+
   test('loads a font', async () => {
     await loadFont(Font.ROBOTO);
 

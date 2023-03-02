@@ -1,4 +1,10 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import {
+  cleanup,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from '@testing-library/react';
 
 import RadioGroup, { RadioGroupOption } from './radiogroup';
 
@@ -35,6 +41,11 @@ describe('<RadioGroup/>', () => {
         onSelect={onSelect}
       />
     );
+  });
+
+  afterEach(() => {
+    cleanup();
+    jest.resetModules();
   });
 
   test('renders', async () => {

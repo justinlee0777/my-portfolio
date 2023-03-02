@@ -5,7 +5,7 @@ jest.mock('react-dom/server', () => {
   };
 });
 
-import { render, screen, waitFor } from '@testing-library/react';
+import { cleanup, render, screen, waitFor } from '@testing-library/react';
 
 import { ResumeConfig } from '../../homepage.config';
 import Resume from './resume';
@@ -23,6 +23,11 @@ describe('<Resume/>', () => {
       ],
     },
   };
+
+  afterEach(() => {
+    cleanup();
+    jest.resetModules();
+  });
 
   test('renders', async () => {
     render(<Resume config={config} />);

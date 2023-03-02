@@ -24,6 +24,7 @@ jest.mock('react-dom/server', () => {
 });
 
 import {
+  cleanup,
   fireEvent,
   render,
   RenderResult,
@@ -69,6 +70,11 @@ describe('<Settings/>', () => {
         onAnimationChange={onAnimationChange}
       />
     );
+  });
+
+  afterEach(() => {
+    cleanup();
+    jest.resetModules();
   });
 
   test('renders', () => {

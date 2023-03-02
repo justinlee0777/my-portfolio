@@ -1,8 +1,13 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { cleanup, render, screen, waitFor } from '@testing-library/react';
 
 import Slide from './slide';
 
 describe('<Slide/>', () => {
+  afterEach(() => {
+    cleanup();
+    jest.resetModules();
+  });
+
   test('renders', async () => {
     const result = render(
       <Slide className="slide01">
