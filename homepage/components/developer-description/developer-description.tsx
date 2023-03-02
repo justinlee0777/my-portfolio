@@ -19,8 +19,6 @@ export default function DeveloperDescription({
   const [captionShown, setCaptionShown] = useState(false);
   const [imageLoadFailed, setImageLoadFailed] = useState(false);
 
-  generatedProfilePictureUrl = 'foo';
-
   useEffect(() => {
     setTimeout(() => {
       setCaptionShown(true);
@@ -31,10 +29,10 @@ export default function DeveloperDescription({
     [styles.profileCaptionShown]: captionShown,
   });
 
-  let profile: JSX.Element;
+  let profileImage: JSX.Element;
 
   if (!imageLoadFailed) {
-    profile = (
+    profileImage = (
       <Image
         className={styles.generatedProfilePicture}
         src={generatedProfilePictureUrl}
@@ -45,7 +43,7 @@ export default function DeveloperDescription({
       />
     );
   } else {
-    profile = (
+    profileImage = (
       <p
         className={styles.profileErrorMessage}
         dangerouslySetInnerHTML={{
@@ -62,7 +60,7 @@ export default function DeveloperDescription({
       <p className={styles.developerTongueInCheck}>
         {config.textContent.tongueInCheck}
       </p>
-      {profile}
+      {profileImage}
       <figcaption className={captionClassName}>
         {config.textContent.profileCaption}: "{profilePicturePrompt}"
       </figcaption>
