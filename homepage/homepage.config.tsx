@@ -8,6 +8,7 @@ export interface DeveloperDescriptionConfig {
     tongueInCheck: string;
     profileCaption: string;
     profileDescription: string;
+    profileErrorMessage: Link;
   };
 }
 

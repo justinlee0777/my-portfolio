@@ -2,8 +2,10 @@ import styles from './developer-description.module.scss';
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import classNames from 'classnames';
 
 import { DeveloperDescriptionConfig } from '../../homepage.config';
+import { createLinkElement } from '../../../config';
 
 export default function DeveloperDescription({
   config,
@@ -15,6 +17,9 @@ export default function DeveloperDescription({
   profilePicturePrompt: string;
 }): JSX.Element {
   const [captionShown, setCaptionShown] = useState(false);
+  const [imageLoadFailed, setImageLoadFailed] = useState(false);
+
+  generatedProfilePictureUrl = 'foo';
 
   useEffect(() => {
     setTimeout(() => {
@@ -22,9 +27,33 @@ export default function DeveloperDescription({
     }, 1000);
   }, []);
 
-  const captionClassName =
-    styles.profileCaption +
-    (captionShown ? ` ${styles.profileCaptionShown}` : '');
+  const captionClassName = classNames(styles.profileCaption, {
+    [styles.profileCaptionShown]: captionShown,
+  });
+
+  let profile: JSX.Element;
+
+  if (!imageLoadFailed) {
+    profile = (
+      <Image
+        className={styles.generatedProfilePicture}
+        src={generatedProfilePictureUrl}
+        alt={config.textContent.profileDescription}
+        width={256}
+        height={256}
+        onError={() => setImageLoadFailed(true)}
+      />
+    );
+  } else {
+    profile = (
+      <p
+        className={styles.profileErrorMessage}
+        dangerouslySetInnerHTML={{
+          __html: createLinkElement(config.textContent.profileErrorMessage),
+        }}
+      ></p>
+    );
+  }
 
   return (
     <>
@@ -33,13 +62,7 @@ export default function DeveloperDescription({
       <p className={styles.developerTongueInCheck}>
         {config.textContent.tongueInCheck}
       </p>
-      <Image
-        className={styles.generatedProfilePicture}
-        src={generatedProfilePictureUrl}
-        alt={config.textContent.profileDescription}
-        width={256}
-        height={256}
-      />
+      {profile}
       <figcaption className={captionClassName}>
         {config.textContent.profileCaption}: "{profilePicturePrompt}"
       </figcaption>

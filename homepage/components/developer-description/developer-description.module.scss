@@ -8,6 +8,17 @@
   border-radius: 50%;
 }
 
+.profileErrorMessage {
+  border-style: solid;
+  border-width: 1px;
+  box-sizing: border-box;
+  font-size: 12px;
+  height: 256px;
+  padding: 106px 8px;
+  text-align: center;
+  width: 256px;
+}
+
 .profileCaption {
   text-align: center;
   font-size: 12px;
