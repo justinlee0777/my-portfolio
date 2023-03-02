@@ -170,7 +170,11 @@ function RegularPage({
         ]}
       />
       <main id="main-content" className={styles.pageContent}>
-        <Component {...pageProps} {...stateProps} />
+        <Component
+          className={styles.pageComponent}
+          {...pageProps}
+          {...stateProps}
+        />
         {settingsIcon}
         {loadingScreen}
       </main>
