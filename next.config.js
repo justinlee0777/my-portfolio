@@ -5,6 +5,9 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 
 const config = {
   trailingSlash: true,
+  images: {
+    unoptimized: true,
+  },
   webpack: (config) => {
     return {
       ...config,

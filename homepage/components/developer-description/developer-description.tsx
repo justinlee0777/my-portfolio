@@ -1,6 +1,7 @@
 import styles from './developer-description.module.scss';
 
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 
 import { DeveloperDescriptionConfig } from '../../homepage.config';
 
@@ -32,7 +33,7 @@ export default function DeveloperDescription({
       <p className={styles.developerTongueInCheck}>
         {config.textContent.tongueInCheck}
       </p>
-      <img
+      <Image
         className={styles.generatedProfilePicture}
         src={generatedProfilePictureUrl}
         alt={config.textContent.profileDescription}
