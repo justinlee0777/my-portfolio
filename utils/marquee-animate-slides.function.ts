@@ -1,5 +1,4 @@
 /**
- * Note: This will override the children's onmouseenter and onmouseleave. This can be fixed, but... don't need to currently.
  * @param htmlElements to animate infinitely until the animation is destroyed. They will move across the screen end to end as if traveling through a weird void.
  */
 export function marqueeAnimateSlides(
@@ -12,14 +11,18 @@ export function marqueeAnimateSlides(
   htmlElements.forEach(async (child: HTMLElement, i) => {
     const modifier = i % 2 === 0 ? -1 : 1;
     let animation: Animation | undefined;
+    let stopped = false;
 
-    child.onmouseenter = () => animation?.pause();
-    child.onmouseleave = () => animation?.play();
+    const toggleAnimationState = () => {
+      stopped ? animation?.play() : animation?.pause();
+      stopped = !stopped;
+    };
+
+    child.addEventListener('click', toggleAnimationState);
 
     destroyFns.push(() => {
       animation?.finish();
-      child.onmouseenter = null;
-      child.onmouseleave = null;
+      child.removeEventListener('click', toggleAnimationState);
     });
 
     while (!stopAnimation) {

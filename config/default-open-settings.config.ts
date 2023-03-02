@@ -6,6 +6,13 @@ export const defaultOpenSettingsConfig: OpenSettingsConfig = {
       header: '',
       subheader: 'Settings',
       prompt: '',
+      marqueeExplanation: {
+        templateString:
+          'This MDN ${article} describes best what the marquee element had been.',
+        urls: [
+          'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/marquee',
+        ],
+      },
     },
   },
   aria: {

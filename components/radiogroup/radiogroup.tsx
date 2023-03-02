@@ -1,6 +1,7 @@
 import styles from './radiogroup.module.scss';
 
 import { useState } from 'react';
+import classNames from 'classnames';
 
 export interface RadioGroupOption {
   key: string;
@@ -9,7 +10,7 @@ export interface RadioGroupOption {
 }
 
 export interface RadioGroupProps {
-  className: string;
+  className?: string;
   legend: string;
   name: string;
   options: Array<RadioGroupOption>;
@@ -51,8 +52,13 @@ export default function RadioGroup({
     expandClassName = `${expandClassName} ${styles.expandUnactivated}`;
   }
 
+  const radioGroupContainerClassNames = classNames(
+    styles.radioGroupContainer,
+    className
+  );
+
   return (
-    <div className={`${styles.radioGroupContainer} ${className}`}>
+    <div className={radioGroupContainerClassNames}>
       <fieldset className={radioGroupClassName}>
         <legend>{legend}</legend>
         {radioOptions}

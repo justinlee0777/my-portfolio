@@ -1,4 +1,5 @@
-import { createLinkElement, ResumeConfig } from '../../homepage.config';
+import { createLinkElement } from '../../../config';
+import { ResumeConfig } from '../../homepage.config';
 import styles from './resume.module.scss';
 
 export default function Resume({

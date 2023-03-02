@@ -53,7 +53,7 @@ export default function HomePage({
         // Animating slides when the user scrolls over them
         return watchSlides();
       case SlideAnimation.MARQUEE:
-        // Animate infinitely but stop them when the user hovers over elements. Be warned: this overrides onmouseenter and onmouseleave.
+        // Animate infinitely but stop them when the user hovers over elements.
         return marqueeAnimateSlides([
           ...homepageRef.current.childNodes,
         ] as Array<HTMLElement>);

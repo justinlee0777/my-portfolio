@@ -1,7 +1,7 @@
 import styles from './settings.module.scss';
 
 import RadioGroup, { RadioGroupOption } from '../radiogroup/radiogroup';
-import { Font, SlideAnimation, Theme } from '../../config';
+import { createLinkElement, Font, SlideAnimation, Theme } from '../../config';
 import { SettingsConfig } from '../../config/settings.config';
 
 export interface SettingsProps {
@@ -61,16 +61,30 @@ export default function Settings({
         value: value[0],
       }));
 
+      let marqueeExplanation: JSX.Element;
+
+      if (legend === 'Animation' && animation === SlideAnimation.MARQUEE) {
+        marqueeExplanation = (
+          <span
+            className={styles.marqueeExplanation}
+            dangerouslySetInnerHTML={{
+              __html: createLinkElement(config.textContent.marqueeExplanation),
+            }}
+          />
+        );
+      }
+
       return (
-        <RadioGroup
-          className={styles.selectGroup}
-          legend={legend}
-          name={legend.toLowerCase()}
-          key={legend.toLowerCase()}
-          options={options}
-          selectedOption={selectedValue}
-          onSelect={(key) => onChange(enumeratedType[key])}
-        />
+        <div className={styles.selectGroup} key={legend.toLowerCase()}>
+          <RadioGroup
+            legend={legend}
+            name={legend.toLowerCase()}
+            options={options}
+            selectedOption={selectedValue}
+            onSelect={(key) => onChange(enumeratedType[key])}
+          />
+          {marqueeExplanation}
+        </div>
       );
     }
   );
