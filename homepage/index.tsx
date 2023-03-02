@@ -10,6 +10,7 @@ import Settings from '../components/settings/settings';
 import Slide from '../components/slide/slide';
 import { HomepageConfig } from './homepage.config';
 import { Theme, SlideAnimation, Font } from '../config';
+import { marqueeAnimateSlides } from '../utils/marquee-animate-slides.function';
 
 export interface HomepageProps {
   homepageConfig: HomepageConfig;
@@ -53,7 +54,9 @@ export default function HomePage({
         return watchSlides();
       case SlideAnimation.MARQUEE:
         // Animate infinitely but stop them when the user hovers over elements. Be warned: this overrides onmouseenter and onmouseleave.
-        return animateSlides();
+        return marqueeAnimateSlides([
+          ...homepageRef.current.childNodes,
+        ] as Array<HTMLElement>);
     }
   }, [animation, animatedSlides]);
 
@@ -152,60 +155,5 @@ export default function HomePage({
     });
 
     return () => intersectionObserver.disconnect();
-  }
-
-  function animateSlides(): (() => void) | undefined {
-    let stopAnimation = false;
-
-    const destroyFns: Array<() => void> = [];
-
-    homepageRef.current.childNodes.forEach(async (child: HTMLElement, i) => {
-      const modifier = i % 2 === 0 ? -1 : 1;
-      let animation: Animation | undefined;
-
-      child.onmouseenter = () => animation?.pause();
-      child.onmouseleave = () => animation?.play();
-
-      destroyFns.push(() => {
-        animation?.finish();
-        child.onmouseenter = null;
-        child.onmouseleave = null;
-      });
-
-      while (!stopAnimation) {
-        animation = child.animate(
-          [
-            {
-              transform: 'translate(0)',
-            },
-            {
-              transform: `translate(${modifier * 100}%)`,
-            },
-          ],
-          { duration: 10000 }
-        );
-
-        await animation.finished;
-
-        animation = child.animate(
-          [
-            {
-              transform: `translate(${modifier * -100}%)`,
-            },
-            {
-              transform: 'translate(0)',
-            },
-          ],
-          { duration: 10000 }
-        );
-
-        await animation.finished;
-      }
-    });
-
-    return () => {
-      stopAnimation = true;
-      destroyFns.forEach((destroyFn) => destroyFn());
-    };
   }
 }

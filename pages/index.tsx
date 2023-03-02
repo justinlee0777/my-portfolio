@@ -1,7 +1,7 @@
 import { createImage } from '../api/openai';
 import { pageConfig } from '../config/default-page.config';
 import { homepageConfig } from '../homepage/default-homepage.config';
-import { saveImageFromUrl } from '../utils';
+import { saveImageFromUrl } from '../utils/save-image-from-url.function';
 
 export { default } from '../homepage/index';
 

@@ -5,12 +5,17 @@ import Head from 'next/head';
 import Slide from '../components/slide/slide';
 import { RpgGamePageConfig } from './rpg-game-page.config';
 import RpgGame from './components/rpg-game/rpg-game';
+import { SlideAnimation } from '../config';
 
 export interface RpgGameProps {
   rpgGameConfig: RpgGamePageConfig;
+  animation: SlideAnimation;
 }
 
-export default function BuzzwordBingoPage({ rpgGameConfig }: RpgGameProps) {
+export default function BuzzwordBingoPage({
+  rpgGameConfig,
+  animation,
+}: RpgGameProps) {
   return (
     <Slide className={styles.slide}>
       <>
@@ -26,7 +31,11 @@ export default function BuzzwordBingoPage({ rpgGameConfig }: RpgGameProps) {
             content="Turn-based role playing game. Only the battle system is anywhere complete."
           />
         </Head>
-        <RpgGame key="rpg-game" config={rpgGameConfig.config} />
+        <RpgGame
+          key="rpg-game"
+          config={rpgGameConfig.config}
+          animation={animation}
+        />
       </>
     </Slide>
   );

@@ -1,4 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { SlideAnimation } from '../../../config';
+import { marqueeAnimateSlides } from '../../../utils/marquee-animate-slides.function';
 
 import { RpgGameConfig } from './rpg-game.config';
 import styles from './rpg-game.module.scss';
@@ -7,12 +9,23 @@ const iframeId = 'rpg-game-iframe';
 
 export default function RpgGame({
   config,
+  animation,
 }: {
   config: RpgGameConfig;
+  animation: SlideAnimation;
 }): JSX.Element {
+  const headerRef = useRef<HTMLHeadingElement>(null);
+  const subheaderRef = useRef<HTMLHeadingElement>(null);
+
   const [focused, setFocused] = useState<boolean>(false);
 
   let iframeRef: HTMLElement;
+
+  useEffect(() => {
+    if (animation === SlideAnimation.MARQUEE) {
+      return marqueeAnimateSlides([headerRef.current, subheaderRef.current]);
+    }
+  }, [animation]);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -72,8 +85,10 @@ export default function RpgGame({
 
   return (
     <>
-      <h2 className={styles.rpgGameHeader}>{config.textContent.header}</h2>
-      <h3 className={styles.rpgGameExplanation}>
+      <h2 className={styles.rpgGameHeader} ref={headerRef}>
+        {config.textContent.header}
+      </h2>
+      <h3 className={styles.rpgGameExplanation} ref={subheaderRef}>
         {config.textContent.subheader}
       </h3>
       {contentContainer}
