@@ -9,7 +9,7 @@ import Resume from './components/resume/resume';
 import Settings from '../components/settings/settings';
 import Slide from '../components/slide/slide';
 import { HomepageConfig } from './homepage.config';
-import { Theme, isFancyAnimation, SlideAnimation, Font } from '../config';
+import { Theme, SlideAnimation, Font } from '../config';
 
 export interface HomepageProps {
   homepageConfig: HomepageConfig;
@@ -45,39 +45,15 @@ export default function HomePage({
 
   let intersectionObserver: IntersectionObserver;
 
-  // Animating slides when the user scrolls over them
   useEffect(() => {
-    if (isFancyAnimation(animation)) {
-      const intersectedSlides: Array<string> = [];
-
-      intersectionObserver = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              intersectedSlides.push(entry.target.id);
-            }
-          });
-
-          let currentAnimatedSlides = animatedSlides;
-          const newSlides = intersectedSlides.filter(
-            (slide) => !animatedSlides.includes(slide)
-          );
-
-          if (newSlides.length > 0) {
-            currentAnimatedSlides = animatedSlides.concat(newSlides);
-            setAnimatedSlides(currentAnimatedSlides);
-          }
-        },
-        { threshold: 0.4 }
-      );
-
-      homepageRef.current.childNodes.forEach((child: HTMLElement) => {
-        if (!animatedSlides.includes(child.id)) {
-          intersectionObserver.observe(child as HTMLElement);
-        }
-      });
-
-      return () => intersectionObserver.disconnect();
+    switch (animation) {
+      case SlideAnimation.SWEEPY:
+      case SlideAnimation.SWOOPY:
+        // Animating slides when the user scrolls over them
+        return watchSlides();
+      case SlideAnimation.MARQUEE:
+        // Animate infinitely but stop them when the user hovers over elements. Be warned: this overrides onmouseenter and onmouseleave.
+        return animateSlides();
     }
   }, [animation, animatedSlides]);
 
@@ -144,4 +120,92 @@ export default function HomePage({
       </div>
     </>
   );
+
+  function watchSlides(): (() => void) | undefined {
+    const intersectedSlides: Array<string> = [];
+
+    intersectionObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            intersectedSlides.push(entry.target.id);
+          }
+        });
+
+        let currentAnimatedSlides = animatedSlides;
+        const newSlides = intersectedSlides.filter(
+          (slide) => !animatedSlides.includes(slide)
+        );
+
+        if (newSlides.length > 0) {
+          currentAnimatedSlides = animatedSlides.concat(newSlides);
+          setAnimatedSlides(currentAnimatedSlides);
+        }
+      },
+      { threshold: 0.4 }
+    );
+
+    homepageRef.current.childNodes.forEach((child: HTMLElement) => {
+      if (!animatedSlides.includes(child.id)) {
+        intersectionObserver.observe(child as HTMLElement);
+      }
+    });
+
+    return () => intersectionObserver.disconnect();
+  }
+
+  function animateSlides(): (() => void) | undefined {
+    let stopAnimation = false;
+
+    const destroyFns: Array<() => void> = [];
+
+    homepageRef.current.childNodes.forEach(async (child: HTMLElement, i) => {
+      const modifier = i % 2 === 0 ? -1 : 1;
+      let animation: Animation | undefined;
+
+      child.onmouseenter = () => animation?.pause();
+      child.onmouseleave = () => animation?.play();
+
+      destroyFns.push(() => {
+        animation?.finish();
+        child.onmouseenter = null;
+        child.onmouseleave = null;
+      });
+
+      while (!stopAnimation) {
+        animation = child.animate(
+          [
+            {
+              transform: 'translate(0)',
+            },
+            {
+              transform: `translate(${modifier * 100}%)`,
+            },
+          ],
+          { duration: 10000 }
+        );
+
+        await animation.finished;
+
+        animation = child.animate(
+          [
+            {
+              transform: `translate(${modifier * -100}%)`,
+            },
+            {
+              transform: 'translate(0)',
+            },
+          ],
+          { duration: 10000 }
+        );
+
+        await animation.finished;
+      }
+    });
+
+    return () => {
+      stopAnimation = true;
+      destroyFns.forEach((destroyFn) => destroyFn());
+    };
+  }
 }
