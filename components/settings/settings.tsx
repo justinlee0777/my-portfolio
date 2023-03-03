@@ -64,14 +64,15 @@ export default function Settings({
         value: value[0],
       }));
 
-      let marqueeExplanation: JSX.Element;
+      let settingExplanation: JSX.Element;
+      let explanationHtmlString: string;
 
-      if (legend === 'Animation' && animation === SlideAnimation.MARQUEE) {
-        marqueeExplanation = (
+      if ((explanationHtmlString = setExplanation(legend, selectedValue))) {
+        settingExplanation = (
           <span
-            className={styles.marqueeExplanation}
+            className={styles.settingExplanation}
             dangerouslySetInnerHTML={{
-              __html: createLinkElement(config.textContent.marqueeExplanation),
+              __html: explanationHtmlString,
             }}
           />
         );
@@ -86,7 +87,7 @@ export default function Settings({
             selectedOption={selectedValue}
             onSelect={(key) => onChange(enumeratedType[key])}
           />
-          {marqueeExplanation}
+          {settingExplanation}
         </div>
       );
     }
@@ -102,4 +103,21 @@ export default function Settings({
       </div>
     </>
   );
+
+  function setExplanation(
+    legend: string,
+    selectedValue: string
+  ): string | undefined {
+    if (legend === 'Animation') {
+      if (selectedValue === SlideAnimation.MARQUEE) {
+        return createLinkElement(config.textContent.explanation.marquee);
+      }
+    } else if (legend === 'Font') {
+      if (selectedValue === Font.TILT_PRISM) {
+        return createLinkElement(config.textContent.explanation.tiltPrism);
+      }
+    }
+
+    return undefined;
+  }
 }

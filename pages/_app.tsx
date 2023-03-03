@@ -73,7 +73,7 @@ function RegularPage({
   const [theme, setTheme] = useState(config.defaults.theme);
   const [animation, setAnimation] = useState(config.defaults.animation);
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(needsLoading(font));
 
   // Getting saved page defaults from storage
   useEffect(() => {
@@ -81,6 +81,8 @@ function RegularPage({
 
     if (savedPageConfig) {
       setFont(savedPageConfig.defaults.font);
+      setLoading(needsLoading(savedPageConfig.defaults.font));
+
       setTheme(savedPageConfig.defaults.theme);
       setAnimation(savedPageConfig.defaults.animation);
     }

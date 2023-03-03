@@ -43,9 +43,15 @@ describe('<Settings/>', () => {
       header: 'Settings',
       subheader: 'Sub-Settings',
       prompt: 'Change up them settings.',
-      marqueeExplanation: {
-        templateString: 'Marquees are great.',
-        urls: [],
+      explanation: {
+        marquee: {
+          templateString: 'Marquees are great.',
+          urls: [],
+        },
+        tiltPrism: {
+          templateString: 'Tilt prism is great.',
+          urls: [],
+        },
       },
     },
   };
@@ -133,5 +139,22 @@ describe('<Settings/>', () => {
 
     const marqueeExplanation = screen.queryByText('Marquees are great.');
     expect(marqueeExplanation).toBeTruthy();
+  });
+
+  test('renders and shows tilt prism explanation', () => {
+    renderResult.rerender(
+      <Settings
+        config={config}
+        font={Font.TILT_PRISM}
+        theme={theme}
+        animation={animation}
+        onFontChange={onFontChange}
+        onThemeChange={onThemeChange}
+        onAnimationChange={onAnimationChange}
+      />
+    );
+
+    const tiltPrismExplanation = screen.queryByText('Tilt Prism is great.');
+    expect(tiltPrismExplanation).toBeTruthy();
   });
 });

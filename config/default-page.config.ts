@@ -6,7 +6,7 @@ import { Theme } from './theme.enum';
 export const pageConfig: PageConfig = {
   defaults: {
     font: Font.ARIAL,
-    theme: Theme.STARRY_NIGHT,
+    theme: Theme.MONOCHROME,
     animation: SlideAnimation.NONE,
   },
 };

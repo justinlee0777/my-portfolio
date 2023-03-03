@@ -5,6 +5,9 @@ export interface SettingsConfig {
     header: string;
     subheader: string;
     prompt: string;
-    marqueeExplanation: Link;
+    explanation: {
+      marquee: Link;
+      tiltPrism: Link;
+    };
   };
 }
