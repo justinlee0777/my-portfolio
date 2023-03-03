@@ -13,4 +13,12 @@ export interface UnitTestResults {
   };
 }
 
-export const UnitTestContext = createContext<UnitTestResults>({});
+export interface UnitTestContextData {
+  results: UnitTestResults;
+  developerMode: boolean;
+}
+
+export const UnitTestContext = createContext<UnitTestContextData>({
+  results: {},
+  developerMode: false,
+});

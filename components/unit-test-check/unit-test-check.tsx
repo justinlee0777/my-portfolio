@@ -23,12 +23,17 @@ export default function UnitTestCheck({
 
   return (
     <UnitTestContext.Consumer>
-      {(unitTestResult) => {
-        const unitTests = unitTestResult[componentName];
+      {({ results, developerMode }) => {
+        if (!developerMode) {
+          return <></>;
+        }
+
+        const unitTests = results[componentName];
 
         return (
           <div className={styles.container}>
             <button
+              aria-label="Click to see the unit test results for this component."
               aria-pressed={tooltipOpened}
               aria-expanded={tooltipOpened}
               className={styles.icon}

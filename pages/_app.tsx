@@ -86,6 +86,9 @@ function RegularPage({
   const [font, setFont] = useState(config.defaults.font);
   const [theme, setTheme] = useState(config.defaults.theme);
   const [animation, setAnimation] = useState(config.defaults.animation);
+  const [developerMode, setDeveloperMode] = useState(
+    config.defaults.developerMode
+  );
 
   const [loading, setLoading] = useState(needsLoading(font));
 
@@ -143,12 +146,15 @@ function RegularPage({
     font,
     theme,
     animation,
+    developerMode,
     onFontChange: (font: Font) => {
       setFont(font);
       setLoading(needsLoading(font));
     },
     onThemeChange: (theme: Theme) => setTheme(theme),
     onAnimationChange: (animation: SlideAnimation) => setAnimation(animation),
+    onDeveloperModeChange: (developerMode: boolean) =>
+      setDeveloperMode(developerMode),
   };
 
   let settingsIcon: JSX.Element;
@@ -164,7 +170,9 @@ function RegularPage({
   }
 
   return (
-    <UnitTestContext.Provider value={pageProps.unitTestResult}>
+    <UnitTestContext.Provider
+      value={{ results: pageProps.unitTestResult, developerMode }}
+    >
       <div className={pageClassnames}>
         <Navigation
           className={styles.pageNavigation}

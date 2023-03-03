@@ -7,5 +7,6 @@ export interface PageConfig {
     font: Font;
     theme: Theme;
     animation: SlideAnimation;
+    developerMode: boolean;
   };
 }

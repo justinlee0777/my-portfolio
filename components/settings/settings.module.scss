@@ -1,13 +1,18 @@
-.selectGroup {
-  &:nth-of-type(n + 2) {
-    margin-top: 18px;
-  }
-}
-
 .settingsHeader {
   text-align: center;
 }
 
-.settingExplanation {
+.settingsContainer {
   font-size: 12px;
+
+  > * {
+    margin-top: 18px;
+  }
+}
+
+.developerMode {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }

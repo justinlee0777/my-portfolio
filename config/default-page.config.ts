@@ -8,5 +8,6 @@ export const pageConfig: PageConfig = {
     font: Font.ARIAL,
     theme: Theme.MONOCHROME,
     animation: SlideAnimation.NONE,
+    developerMode: false,
   },
 };

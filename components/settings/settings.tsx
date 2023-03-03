@@ -6,15 +6,19 @@ import { SlideAnimation } from '../../config/slide-animation.enum';
 import { Theme } from '../../config/theme.enum';
 import { createLinkElement } from '../../config/link.model';
 import { SettingsConfig } from '../../config/settings.config';
+import UnitTestCheck from '../unit-test-check/unit-test-check';
+import Switch from '../switch/switch';
 
 export interface SettingsProps {
   config: SettingsConfig;
   font: string;
   theme: string;
   animation: string;
+  developerMode: boolean;
   onFontChange: (font: Font) => void;
   onThemeChange: (theme: Theme) => void;
   onAnimationChange: (animation: SlideAnimation) => void;
+  onDeveloperModeChange: (developerMode: boolean) => void;
 }
 
 interface SettingsSection {
@@ -29,9 +33,11 @@ export default function Settings({
   font,
   theme,
   animation,
+  developerMode,
   onFontChange,
   onThemeChange,
   onAnimationChange,
+  onDeveloperModeChange,
 }: SettingsProps): JSX.Element {
   const sections: Array<SettingsSection> = [
     {
@@ -95,11 +101,16 @@ export default function Settings({
 
   return (
     <>
+      <UnitTestCheck componentName={Settings.name} />
       <h2 className={styles.settingsHeader}>{config.textContent.header}</h2>
       <h3>{config.textContent.subheader}</h3>
-      <div>
+      <div className={styles.settingsContainer}>
         <p>{config.textContent.prompt}</p>
         {selects}
+        <p className={styles.developerMode}>
+          Developer mode:{' '}
+          <Switch value={developerMode} onChange={onDeveloperModeChange} />
+        </p>
       </div>
     </>
   );

@@ -23,10 +23,12 @@ export interface HomepageProps {
   font: Font;
   theme: Theme;
   animation: SlideAnimation;
+  developerMode: boolean;
 
   onFontChange: (font: Font) => void;
   onThemeChange: (theme: Theme) => void;
   onAnimationChange: (animation: SlideAnimation) => void;
+  onDeveloperModeChange: (developerMode: boolean) => void;
 }
 
 export default function HomePage({
@@ -37,10 +39,12 @@ export default function HomePage({
   font,
   theme,
   animation,
+  developerMode,
 
   onFontChange,
   onThemeChange,
   onAnimationChange,
+  onDeveloperModeChange,
 }: HomepageProps): JSX.Element {
   const [animatedSlides, setAnimatedSlides] = useState<Array<string>>([]);
 
@@ -75,12 +79,14 @@ export default function HomePage({
       font={font}
       theme={theme}
       animation={animation}
+      developerMode={developerMode}
       onFontChange={onFontChange}
       onThemeChange={onThemeChange}
       onAnimationChange={(animation) => {
         onAnimationChange(animation);
         setAnimatedSlides([]);
       }}
+      onDeveloperModeChange={onDeveloperModeChange}
     />,
     <Resume key="resume" config={homepageConfig.resume} />,
   ];

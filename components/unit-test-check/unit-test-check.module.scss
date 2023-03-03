@@ -34,8 +34,8 @@ $iconWidth: 24px;
   position: absolute;
   right: ($iconWidth * 3 / 2);
   top: 0;
-
   transition: 1s opacity;
+  z-index: 1;
 
   &Opened {
     opacity: 1;
@@ -43,5 +43,7 @@ $iconWidth: 24px;
 }
 
 .tooltipTitle {
+  font-weight: bold;
   text-align: center;
+  white-space: nowrap;
 }
