@@ -5,14 +5,12 @@ import { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import { cloneDeep } from 'lodash-es';
 
-import {
-  Font,
-  loadFont,
-  needsLoading,
-  PageConfig,
-  SlideAnimation,
-  Theme,
-} from '../config';
+import { PageConfig } from '../config/page.config';
+import { needsLoading } from '../config/font.enum';
+import { loadFont } from '../config/load-font.function';
+import { Font } from '../config/font.enum';
+import { SlideAnimation } from '../config/slide-animation.enum';
+import { Theme } from '../config/theme.enum';
 import LoadingScreen from '../components/loading-screen/loading-screen';
 import Slide from '../components/slide/slide';
 import {

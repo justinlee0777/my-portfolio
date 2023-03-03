@@ -6,7 +6,7 @@ import { useEffect, useRef } from 'react';
 
 import Slide from '../components/slide/slide';
 import { BuzzwordBingoConfig } from './buzzword-bingo.config';
-import { SlideAnimation } from '../config';
+import { SlideAnimation } from '../config/slide-animation.enum';
 import { marqueeAnimateSlides } from '../utils/marquee-animate-slides.function';
 
 export interface BuzzwordBingoProps {

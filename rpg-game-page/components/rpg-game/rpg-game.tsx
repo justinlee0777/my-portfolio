@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { SlideAnimation } from '../../../config';
+import { SlideAnimation } from '../../../config/slide-animation.enum';
 import { marqueeAnimateSlides } from '../../../utils/marquee-animate-slides.function';
 
 import { RpgGameConfig } from './rpg-game.config';

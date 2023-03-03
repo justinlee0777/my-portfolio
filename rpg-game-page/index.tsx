@@ -5,7 +5,7 @@ import Head from 'next/head';
 import Slide from '../components/slide/slide';
 import { RpgGamePageConfig } from './rpg-game-page.config';
 import RpgGame from './components/rpg-game/rpg-game';
-import { SlideAnimation } from '../config';
+import { SlideAnimation } from '../config/slide-animation.enum';
 
 export interface RpgGameProps {
   rpgGameConfig: RpgGamePageConfig;

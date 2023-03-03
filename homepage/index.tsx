@@ -9,7 +9,9 @@ import Resume from './components/resume/resume';
 import Settings from '../components/settings/settings';
 import Slide from '../components/slide/slide';
 import { HomepageConfig } from './homepage.config';
-import { Theme, SlideAnimation, Font } from '../config';
+import { Font } from '../config/font.enum';
+import { SlideAnimation } from '../config/slide-animation.enum';
+import { Theme } from '../config/theme.enum';
 import { marqueeAnimateSlides } from '../utils/marquee-animate-slides.function';
 
 export interface HomepageProps {

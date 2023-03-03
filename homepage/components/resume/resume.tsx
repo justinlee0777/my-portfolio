@@ -1,4 +1,4 @@
-import { createLinkElement } from '../../../config';
+import { createLinkElement } from '../../../config/link.model';
 import { ResumeConfig } from '../../homepage.config';
 import styles from './resume.module.scss';
 

@@ -1,4 +1,4 @@
-import { Link } from '../config';
+import { Link } from '../config/link.model';
 import { SettingsConfig } from '../config/settings.config';
 
 export interface DeveloperDescriptionConfig {

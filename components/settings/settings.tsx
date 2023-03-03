@@ -1,7 +1,10 @@
 import styles from './settings.module.scss';
 
 import RadioGroup, { RadioGroupOption } from '../radiogroup/radiogroup';
-import { createLinkElement, Font, SlideAnimation, Theme } from '../../config';
+import { Font } from '../../config/font.enum';
+import { SlideAnimation } from '../../config/slide-animation.enum';
+import { Theme } from '../../config/theme.enum';
+import { createLinkElement } from '../../config/link.model';
 import { SettingsConfig } from '../../config/settings.config';
 
 export interface SettingsProps {
