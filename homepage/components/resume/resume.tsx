@@ -1,3 +1,4 @@
+import UnitTestCheck from '../../../components/unit-test-check/unit-test-check';
 import { createLinkElement } from '../../../config/link.model';
 import { ResumeConfig } from '../../homepage.config';
 import styles from './resume.module.scss';
@@ -25,5 +26,13 @@ export default function Resume({
     }
   });
 
-  return <>{lines}</>;
+  return (
+    <>
+      <UnitTestCheck
+        componentName={Resume.name}
+        style={{ transform: 'translateX(25vw)' }}
+      />
+      {lines}
+    </>
+  );
 }

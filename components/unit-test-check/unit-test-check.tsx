@@ -1,16 +1,18 @@
 import styles from './unit-test-check.module.scss';
 
-import { useState } from 'react';
+import { CSSProperties, useState } from 'react';
 import classNames from 'classnames';
 
 import { UnitTestContext } from '../../contexts/unit-test.context';
 
 export interface UnitTestProps {
   componentName: string;
+  style?: CSSProperties;
 }
 
 export default function UnitTestCheck({
   componentName,
+  style,
 }: UnitTestProps): JSX.Element {
   const [tooltipOpened, setTooltipOpened] = useState(false);
 
@@ -31,7 +33,7 @@ export default function UnitTestCheck({
         const unitTests = results[componentName];
 
         return (
-          <div className={styles.container}>
+          <div className={styles.container} style={style}>
             <button
               aria-label="Click to see the unit test results for this component."
               aria-pressed={tooltipOpened}

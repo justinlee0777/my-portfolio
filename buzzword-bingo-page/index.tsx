@@ -8,6 +8,7 @@ import Slide from '../components/slide/slide';
 import { BuzzwordBingoConfig } from './buzzword-bingo.config';
 import { SlideAnimation } from '../config/slide-animation.enum';
 import { marqueeAnimateSlides } from '../utils/marquee-animate-slides.function';
+import UnitTestCheck from '../components/unit-test-check/unit-test-check';
 
 export interface BuzzwordBingoProps {
   buzzwordBingoConfig: BuzzwordBingoConfig;
@@ -42,6 +43,7 @@ export default function BuzzwordBingoPage({
             content="Web app to generate buzzword bingo sheets."
           />
         </Head>
+        <UnitTestCheck componentName={BuzzwordBingoPage.name} />
         <h1 className={styles.header} ref={headerRef}>
           {buzzwordBingoConfig.textContent.header}
         </h1>

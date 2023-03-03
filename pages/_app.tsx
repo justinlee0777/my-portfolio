@@ -102,6 +102,7 @@ function RegularPage({
 
       setTheme(savedPageConfig.defaults.theme);
       setAnimation(savedPageConfig.defaults.animation);
+      setDeveloperMode(savedPageConfig.defaults.developerMode);
     }
   }, []);
 
@@ -111,9 +112,10 @@ function RegularPage({
     clonedPageConfig.defaults.font = font;
     clonedPageConfig.defaults.theme = theme;
     clonedPageConfig.defaults.animation = animation;
+    clonedPageConfig.defaults.developerMode = developerMode;
 
     setPageDefaults(clonedPageConfig);
-  }, [config, font, theme, animation]);
+  }, [config, font, theme, animation, developerMode]);
 
   // Loading fonts
   useEffect(() => {

@@ -3,6 +3,8 @@ import styles from './radiogroup.module.scss';
 import { useState } from 'react';
 import classNames from 'classnames';
 
+import UnitTestCheck from '../unit-test-check/unit-test-check';
+
 export interface RadioGroupOption {
   key: string;
   label: string;
@@ -59,6 +61,10 @@ export default function RadioGroup({
 
   return (
     <div className={radioGroupContainerClassNames}>
+      <UnitTestCheck
+        componentName={RadioGroup.name}
+        style={{ transform: 'translateY(-24px)' }}
+      />
       <fieldset className={radioGroupClassName}>
         <legend>{legend}</legend>
         {radioOptions}

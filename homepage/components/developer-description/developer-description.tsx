@@ -56,7 +56,10 @@ export default function DeveloperDescription({
 
   return (
     <>
-      <UnitTestCheck componentName={DeveloperDescription.name} />
+      <UnitTestCheck
+        componentName={DeveloperDescription.name}
+        style={{ transform: 'translateX(25vw)' }}
+      />
       <h1 className={styles.developerName}>{config.textContent.name}</h1>
       <h2 className={styles.developerPrompt}>{config.textContent.prompt}</h2>
       <p className={styles.developerTongueInCheck}>
