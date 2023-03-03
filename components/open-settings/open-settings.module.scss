@@ -6,8 +6,8 @@ $animationTime: 1s;
   background-color: transparent;
   box-sizing: border-box;
   padding: 8px;
-  transition: $animationTime width ease-in, $animationTime box-shadow,
-    $animationTime background-color;
+  transition: $animationTime width ease-in, $animationTime max-height ease-in,
+    $animationTime box-shadow, $animationTime background-color;
   width: $iconWidth + $iconMargin;
 
   & &Triangle {
@@ -22,7 +22,7 @@ $animationTime: 1s;
 
 @media (max-width: 800px) {
   .menu {
-    height: $iconWidth + $iconMargin;
+    max-height: $iconWidth + $iconMargin;
 
     &,
     &.menuOpened {
@@ -30,7 +30,7 @@ $animationTime: 1s;
     }
 
     &.menuOpened {
-      height: auto;
+      max-height: 100vh;
     }
 
     &Icon {

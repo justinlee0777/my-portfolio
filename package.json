@@ -1,9 +1,9 @@
 {
   "scripts": {
     "dev": "next dev",
-    "build": "next build && next export",
+    "build": "npm run test && next build && next export",
     "build:analyze": "ANALYZE=true yarn build",
-    "build:zip": "npm run build && rm -f out.zip && zip -r out out/*",
+    "build:zip": "npm run build:complete && rm -f out.zip && zip -r out out/*",
     "start": "next start",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "lint": "next lint",

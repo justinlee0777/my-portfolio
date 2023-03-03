@@ -5,6 +5,10 @@ jest.mock('react-dom/server', () => {
   };
 });
 
+jest.mock('../../../components/unit-test-check/unit-test-check', () => () => (
+  <span></span>
+));
+
 import {
   cleanup,
   fireEvent,

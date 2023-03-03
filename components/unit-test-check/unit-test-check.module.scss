@@ -1,0 +1,47 @@
+$iconWidth: 24px;
+
+.container {
+  border-radius: 2px;
+  font-size: 12px;
+  position: relative;
+}
+
+.icon {
+  border-radius: 50%;
+  border-style: solid;
+  border-width: 1px;
+  box-sizing: border-box;
+  height: $iconWidth;
+  line-height: $iconWidth - 2;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  top: 0;
+  transition: 1s filter;
+  vertical-align: middle;
+  width: $iconWidth;
+
+  &[aria-pressed='true'] {
+    filter: invert(1);
+  }
+}
+
+.tooltip {
+  border-style: solid;
+  border-width: 1px;
+  opacity: 0;
+  padding: 4px;
+  position: absolute;
+  right: ($iconWidth * 3 / 2);
+  top: 0;
+
+  transition: 1s opacity;
+
+  &Opened {
+    opacity: 1;
+  }
+}
+
+.tooltipTitle {
+  text-align: center;
+}

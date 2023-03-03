@@ -4,6 +4,7 @@ const { defaults } = require('jest-config');
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'jest-environment-jsdom',
+  testResultsProcessor: './save-unit-test-results',
   moduleNameMapper: {
     '\\.(css|less|scss|sss|styl)$': '<rootDir>/node_modules/jest-css-modules',
   },

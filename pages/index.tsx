@@ -1,6 +1,7 @@
 import { createImage } from '../api/openai';
 import { pageConfig } from '../config/default-page.config';
 import { homepageConfig } from '../homepage/default-homepage.config';
+import { loadUnitTestResult } from '../utils/load-unit-test-result.function';
 import { saveImageFromUrl } from '../utils/save-image-from-url.function';
 
 export { default } from '../homepage/index';
@@ -23,6 +24,7 @@ export async function getStaticProps() {
       homepageConfig,
       generatedProfilePictureUrl: `/${savedFile}`,
       profilePicturePrompt,
+      unitTestResult: loadUnitTestResult(),
     },
   };
 }

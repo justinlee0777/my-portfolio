@@ -21,26 +21,40 @@ import OpenSettings from '../components/open-settings/open-settings';
 import { HomepageConfig } from '../homepage/homepage.config';
 import { OpenSettingsConfig } from '../config/open-settings.config';
 import { Navigation } from '../components/navigation/navigation';
+import {
+  UnitTestContext,
+  UnitTestResults,
+} from '../contexts/unit-test.context';
+import { RpgGamePageConfig } from '../rpg-game-page/rpg-game-page.config';
 
 interface HomepageProps {
   pageConfig: PageConfig;
   homepageConfig: HomepageConfig;
   generatedProfilePictureUrl: string;
   profilePicturePrompt: string;
+  unitTestResult: UnitTestResults;
 }
 
 interface BuzzwordBingoProps {
   pageConfig: PageConfig;
-  openSettingsConfig?: OpenSettingsConfig;
+  unitTestResult: UnitTestResults;
+  openSettingsConfig: OpenSettingsConfig;
+}
+
+interface RpgGameProps {
+  pageConfig: PageConfig;
+  rpgGameConfig: RpgGamePageConfig;
+  openSettingsConfig: OpenSettingsConfig;
+  unitTestResult: UnitTestResults;
 }
 
 interface ErrorPageProps {
   statusCode: number;
 }
 
-type MyAppProps = HomepageProps | BuzzwordBingoProps | ErrorPageProps;
+type RegularAppProps = HomepageProps | BuzzwordBingoProps | RpgGameProps;
 
-type RegularAppProps = HomepageProps | BuzzwordBingoProps;
+type MyAppProps = RegularAppProps | ErrorPageProps;
 
 export default function MyApp({
   Component,
@@ -150,34 +164,36 @@ function RegularPage({
   }
 
   return (
-    <div className={pageClassnames}>
-      <Navigation
-        className={styles.pageNavigation}
-        links={[
-          {
-            displayName: 'Justin Lee',
-            url: '/',
-            isHome: true,
-          },
-          {
-            displayName: 'Buzzword Bingo',
-            url: '/buzzword-bingo',
-          },
-          {
-            displayName: 'RPG',
-            url: '/rpg-game',
-          },
-        ]}
-      />
-      <main id="main-content" className={styles.pageContent}>
-        <Component
-          className={styles.pageComponent}
-          {...pageProps}
-          {...stateProps}
+    <UnitTestContext.Provider value={pageProps.unitTestResult}>
+      <div className={pageClassnames}>
+        <Navigation
+          className={styles.pageNavigation}
+          links={[
+            {
+              displayName: 'Justin Lee',
+              url: '/',
+              isHome: true,
+            },
+            {
+              displayName: 'Buzzword Bingo',
+              url: '/buzzword-bingo',
+            },
+            {
+              displayName: 'RPG',
+              url: '/rpg-game',
+            },
+          ]}
         />
-        {settingsIcon}
-        {loadingScreen}
-      </main>
-    </div>
+        <main id="main-content" className={styles.pageContent}>
+          <Component
+            className={styles.pageComponent}
+            {...pageProps}
+            {...stateProps}
+          />
+          {settingsIcon}
+          {loadingScreen}
+        </main>
+      </div>
+    </UnitTestContext.Provider>
   );
 }

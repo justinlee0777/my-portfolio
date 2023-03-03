@@ -5,6 +5,7 @@
 }
 
 .slide {
+  position: relative;
   transition: 1s transform, 1s opacity;
 
   &-Swoopy {

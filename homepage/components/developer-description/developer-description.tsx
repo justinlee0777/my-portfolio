@@ -6,6 +6,7 @@ import classNames from 'classnames';
 
 import { DeveloperDescriptionConfig } from '../../homepage.config';
 import { createLinkElement } from '../../../config/link.model';
+import UnitTestCheck from '../../../components/unit-test-check/unit-test-check';
 
 export default function DeveloperDescription({
   config,
@@ -55,6 +56,7 @@ export default function DeveloperDescription({
 
   return (
     <>
+      <UnitTestCheck componentName={DeveloperDescription.name} />
       <h1 className={styles.developerName}>{config.textContent.name}</h1>
       <h2 className={styles.developerPrompt}>{config.textContent.prompt}</h2>
       <p className={styles.developerTongueInCheck}>
