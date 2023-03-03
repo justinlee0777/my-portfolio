@@ -12,3 +12,5 @@ public/rpg-game-source
 .env
 
 .DS_Store
+
+coverage
