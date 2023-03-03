@@ -48,6 +48,10 @@ $animationTime: 1s;
     opacity: 1;
   }
 
+  .menuIcon {
+    filter: invert(1);
+  }
+
   .menuTriangle {
     transform: scale(-1, -1) translateX(-50%);
   }
@@ -61,6 +65,7 @@ $animationTime: 1s;
   height: $iconWidth;
   margin: $iconMargin $iconMargin 0 0;
   padding: 0;
+  transition: $animationTime filter;
   width: $iconWidth;
 }
 

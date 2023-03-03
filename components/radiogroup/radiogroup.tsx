@@ -65,6 +65,8 @@ export default function RadioGroup({
       </fieldset>
       <button
         className={expandClassName}
+        aria-pressed={opened}
+        aria-expanded={opened}
         onClick={() => setOpened(!opened)}
         aria-label={`Open ${legend.toLowerCase()} settings`}
       >

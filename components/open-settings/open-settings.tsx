@@ -30,6 +30,8 @@ export default function OpenSettings({
         aria-label={
           opened ? config.aria.collapseLabel : config.aria.expandLabel
         }
+        aria-pressed={opened}
+        aria-expanded={opened}
         onClick={() => setOpened(!opened)}
       >
         <div className={styles.menuTriangle}></div>

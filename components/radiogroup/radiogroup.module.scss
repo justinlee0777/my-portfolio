@@ -20,6 +20,7 @@
   border-style: solid;
   border-width: 2px;
   border-radius: 50%;
+  filter: invert(1);
   font-size: 12px;
   font-weight: bold;
   line-height: 12px;
@@ -29,11 +30,12 @@
   right: 0;
   top: 0;
   transform: rotate(135deg);
-  transition: 0.5s transform;
+  transition: 0.5s transform, 0.5s filter;
   vertical-align: middle;
   width: 24px;
 
   &Unactivated {
+    filter: invert(0);
     transform: rotate(0deg);
   }
 }

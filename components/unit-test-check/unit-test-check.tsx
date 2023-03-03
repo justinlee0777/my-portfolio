@@ -30,6 +30,7 @@ export default function UnitTestCheck({
           <div className={styles.container}>
             <button
               aria-pressed={tooltipOpened}
+              aria-expanded={tooltipOpened}
               className={styles.icon}
               onClick={() => setTooltipOpened(!tooltipOpened)}
             >
