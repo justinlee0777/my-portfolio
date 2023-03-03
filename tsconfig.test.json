@@ -3,5 +3,11 @@
   "compilerOptions": {
     "jsx": "react-jsx"
   },
-  "include": ["**/*.test.ts", "**/*.test.tsx"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.test.ts",
+    "**/*.test.tsx"
+  ]
 }

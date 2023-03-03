@@ -154,7 +154,7 @@ describe('<Settings/>', () => {
       />
     );
 
-    const tiltPrismExplanation = screen.queryByText('Tilt Prism is great.');
+    const tiltPrismExplanation = screen.queryByText('Tilt prism is great.');
     expect(tiltPrismExplanation).toBeTruthy();
   });
 });
