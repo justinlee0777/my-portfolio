@@ -16,6 +16,7 @@ describe('getPageDefaults() and setPageDefaults()', () => {
         font: Font.COMIC_SANS_MS,
         theme: Theme.ULYSSES,
         animation: SlideAnimation.MARQUEE,
+        developerMode: true,
       },
     };
 

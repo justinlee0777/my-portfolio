@@ -15,6 +15,15 @@ jest.mock(
     }
 );
 
+jest.mock('../switch/switch', () => ({ value, onChange }) => {
+  return (
+    <>
+      <span>Toggle: {value}</span>
+      <button onClick={() => onChange(!value)}>Toggle state</button>
+    </>
+  );
+});
+
 jest.mock('react-dom/server', () => {
   return {
     __esModule: true,
@@ -59,10 +68,12 @@ describe('<Settings/>', () => {
   const font = Font.ROBOTO;
   const theme = Theme.STARRY_NIGHT;
   const animation = SlideAnimation.SWEEPY;
+  const developerMode = false;
 
   let onFontChange = jest.fn();
   let onThemeChange = jest.fn();
   let onAnimationChange = jest.fn();
+  let onDeveloperModeChange = jest.fn();
 
   let renderResult: RenderResult;
 
@@ -73,9 +84,11 @@ describe('<Settings/>', () => {
         font={font}
         theme={theme}
         animation={animation}
+        developerMode={developerMode}
         onFontChange={onFontChange}
         onThemeChange={onThemeChange}
         onAnimationChange={onAnimationChange}
+        onDeveloperModeChange={onDeveloperModeChange}
       />
     );
   });
@@ -122,6 +135,11 @@ describe('<Settings/>', () => {
     fireEvent.click(clickedAnimation);
 
     expect(onAnimationChange.mock.calls[0]).toEqual([SlideAnimation.SWOOPY]);
+
+    const clickedDeveloperMode = screen.queryByText('Toggle state');
+    fireEvent.click(clickedDeveloperMode);
+
+    expect(onDeveloperModeChange.mock.calls[0]).toEqual([true]);
   });
 
   test('renders and shows marquee explanation', () => {
@@ -131,9 +149,11 @@ describe('<Settings/>', () => {
         font={font}
         theme={theme}
         animation={SlideAnimation.MARQUEE}
+        developerMode={developerMode}
         onFontChange={onFontChange}
         onThemeChange={onThemeChange}
         onAnimationChange={onAnimationChange}
+        onDeveloperModeChange={onDeveloperModeChange}
       />
     );
 
@@ -148,9 +168,11 @@ describe('<Settings/>', () => {
         font={Font.TILT_PRISM}
         theme={theme}
         animation={animation}
+        developerMode={developerMode}
         onFontChange={onFontChange}
         onThemeChange={onThemeChange}
         onAnimationChange={onAnimationChange}
+        onDeveloperModeChange={onDeveloperModeChange}
       />
     );
 
