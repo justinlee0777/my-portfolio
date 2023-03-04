@@ -3,14 +3,19 @@ import styles from './switch.module.scss';
 import classNames from 'classnames';
 
 export interface SwitchProps {
+  className?: string;
   value?: boolean;
   onChange?: (toggled: boolean) => void;
 }
 
-export default function Switch({ value, onChange }: SwitchProps): JSX.Element {
+export default function Switch({
+  className,
+  value,
+  onChange,
+}: SwitchProps): JSX.Element {
   const onClick = () => onChange?.(!value);
 
-  const switchClassName = classNames(styles.switch, {
+  const switchClassName = classNames(styles.switch, className, {
     [styles.switchActive]: value,
   });
 

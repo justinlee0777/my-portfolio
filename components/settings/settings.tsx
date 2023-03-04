@@ -108,8 +108,12 @@ export default function Settings({
         <p>{config.textContent.prompt}</p>
         {selects}
         <p className={styles.developerMode}>
-          Developer mode:{' '}
-          <Switch value={developerMode} onChange={onDeveloperModeChange} />
+          {config.textContent.explanation.developerMode}
+          <Switch
+            className={styles.developerModeSwitch}
+            value={developerMode}
+            onChange={onDeveloperModeChange}
+          />
         </p>
       </div>
     </>

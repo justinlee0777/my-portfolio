@@ -34,6 +34,8 @@ export const homepageConfig: HomepageConfig = {
           templateString: 'Courtesy to ${Andy Clymer}',
           urls: ['https://fonts.google.com/specimen/Tilt+Prism'],
         },
+        developerMode:
+          'Developer mode shows the passing/failing unit tests for components and other things usually hidden from the end user.',
       },
     },
   },

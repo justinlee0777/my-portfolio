@@ -8,6 +8,7 @@ export interface SettingsConfig {
     explanation: {
       marquee: Link;
       tiltPrism: Link;
+      developerMode: string;
     };
   };
 }

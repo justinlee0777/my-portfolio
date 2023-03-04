@@ -61,6 +61,7 @@ describe('<Settings/>', () => {
           templateString: 'Tilt prism is great.',
           urls: [],
         },
+        developerMode: 'Developer mode is wicked awesome.',
       },
     },
   };
@@ -118,6 +119,11 @@ describe('<Settings/>', () => {
 
     const selectedAnimation = screen.queryByText('Selected: Sweepy');
     expect(selectedAnimation).toBeTruthy();
+
+    const developerModeExplanation = screen.queryByText(
+      'Developer mode is wicked awesome.'
+    );
+    expect(developerModeExplanation).toBeTruthy();
   });
 
   test('renders and changes settings', async () => {
