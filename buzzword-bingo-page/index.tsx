@@ -43,7 +43,7 @@ export default function BuzzwordBingoPage({
             content="Web app to generate buzzword bingo sheets."
           />
         </Head>
-        <UnitTestCheck componentName={BuzzwordBingoPage.name} />
+        <UnitTestCheck componentName="BuzzwordBingoPage" />
         <h1 className={styles.header} ref={headerRef}>
           {buzzwordBingoConfig.textContent.header}
         </h1>

@@ -62,7 +62,7 @@ export default function RadioGroup({
   return (
     <div className={radioGroupContainerClassNames}>
       <UnitTestCheck
-        componentName={RadioGroup.name}
+        componentName="RadioGroup"
         style={{ transform: 'translateY(-24px)' }}
       />
       <fieldset className={radioGroupClassName}>

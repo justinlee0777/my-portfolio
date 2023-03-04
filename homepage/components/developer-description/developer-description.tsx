@@ -57,7 +57,7 @@ export default function DeveloperDescription({
   return (
     <>
       <UnitTestCheck
-        componentName={DeveloperDescription.name}
+        componentName="DeveloperDescription"
         style={{ transform: 'translateX(25vw)' }}
       />
       <h1 className={styles.developerName}>{config.textContent.name}</h1>

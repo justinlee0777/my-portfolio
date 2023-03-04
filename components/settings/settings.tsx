@@ -101,7 +101,7 @@ export default function Settings({
 
   return (
     <>
-      <UnitTestCheck componentName={Settings.name} />
+      <UnitTestCheck componentName="Settings" />
       <h2 className={styles.settingsHeader}>{config.textContent.header}</h2>
       <h3>{config.textContent.subheader}</h3>
       <div className={styles.settingsContainer}>

@@ -26,11 +26,11 @@ export default function UnitTestCheck({
   return (
     <UnitTestContext.Consumer>
       {({ results, developerMode }) => {
-        if (!developerMode) {
+        const unitTests = results[componentName];
+
+        if (!(developerMode && unitTests)) {
           return <></>;
         }
-
-        const unitTests = results[componentName];
 
         return (
           <div className={styles.container} style={style}>

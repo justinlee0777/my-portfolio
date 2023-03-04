@@ -29,7 +29,7 @@ export default function Resume({
   return (
     <>
       <UnitTestCheck
-        componentName={Resume.name}
+        componentName="Resume"
         style={{ transform: 'translateX(25vw)' }}
       />
       {lines}

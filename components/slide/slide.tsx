@@ -20,7 +20,7 @@ export default function Slide({
   return (
     <div className={slideClassName} id={id}>
       <UnitTestCheck
-        componentName={Slide.name}
+        componentName="Slide"
         style={{ transform: 'translateX(48vw)' }}
       />
       {children}
