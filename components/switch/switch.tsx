@@ -27,7 +27,12 @@ export default function Switch({
       aria-checked={value}
       aria-label="Click to toggle."
     >
-      <div className={styles.switchKnob} role="button" onClick={onClick}></div>
+      <div
+        className={styles.switchKnob}
+        role="button"
+        aria-label="Click to toggle."
+        onClick={onClick}
+      ></div>
     </button>
   );
 }

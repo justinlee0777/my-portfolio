@@ -61,6 +61,13 @@ $backgroundColorAnimation: 1s background-color;
       font-family: 'Tilt Prism', sans-serif;
     }
   }
+
+  &-Eater {
+    &,
+    button {
+      font-family: 'Eater', sans-serif;
+    }
+  }
 }
 
 .loadingScreen {
@@ -88,7 +95,6 @@ $backgroundColorAnimation: 1s background-color;
   .loadingScreen,
   .settingsMenu {
     background-color: $backgroundColor;
-    transition: $backgroundColorAnimation;
   }
 
   button,

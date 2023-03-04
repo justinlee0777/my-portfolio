@@ -15,8 +15,12 @@ export const defaultOpenSettingsConfig: OpenSettingsConfig = {
           ],
         },
         tiltPrism: {
-          templateString: 'Courtesy to ${Andy Clymer}',
+          templateString: 'Courtesy towards ${Andy Clymer}',
           urls: ['https://fonts.google.com/specimen/Tilt+Prism'],
+        },
+        eater: {
+          templateString: 'Courtesy towards ${Typomondo}',
+          urls: ['https://fonts.google.com/specimen/Eater'],
         },
         developerMode:
           'Developer mode shows the passing/failing unit tests for components and other things usually hidden from the end user.',

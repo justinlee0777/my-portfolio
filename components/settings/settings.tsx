@@ -128,8 +128,11 @@ export default function Settings({
         return createLinkElement(config.textContent.explanation.marquee);
       }
     } else if (legend === 'Font') {
-      if (selectedValue === Font.TILT_PRISM) {
-        return createLinkElement(config.textContent.explanation.tiltPrism);
+      switch (selectedValue) {
+        case Font.TILT_PRISM:
+          return createLinkElement(config.textContent.explanation.tiltPrism);
+        case Font.EATER:
+          return createLinkElement(config.textContent.explanation.eater);
       }
     }
 

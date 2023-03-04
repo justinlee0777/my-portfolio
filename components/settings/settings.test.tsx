@@ -61,6 +61,10 @@ describe('<Settings/>', () => {
           templateString: 'Tilt prism is great.',
           urls: [],
         },
+        eater: {
+          templateString: 'Eater is great.',
+          urls: [],
+        },
         developerMode: 'Developer mode is wicked awesome.',
       },
     },
@@ -183,6 +187,25 @@ describe('<Settings/>', () => {
     );
 
     const tiltPrismExplanation = screen.queryByText('Tilt prism is great.');
+    expect(tiltPrismExplanation).toBeTruthy();
+  });
+
+  test('renders and shows an eater explanation', () => {
+    renderResult.rerender(
+      <Settings
+        config={config}
+        font={Font.EATER}
+        theme={theme}
+        animation={animation}
+        developerMode={developerMode}
+        onFontChange={onFontChange}
+        onThemeChange={onThemeChange}
+        onAnimationChange={onAnimationChange}
+        onDeveloperModeChange={onDeveloperModeChange}
+      />
+    );
+
+    const tiltPrismExplanation = screen.queryByText('Eater is great.');
     expect(tiltPrismExplanation).toBeTruthy();
   });
 });

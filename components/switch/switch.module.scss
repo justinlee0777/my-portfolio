@@ -17,7 +17,7 @@ $switchHeight: 14px;
     box-sizing: border-box;
     height: $switchHeight * 3 / 2;
     min-width: $switchHeight * 3 / 2;
-    transform: translateX(-50%);
+    transform: translateX(-($switchHeight * 3 / 2));
     transition: transform 0.333s;
   }
 }
