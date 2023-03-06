@@ -1,5 +1,7 @@
 import styles from './settings.module.scss';
 
+import Link from 'next/link';
+
 import RadioGroup, { RadioGroupOption } from '../radiogroup/radiogroup';
 import { Font } from '../../config/font.enum';
 import { SlideAnimation } from '../../config/slide-animation.enum';
@@ -8,6 +10,7 @@ import { createLinkElement } from '../../config/link.model';
 import { SettingsConfig } from '../../config/settings.config';
 import UnitTestCheck from '../unit-test-check/unit-test-check';
 import Switch from '../switch/switch';
+import { locales } from '../../page-utils/locales.config';
 
 export interface SettingsProps {
   config: SettingsConfig;
@@ -106,6 +109,25 @@ export default function Settings({
       <h3>{config.textContent.subheader}</h3>
       <div className={styles.settingsContainer}>
         <p>{config.textContent.prompt}</p>
+        <div className={styles.localizedSites}>
+          <label className={styles.localizedSitesHeader}>Language</label>
+          {locales.map((locale) => (
+            <Link
+              className={styles.localizedSite}
+              key={locale.code}
+              href={`/${locale.code}`}
+            >
+              {locale.displayName}
+            </Link>
+          ))}
+          <p
+            dangerouslySetInnerHTML={{
+              __html: createLinkElement(
+                config.textContent.explanation.translation
+              ),
+            }}
+          />
+        </div>
         {selects}
         <p className={styles.developerMode}>
           {config.textContent.explanation.developerMode}

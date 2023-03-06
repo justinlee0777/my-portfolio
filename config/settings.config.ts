@@ -6,6 +6,7 @@ export interface SettingsConfig {
     subheader: string;
     prompt: string;
     explanation: {
+      translation: Link;
       marquee: Link;
       tiltPrism: Link;
       eater: Link;
@@ -15,6 +16,7 @@ export interface SettingsConfig {
 }
 
 const explanationKeys = [
+  'translation.templateString',
   'marquee.templateString',
   'tiltPrism.templateString',
   'eater.templateString',

@@ -23,6 +23,11 @@ export const homepageConfig: HomepageConfig = {
       prompt:
         'You can change certain things with the site to suit your liking. Such as...',
       explanation: {
+        translation: {
+          templateString:
+            'All languages except English were translated through ${Google Cloud Translation}.',
+          urls: ['https://cloud.google.com/translate'],
+        },
         marquee: {
           templateString:
             'This MDN ${article} describes best what the marquee element had been.',

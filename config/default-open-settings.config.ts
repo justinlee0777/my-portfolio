@@ -7,6 +7,11 @@ export const defaultOpenSettingsConfig: OpenSettingsConfig = {
       subheader: 'Settings',
       prompt: '',
       explanation: {
+        translation: {
+          templateString:
+            'All languages except English were translated through ${Google Cloud Translation}.',
+          urls: ['https://cloud.google.com/translate'],
+        },
         marquee: {
           templateString:
             'This MDN ${article} describes best what the marquee element had been.',

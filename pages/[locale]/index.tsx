@@ -1,4 +1,5 @@
 import { getLocalizedStaticProps } from '../../page-utils/get-localized-homepage-props.function';
+import { locales } from '../../page-utils/locales.config';
 
 export { default } from '../../homepage/index';
 
@@ -9,31 +10,11 @@ export function getStaticProps({ params }) {
 export async function getStaticPaths() {
   return {
     paths: [
-      {
+      ...locales.map((locale) => ({
         params: {
-          locale: 'en',
+          locale: locale.code,
         },
-      },
-      {
-        params: {
-          locale: 'fr',
-        },
-      },
-      {
-        params: {
-          locale: 'de',
-        },
-      },
-      {
-        params: {
-          locale: 'zh',
-        },
-      },
-      {
-        params: {
-          locale: 'ja',
-        },
-      },
+      })),
     ],
     fallback: false,
   };

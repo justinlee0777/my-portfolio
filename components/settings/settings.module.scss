@@ -10,6 +10,23 @@
   }
 }
 
+.localizedSites {
+  display: flex;
+  flex-flow: row wrap;
+  margin-bottom: 8px;
+
+  &Header {
+    margin-bottom: 4px;
+    width: 100%;
+  }
+}
+
+.localizedSite {
+  &:nth-of-type(n + 2) {
+    margin-left: 8px;
+  }
+}
+
 .developerMode {
   align-items: center;
   display: flex;
