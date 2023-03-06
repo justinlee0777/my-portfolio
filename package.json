@@ -10,6 +10,7 @@
     "format": "prettier --write ."
   },
   "dependencies": {
+    "@google-cloud/translate": "^7.2.0",
     "buzzword-bingo-generator": "^0.0.20",
     "classnames": "^2.3.2",
     "lodash-es": "^4.17.21",
@@ -24,6 +25,7 @@
     "@next/bundle-analyzer": "^13.2.2",
     "@testing-library/react": "^14.0.0",
     "@types/jest": "^29.4.0",
+    "@types/lodash": "^4.14.191",
     "@types/node": "18.14.0",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",

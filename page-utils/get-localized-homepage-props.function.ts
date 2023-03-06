@@ -3,9 +3,13 @@ import { pageConfig } from '../config/default-page.config';
 import { PageConfig } from '../config/page.config';
 import { UnitTestResults } from '../contexts/unit-test.context';
 import { homepageConfig } from '../homepage/default-homepage.config';
-import { HomepageConfig } from '../homepage/homepage.config';
+import {
+  getTranslationKeys,
+  HomepageConfig,
+} from '../homepage/homepage.config';
 import { loadUnitTestResult } from '../utils/load-unit-test-result.function';
 import { saveImageFromUrl } from '../utils/save-image-from-url.function';
+import { translateObject } from '../utils/translate-object.function';
 
 export interface HomePageProps {
   pageConfig: PageConfig;
@@ -30,10 +34,20 @@ export function getLocalizedStaticProps(
 
     await saveImageFromUrl(generatedProfilePictureUrl, savedFile);
 
+    let translatedConfig = homepageConfig;
+
+    if (locale !== 'en') {
+      translatedConfig = await translateObject(
+        homepageConfig,
+        getTranslationKeys(homepageConfig),
+        locale
+      );
+    }
+
     return {
       props: {
         pageConfig,
-        homepageConfig,
+        homepageConfig: translatedConfig,
         generatedProfilePictureUrl: `/${savedFile}`,
         profilePicturePrompt,
         unitTestResult: loadUnitTestResult(),

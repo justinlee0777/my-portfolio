@@ -13,3 +13,17 @@ export interface SettingsConfig {
     };
   };
 }
+
+const explanationKeys = [
+  'marquee.templateString',
+  'tiltPrism.templateString',
+  'eater.templateString',
+  'developerMode',
+].map((key) => `explanation.${key}`);
+
+export const keysToTranslate = [
+  'header',
+  'subheader',
+  'prompt',
+  ...explanationKeys,
+].map((key) => `textContent.${key}`);

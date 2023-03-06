@@ -8,7 +8,33 @@ export function getStaticProps({ params }) {
 
 export async function getStaticPaths() {
   return {
-    paths: [{ params: { locale: 'en' } }, { params: { locale: 'fr' } }],
+    paths: [
+      {
+        params: {
+          locale: 'en',
+        },
+      },
+      {
+        params: {
+          locale: 'fr',
+        },
+      },
+      {
+        params: {
+          locale: 'de',
+        },
+      },
+      {
+        params: {
+          locale: 'zh',
+        },
+      },
+      {
+        params: {
+          locale: 'ja',
+        },
+      },
+    ],
     fallback: false,
   };
 }
