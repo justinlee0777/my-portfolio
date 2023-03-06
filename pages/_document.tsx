@@ -5,7 +5,6 @@ export default function Document(): JSX.Element {
     <Html lang="en">
       <Head>
         <meta name="author" content="Justin Lee, leej40@outlook.com" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link
           rel="icon"
           type="image/png"

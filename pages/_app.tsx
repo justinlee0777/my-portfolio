@@ -4,6 +4,7 @@ import styles from './app.module.scss';
 import { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import { cloneDeep } from 'lodash-es';
+import Head from 'next/head';
 
 import { PageConfig } from '../config/page.config';
 import { needsLoading } from '../config/font.enum';
@@ -18,7 +19,6 @@ import {
   setPageDefaults,
 } from '../config/get-page-defaults.function';
 import OpenSettings from '../components/open-settings/open-settings';
-import { HomepageConfig } from '../homepage/homepage.config';
 import { OpenSettingsConfig } from '../config/open-settings.config';
 import { Navigation } from '../components/navigation/navigation';
 import {
@@ -26,14 +26,7 @@ import {
   UnitTestResults,
 } from '../contexts/unit-test.context';
 import { RpgGamePageConfig } from '../rpg-game-page/rpg-game-page.config';
-
-interface HomepageProps {
-  pageConfig: PageConfig;
-  homepageConfig: HomepageConfig;
-  generatedProfilePictureUrl: string;
-  profilePicturePrompt: string;
-  unitTestResult: UnitTestResults;
-}
+import { HomePageProps } from '../page-utils/get-localized-homepage-props.function';
 
 interface BuzzwordBingoProps {
   pageConfig: PageConfig;
@@ -52,7 +45,7 @@ interface ErrorPageProps {
   statusCode: number;
 }
 
-type RegularAppProps = HomepageProps | BuzzwordBingoProps | RpgGameProps;
+type RegularAppProps = HomePageProps | BuzzwordBingoProps | RpgGameProps;
 
 type MyAppProps = RegularAppProps | ErrorPageProps;
 
@@ -175,6 +168,9 @@ function RegularPage({
     <UnitTestContext.Provider
       value={{ results: pageProps.unitTestResult, developerMode }}
     >
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
       <div className={pageClassnames}>
         <Navigation
           className={styles.pageNavigation}
