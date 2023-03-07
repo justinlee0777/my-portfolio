@@ -19,6 +19,10 @@ import BuzzwordBingoPage from './index';
 
 describe('<BuzzwordBingoPage/>', () => {
   const buzzwordBingoConfig: BuzzwordBingoConfig = {
+    seo: {
+      title: 'title',
+      description: 'description',
+    },
     textContent: {
       header: 'Header',
       explanation: ['Buzzword bingo is awesome.', 'Super fun.', 'Most rad.'],

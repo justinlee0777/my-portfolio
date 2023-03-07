@@ -53,6 +53,10 @@ describe('<Settings/>', () => {
       subheader: 'Sub-Settings',
       prompt: 'Change up them settings.',
       explanation: {
+        translation: {
+          templateString: 'Translated by I.',
+          urls: [],
+        },
         marquee: {
           templateString: 'Marquees are great.',
           urls: [],
@@ -128,6 +132,9 @@ describe('<Settings/>', () => {
       'Developer mode is wicked awesome.'
     );
     expect(developerModeExplanation).toBeTruthy();
+
+    const translationExplanation = screen.queryByText('Translated by I.');
+    expect(translationExplanation).toBeTruthy();
   });
 
   test('renders and changes settings', async () => {

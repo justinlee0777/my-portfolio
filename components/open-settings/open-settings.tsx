@@ -5,6 +5,7 @@ import { useState } from 'react';
 
 import Settings, { SettingsProps } from '../settings/settings';
 import { OpenSettingsConfig } from '../../config/open-settings.config';
+import UnitTestCheck from '../unit-test-check/unit-test-check';
 
 export interface OpenSettingsProps extends Omit<SettingsProps, 'config'> {
   config: OpenSettingsConfig;
@@ -25,6 +26,7 @@ export default function OpenSettings({
 
   return (
     <div className={menuClassName}>
+      <UnitTestCheck componentName="OpenSettings" />
       <button
         className={styles.menuIcon}
         aria-label={
