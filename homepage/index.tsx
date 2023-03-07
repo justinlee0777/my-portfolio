@@ -15,6 +15,8 @@ import { Theme } from '../config/theme.enum';
 import { marqueeAnimateSlides } from '../utils/marquee-animate-slides.function';
 
 export interface HomepageProps {
+  locale: string;
+
   homepageConfig: HomepageConfig;
 
   generatedProfilePictureUrl: string;

@@ -15,6 +15,8 @@ import { loadUnitTestResult } from '../utils/load-unit-test-result.function';
 import { translateObject } from '../utils/translate-object.function';
 
 export interface BuzzwordBingoPageProps {
+  locale: string;
+  route: string;
   pageConfig: PageConfig;
   buzzwordBingoConfig: BuzzwordBingoConfig;
   unitTestResult: UnitTestResults;
@@ -44,6 +46,8 @@ export function getLocalizedStaticProps(
 
     return {
       props: {
+        locale,
+        route: '/buzzword-bingo',
         pageConfig,
         buzzwordBingoConfig: translatedConfig,
         openSettingsConfig: translatedOpenSettingsConfig,

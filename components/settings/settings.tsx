@@ -22,6 +22,8 @@ export interface SettingsProps {
   onThemeChange: (theme: Theme) => void;
   onAnimationChange: (animation: SlideAnimation) => void;
   onDeveloperModeChange: (developerMode: boolean) => void;
+
+  route?: string;
 }
 
 interface SettingsSection {
@@ -41,6 +43,8 @@ export default function Settings({
   onThemeChange,
   onAnimationChange,
   onDeveloperModeChange,
+
+  route = '',
 }: SettingsProps): JSX.Element {
   const sections: Array<SettingsSection> = [
     {
@@ -115,7 +119,7 @@ export default function Settings({
             <Link
               className={styles.localizedSite}
               key={locale.code}
-              href={`/${locale.code}`}
+              href={`/${locale.code}${route}`}
             >
               {locale.displayName}
             </Link>

@@ -13,6 +13,8 @@ import { loadUnitTestResult } from '../utils/load-unit-test-result.function';
 import { translateObject } from '../utils/translate-object.function';
 
 export interface RpgGamePageProps {
+  locale: string;
+  route: string;
   pageConfig: PageConfig;
   rpgGameConfig: RpgGamePageConfig;
   openSettingsConfig: OpenSettingsConfig;
@@ -42,6 +44,8 @@ export function getLocalizedStaticProps(
 
     return {
       props: {
+        locale,
+        route: '/rpg-game',
         pageConfig,
         rpgGameConfig: translatedConfig,
         openSettingsConfig: translatedOpenSettingsConfig,

@@ -145,6 +145,7 @@ function RegularPage({
       <OpenSettings
         className={styles.settingsMenu}
         config={pageProps.openSettingsConfig}
+        route={pageProps.route}
         {...stateProps}
       />
     );
@@ -163,16 +164,16 @@ function RegularPage({
           links={[
             {
               displayName: 'Justin Lee',
-              url: '/',
+              url: `/${pageProps.locale}/`,
               isHome: true,
             },
             {
               displayName: 'Buzzword Bingo',
-              url: '/buzzword-bingo',
+              url: `/${pageProps.locale}/buzzword-bingo`,
             },
             {
               displayName: 'RPG',
-              url: '/rpg-game',
+              url: `/${pageProps.locale}/rpg-game`,
             },
           ]}
         />

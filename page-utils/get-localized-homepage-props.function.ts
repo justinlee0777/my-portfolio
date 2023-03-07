@@ -12,6 +12,7 @@ import { saveImageFromUrl } from '../utils/save-image-from-url.function';
 import { translateObject } from '../utils/translate-object.function';
 
 export interface HomePageProps {
+  locale: string;
   pageConfig: PageConfig;
   homepageConfig: HomepageConfig;
   generatedProfilePictureUrl: string;
@@ -46,6 +47,7 @@ export function getLocalizedStaticProps(
 
     return {
       props: {
+        locale,
         pageConfig,
         homepageConfig: translatedConfig,
         generatedProfilePictureUrl: `/${savedFile}`,
