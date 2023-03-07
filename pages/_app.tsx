@@ -168,6 +168,10 @@ function RegularPage({
               isHome: true,
             },
             {
+              displayName: 'Musings',
+              url: '/musings',
+            },
+            {
               displayName: 'Buzzword Bingo',
               url: `/${pageProps.locale}/buzzword-bingo`,
             },
