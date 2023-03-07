@@ -1,18 +1,11 @@
-import MusingsPage from '../../../musings/index';
-
-export { getStaticProps } from '../../../page-utils/get-musings-props.function';
-
-export const config = {
-  seo: {
-    title: 'Angular versus React',
-    description:
-      'Another article weighing between Angular and React for your UI needs.',
-  },
-};
-
-export default ({ children }) => (
-  <MusingsPage config={config}>{children}</MusingsPage>
-);
+---
+slug: angular-vs-react
+title: Angular versus React
+description: TL;DR - It's down to commercial sites, like this one, and enterprise solutions.
+seoTitle: Angular versus React
+seoDescription: Another article weighing between Angular and React for your UI needs.
+timestamp: 2023-03-07T18:13:59+0000
+---
 
 # Angular vs. React
 
