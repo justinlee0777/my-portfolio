@@ -22,6 +22,10 @@ export interface ResumeConfig {
 }
 
 export interface HomepageConfig {
+  seo: {
+    title: string;
+    description: string;
+  };
   developerDescription: DeveloperDescriptionConfig;
   settings: SettingsConfig;
   resume: ResumeConfig;
@@ -49,6 +53,8 @@ function getResumeTranslationKeys(config: HomepageConfig): Array<string> {
 }
 
 const keysToTranslate = [
+  'seo.title',
+  'seo.description',
   ...developerDescriptionKeys,
   ...settingsKeysToTranslate.map((key) => `settings.${key}`),
 ];

@@ -117,15 +117,12 @@ export default function HomePage({
   return (
     <>
       <Head>
-        <title>Justin Lee - Web Developer</title>
-        <meta
-          name="description"
-          content="Tongue-in-cheek portfolio site for Justin Lee, web developer. Contains open-source apps like an RPG and buzzword bingo."
-        />
-        <meta property="og:title" content="Justin Lee - Web Developer" />
+        <title>{homepageConfig.seo.title}</title>
+        <meta name="description" content={homepageConfig.seo.description} />
+        <meta property="og:title" content={homepageConfig.seo.title} />
         <meta
           property="og:description"
-          content="Tongue-in-cheek portfolio site for Justin Lee, web developer. Contains open-source apps like an RPG and buzzword bingo."
+          content={homepageConfig.seo.description}
         />
       </Head>
       <div className={styles.homepage} ref={homepageRef}>

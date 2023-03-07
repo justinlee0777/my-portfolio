@@ -20,15 +20,12 @@ export default function BuzzwordBingoPage({
     <Slide className={styles.slide}>
       <>
         <Head>
-          <title>Turn-based RPG</title>
-          <meta
-            name="description"
-            content="Turn-based role playing game. Only the battle system is anywhere complete."
-          />
-          <meta property="og:title" content="Turn-based RPG" />
+          <title>{rpgGameConfig.seo.title}</title>
+          <meta name="description" content={rpgGameConfig.seo.description} />
+          <meta property="og:title" content={rpgGameConfig.seo.title} />
           <meta
             property="og:description"
-            content="Turn-based role playing game. Only the battle system is anywhere complete."
+            content={rpgGameConfig.seo.description}
           />
         </Head>
         <RpgGame

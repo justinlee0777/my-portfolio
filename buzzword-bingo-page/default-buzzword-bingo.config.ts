@@ -1,6 +1,10 @@
 import { BuzzwordBingoConfig } from './buzzword-bingo.config';
 
 export const defaultBuzzwordBingoConfig: BuzzwordBingoConfig = {
+  seo: {
+    title: 'Buzzword Bingo Generator',
+    description: 'Web app to generate buzzword bingo sheets.',
+  },
   textContent: {
     header: 'Buzzword bingo',
     explanation: [

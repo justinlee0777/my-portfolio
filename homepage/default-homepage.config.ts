@@ -1,6 +1,11 @@
 import { HomepageConfig } from './homepage.config';
 
 export const homepageConfig: HomepageConfig = {
+  seo: {
+    title: 'Justin Lee - Web Developer',
+    description:
+      'Tongue-in-cheek portfolio site for Justin Lee, web developer. Contains open-source apps like an RPG and buzzword bingo.',
+  },
   developerDescription: {
     textContent: {
       name: 'Justin Lee',

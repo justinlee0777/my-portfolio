@@ -32,15 +32,15 @@ export default function BuzzwordBingoPage({
     <Slide className={styles.slide}>
       <>
         <Head>
-          <title>Buzzword Bingo Generator</title>
+          <title>{buzzwordBingoConfig.seo.title}</title>
           <meta
             name="description"
-            content="Web app to generate buzzword bingo sheets."
+            content={buzzwordBingoConfig.seo.description}
           />
-          <meta property="og:title" content="Buzzword Bingo Generator" />
+          <meta property="og:title" content={buzzwordBingoConfig.seo.title} />
           <meta
             property="og:description"
-            content="Web app to generate buzzword bingo sheets."
+            content={buzzwordBingoConfig.seo.description}
           />
         </Head>
         <UnitTestCheck componentName="BuzzwordBingoPage" />
