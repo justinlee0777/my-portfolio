@@ -29,3 +29,7 @@ export const keysToTranslate = [
   'prompt',
   ...explanationKeys,
 ].map((key) => `textContent.${key}`);
+
+export function getTranslationKeys(): Array<string> {
+  return keysToTranslate;
+}

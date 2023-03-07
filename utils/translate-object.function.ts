@@ -12,19 +12,29 @@ export async function translateObject<T = Object>(
   keysToTranslate: Array<string>,
   targetLanguage: string
 ): Promise<T> {
-  const stringsToTranslate = keysToTranslate.map((keyString) => {
-    const keys = keyString.split('.');
+  let stringsToTranslate: Array<string>;
 
-    const stringToTranslate = get(object, keys);
+  [keysToTranslate, stringsToTranslate] = keysToTranslate.reduce(
+    (filteredValues, keyString) => {
+      const keys = keyString.split('.');
 
-    if (typeof stringToTranslate !== 'string') {
-      throw new Error(
-        `Path passed to 'translateObject' does not lead to a string. Path: ${keyString} Retrieved value: ${stringToTranslate}`
-      );
-    }
+      const stringToTranslate = get(object, keys);
 
-    return stringToTranslate;
-  });
+      if (typeof stringToTranslate !== 'string') {
+        throw new Error(
+          `Path passed to 'translateObject' does not lead to a string. Path: ${keyString} Retrieved value: ${stringToTranslate}`
+        );
+      } else if (stringToTranslate.length !== 0) {
+        return [
+          filteredValues[0].concat(keyString),
+          filteredValues[1].concat(stringToTranslate),
+        ];
+      }
+
+      return filteredValues;
+    },
+    [[], []]
+  );
 
   const translatedStrings = await translate(stringsToTranslate, targetLanguage);
 

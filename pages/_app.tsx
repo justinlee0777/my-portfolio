@@ -6,7 +6,6 @@ import classNames from 'classnames';
 import { cloneDeep } from 'lodash-es';
 import Head from 'next/head';
 
-import { PageConfig } from '../config/page.config';
 import { needsLoading } from '../config/font.enum';
 import { loadFont } from '../config/load-font.function';
 import { Font } from '../config/font.enum';
@@ -19,33 +18,20 @@ import {
   setPageDefaults,
 } from '../config/get-page-defaults.function';
 import OpenSettings from '../components/open-settings/open-settings';
-import { OpenSettingsConfig } from '../config/open-settings.config';
 import { Navigation } from '../components/navigation/navigation';
-import {
-  UnitTestContext,
-  UnitTestResults,
-} from '../contexts/unit-test.context';
-import { RpgGamePageConfig } from '../rpg-game-page/rpg-game-page.config';
+import { UnitTestContext } from '../contexts/unit-test.context';
 import { HomePageProps } from '../page-utils/get-localized-homepage-props.function';
-
-interface BuzzwordBingoProps {
-  pageConfig: PageConfig;
-  unitTestResult: UnitTestResults;
-  openSettingsConfig: OpenSettingsConfig;
-}
-
-interface RpgGameProps {
-  pageConfig: PageConfig;
-  rpgGameConfig: RpgGamePageConfig;
-  openSettingsConfig: OpenSettingsConfig;
-  unitTestResult: UnitTestResults;
-}
+import { BuzzwordBingoPageProps } from '../page-utils/get-localized-buzzword-bingo-props.function';
+import { RpgGamePageProps } from '../page-utils/get-localized-rpg-game-props.function';
 
 interface ErrorPageProps {
   statusCode: number;
 }
 
-type RegularAppProps = HomePageProps | BuzzwordBingoProps | RpgGameProps;
+type RegularAppProps =
+  | HomePageProps
+  | BuzzwordBingoPageProps
+  | RpgGamePageProps;
 
 type MyAppProps = RegularAppProps | ErrorPageProps;
 

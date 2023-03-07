@@ -121,6 +121,7 @@ export default function Settings({
             </Link>
           ))}
           <p
+            className={styles.languageExplanation}
             dangerouslySetInnerHTML={{
               __html: createLinkElement(
                 config.textContent.explanation.translation

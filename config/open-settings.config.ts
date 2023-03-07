@@ -1,4 +1,7 @@
-import { SettingsConfig } from './settings.config';
+import {
+  SettingsConfig,
+  getTranslationKeys as getSettingsTranslationKeys,
+} from './settings.config';
 
 export interface OpenSettingsConfig {
   settings: SettingsConfig;
@@ -6,4 +9,13 @@ export interface OpenSettingsConfig {
     expandLabel: string;
     collapseLabel: string;
   };
+}
+
+const keysToTranslate = ['aria.expandLabel', 'aria.collapseLabel'];
+
+export function getTranslationKeys(): Array<string> {
+  return [
+    ...getSettingsTranslationKeys().map((key) => `settings.${key}`),
+    ...keysToTranslate,
+  ];
 }

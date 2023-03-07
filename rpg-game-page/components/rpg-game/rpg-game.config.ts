@@ -6,3 +6,13 @@ export interface RpgGameConfig {
   };
   iframeUrl: string;
 }
+
+const keysToTranslate = [
+  'textContent.header',
+  'textContent.subheader',
+  'textContent.outOfFocusMessage',
+];
+
+export function getTranslationKeys(): Array<string> {
+  return keysToTranslate;
+}
