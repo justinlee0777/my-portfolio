@@ -23,6 +23,9 @@ import { UnitTestContext } from '../contexts/unit-test.context';
 import { HomePageProps } from '../page-utils/get-localized-homepage-props.function';
 import { BuzzwordBingoPageProps } from '../page-utils/get-localized-buzzword-bingo-props.function';
 import { RpgGamePageProps } from '../page-utils/get-localized-rpg-game-props.function';
+import { MusingPageProps } from '../page-utils/get-musing-props.function';
+import { MusingsPageProps } from '../page-utils/get-musings-props.function';
+import UnitTestCheck from '../components/unit-test-check/unit-test-check';
 
 interface ErrorPageProps {
   statusCode: number;
@@ -31,7 +34,9 @@ interface ErrorPageProps {
 type RegularAppProps =
   | HomePageProps
   | BuzzwordBingoPageProps
-  | RpgGamePageProps;
+  | RpgGamePageProps
+  | MusingPageProps
+  | MusingsPageProps;
 
 type MyAppProps = RegularAppProps | ErrorPageProps;
 
@@ -158,7 +163,8 @@ function RegularPage({
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <div className={pageClassnames}>
+      <div className={pageClassnames} data-testid="page-container">
+        <UnitTestCheck componentName="App" style={{ zIndex: 5 }} />
         <Navigation
           className={styles.pageNavigation}
           links={[

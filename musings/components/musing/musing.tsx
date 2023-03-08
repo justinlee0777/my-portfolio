@@ -5,6 +5,7 @@ import Link from 'next/link';
 
 import Slide from '../../../components/slide/slide';
 import { MusingConfig } from './musing.config';
+import UnitTestCheck from '../../../components/unit-test-check/unit-test-check';
 
 export interface MusingPageProps {
   config: MusingConfig;
@@ -24,6 +25,10 @@ export default function MusingPage({ config }: MusingPageProps): JSX.Element {
           <Link href="/musings">Back</Link>
           <div
             dangerouslySetInnerHTML={{ __html: config.display.contentHtml }}
+          />
+          <UnitTestCheck
+            componentName="Musing"
+            style={{ position: 'absolute', top: 0, right: 0 }}
           />
         </>
       </Slide>
