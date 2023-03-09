@@ -30,26 +30,29 @@ export namespace MusingFiles {
         ).then((file: string) => {
           const result = matter(file);
 
-          return remark()
-            .use(html)
-            .process(result.content)
-            .then((content) => {
-              const contentHtml = content.toString();
+          return (
+            remark()
+              // As the files are only built on my local machine, I feel this is safe. If ever this site needs an SSR solution, this needs to be properly sanitized.
+              .use(html, { sanitize: false })
+              .process(result.content)
+              .then((content) => {
+                const contentHtml = content.toString();
 
-              return {
-                slug: result.data.slug,
-                display: {
-                  contentHtml,
-                  title: result.data.title,
-                  description: result.data.description,
-                },
-                seo: {
-                  title: result.data.seoTitle,
-                  description: result.data.seoDescription,
-                },
-                timestamp: new Date(result.data.timestamp),
-              };
-            });
+                return {
+                  slug: result.data.slug,
+                  display: {
+                    contentHtml,
+                    title: result.data.title,
+                    description: result.data.description,
+                  },
+                  seo: {
+                    title: result.data.seoTitle,
+                    description: result.data.seoDescription,
+                  },
+                  timestamp: new Date(result.data.timestamp),
+                };
+              })
+          );
         });
       });
 
@@ -57,7 +60,7 @@ export namespace MusingFiles {
 
     return fileContent
       .sort((a, b) => {
-        return a.timestamp.getTime() - b.timestamp.getTime();
+        return b.timestamp.getTime() - a.timestamp.getTime();
       })
       .map((config) => {
         const newConfig = {

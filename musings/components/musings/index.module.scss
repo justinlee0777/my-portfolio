@@ -10,6 +10,10 @@
   display: flex;
   flex-flow: row wrap;
   padding: 8px;
+
+  &:nth-of-type(n + 2) {
+    margin-top: 8px;
+  }
 }
 
 .musing {
