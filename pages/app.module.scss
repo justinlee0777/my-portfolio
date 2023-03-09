@@ -41,6 +41,13 @@ $backgroundColorAnimation: 1s background-color;
     }
   }
 
+  &-Bookerly {
+    &,
+    button {
+      font-family: 'Bookerly', sans-serif;
+    }
+  }
+
   &-Roboto {
     &,
     button {
@@ -118,6 +125,10 @@ $backgroundColorAnimation: 1s background-color;
 .theme {
   &-Monochrome {
     @include applyTheme(white, black, dimgray);
+  }
+
+  &-Night {
+    @include applyTheme(black, white, gray);
   }
 
   &-Ulysses {

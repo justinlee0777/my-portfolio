@@ -11,6 +11,8 @@ export function loadFont(font: Font): Promise<void> {
 
 export function getFontUrl(font: Font): string {
   switch (font) {
+    case Font.BOOKERLY:
+      return '/Bookerly-Regular.ttf';
     case Font.ROBOTO:
       return 'https://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92Fr1Mu7mxKKTU1Kvnz.woff2';
     case Font.TILT_PRISM:
