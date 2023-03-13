@@ -22,7 +22,9 @@ export default function MusingPage({ config }: MusingPageProps): JSX.Element {
       </Head>
       <Slide className={styles.musingPage}>
         <>
-          <Link href="/musings">Back</Link>
+          <Link className={styles.musingBack} href="/musings">
+            Back
+          </Link>
           <div
             dangerouslySetInnerHTML={{ __html: config.display.contentHtml }}
           />
