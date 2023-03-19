@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@google-cloud/translate": "^7.2.0",
-    "buzzword-bingo-generator": "^0.0.20",
+    "buzzword-bingo-generator": "^0.0.21",
     "classnames": "^2.3.2",
     "gray-matter": "^4.0.3",
     "lodash-es": "^4.17.21",
