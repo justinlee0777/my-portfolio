@@ -4,3 +4,9 @@ body {
   margin: 0;
   overflow-x: hidden;
 }
+
+@media (min-width: 1200px) {
+  body {
+    font-size: 1.25rem;
+  }
+}
