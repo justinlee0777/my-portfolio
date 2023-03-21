@@ -5,18 +5,18 @@ jest.mock('lodash-es', () => {
   };
 });
 
-jest.mock('../components/navigation/navigation', () => {
+jest.mock('../src/components/navigation/navigation', () => {
   return {
     __esModule: true,
     Navigation: () => <div>Navigation here</div>,
   };
 });
 
-jest.mock('../components/open-settings/open-settings', () => () => {
+jest.mock('../src/components/open-settings/open-settings', () => () => {
   return <div>Open Settings</div>;
 });
 
-jest.mock('../contexts/unit-test.context', () => {
+jest.mock('../src/contexts/unit-test.context', () => {
   return {
     __esModule: true,
     UnitTestContext: {
@@ -30,15 +30,15 @@ jest.mock('../contexts/unit-test.context', () => {
   };
 });
 
-jest.mock('../components/unit-test-check/unit-test-check', () => () => (
+jest.mock('../src/components/unit-test-check/unit-test-check', () => () => (
   <span></span>
 ));
 
-jest.mock('../components/slide/slide', () => ({ children }) => (
+jest.mock('../src/components/slide/slide', () => ({ children }) => (
   <div>{children}</div>
 ));
 
-jest.mock('../components/loading-screen/loading-screen', () => () => (
+jest.mock('../src/components/loading-screen/loading-screen', () => () => (
   <div>Loading screen...</div>
 ));
 
@@ -46,7 +46,7 @@ let pageDefaults;
 
 const mockSetPageDefaults = jest.fn();
 
-jest.mock('../config/get-page-defaults.function', () => {
+jest.mock('../src/config/get-page-defaults.function', () => {
   return {
     __esModule: true,
     getPageDefaults: jest.fn().mockImplementation(() => pageDefaults),
@@ -56,7 +56,7 @@ jest.mock('../config/get-page-defaults.function', () => {
 
 let loadFontReturnValue;
 
-jest.mock('../config/load-font.function', () => {
+jest.mock('../src/config/load-font.function', () => {
   return {
     __esModule: true,
     loadFont: jest.fn().mockImplementation(() => loadFontReturnValue),
@@ -71,12 +71,12 @@ import {
   waitForElementToBeRemoved,
 } from '@testing-library/react';
 
-import { Font } from '../config/font.enum';
-import { PageConfig } from '../config/page.config';
-import { SlideAnimation } from '../config/slide-animation.enum';
-import { Theme } from '../config/theme.enum';
-import { UnitTestResults } from '../contexts/unit-test.context';
-import { RpgGamePageConfig } from '../rpg-game-page/rpg-game-page.config';
+import { Font } from '../src/config/font.enum';
+import { PageConfig } from '../src/config/page.config';
+import { SlideAnimation } from '../src/config/slide-animation.enum';
+import { Theme } from '../src/config/theme.enum';
+import { UnitTestResults } from '../src/contexts/unit-test.context';
+import { RpgGamePageConfig } from '../src/rpg-game-page/rpg-game-page.config';
 import App from '../pages/_app';
 
 describe('<App/>', () => {

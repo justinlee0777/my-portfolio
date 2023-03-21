@@ -1,9 +1,9 @@
-import { getLocalizedStaticProps } from '../../../page-utils/get-localized-rpg-game-props.function';
+import { getLocalizedStaticProps } from '../../../src/page-utils/get-localized-rpg-game-props.function';
 
-export { default } from '../../../rpg-game-page/index';
+export { default } from '../../../src/rpg-game-page/index';
 
 export function getStaticProps({ params }) {
   return getLocalizedStaticProps(params.locale)();
 }
 
-export { getStaticPaths } from '../../../page-utils/get-localized-paths.function';
+export { getStaticPaths } from '../../../src/page-utils/get-localized-paths.function';

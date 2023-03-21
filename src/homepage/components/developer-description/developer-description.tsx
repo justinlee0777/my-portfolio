@@ -67,7 +67,7 @@ export default function DeveloperDescription({
       </p>
       {profileImage}
       <figcaption className={captionClassName}>
-        {config.textContent.profileCaption}: "{profilePicturePrompt}"
+        {config.textContent.profileCaption}: &quot;{profilePicturePrompt}&quot;
       </figcaption>
     </>
   );

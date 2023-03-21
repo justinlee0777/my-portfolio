@@ -1,3 +1,3 @@
-export { default } from '../../musings/index';
+export { default } from '../../src/musings/index';
 
-export { getStaticProps } from '../../page-utils/get-musings-props.function';
+export { getStaticProps } from '../../src/page-utils/get-musings-props.function';
