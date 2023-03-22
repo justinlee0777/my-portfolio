@@ -1,23 +1,20 @@
 import { createImage } from '../api/openai';
-import { pageConfig } from '../config/default-page.config';
-import { PageConfig } from '../config/page.config';
-import { UnitTestResults } from '../contexts/unit-test.context';
 import { homepageConfig } from '../homepage/default-homepage.config';
 import {
   getTranslationKeys,
   HomepageConfig,
 } from '../homepage/homepage.config';
-import { loadUnitTestResult } from '../utils/load-unit-test-result.function';
 import { saveImageFromUrl } from '../utils/save-image-from-url.function';
 import { translateObject } from '../utils/translate-object.function';
+import {
+  BasePageProps,
+  getBasePageProps,
+} from './get-base-page-props.function';
 
-export interface HomePageProps {
-  locale: string;
-  pageConfig: PageConfig;
+export interface HomePageProps extends BasePageProps {
   homepageConfig: HomepageConfig;
   generatedProfilePictureUrl: string;
   profilePicturePrompt: string;
-  unitTestResult: UnitTestResults;
 }
 
 export function getLocalizedStaticProps(
@@ -45,14 +42,14 @@ export function getLocalizedStaticProps(
       );
     }
 
+    const baseProps = await getBasePageProps(locale, '');
+
     return {
       props: {
-        locale,
-        pageConfig,
+        ...baseProps,
         homepageConfig: translatedConfig,
         generatedProfilePictureUrl: `/${savedFile}`,
         profilePicturePrompt,
-        unitTestResult: loadUnitTestResult(),
       },
     };
   };

@@ -3,24 +3,14 @@ import {
   getTranslationKeys,
 } from '../buzzword-bingo-page/buzzword-bingo.config';
 import { defaultBuzzwordBingoConfig } from '../buzzword-bingo-page/default-buzzword-bingo.config';
-import { defaultOpenSettingsConfig } from '../config/default-open-settings.config';
-import { pageConfig } from '../config/default-page.config';
-import {
-  OpenSettingsConfig,
-  getTranslationKeys as getOpenSettingsTranslationKeys,
-} from '../config/open-settings.config';
-import { PageConfig } from '../config/page.config';
-import { UnitTestResults } from '../contexts/unit-test.context';
-import { loadUnitTestResult } from '../utils/load-unit-test-result.function';
 import { translateObject } from '../utils/translate-object.function';
+import {
+  BasePageProps,
+  getBasePageProps,
+} from './get-base-page-props.function';
 
-export interface BuzzwordBingoPageProps {
-  locale: string;
-  route: string;
-  pageConfig: PageConfig;
+export interface BuzzwordBingoPageProps extends BasePageProps {
   buzzwordBingoConfig: BuzzwordBingoConfig;
-  unitTestResult: UnitTestResults;
-  openSettingsConfig: OpenSettingsConfig;
 }
 
 export function getLocalizedStaticProps(
@@ -28,7 +18,6 @@ export function getLocalizedStaticProps(
 ): () => Promise<{ props: BuzzwordBingoPageProps }> {
   return async function getStaticProps() {
     let translatedConfig = defaultBuzzwordBingoConfig;
-    let translatedOpenSettingsConfig = defaultOpenSettingsConfig;
 
     if (locale !== 'en') {
       translatedConfig = await translateObject(
@@ -36,22 +25,14 @@ export function getLocalizedStaticProps(
         getTranslationKeys(translatedConfig),
         locale
       );
-
-      translatedOpenSettingsConfig = await translateObject(
-        translatedOpenSettingsConfig,
-        getOpenSettingsTranslationKeys(),
-        locale
-      );
     }
+
+    const baseProps = await getBasePageProps(locale, '/buzzword-bingo', true);
 
     return {
       props: {
-        locale,
-        route: '/buzzword-bingo',
-        pageConfig,
+        ...baseProps,
         buzzwordBingoConfig: translatedConfig,
-        openSettingsConfig: translatedOpenSettingsConfig,
-        unitTestResult: loadUnitTestResult(),
       },
     };
   };
