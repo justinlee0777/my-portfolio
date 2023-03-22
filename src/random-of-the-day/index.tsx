@@ -1,12 +1,9 @@
 import styles from './index.module.scss';
 
-import { useEffect, useState } from 'react';
 import Head from 'next/head';
 
-import Slide from '../components/slide/slide';
-import LoadingScreen from '../components/loading-screen/loading-screen';
-import { Poem } from './poem.interface';
 import { RandomOfTheDayConfig } from './random-of-the-day.config';
+import RandomPoemOfTheDay from './utilities/random-poem-of-the-day/random-poem-of-the-day';
 
 export interface RandomOfTheDayPageProps {
   randomOfTheDayConfig: RandomOfTheDayConfig;
@@ -17,36 +14,6 @@ export default function RandomOfTheDayPage({
   randomOfTheDayConfig,
   randomOfTheDayApiUrl,
 }: RandomOfTheDayPageProps): JSX.Element {
-  const [data, setData] = useState<Poem | null>(null);
-
-  useEffect(() => {
-    fetch(`${randomOfTheDayApiUrl}/poem`)
-      .then((response) => response.json())
-      .then((body) => {
-        setData(body);
-      });
-  }, []);
-
-  let content: JSX.Element;
-
-  if (!data) {
-    content = <LoadingScreen />;
-  } else {
-    content = (
-      <section>
-        <h3>{data.title}</h3>
-        <p>{data.author}</p>
-        {data.translator && <p>Translated by {data.translator}</p>}
-        <div className={styles.poemSeparator}></div>
-        {data.lines.map((line, i) => (
-          <p className={styles.poemLine} key={i}>
-            {line}
-          </p>
-        ))}
-      </section>
-    );
-  }
-
   return (
     <div className={styles.randomOfTheDayContent}>
       <Head>
@@ -66,13 +33,11 @@ export default function RandomOfTheDayPage({
         {randomOfTheDayConfig.textContent.description.map((line, i) => (
           <p key={i}>{line}</p>
         ))}
+        <RandomPoemOfTheDay
+          header={randomOfTheDayConfig.textContent.poemOfTheDay.header}
+          randomOfTheDayApiUrl={randomOfTheDayApiUrl}
+        />
       </main>
-      <Slide className={styles.slide}>
-        <>
-          <h2>{randomOfTheDayConfig.textContent.poemOfTheDay.header}</h2>
-          {content}
-        </>
-      </Slide>
     </div>
   );
 }
