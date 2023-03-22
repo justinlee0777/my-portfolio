@@ -47,13 +47,13 @@ export default function BuzzwordBingoPage({
         <h1 className={styles.header} ref={headerRef}>
           {buzzwordBingoConfig.textContent.header}
         </h1>
-        <div className={styles.explanation} ref={explanationRef}>
+        <main className={styles.explanation} ref={explanationRef}>
           {buzzwordBingoConfig.textContent.explanation.map((line, i) => (
             <p className={styles.explanationLine} key={i}>
               {line}
             </p>
           ))}
-        </div>
+        </main>
         <BuzzwordBingo
           defaultFiles={[
             {

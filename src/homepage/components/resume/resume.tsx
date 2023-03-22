@@ -32,7 +32,7 @@ export default function Resume({
         componentName="Resume"
         style={{ transform: 'translateX(25vw)' }}
       />
-      {lines}
+      <main className={styles.resumeContent}>{lines}</main>
     </>
   );
 }

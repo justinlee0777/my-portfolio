@@ -1,11 +1,14 @@
 .line {
   line-height: 1.5;
-  max-width: 50%; // Default size for phone-sized screens.
   text-align: center;
 }
 
+.resumeContent {
+  max-width: 50%; // Default size for phone-sized screens.
+}
+
 @media (min-width: 600px) {
-  .line {
+  .resumeContent {
     max-width: 33%;
   }
 }

@@ -30,11 +30,13 @@ export default function MusingsPage({
       <Slide className={styles.musingsPage}>
         <>
           <h1 className={styles.musingsHeader}>{config.textContent.header}</h1>
-          {config.textContent.content.map((paragraph, i) => (
-            <p key={i} className={styles.musingsParagraph}>
-              {paragraph}
-            </p>
-          ))}
+          <main>
+            {config.textContent.content.map((paragraph, i) => (
+              <p key={i} className={styles.musingsParagraph}>
+                {paragraph}
+              </p>
+            ))}
+          </main>
           <Musings musings={musings} />
         </>
       </Slide>

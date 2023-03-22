@@ -18,12 +18,12 @@ export default function Slide({
   const slideClassName = classNames(styles.slide, className);
 
   return (
-    <div className={slideClassName} id={id}>
+    <article className={slideClassName} id={id}>
       <UnitTestCheck
         componentName="Slide"
         style={{ transform: 'translateX(48vw)' }}
       />
       {children}
-    </div>
+    </article>
   );
 }

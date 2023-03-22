@@ -25,7 +25,7 @@ export default function MusingPage({ config }: MusingPageProps): JSX.Element {
           <Link className={styles.musingBack} href="/musings">
             Back
           </Link>
-          <div
+          <main
             dangerouslySetInnerHTML={{ __html: config.display.contentHtml }}
           />
           <UnitTestCheck

@@ -25,13 +25,15 @@ import { RpgGamePageProps } from './page-utils/get-localized-rpg-game-props.func
 import { MusingPageProps } from './page-utils/get-musing-props.function';
 import { MusingsPageProps } from './page-utils/get-musings-props.function';
 import UnitTestCheck from './components/unit-test-check/unit-test-check';
+import { RandomOfTheDayPageProps } from './page-utils/get-localized-random-of-the-day-props.function';
 
 export type PageProps =
   | HomePageProps
   | BuzzwordBingoPageProps
   | RpgGamePageProps
   | MusingPageProps
-  | MusingsPageProps;
+  | MusingsPageProps
+  | RandomOfTheDayPageProps;
 
 export default function Page({
   Component,
@@ -161,7 +163,7 @@ export default function Page({
             },
           ]}
         />
-        <main id="main-content" className={styles.pageContent}>
+        <div id="main-content" className={styles.pageContent}>
           <Component
             className={styles.pageComponent}
             {...pageProps}
@@ -169,7 +171,7 @@ export default function Page({
           />
           {settingsIcon}
           {loadingScreen}
-        </main>
+        </div>
       </div>
     </UnitTestContext.Provider>
   );
