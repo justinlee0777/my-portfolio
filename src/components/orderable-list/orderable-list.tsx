@@ -21,6 +21,10 @@ export default function OrderableList({
 
   const lastIndex = listElements.length - 1;
 
+  if (listElements.length < 2) {
+    return <></>;
+  }
+
   return (
     <ol className={orderableListClassName}>
       {listElements.map((listElement, i) => {

@@ -1,17 +1,21 @@
 import styles from './index.module.scss';
 
 import Head from 'next/head';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import {
   RandomOfTheDayConfig,
   RandomThing,
   RandomType,
 } from './random-of-the-day.config';
-import RandomPoemOfTheDay from './utilities/random-poem-of-the-day/random-poem-of-the-day';
-import RandomFactOfTheDay from './utilities/random-fact-of-the-day/random-fact-of-the-day';
+import RandomPoemOfTheDay from './sections/random-poem-of-the-day/random-poem-of-the-day';
+import RandomFactOfTheDay from './sections/random-fact-of-the-day/random-fact-of-the-day';
 import FieldSet from '../components/fieldset/fieldset';
 import OrderableList from '../components/orderable-list/orderable-list';
+import {
+  getRandomOfTheDayConfig,
+  setRandomOfTheDayConfig,
+} from './utils/random-of-the-day-config.function';
 
 export interface RandomOfTheDayPageProps {
   randomOfTheDayConfig: RandomOfTheDayConfig;
@@ -30,9 +34,19 @@ export default function RandomOfTheDayPage({
 }: RandomOfTheDayPageProps): JSX.Element {
   const [poemShown, setPoemShown] = useState(false);
   const [factShown, setFactShown] = useState(false);
-  const [randomOrder, setRandomOrder] = useState<Array<RandomType> | null>(
-    null
-  );
+  const [randomOrder, setRandomOrder] = useState<Array<RandomType>>([]);
+
+  useEffect(() => {
+    const config = getRandomOfTheDayConfig();
+
+    setRandomOrder(config);
+    setPoemShown(config.some((randomType) => randomType === RandomType.POEM));
+    setFactShown(config.some((randomType) => randomType === RandomType.FACT));
+  }, []);
+
+  useEffect(() => {
+    setRandomOfTheDayConfig(randomOrder);
+  }, [randomOrder]);
 
   const settings: Array<RandomThingSetting> =
     randomOfTheDayConfig.textContent.randoms.map(createRandomThingSetting);
@@ -63,13 +77,9 @@ export default function RandomOfTheDayPage({
     (setting) => setting.shown
   );
 
-  if (randomOrder?.length === addedRandoms.length) {
-    addedRandoms = randomOrder.map((randomType) => {
-      return addedRandoms.find(
-        (addedRandom) => addedRandom.type === randomType
-      );
-    });
-  }
+  addedRandoms = randomOrder.map((randomType) => {
+    return addedRandoms.find((addedRandom) => addedRandom.type === randomType);
+  });
 
   const reorderRandoms = (
     <OrderableList
@@ -122,7 +132,7 @@ export default function RandomOfTheDayPage({
     switch (randomThing.type) {
       case RandomType.POEM:
         shown = poemShown;
-        setShown = setPoemShown;
+        setShown = setSection(setPoemShown, RandomType.POEM);
         element = (
           <RandomPoemOfTheDay
             key={RandomType.POEM}
@@ -133,7 +143,7 @@ export default function RandomOfTheDayPage({
         break;
       case RandomType.FACT:
         shown = factShown;
-        setShown = setFactShown;
+        setShown = setSection(setFactShown, RandomType.FACT);
         element = (
           <RandomFactOfTheDay
             key={RandomType.FACT}
@@ -145,5 +155,15 @@ export default function RandomOfTheDayPage({
     }
 
     return { ...randomThing, shown, setShown, element };
+  }
+
+  function setSection(
+    set: (state: boolean) => void,
+    value: RandomType
+  ): (state: boolean) => void {
+    return (state: boolean) => {
+      set(state);
+      setRandomOrder(randomOrder ? randomOrder.concat(value) : [value]);
+    };
   }
 }
