@@ -1,3 +1,61 @@
+import { SlideAnimation } from '../config/slide-animation.enum';
+
+export interface AnimatedSlides {
+  [slideId: string]: boolean;
+}
+
+export interface AnimatedSlidesState {
+  get: AnimatedSlides;
+  set: (slides: AnimatedSlides) => void;
+}
+
+export function animateSlides(
+  animation: SlideAnimation,
+  slides: Array<HTMLElement>,
+  state: AnimatedSlidesState
+): () => void {
+  switch (animation) {
+    case SlideAnimation.SWEEPY:
+    case SlideAnimation.SWOOPY:
+      // Animating slides when the user scrolls over them
+      return watchSlides(slides, state);
+    case SlideAnimation.MARQUEE:
+      // Animate infinitely but stop them when the user hovers over elements.
+      return marqueeAnimateSlides(slides);
+  }
+}
+
+function watchSlides(
+  slides: Array<HTMLElement>,
+  state: AnimatedSlidesState
+): () => void {
+  const intersectionObserver = new IntersectionObserver(
+    (entries) => {
+      let animatedSlides = state.get;
+
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          animatedSlides = {
+            ...animatedSlides,
+            [entry.target.id]: true,
+          };
+        }
+      });
+
+      state.set(animatedSlides);
+    },
+    { threshold: 0.4 }
+  );
+
+  slides.forEach((child: HTMLElement) => {
+    if (!state.get[child.id]) {
+      intersectionObserver.observe(child as HTMLElement);
+    }
+  });
+
+  return () => intersectionObserver.disconnect();
+}
+
 /**
  * @param htmlElements to animate infinitely until the animation is destroyed. They will move across the screen end to end as if traveling through a weird void.
  */

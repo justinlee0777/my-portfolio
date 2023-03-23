@@ -9,12 +9,18 @@ import { getFact } from '../../random-of-the-day.api';
 import { createLinkElement } from '../../../config/link.model';
 
 interface PoemProps {
+  id?: string;
+  animated?: 'activated' | 'unactivated';
+
   header: string;
   credit: string;
   randomOfTheDayApiUrl: string;
 }
 
 export default function RandomFactOfTheDay({
+  id,
+  animated,
+
   header,
   credit,
   randomOfTheDayApiUrl,
@@ -57,7 +63,7 @@ export default function RandomFactOfTheDay({
   }
 
   return (
-    <Slide className={slideStyles.slide}>
+    <Slide id={id} animated={animated} className={slideStyles.slide}>
       <>
         <h2>{header}</h2>
         {content}

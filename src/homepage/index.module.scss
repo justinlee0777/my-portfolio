@@ -3,35 +3,3 @@
   overflow-x: hidden;
   padding: 18px;
 }
-
-.slide {
-  position: relative;
-  transition: 1s transform, 1s opacity;
-
-  &-Swoopy {
-    opacity: 0;
-    transform: scale(0.1);
-
-    &-activated {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
-
-  &-Sweepy {
-    opacity: 0;
-
-    &:nth-of-type(2n) {
-      transform: translateX(-50%);
-    }
-
-    &:nth-of-type(2n + 1) {
-      transform: translateX(50%);
-    }
-
-    &-activated:nth-of-type(n) {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-}

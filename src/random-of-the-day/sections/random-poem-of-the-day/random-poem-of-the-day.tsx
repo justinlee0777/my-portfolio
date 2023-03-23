@@ -9,11 +9,16 @@ import { getPoem } from '../../random-of-the-day.api';
 import LoadingScreen from '../../../components/loading-screen/loading-screen';
 
 interface PoemProps {
+  id?: string;
+  animated?: 'activated' | 'unactivated';
+
   header: string;
   randomOfTheDayApiUrl: string;
 }
 
 export default function RandomPoemOfTheDay({
+  id,
+  animated,
   header,
   randomOfTheDayApiUrl,
 }: PoemProps): JSX.Element {
@@ -46,7 +51,7 @@ export default function RandomPoemOfTheDay({
   }
 
   return (
-    <Slide className={slideStyles.slide}>
+    <Slide id={id} animated={animated} className={slideStyles.slide}>
       <>
         <h2>{header}</h2>
         {content}

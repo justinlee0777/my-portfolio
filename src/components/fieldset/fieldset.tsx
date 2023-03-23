@@ -1,17 +1,21 @@
 import styles from './fieldset.module.scss';
 
 import classNames from 'classnames';
-import { useState } from 'react';
+import { RefObject, useState } from 'react';
 
 export interface FieldSetProps {
+  id?: string;
   className?: string;
   children?: JSX.Element;
+  animated?: 'activated' | 'unactivated';
   legend: string;
 }
 
 export default function FieldSet({
+  id,
   className,
   children,
+  animated,
   legend,
 }: FieldSetProps): JSX.Element {
   const [opened, setOpened] = useState(false);
@@ -30,7 +34,11 @@ export default function FieldSet({
   );
 
   return (
-    <div className={fieldsetContainerClassNames}>
+    <div
+      id={id}
+      className={fieldsetContainerClassNames}
+      data-animatable={animated}
+    >
       <fieldset className={fieldsetClassName}>
         <legend>{legend}</legend>
         {opened && children}

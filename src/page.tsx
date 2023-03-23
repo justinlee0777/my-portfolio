@@ -101,8 +101,14 @@ export default function Page({
 
   const fontClass = styles[`font-${font.replace(/ /g, '')}`];
   const themeClass = styles[`theme-${theme.replace(' ', '')}`];
+  const animationClass = styles[`animation-${animation.replace(/ /g, '')}`];
 
-  const pageClassnames = classNames(styles.page, fontClass, themeClass);
+  const pageClassnames = classNames(
+    styles.page,
+    fontClass,
+    themeClass,
+    animationClass
+  );
 
   const stateProps = {
     font,

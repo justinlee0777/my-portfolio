@@ -78,6 +78,49 @@ $backgroundColorAnimation: 1s background-color;
   }
 }
 
+.animation {
+  &-Swoopy {
+    [data-animatable] {
+      position: relative;
+      transition: 1s transform, 1s opacity;
+    }
+
+    [data-animatable='unactivated'] {
+      opacity: 0;
+      transform: scale(0.1);
+
+      &[data-animatable='activated'] {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+  }
+
+  &-Sweepy {
+    [data-animatable] {
+      position: relative;
+      transition: 1s transform, 1s opacity;
+    }
+
+    [data-animatable='unactivated'] {
+      opacity: 0;
+
+      &:nth-of-type(2n) {
+        transform: translateX(-50%);
+      }
+
+      &:nth-of-type(2n + 1) {
+        transform: translateX(50%);
+      }
+    }
+
+    [data-animatable='activated'] {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+}
+
 .loadingScreen {
   height: 100%;
   left: 0;

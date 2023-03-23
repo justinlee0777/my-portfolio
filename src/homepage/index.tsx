@@ -12,7 +12,10 @@ import { HomepageConfig } from './homepage.config';
 import { Font } from '../config/font.enum';
 import { SlideAnimation } from '../config/slide-animation.enum';
 import { Theme } from '../config/theme.enum';
-import { marqueeAnimateSlides } from '../utils/marquee-animate-slides.function';
+import {
+  AnimatedSlides,
+  animateSlides,
+} from '../utils/animate-slides.function';
 
 export interface HomepageProps {
   locale: string;
@@ -48,24 +51,16 @@ export default function HomePage({
   onAnimationChange,
   onDeveloperModeChange,
 }: HomepageProps): JSX.Element {
-  const [animatedSlides, setAnimatedSlides] = useState<Array<string>>([]);
+  const [animatedSlides, setAnimatedSlides] = useState<AnimatedSlides>({});
 
   const homepageRef = useRef<HTMLDivElement>(null);
 
-  let intersectionObserver: IntersectionObserver;
-
   useEffect(() => {
-    switch (animation) {
-      case SlideAnimation.SWEEPY:
-      case SlideAnimation.SWOOPY:
-        // Animating slides when the user scrolls over them
-        return watchSlides();
-      case SlideAnimation.MARQUEE:
-        // Animate infinitely but stop them when the user hovers over elements.
-        return marqueeAnimateSlides([
-          ...homepageRef.current.childNodes,
-        ] as Array<HTMLElement>);
-    }
+    return animateSlides(
+      animation,
+      [...homepageRef.current.childNodes] as Array<HTMLElement>,
+      { get: animatedSlides, set: setAnimatedSlides }
+    );
   }, [animation, animatedSlides]);
 
   const content = [
@@ -86,7 +81,7 @@ export default function HomePage({
       onThemeChange={onThemeChange}
       onAnimationChange={(animation) => {
         onAnimationChange(animation);
-        setAnimatedSlides([]);
+        setAnimatedSlides({});
       }}
       onDeveloperModeChange={onDeveloperModeChange}
     />,
@@ -96,19 +91,13 @@ export default function HomePage({
   const slides = content.map((component, i) => {
     const id = `slide-${i}`;
 
-    const animationString = animation.replace(' ', '');
-
-    const slideClassName = classnames(
-      styles.slide,
-      styles[`slide-${animationString}`],
-      {
-        [styles[`slide-${animationString}-activated`]]:
-          animatedSlides.includes(id),
-      }
-    );
-
     return (
-      <Slide className={slideClassName} id={id} key={`slide-${i}`}>
+      <Slide
+        className={styles.slide}
+        animated={animatedSlides[id] ? 'activated' : 'unactivated'}
+        id={id}
+        key={`slide-${i}`}
+      >
         {component}
       </Slide>
     );
@@ -130,37 +119,4 @@ export default function HomePage({
       </div>
     </>
   );
-
-  function watchSlides(): (() => void) | undefined {
-    const intersectedSlides: Array<string> = [];
-
-    intersectionObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            intersectedSlides.push(entry.target.id);
-          }
-        });
-
-        let currentAnimatedSlides = animatedSlides;
-        const newSlides = intersectedSlides.filter(
-          (slide) => !animatedSlides.includes(slide)
-        );
-
-        if (newSlides.length > 0) {
-          currentAnimatedSlides = animatedSlides.concat(newSlides);
-          setAnimatedSlides(currentAnimatedSlides);
-        }
-      },
-      { threshold: 0.4 }
-    );
-
-    homepageRef.current.childNodes.forEach((child: HTMLElement) => {
-      if (!animatedSlides.includes(child.id)) {
-        intersectionObserver.observe(child as HTMLElement);
-      }
-    });
-
-    return () => intersectionObserver.disconnect();
-  }
 }

@@ -17,8 +17,14 @@ import {
   getRandomOfTheDayConfig,
   setRandomOfTheDayConfig,
 } from './utils/random-of-the-day-config.function';
+import {
+  AnimatedSlides,
+  animateSlides,
+} from '../utils/animate-slides.function';
+import { SlideAnimation } from '../config/slide-animation.enum';
 
 export interface RandomOfTheDayPageProps {
+  animation: SlideAnimation;
   randomOfTheDayConfig: RandomOfTheDayConfig;
   randomOfTheDayApiUrl: string;
 }
@@ -27,9 +33,11 @@ interface RandomThingSetting extends RandomThing {
   shown: boolean;
   setShown: (state: boolean) => void;
   element: JSX.Element;
+  elementId: string;
 }
 
 export default function RandomOfTheDayPage({
+  animation,
   randomOfTheDayConfig,
   randomOfTheDayApiUrl,
 }: RandomOfTheDayPageProps): JSX.Element {
@@ -37,6 +45,8 @@ export default function RandomOfTheDayPage({
   const [poemShown, setPoemShown] = useState(false);
   const [factShown, setFactShown] = useState(false);
   const [randomOrder, setRandomOrder] = useState<Array<RandomType>>([]);
+
+  const [animatedSlides, setAnimatedSlides] = useState<AnimatedSlides>({});
 
   useEffect(() => {
     const config = getRandomOfTheDayConfig();
@@ -63,28 +73,6 @@ export default function RandomOfTheDayPage({
   const settings: Array<RandomThingSetting> =
     randomOfTheDayConfig.textContent.randoms.map(createRandomThingSetting);
 
-  const randomCheckboxes = (
-    <FieldSet legend="Randoms">
-      <>
-        {settings.map((setting) => {
-          const checkboxId = `random-of-the-day-${setting.type}`;
-
-          return (
-            <div className={styles.randomCheckbox} key={setting.type}>
-              <input
-                id={checkboxId}
-                type="checkbox"
-                checked={setting.shown}
-                onChange={() => setting.setShown(!setting.shown)}
-              />
-              <label htmlFor={checkboxId}>{setting.text}</label>
-            </div>
-          );
-        })}
-      </>
-    </FieldSet>
-  );
-
   let addedRandoms: Array<RandomThingSetting> = settings.filter(
     (setting) => setting.shown
   );
@@ -93,16 +81,19 @@ export default function RandomOfTheDayPage({
     return addedRandoms.find((addedRandom) => addedRandom.type === randomType);
   });
 
-  const reorderRandoms = (
-    <OrderableList
-      className={styles.orderedRandoms}
-      listElements={addedRandoms.map((random) => ({
-        value: random.type,
-        element: <span>{random.text}</span>,
-      }))}
-      onReorder={setRandomOrder as (items: Array<string>) => void}
-    ></OrderableList>
-  );
+  useEffect(() => {
+    return animateSlides(
+      animation,
+      [
+        document.getElementById('toggle-randoms'),
+        document.getElementById('ordered-randoms'),
+        ...addedRandoms.map((random) =>
+          document.getElementById(random.elementId)
+        ),
+      ] as Array<HTMLElement>,
+      { get: animatedSlides, set: setAnimatedSlides }
+    );
+  }, [animation, animatedSlides]);
 
   const addedRandomElements: Array<JSX.Element> = addedRandoms.map(
     (setting) => setting.element
@@ -140,8 +131,43 @@ export default function RandomOfTheDayPage({
           ? randomOfTheDayConfig.textContent.hideDescription
           : randomOfTheDayConfig.textContent.showDescription}
       </button>
-      {randomCheckboxes}
-      {reorderRandoms}
+      <FieldSet
+        id="toggle-randoms"
+        animated={
+          animatedSlides['toggle-randoms'] ? 'activated' : 'unactivated'
+        }
+        legend="Randoms"
+      >
+        <>
+          {settings.map((setting) => {
+            const checkboxId = `random-of-the-day-${setting.type}`;
+
+            return (
+              <div className={styles.randomCheckbox} key={setting.type}>
+                <input
+                  id={checkboxId}
+                  type="checkbox"
+                  checked={setting.shown}
+                  onChange={() => setting.setShown(!setting.shown)}
+                />
+                <label htmlFor={checkboxId}>{setting.text}</label>
+              </div>
+            );
+          })}
+        </>
+      </FieldSet>
+      <OrderableList
+        id="ordered-randoms"
+        className={styles.orderedRandoms}
+        animated={
+          animatedSlides['ordered-randoms'] ? 'activated' : 'unactivated'
+        }
+        listElements={addedRandoms.map((random) => ({
+          value: random.type,
+          element: <span>{random.text}</span>,
+        }))}
+        onReorder={setRandomOrder as (items: Array<string>) => void}
+      ></OrderableList>
       {addedRandomElements}
     </div>
   );
@@ -151,26 +177,33 @@ export default function RandomOfTheDayPage({
   ): RandomThingSetting {
     let shown: boolean;
     let setShown: (state: boolean) => void;
+    let elementId: string;
     let element: JSX.Element;
 
     switch (randomThing.type) {
       case RandomType.POEM:
+        elementId = 'random-poem-of-the-day';
         shown = poemShown;
         setShown = setSection(setPoemShown, RandomType.POEM);
         element = (
           <RandomPoemOfTheDay
+            id={elementId}
             key={RandomType.POEM}
+            animated={animatedSlides[elementId] ? 'activated' : 'unactivated'}
             header={randomOfTheDayConfig.textContent.poemOfTheDay.header}
             randomOfTheDayApiUrl={randomOfTheDayApiUrl}
           />
         );
         break;
       case RandomType.FACT:
+        elementId = 'random-fact-of-the-day';
         shown = factShown;
         setShown = setSection(setFactShown, RandomType.FACT);
         element = (
           <RandomFactOfTheDay
+            id={elementId}
             key={RandomType.FACT}
+            animated={animatedSlides[elementId] ? 'activated' : 'unactivated'}
             {...randomOfTheDayConfig.textContent.factOfTheDay}
             randomOfTheDayApiUrl={randomOfTheDayApiUrl}
           />
@@ -178,7 +211,7 @@ export default function RandomOfTheDayPage({
         break;
     }
 
-    return { ...randomThing, shown, setShown, element };
+    return { ...randomThing, shown, setShown, element, elementId };
   }
 
   function setSection(

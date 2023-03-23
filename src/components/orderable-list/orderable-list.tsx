@@ -3,7 +3,10 @@ import styles from './orderable-list.module.scss';
 import classNames from 'classnames';
 
 export interface OrderableListProps {
+  id?: string;
   className?: string;
+  animated?: 'activated' | 'unactivated';
+
   listElements: Array<{
     value: string | number;
     element: JSX.Element;
@@ -12,7 +15,9 @@ export interface OrderableListProps {
 }
 
 export default function OrderableList({
+  id,
   className,
+  animated,
   listElements,
   onReorder,
 }: OrderableListProps): JSX.Element {
@@ -26,7 +31,7 @@ export default function OrderableList({
   }
 
   return (
-    <ol className={orderableListClassName}>
+    <ol id={id} className={orderableListClassName} data-animatable={animated}>
       {listElements.map((listElement, i) => {
         return (
           <li className={styles.listItem} key={listElement.value}>
