@@ -10,6 +10,7 @@ import {
 } from './random-of-the-day.config';
 import RandomPoemOfTheDay from './utilities/random-poem-of-the-day/random-poem-of-the-day';
 import RandomFactOfTheDay from './utilities/random-fact-of-the-day/random-fact-of-the-day';
+import FieldSet from '../components/fieldset/fieldset';
 
 export interface RandomOfTheDayPageProps {
   randomOfTheDayConfig: RandomOfTheDayConfig;
@@ -19,6 +20,7 @@ export interface RandomOfTheDayPageProps {
 interface RandomThingSetting extends RandomThing {
   shown: boolean;
   setShown: (state: boolean) => void;
+  element: JSX.Element;
 }
 
 export default function RandomOfTheDayPage({
@@ -29,23 +31,33 @@ export default function RandomOfTheDayPage({
   const [factShown, setFactShown] = useState(false);
 
   const settings: Array<RandomThingSetting> =
-    randomOfTheDayConfig.textContent.randoms.map((random) => {
-      let shown: boolean;
-      let setShown: (state: boolean) => void;
+    randomOfTheDayConfig.textContent.randoms.map(createRandomThingSetting);
 
-      switch (random.type) {
-        case RandomType.POEM:
-          shown = poemShown;
-          setShown = setPoemShown;
-          break;
-        case RandomType.FACT:
-          shown = factShown;
-          setShown = setFactShown;
-          break;
-      }
+  const randomCheckboxes = (
+    <FieldSet legend="Randoms">
+      <>
+        {settings.map((setting) => {
+          const checkboxId = `random-of-the-day-${setting.type}`;
 
-      return { ...random, shown, setShown };
-    });
+          return (
+            <div className={styles.randomCheckbox} key={setting.type}>
+              <input
+                id={checkboxId}
+                type="checkbox"
+                checked={setting.shown}
+                onChange={() => setting.setShown(!setting.shown)}
+              />
+              <label htmlFor={checkboxId}>{setting.text}</label>
+            </div>
+          );
+        })}
+      </>
+    </FieldSet>
+  );
+
+  const addedRandoms: Array<JSX.Element> = settings
+    .filter((setting) => setting.shown)
+    .map((setting) => setting.element);
 
   return (
     <div className={styles.randomOfTheDayContent}>
@@ -61,41 +73,49 @@ export default function RandomOfTheDayPage({
           content={randomOfTheDayConfig.seo.description}
         />
       </Head>
-      <h1>Random of the Day</h1>
+      <h1>{randomOfTheDayConfig.textContent.header}</h1>
       <main>
         {randomOfTheDayConfig.textContent.description.map((line, i) => (
           <p key={i}>{line}</p>
         ))}
-        {settings.map((setting) => {
-          const checkboxId = `random-of-the-day-${setting.type}`;
+      </main>
+      {randomCheckboxes}
+      {addedRandoms}
+    </div>
+  );
 
-          return (
-            <div key={setting.type}>
-              <input
-                id={checkboxId}
-                type="checkbox"
-                checked={setting.shown}
-                onChange={() => setting.setShown(!setting.shown)}
-              />
-              <label htmlFor={checkboxId}>{setting.text}</label>
-            </div>
-          );
-        })}
-        {poemShown && (
+  function createRandomThingSetting(
+    randomThing: RandomThing
+  ): RandomThingSetting {
+    let shown: boolean;
+    let setShown: (state: boolean) => void;
+    let element: JSX.Element;
+
+    switch (randomThing.type) {
+      case RandomType.POEM:
+        shown = poemShown;
+        setShown = setPoemShown;
+        element = (
           <RandomPoemOfTheDay
             key={RandomType.POEM}
             header={randomOfTheDayConfig.textContent.poemOfTheDay.header}
             randomOfTheDayApiUrl={randomOfTheDayApiUrl}
           />
-        )}
-        {factShown && (
+        );
+        break;
+      case RandomType.FACT:
+        shown = factShown;
+        setShown = setFactShown;
+        element = (
           <RandomFactOfTheDay
             key={RandomType.FACT}
             {...randomOfTheDayConfig.textContent.factOfTheDay}
             randomOfTheDayApiUrl={randomOfTheDayApiUrl}
           />
-        )}
-      </main>
-    </div>
-  );
+        );
+        break;
+    }
+
+    return { ...randomThing, shown, setShown, element };
+  }
 }

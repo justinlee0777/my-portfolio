@@ -113,7 +113,8 @@ $backgroundColorAnimation: 1s background-color;
     color: $linkColor;
   }
 
-  input[type='radio'] {
+  input[type='radio'],
+  input[type='checkbox'] {
     accent-color: $color;
   }
 

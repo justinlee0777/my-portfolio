@@ -4,6 +4,14 @@
   padding: 18px;
 }
 
+.randomCheckbox {
+  display: inline-block;
+
+  &:nth-of-type(n + 2) {
+    margin-left: 8px;
+  }
+}
+
 @media (max-width: 600px) {
   .randomOfTheDayContent {
     max-width: 83%;
