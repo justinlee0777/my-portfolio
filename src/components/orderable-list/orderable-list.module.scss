@@ -1,0 +1,27 @@
+.orderableList {
+  list-style: none;
+}
+
+.listItem {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  font-size: 0.75em;
+
+  &:nth-of-type(n + 2) {
+    margin-top: 8px;
+  }
+}
+
+.arrow {
+  border-radius: 2px;
+  border-style: solid;
+
+  &:first-of-type {
+    margin-left: auto;
+  }
+
+  &:nth-of-type(n + 2) {
+    margin-left: 8px;
+  }
+}

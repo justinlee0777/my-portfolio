@@ -1,6 +1,7 @@
 $backgroundColorAnimation: 1s background-color;
 
 .page {
+  min-height: 100vh;
   position: relative;
   transition: 1s color, $backgroundColorAnimation;
 

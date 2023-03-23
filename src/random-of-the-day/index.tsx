@@ -11,6 +11,7 @@ import {
 import RandomPoemOfTheDay from './utilities/random-poem-of-the-day/random-poem-of-the-day';
 import RandomFactOfTheDay from './utilities/random-fact-of-the-day/random-fact-of-the-day';
 import FieldSet from '../components/fieldset/fieldset';
+import OrderableList from '../components/orderable-list/orderable-list';
 
 export interface RandomOfTheDayPageProps {
   randomOfTheDayConfig: RandomOfTheDayConfig;
@@ -29,6 +30,9 @@ export default function RandomOfTheDayPage({
 }: RandomOfTheDayPageProps): JSX.Element {
   const [poemShown, setPoemShown] = useState(false);
   const [factShown, setFactShown] = useState(false);
+  const [randomOrder, setRandomOrder] = useState<Array<RandomType> | null>(
+    null
+  );
 
   const settings: Array<RandomThingSetting> =
     randomOfTheDayConfig.textContent.randoms.map(createRandomThingSetting);
@@ -55,9 +59,32 @@ export default function RandomOfTheDayPage({
     </FieldSet>
   );
 
-  const addedRandoms: Array<JSX.Element> = settings
-    .filter((setting) => setting.shown)
-    .map((setting) => setting.element);
+  let addedRandoms: Array<RandomThingSetting> = settings.filter(
+    (setting) => setting.shown
+  );
+
+  if (randomOrder?.length === addedRandoms.length) {
+    addedRandoms = randomOrder.map((randomType) => {
+      return addedRandoms.find(
+        (addedRandom) => addedRandom.type === randomType
+      );
+    });
+  }
+
+  const reorderRandoms = (
+    <OrderableList
+      className={styles.orderedRandoms}
+      listElements={addedRandoms.map((random) => ({
+        value: random.type,
+        element: <span>{random.text}</span>,
+      }))}
+      onReorder={setRandomOrder as (items: Array<string>) => void}
+    ></OrderableList>
+  );
+
+  const addedRandomElements: Array<JSX.Element> = addedRandoms.map(
+    (setting) => setting.element
+  );
 
   return (
     <div className={styles.randomOfTheDayContent}>
@@ -80,7 +107,8 @@ export default function RandomOfTheDayPage({
         ))}
       </main>
       {randomCheckboxes}
-      {addedRandoms}
+      {reorderRandoms}
+      {addedRandomElements}
     </div>
   );
 
