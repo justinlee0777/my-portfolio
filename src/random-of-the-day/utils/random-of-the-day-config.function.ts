@@ -1,9 +1,16 @@
 import { getStorage } from '../../utils/get-storage.function';
 import { RandomType } from '../random-of-the-day.config';
 
+export interface SavedRandomOfTheDayConfig {
+  sections: Array<RandomType>;
+  showDescription: boolean;
+}
+
 const storageKey = 'random-of-the-day-config';
 
-export function getRandomOfTheDayConfig(): Array<RandomType> | undefined {
+export function getRandomOfTheDayConfig():
+  | SavedRandomOfTheDayConfig
+  | undefined {
   const stringifiedObject = getStorage().getItem(storageKey);
 
   try {
@@ -13,6 +20,8 @@ export function getRandomOfTheDayConfig(): Array<RandomType> | undefined {
   }
 }
 
-export function setRandomOfTheDayConfig(config: Array<RandomType>): void {
+export function setRandomOfTheDayConfig(
+  config: SavedRandomOfTheDayConfig
+): void {
   getStorage().setItem(storageKey, JSON.stringify(config));
 }

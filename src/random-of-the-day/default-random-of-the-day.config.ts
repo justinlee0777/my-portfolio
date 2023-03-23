@@ -27,6 +27,8 @@ export const defaultRandomOfTheDayConfig: RandomOfTheDayConfig = {
       'To preserve our watercooler talk, I have created a few utilities for generating random things for a weekday.',
       'Do these after standup is over and remind anyone and everyone they are free not to participate.',
     ],
+    hideDescription: 'Hide description',
+    showDescription: 'Show description',
     poemOfTheDay: {
       header: 'Poem of the Day',
     },

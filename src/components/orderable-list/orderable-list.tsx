@@ -32,12 +32,20 @@ export default function OrderableList({
           <li className={styles.listItem} key={listElement.value}>
             {listElement.element}
             {i !== 0 && (
-              <button className={upArrowClassName} onClick={swapFn(i, i - 1)}>
+              <button
+                className={upArrowClassName}
+                aria-label={`Move "${listElement.value}" section up`}
+                onClick={swapFn(i, i - 1)}
+              >
                 {String.fromCharCode(8593)}
               </button>
             )}
             {i !== lastIndex && (
-              <button className={styles.arrow} onClick={swapFn(i, i + 1)}>
+              <button
+                className={styles.arrow}
+                aria-label={`Move "${listElement.value}" section down`}
+                onClick={swapFn(i, i + 1)}
+              >
                 {String.fromCharCode(8595)}
               </button>
             )}

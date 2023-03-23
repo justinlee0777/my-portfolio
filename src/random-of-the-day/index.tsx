@@ -2,6 +2,7 @@ import styles from './index.module.scss';
 
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
+import classNames from 'classnames';
 
 import {
   RandomOfTheDayConfig,
@@ -32,6 +33,7 @@ export default function RandomOfTheDayPage({
   randomOfTheDayConfig,
   randomOfTheDayApiUrl,
 }: RandomOfTheDayPageProps): JSX.Element {
+  const [descriptionShown, setDescriptionShown] = useState(true);
   const [poemShown, setPoemShown] = useState(false);
   const [factShown, setFactShown] = useState(false);
   const [randomOrder, setRandomOrder] = useState<Array<RandomType>>([]);
@@ -39,14 +41,24 @@ export default function RandomOfTheDayPage({
   useEffect(() => {
     const config = getRandomOfTheDayConfig();
 
-    setRandomOrder(config);
-    setPoemShown(config.some((randomType) => randomType === RandomType.POEM));
-    setFactShown(config.some((randomType) => randomType === RandomType.FACT));
+    if (!config) {
+      return;
+    }
+
+    const { showDescription, sections } = config;
+
+    setDescriptionShown(showDescription);
+    setRandomOrder(sections);
+    setPoemShown(sections.some((randomType) => randomType === RandomType.POEM));
+    setFactShown(sections.some((randomType) => randomType === RandomType.FACT));
   }, []);
 
   useEffect(() => {
-    setRandomOfTheDayConfig(randomOrder);
-  }, [randomOrder]);
+    setRandomOfTheDayConfig({
+      showDescription: descriptionShown,
+      sections: randomOrder,
+    });
+  }, [descriptionShown, randomOrder]);
 
   const settings: Array<RandomThingSetting> =
     randomOfTheDayConfig.textContent.randoms.map(createRandomThingSetting);
@@ -96,6 +108,10 @@ export default function RandomOfTheDayPage({
     (setting) => setting.element
   );
 
+  const descriptionClassName = classNames(styles.description, {
+    [styles.descriptionHidden]: !descriptionShown,
+  });
+
   return (
     <div className={styles.randomOfTheDayContent}>
       <Head>
@@ -111,11 +127,19 @@ export default function RandomOfTheDayPage({
         />
       </Head>
       <h1>{randomOfTheDayConfig.textContent.header}</h1>
-      <main>
+      <main className={descriptionClassName}>
         {randomOfTheDayConfig.textContent.description.map((line, i) => (
           <p key={i}>{line}</p>
         ))}
       </main>
+      <button
+        className={styles.hidePageDescription}
+        onClick={() => setDescriptionShown(!descriptionShown)}
+      >
+        {descriptionShown
+          ? randomOfTheDayConfig.textContent.hideDescription
+          : randomOfTheDayConfig.textContent.showDescription}
+      </button>
       {randomCheckboxes}
       {reorderRandoms}
       {addedRandomElements}

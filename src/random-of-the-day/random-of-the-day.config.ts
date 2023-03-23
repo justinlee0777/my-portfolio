@@ -16,6 +16,8 @@ export interface RandomOfTheDayConfig {
   textContent: {
     header: string;
     description: Array<string>;
+    hideDescription: string;
+    showDescription: string;
     randoms: Array<RandomThing>;
     poemOfTheDay: {
       header: string;
@@ -33,6 +35,8 @@ export interface RandomOfTheDayConfig {
 const keysToTranslate = [
   ...[
     'header',
+    'hideDescription',
+    'showDescription',
     'poemOfTheDay.header',
     ...['header', 'credit'].map((key) => `factOfTheDay.${key}`),
   ].map((key) => `textContent.${key}`),
