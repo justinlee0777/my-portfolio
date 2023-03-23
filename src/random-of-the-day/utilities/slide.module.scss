@@ -1,4 +1,12 @@
 .slide {
   flex: 1;
   font-size: 0.75em;
+  margin: 0 auto;
+  max-width: 66%;
+}
+
+@media (max-width: 600px) {
+  .slide {
+    max-width: 83%;
+  }
 }

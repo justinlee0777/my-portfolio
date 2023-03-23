@@ -20,5 +20,9 @@ export const defaultRandomOfTheDayConfig: RandomOfTheDayConfig = {
     poemOfTheDay: {
       header: 'Poem of the Day',
     },
+    factOfTheDay: {
+      header: 'Fact of the Day',
+      credit: 'Fact taken from ${API_URL}',
+    },
   },
 };

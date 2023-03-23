@@ -4,6 +4,7 @@ import Head from 'next/head';
 
 import { RandomOfTheDayConfig } from './random-of-the-day.config';
 import RandomPoemOfTheDay from './utilities/random-poem-of-the-day/random-poem-of-the-day';
+import RandomFactOfTheDay from './utilities/random-fact-of-the-day/random-fact-of-the-day';
 
 export interface RandomOfTheDayPageProps {
   randomOfTheDayConfig: RandomOfTheDayConfig;
@@ -35,6 +36,10 @@ export default function RandomOfTheDayPage({
         ))}
         <RandomPoemOfTheDay
           header={randomOfTheDayConfig.textContent.poemOfTheDay.header}
+          randomOfTheDayApiUrl={randomOfTheDayApiUrl}
+        />
+        <RandomFactOfTheDay
+          {...randomOfTheDayConfig.textContent.factOfTheDay}
           randomOfTheDayApiUrl={randomOfTheDayApiUrl}
         />
       </main>
