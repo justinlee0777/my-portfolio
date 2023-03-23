@@ -29,6 +29,11 @@ export const defaultRandomOfTheDayConfig: RandomOfTheDayConfig = {
     ],
     hideDescription: 'Hide description',
     showDescription: 'Show description',
+    errorMessage: {
+      templateString:
+        "This resource could not be loaded. Please contact ${leej40@outlook.com} and, if possible, add a screenshot and the cURL to the email's body.",
+      urls: ['mailto:leej40@outlook.com'],
+    },
     poemOfTheDay: {
       header: 'Poem of the Day',
     },

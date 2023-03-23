@@ -7,6 +7,8 @@ import Slide from '../../../components/slide/slide';
 import { Poem } from '../../poem.interface';
 import { getPoem } from '../../random-of-the-day.api';
 import LoadingScreen from '../../../components/loading-screen/loading-screen';
+import ErrorScreen from '../../../components/error-screen/error-screen';
+import { Link } from '../../../config/link.model';
 
 interface PoemProps {
   id?: string;
@@ -14,6 +16,7 @@ interface PoemProps {
 
   header: string;
   randomOfTheDayApiUrl: string;
+  linkedErrorMessage: Link;
 }
 
 export default function RandomPoemOfTheDay({
@@ -21,18 +24,29 @@ export default function RandomPoemOfTheDay({
   animated,
   header,
   randomOfTheDayApiUrl,
+  linkedErrorMessage,
 }: PoemProps): JSX.Element {
+  const [error, setError] = useState<string | null>(null);
+
   const [poem, setPoem] = useState<Poem | null>(null);
 
   useEffect(() => {
-    getPoem(randomOfTheDayApiUrl).then((poem) => {
-      setPoem(poem);
-    });
+    getPoem(randomOfTheDayApiUrl)
+      .then((poem) => {
+        setPoem(poem);
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
   }, []);
 
   let content: JSX.Element;
 
-  if (!poem) {
+  if (error) {
+    content = (
+      <ErrorScreen linkedMessage={linkedErrorMessage} errorMessages={[error]} />
+    );
+  } else if (!poem) {
     content = <LoadingScreen />;
   } else {
     content = (

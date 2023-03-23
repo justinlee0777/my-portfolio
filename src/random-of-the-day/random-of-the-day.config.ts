@@ -1,3 +1,5 @@
+import { Link } from '../config/link.model';
+
 export enum RandomType {
   POEM = 'poem',
   FACT = 'fact',
@@ -19,6 +21,7 @@ export interface RandomOfTheDayConfig {
     hideDescription: string;
     showDescription: string;
     randoms: Array<RandomThing>;
+    errorMessage: Link;
     poemOfTheDay: {
       header: string;
     };
@@ -37,6 +40,7 @@ const keysToTranslate = [
     'header',
     'hideDescription',
     'showDescription',
+    'errorMessage.templateString',
     'poemOfTheDay.header',
     ...['header', 'credit'].map((key) => `factOfTheDay.${key}`),
   ].map((key) => `textContent.${key}`),

@@ -191,6 +191,7 @@ export default function RandomOfTheDayPage({
             key={RandomType.POEM}
             animated={animatedSlides[elementId] ? 'activated' : 'unactivated'}
             header={randomOfTheDayConfig.textContent.poemOfTheDay.header}
+            linkedErrorMessage={randomOfTheDayConfig.textContent.errorMessage}
             randomOfTheDayApiUrl={randomOfTheDayApiUrl}
           />
         );
@@ -204,6 +205,7 @@ export default function RandomOfTheDayPage({
             id={elementId}
             key={RandomType.FACT}
             animated={animatedSlides[elementId] ? 'activated' : 'unactivated'}
+            linkedErrorMessage={randomOfTheDayConfig.textContent.errorMessage}
             {...randomOfTheDayConfig.textContent.factOfTheDay}
             randomOfTheDayApiUrl={randomOfTheDayApiUrl}
           />
