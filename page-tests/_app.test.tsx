@@ -133,7 +133,7 @@ describe('<App/>', () => {
       let containerElement = renderResult.queryByTestId('page-container');
 
       expect(containerElement.classList.toString()).toBe(
-        'page font-Arial theme-Monochrome'
+        'page font-Arial theme-Monochrome animation-Sweepy'
       );
 
       loadFontReturnValue = Promise.resolve();
@@ -148,7 +148,7 @@ describe('<App/>', () => {
 
       containerElement = renderResult.queryByTestId('page-container');
       expect(containerElement.classList.toString()).toBe(
-        'page font-Eater theme-Monochrome'
+        'page font-Eater theme-Monochrome animation-Sweepy'
       );
 
       [args] = mockComponent.mock.calls[1];
@@ -156,7 +156,7 @@ describe('<App/>', () => {
 
       containerElement = renderResult.queryByTestId('page-container');
       expect(containerElement.classList.toString()).toBe(
-        'page font-Eater theme-Sea'
+        'page font-Eater theme-Sea animation-Sweepy'
       );
     });
 
@@ -177,7 +177,7 @@ describe('<App/>', () => {
       const containerElement = renderResult.queryByTestId('page-container');
 
       expect(containerElement.classList.toString()).toBe(
-        'page font-ComicSansMS theme-Ulysses'
+        'page font-ComicSansMS theme-Ulysses animation-Swoopy'
       );
 
       const developerModeOn = renderResult.queryByText('Developer mode: true');
@@ -204,6 +204,7 @@ describe('<App/>', () => {
           Component={mockComponent}
           pageProps={{
             locale: 'en',
+            route: '',
             pageConfig,
             homepageConfig: {} as any,
             generatedProfilePictureUrl: '',

@@ -1,3 +1,7 @@
+jest.mock('../fieldset/fieldset', () => ({ children }) => (
+  <div>{children}</div>
+));
+
 import {
   cleanup,
   fireEvent,
@@ -49,24 +53,9 @@ describe('<RadioGroup/>', () => {
   });
 
   test('renders', async () => {
-    const legend = await waitFor(() => screen.findByText('Test legend'));
-    expect(legend).toBeTruthy();
-    expect(legend.parentElement.tagName).toBe('FIELDSET');
-
-    const fooOption = screen.queryByLabelText('Foo');
-    expect(fooOption).toBeFalsy();
-
-    const barOption = screen.queryByLabelText('Bar');
-    expect(barOption).toBeFalsy();
-
-    const bazOption = screen.queryByLabelText('Baz');
-    expect(bazOption).toBeFalsy();
-  });
-
-  test('expands the radio group to show options', async () => {
-    fireEvent.click(screen.queryByText('+'));
-
-    const fooOption = screen.queryByLabelText('Foo') as HTMLInputElement;
+    const fooOption: HTMLInputElement = await waitFor(() =>
+      screen.findByLabelText('Foo')
+    );
     expect(fooOption).toBeTruthy();
     expect(fooOption.tagName).toBe('INPUT');
     expect(fooOption.checked).toBe(true);
@@ -82,9 +71,7 @@ describe('<RadioGroup/>', () => {
     expect(bazOption.checked).toBe(false);
   });
 
-  test('expands the radio group to show options and selects one', async () => {
-    fireEvent.click(screen.queryByText('+'));
-
+  test('selects one', async () => {
     fireEvent.click(screen.queryByLabelText('Baz'));
 
     expect(onSelect.mock.calls[0]).toEqual(['baz']);

@@ -1,7 +1,8 @@
 import styles from './fieldset.module.scss';
 
 import classNames from 'classnames';
-import { RefObject, useState } from 'react';
+import { useState } from 'react';
+import UnitTestCheck from '../unit-test-check/unit-test-check';
 
 export interface FieldSetProps {
   id?: string;
@@ -39,6 +40,7 @@ export default function FieldSet({
       className={fieldsetContainerClassNames}
       data-animatable={animated}
     >
+      <UnitTestCheck componentName="FieldSet" />
       <fieldset className={fieldsetClassName}>
         <legend>{legend}</legend>
         {opened && children}

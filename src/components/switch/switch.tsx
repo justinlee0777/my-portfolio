@@ -1,6 +1,7 @@
 import styles from './switch.module.scss';
 
 import classNames from 'classnames';
+import UnitTestCheck from '../unit-test-check/unit-test-check';
 
 export interface SwitchProps {
   className?: string;
@@ -27,6 +28,7 @@ export default function Switch({
       aria-checked={value}
       aria-label="Click to toggle."
     >
+      <UnitTestCheck componentName="Switch" />
       <div
         className={styles.switchKnob}
         role="button"

@@ -2,6 +2,8 @@ import styles from './orderable-list.module.scss';
 
 import classNames from 'classnames';
 
+import UnitTestCheck from '../unit-test-check/unit-test-check';
+
 export interface OrderableListProps {
   id?: string;
   className?: string;
@@ -32,6 +34,7 @@ export default function OrderableList({
 
   return (
     <ol id={id} className={orderableListClassName} data-animatable={animated}>
+      <UnitTestCheck componentName="OrderableList" />
       {listElements.map((listElement, i) => {
         return (
           <li className={styles.listItem} key={listElement.value}>

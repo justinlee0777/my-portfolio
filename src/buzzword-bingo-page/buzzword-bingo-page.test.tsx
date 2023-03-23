@@ -1,13 +1,13 @@
-const mockMarqueeAnimateSlides = jest.fn();
+const mockAnimateSlides = jest.fn();
 
 jest.mock('buzzword-bingo-generator', () => () => <div></div>);
 jest.mock('../components/slide/slide', () => ({ children }) => (
   <div>{children}</div>
 ));
-jest.mock('../utils/marquee-animate-slides.function', () => {
+jest.mock('../utils/animate-slides.function', () => {
   return {
     __esModule: true,
-    marqueeAnimateSlides: mockMarqueeAnimateSlides,
+    animateSlides: mockAnimateSlides,
   };
 });
 
@@ -70,8 +70,8 @@ describe('<BuzzwordBingoPage/>', () => {
         element.textContent === 'Buzzword bingo is awesome.Super fun.Most rad.'
     );
 
-    expect(mockMarqueeAnimateSlides.mock.calls[0]).toEqual([
-      [header, explanation],
-    ]);
+    const args = mockAnimateSlides.mock.calls[0];
+    expect(args[0]).toBe(SlideAnimation.SWEEPY);
+    expect(args[1]).toEqual([header, explanation]);
   });
 });
