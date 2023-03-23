@@ -1,4 +1,4 @@
-import { RandomOfTheDayConfig } from './random-of-the-day.config';
+import { RandomOfTheDayConfig, RandomType } from './random-of-the-day.config';
 
 export const defaultRandomOfTheDayConfig: RandomOfTheDayConfig = {
   seo: {
@@ -8,6 +8,16 @@ export const defaultRandomOfTheDayConfig: RandomOfTheDayConfig = {
   },
   textContent: {
     header: 'Random of the Day',
+    randoms: [
+      {
+        text: 'Poem',
+        type: RandomType.POEM,
+      },
+      {
+        text: 'Fact',
+        type: RandomType.FACT,
+      },
+    ],
     description: [
       'The Daily Scrum is the most visible face of Scrum.',
       'It is held at the same place at the same time and it is always 15 minutes long.',

@@ -1,3 +1,13 @@
+export enum RandomType {
+  POEM = 'poem',
+  FACT = 'fact',
+}
+
+export interface RandomThing {
+  text: string;
+  type: RandomType;
+}
+
 export interface RandomOfTheDayConfig {
   seo: {
     title: string;
@@ -6,6 +16,7 @@ export interface RandomOfTheDayConfig {
   textContent: {
     header: string;
     description: Array<string>;
+    randoms: Array<RandomThing>;
     poemOfTheDay: {
       header: string;
     };
@@ -34,6 +45,9 @@ export function getTranslationKeys(
     ...keysToTranslate,
     ...config.textContent.description.map(
       (_, i) => `textContent.description.${i}`
+    ),
+    ...config.textContent.randoms.map(
+      (_, i) => `textContent.randoms.${i}.text`
     ),
   ];
 }
