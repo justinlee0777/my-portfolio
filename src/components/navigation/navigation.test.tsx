@@ -11,11 +11,11 @@ describe('<Navigation/>', () => {
   test('renders', () => {
     const renderResult = render(
       <Navigation
+        locale="en"
         links={[
           {
             displayName: 'Foo',
             url: '/foo',
-            isHome: true,
           },
           {
             displayName: 'Bar',
@@ -39,7 +39,6 @@ describe('<Navigation/>', () => {
 
     const fooLink = screen.queryByText('Foo');
     expect(fooLink).toBeTruthy();
-    expect(fooLink.classList.toString()).toBe('navigationLink homeLink');
 
     const barLink = screen.queryByText('Bar');
     expect(barLink).toBeTruthy();

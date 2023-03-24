@@ -93,7 +93,7 @@ export default function RandomOfTheDayPage({
       ] as Array<HTMLElement>,
       { get: animatedSlides, set: setAnimatedSlides }
     );
-  }, [animation, animatedSlides]);
+  }, [randomOrder, animation, animatedSlides]);
 
   const addedRandomElements: Array<JSX.Element> = addedRandoms.map(
     (setting) => setting.element
@@ -222,7 +222,11 @@ export default function RandomOfTheDayPage({
   ): (state: boolean) => void {
     return (state: boolean) => {
       set(state);
-      setRandomOrder(randomOrder ? randomOrder.concat(value) : [value]);
+      setRandomOrder(
+        state
+          ? randomOrder.concat(value)
+          : randomOrder.filter((randomType) => randomType !== value)
+      );
     };
   }
 }

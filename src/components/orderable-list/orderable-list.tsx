@@ -28,38 +28,44 @@ export default function OrderableList({
 
   const lastIndex = listElements.length - 1;
 
-  if (listElements.length < 2) {
-    return <></>;
+  let content: JSX.Element;
+
+  if (listElements.length > 1) {
+    content = (
+      <>
+        {listElements.map((listElement, i) => {
+          return (
+            <li className={styles.listItem} key={listElement.value}>
+              {listElement.element}
+              {i !== 0 && (
+                <button
+                  className={upArrowClassName}
+                  aria-label={`Move "${listElement.value}" section up`}
+                  onClick={swapFn(i, i - 1)}
+                >
+                  {String.fromCharCode(8593)}
+                </button>
+              )}
+              {i !== lastIndex && (
+                <button
+                  className={styles.arrow}
+                  aria-label={`Move "${listElement.value}" section down`}
+                  onClick={swapFn(i, i + 1)}
+                >
+                  {String.fromCharCode(8595)}
+                </button>
+              )}
+            </li>
+          );
+        })}
+      </>
+    );
   }
 
   return (
     <ol id={id} className={orderableListClassName} data-animatable={animated}>
       <UnitTestCheck componentName="OrderableList" />
-      {listElements.map((listElement, i) => {
-        return (
-          <li className={styles.listItem} key={listElement.value}>
-            {listElement.element}
-            {i !== 0 && (
-              <button
-                className={upArrowClassName}
-                aria-label={`Move "${listElement.value}" section up`}
-                onClick={swapFn(i, i - 1)}
-              >
-                {String.fromCharCode(8593)}
-              </button>
-            )}
-            {i !== lastIndex && (
-              <button
-                className={styles.arrow}
-                aria-label={`Move "${listElement.value}" section down`}
-                onClick={swapFn(i, i + 1)}
-              >
-                {String.fromCharCode(8595)}
-              </button>
-            )}
-          </li>
-        );
-      })}
+      {content}
     </ol>
   );
 

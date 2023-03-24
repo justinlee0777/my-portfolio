@@ -149,11 +149,11 @@ export default function Page({
         <UnitTestCheck componentName="App" style={{ zIndex: 5 }} />
         <Navigation
           className={styles.pageNavigation}
+          locale={pageProps.locale}
           links={[
             {
-              displayName: 'Justin Lee',
-              url: `/${pageProps.locale}/`,
-              isHome: true,
+              displayName: 'Random of the Day',
+              url: `/${pageProps.locale}/random-of-the-day`,
             },
             {
               displayName: 'Musings',
