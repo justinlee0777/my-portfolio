@@ -12,7 +12,7 @@ export interface RpgGameProps {
   animation: SlideAnimation;
 }
 
-export default function BuzzwordBingoPage({
+export default function RpgGamePage({
   rpgGameConfig,
   animation,
 }: RpgGameProps) {

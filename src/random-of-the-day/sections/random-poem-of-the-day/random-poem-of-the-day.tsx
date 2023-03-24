@@ -38,7 +38,7 @@ export default function RandomPoemOfTheDay({
       .catch((error) => {
         setError(error.message);
       });
-  }, []);
+  }, [randomOfTheDayApiUrl]);
 
   let content: JSX.Element;
 

@@ -93,7 +93,7 @@ export default function RandomOfTheDayPage({
       ] as Array<HTMLElement>,
       { get: animatedSlides, set: setAnimatedSlides }
     );
-  }, [randomOrder, animation, animatedSlides]);
+  }, [addedRandoms, animation, animatedSlides]);
 
   const addedRandomElements: Array<JSX.Element> = addedRandoms.map(
     (setting) => setting.element

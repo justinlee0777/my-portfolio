@@ -32,7 +32,7 @@ export default function BuzzwordBingoPage({
       [headerRef.current, explanationRef.current],
       { get: animatedSlides, set: setAnimatedSlides }
     );
-  }, [animation]);
+  }, [animation, animatedSlides]);
 
   return (
     <Slide className={styles.slide}>

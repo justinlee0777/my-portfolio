@@ -30,7 +30,7 @@ export default function RpgGame({
       get: animatedSlides,
       set: setAnimatedSlides,
     });
-  }, [animation]);
+  }, [animatedSlides, animation]);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -57,7 +57,7 @@ export default function RpgGame({
     } else {
       document.body.style.overflow = '';
     }
-  }, [focused]);
+  }, [focused, iframeRef]);
 
   let outOfFocusMessage: JSX.Element;
 

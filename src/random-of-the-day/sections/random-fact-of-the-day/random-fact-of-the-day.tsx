@@ -40,7 +40,7 @@ export default function RandomFactOfTheDay({
       .catch((error) => {
         setError(error.message);
       });
-  }, []);
+  }, [randomOfTheDayApiUrl]);
 
   let content: JSX.Element;
 
