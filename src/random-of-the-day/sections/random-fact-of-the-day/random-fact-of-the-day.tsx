@@ -8,6 +8,7 @@ import { Fact } from '../../fact.interface';
 import { getFact } from '../../random-of-the-day.api';
 import { createLinkElement, Link } from '../../../config/link.model';
 import ErrorScreen from '../../../components/error-screen/error-screen';
+import UnitTestCheck from '../../../components/unit-test-check/unit-test-check';
 
 interface PoemProps {
   id?: string;
@@ -78,6 +79,7 @@ export default function RandomFactOfTheDay({
   return (
     <Slide id={id} animated={animated} className={slideStyles.slide}>
       <>
+        <UnitTestCheck componentName="RandomFactOfTheDay" />
         <h2>{header}</h2>
         {content}
       </>

@@ -1,6 +1,9 @@
 import styles from './loading-screen.module.scss';
 
 import { useEffect, useState } from 'react';
+import classNames from 'classnames';
+
+import UnitTestCheck from '../unit-test-check/unit-test-check';
 
 export default function LoadingScreen() {
   const [loadingTickIndex, setLoadingTickIndex] = useState(0);
@@ -9,9 +12,9 @@ export default function LoadingScreen() {
   const loadingTicks: Array<JSX.Element> = [];
 
   for (let i = 0; i < maxTicks; i++) {
-    const className =
-      styles.loadingTick +
-      (loadingTickIndex === i ? ` ${styles.animated}` : '');
+    const className = classNames(styles.loadingTick, {
+      [styles.animated]: loadingTickIndex === i,
+    });
 
     loadingTicks.push(<div className={className} key={i}></div>);
   }
@@ -30,6 +33,7 @@ export default function LoadingScreen() {
 
   return (
     <>
+      <UnitTestCheck componentName="LoadingScreen" />
       <p>We&apos;re preparing your changes...</p>
       <div className={styles.loadingIcon}>{loadingTicks}</div>
     </>
