@@ -38,8 +38,7 @@ export function getLocalizedStaticProps(
       props: {
         ...baseProps,
         randomOfTheDayConfig: translatedConfig,
-        randomOfTheDayApiUrl:
-          'http://randomoftheday-env.eba-qewtxjhx.us-east-2.elasticbeanstalk.com',
+        randomOfTheDayApiUrl: 'https://api.iamjustinlee.com',
       },
     };
   };
