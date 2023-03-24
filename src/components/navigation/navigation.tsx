@@ -46,13 +46,12 @@ export function Navigation({
           ref={(element) => element && showArrowHints(element)}
         >
           {links.map((link) => (
-            <Link
+            <li
               className={classNames(styles.navigationLink)}
-              href={link.url}
               key={link.displayName}
             >
-              {link.displayName}
-            </Link>
+              <Link href={link.url}>{link.displayName}</Link>
+            </li>
           ))}
           {rightArrowHintShown && (
             <div
