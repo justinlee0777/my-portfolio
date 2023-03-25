@@ -41,7 +41,7 @@ export default function RandomOfTheDayPage({
   randomOfTheDayConfig,
   randomOfTheDayApiUrl,
 }: RandomOfTheDayPageProps): JSX.Element {
-  const [descriptionShown, setDescriptionShown] = useState(true);
+  const [controlsShown, setControlsShown] = useState(true);
   const [poemShown, setPoemShown] = useState(false);
   const [factShown, setFactShown] = useState(false);
   const [randomOrder, setRandomOrder] = useState<Array<RandomType>>([]);
@@ -55,9 +55,9 @@ export default function RandomOfTheDayPage({
       return;
     }
 
-    const { showDescription, sections } = config;
+    const { showControls, sections } = config;
 
-    setDescriptionShown(showDescription);
+    setControlsShown(showControls);
     setRandomOrder(sections);
     setPoemShown(sections.some((randomType) => randomType === RandomType.POEM));
     setFactShown(sections.some((randomType) => randomType === RandomType.FACT));
@@ -65,10 +65,10 @@ export default function RandomOfTheDayPage({
 
   useEffect(() => {
     setRandomOfTheDayConfig({
-      showDescription: descriptionShown,
+      showControls: controlsShown,
       sections: randomOrder,
     });
-  }, [descriptionShown, randomOrder]);
+  }, [controlsShown, randomOrder]);
 
   const settings: Array<RandomThingSetting> =
     randomOfTheDayConfig.textContent.randoms.map(createRandomThingSetting);
@@ -99,8 +99,8 @@ export default function RandomOfTheDayPage({
     (setting) => setting.element
   );
 
-  const descriptionClassName = classNames(styles.description, {
-    [styles.descriptionHidden]: !descriptionShown,
+  const controlsClassName = classNames(styles.controls, {
+    [styles.controlsHidden]: !controlsShown,
   });
 
   return (
@@ -118,56 +118,58 @@ export default function RandomOfTheDayPage({
         />
       </Head>
       <h1>{randomOfTheDayConfig.textContent.header}</h1>
-      <main className={descriptionClassName}>
-        {randomOfTheDayConfig.textContent.description.map((line, i) => (
-          <p key={i}>{line}</p>
-        ))}
-      </main>
+      <div className={controlsClassName}>
+        <main>
+          {randomOfTheDayConfig.textContent.description.map((line, i) => (
+            <p key={i}>{line}</p>
+          ))}
+        </main>
+        <FieldSet
+          id="toggle-randoms"
+          animated={
+            animatedSlides['toggle-randoms'] ? 'activated' : 'unactivated'
+          }
+          legend="Randoms"
+        >
+          <>
+            {settings.map((setting) => {
+              const checkboxId = `random-of-the-day-${setting.type}`;
+
+              return (
+                <div className={styles.randomCheckbox} key={setting.type}>
+                  <input
+                    id={checkboxId}
+                    type="checkbox"
+                    checked={setting.shown}
+                    onChange={() => setting.setShown(!setting.shown)}
+                  />
+                  <label htmlFor={checkboxId}>{setting.text}</label>
+                </div>
+              );
+            })}
+          </>
+        </FieldSet>
+        <OrderableList
+          id="ordered-randoms"
+          className={styles.orderedRandoms}
+          animated={
+            animatedSlides['ordered-randoms'] ? 'activated' : 'unactivated'
+          }
+          listElements={addedRandoms.map((random) => ({
+            value: random.type,
+            element: <span>{random.text}</span>,
+          }))}
+          onReorder={setRandomOrder as (items: Array<string>) => void}
+        ></OrderableList>
+      </div>
       <button
         className={styles.hidePageDescription}
-        onClick={() => setDescriptionShown(!descriptionShown)}
+        onClick={() => setControlsShown(!controlsShown)}
       >
-        {descriptionShown
-          ? randomOfTheDayConfig.textContent.hideDescription
-          : randomOfTheDayConfig.textContent.showDescription}
+        {controlsShown
+          ? randomOfTheDayConfig.textContent.hideControls
+          : randomOfTheDayConfig.textContent.showControls}
       </button>
-      <FieldSet
-        id="toggle-randoms"
-        animated={
-          animatedSlides['toggle-randoms'] ? 'activated' : 'unactivated'
-        }
-        legend="Randoms"
-      >
-        <>
-          {settings.map((setting) => {
-            const checkboxId = `random-of-the-day-${setting.type}`;
-
-            return (
-              <div className={styles.randomCheckbox} key={setting.type}>
-                <input
-                  id={checkboxId}
-                  type="checkbox"
-                  checked={setting.shown}
-                  onChange={() => setting.setShown(!setting.shown)}
-                />
-                <label htmlFor={checkboxId}>{setting.text}</label>
-              </div>
-            );
-          })}
-        </>
-      </FieldSet>
-      <OrderableList
-        id="ordered-randoms"
-        className={styles.orderedRandoms}
-        animated={
-          animatedSlides['ordered-randoms'] ? 'activated' : 'unactivated'
-        }
-        listElements={addedRandoms.map((random) => ({
-          value: random.type,
-          element: <span>{random.text}</span>,
-        }))}
-        onReorder={setRandomOrder as (items: Array<string>) => void}
-      ></OrderableList>
       {addedRandomElements}
     </div>
   );

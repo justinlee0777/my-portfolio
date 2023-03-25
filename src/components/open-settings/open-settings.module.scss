@@ -46,6 +46,7 @@ $animationTime: 1s;
 
   .settings {
     opacity: 1;
+    pointer-events: initial;
   }
 
   .menuIcon {
@@ -79,5 +80,6 @@ $animationTime: 1s;
 
 .settings {
   opacity: 0;
+  pointer-events: none;
   transition: $animationTime opacity;
 }

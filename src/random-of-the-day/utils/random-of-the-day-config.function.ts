@@ -3,7 +3,7 @@ import { RandomType } from '../random-of-the-day.config';
 
 export interface SavedRandomOfTheDayConfig {
   sections: Array<RandomType>;
-  showDescription: boolean;
+  showControls: boolean;
 }
 
 const storageKey = 'random-of-the-day-config';
