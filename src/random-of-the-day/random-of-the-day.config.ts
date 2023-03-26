@@ -55,6 +55,9 @@ const keysToTranslate = [
     'errorMessage.templateString',
     'poemOfTheDay.header',
     ...['header', 'credit'].map((key) => `factOfTheDay.${key}`),
+    ...['header', 'credit', 'openHighResImage', 'highResImageLoadFailed'].map(
+      (key) => `paintingOfTheDay.${key}`
+    ),
   ].map((key) => `textContent.${key}`),
 ];
 
