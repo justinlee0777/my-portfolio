@@ -18,9 +18,6 @@ export function Navigation({
   links,
   className,
 }: NavigationProps): JSX.Element {
-  const [leftArrowHintShown, setLeftArrowHintShown] = useState(false);
-  const [rightArrowHintShown, setRightArrowHintShown] = useState(false);
-
   const navigationClassName = classNames(styles.navigation, className);
 
   return (
@@ -35,16 +32,7 @@ export function Navigation({
         Justin Lee
       </Link>
       <div className={styles.navigationLinksContainer}>
-        {leftArrowHintShown && (
-          <div className={classNames(styles.arrowHint, styles.arrowHintLeft)}>
-            {String.fromCharCode(8656)}
-          </div>
-        )}
-        <ul
-          className={styles.navigationLinks}
-          onScroll={(event) => showArrowHints(event.target as HTMLElement)}
-          ref={(element) => element && showArrowHints(element)}
-        >
+        <ul className={styles.navigationLinks}>
           {links.map((link) => (
             <li
               className={classNames(styles.navigationLink)}
@@ -53,22 +41,8 @@ export function Navigation({
               <Link href={link.url}>{link.displayName}</Link>
             </li>
           ))}
-          {rightArrowHintShown && (
-            <div
-              className={classNames(styles.arrowHint, styles.arrowHintRight)}
-            >
-              {String.fromCharCode(8658)}
-            </div>
-          )}
         </ul>
       </div>
     </nav>
   );
-
-  function showArrowHints(listElement: HTMLElement): void {
-    const { scrollLeft, clientWidth, scrollWidth } = listElement;
-
-    setLeftArrowHintShown(scrollLeft !== 0);
-    setRightArrowHintShown(Math.ceil(scrollLeft + clientWidth) < scrollWidth);
-  }
 }
