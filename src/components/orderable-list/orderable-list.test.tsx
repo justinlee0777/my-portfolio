@@ -56,7 +56,7 @@ describe('<OrderableList/>', () => {
     // Test arrows
 
     const fooMoveUp = renderResult.queryByLabelText('Move "foo" section up');
-    expect(fooMoveUp).toBeFalsy();
+    expect(fooMoveUp.className).toBe('arrow arrowHidden');
 
     const fooMoveDown = renderResult.queryByLabelText(
       'Move "foo" section down'
@@ -77,7 +77,7 @@ describe('<OrderableList/>', () => {
     const bazMoveDown = renderResult.queryByLabelText(
       'Move "baz" section down'
     );
-    expect(bazMoveDown).toBeFalsy();
+    expect(bazMoveDown.className).toBe('arrow arrowHidden');
   });
 
   test('swaps elements', () => {
