@@ -23,8 +23,11 @@ import {
 } from '../utils/animate-slides.function';
 import { SlideAnimation } from '../config/slide-animation.enum';
 import RandomPaintingOfTheDay from './sections/random-painting-of-the-day/random-painting-of-the-day';
+import { Modal } from '../services/modal';
 
 export interface RandomOfTheDayPageProps {
+  modal: Modal;
+
   animation: SlideAnimation;
   randomOfTheDayConfig: RandomOfTheDayConfig;
   randomOfTheDayApiUrl: string;
@@ -38,6 +41,8 @@ interface RandomThingSetting extends RandomThing {
 }
 
 export default function RandomOfTheDayPage({
+  modal,
+
   animation,
   randomOfTheDayConfig,
   randomOfTheDayApiUrl,
@@ -226,6 +231,7 @@ export default function RandomOfTheDayPage({
           <RandomPaintingOfTheDay
             id={elementId}
             key={RandomType.PAINTING}
+            modal={modal}
             animated={animatedSlides[elementId] ? 'activated' : 'unactivated'}
             linkedErrorMessage={randomOfTheDayConfig.textContent.errorMessage}
             {...randomOfTheDayConfig.textContent.paintingOfTheDay}

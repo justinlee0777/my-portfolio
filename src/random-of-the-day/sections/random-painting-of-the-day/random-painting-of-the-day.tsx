@@ -12,10 +12,13 @@ import ErrorScreen from '../../../components/error-screen/error-screen';
 import { loadImage } from '../../../utils/load-image.function';
 import HighResImageDialog from './high-res-image-dialog/high-res-image-dialog';
 import UnitTestCheck from '../../../components/unit-test-check/unit-test-check';
+import { Modal } from '../../../services/modal';
 
 interface RandomPaintingOfTheDayProps {
   id?: string;
   animated?: 'activated' | 'unactivated';
+
+  modal: Modal;
 
   header: string;
   credit: string;
@@ -28,6 +31,9 @@ interface RandomPaintingOfTheDayProps {
 export default function RandomPaintingOfTheDay({
   id,
   animated,
+
+  modal,
+
   header,
   credit,
   openHighResImage,
@@ -37,7 +43,6 @@ export default function RandomPaintingOfTheDay({
 }: RandomPaintingOfTheDayProps): JSX.Element {
   const [highResImageLoaded, setHighResImageLoaded] = useState<boolean>(false);
   const [highResImageFailed, setHighResImageFailed] = useState<boolean>(false);
-  const [highResImageOpened, setHighResImageOpened] = useState<boolean>(false);
 
   const [error, setError] = useState<string | null>(null);
 
@@ -90,11 +95,18 @@ export default function RandomPaintingOfTheDay({
     if (highResImageFailed) {
       openHighResImageElement = <p>{highResImageLoadFailed}</p>;
     } else {
+      const dialog = (
+        <HighResImageDialog
+          imageUrl={painting.images.highRes}
+          onClose={() => modal.close()}
+        />
+      );
+
       openHighResImageElement = (
         <button
           className={styles.openHighResImage}
           disabled={!highResImageLoaded}
-          onClick={() => setHighResImageOpened(!highResImageOpened)}
+          onClick={() => modal.set(dialog)}
         >
           {openHighResImage}
         </button>
@@ -112,12 +124,6 @@ export default function RandomPaintingOfTheDay({
         />
         <p dangerouslySetInnerHTML={{ __html: creditTemplateString }}></p>
         {openHighResImageElement}
-        {highResImageOpened && (
-          <HighResImageDialog
-            imageUrl={painting.images.highRes}
-            onClose={() => setHighResImageOpened(false)}
-          />
-        )}
       </section>
     );
   }

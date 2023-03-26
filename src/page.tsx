@@ -1,6 +1,6 @@
 import styles from './page.module.scss';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import classNames from 'classnames';
 import { cloneDeep } from 'lodash-es';
 import Head from 'next/head';
@@ -26,6 +26,7 @@ import { MusingPageProps } from './page-utils/get-musing-props.function';
 import { MusingsPageProps } from './page-utils/get-musings-props.function';
 import UnitTestCheck from './components/unit-test-check/unit-test-check';
 import { RandomOfTheDayPageProps } from './page-utils/get-localized-random-of-the-day-props.function';
+import { Modal } from './services/modal';
 
 export type PageProps =
   | HomePageProps
@@ -51,6 +52,9 @@ export default function Page({
   );
 
   const [loading, setLoading] = useState(needsLoading(font));
+  const [modal, setModal] = useState<JSX.Element | null>(null);
+
+  const modalService = useMemo(() => new Modal(setModal), []);
 
   // Getting saved page defaults from storage
   useEffect(() => {
@@ -172,11 +176,13 @@ export default function Page({
         <div id="main-content" className={styles.pageContent}>
           <Component
             className={styles.pageComponent}
+            modal={modalService}
             {...pageProps}
             {...stateProps}
           />
           {settingsIcon}
           {loadingScreen}
+          {modal}
         </div>
       </div>
     </UnitTestContext.Provider>

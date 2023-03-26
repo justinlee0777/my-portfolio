@@ -40,16 +40,22 @@ import {
   waitFor,
 } from '@testing-library/react';
 
+import { Modal } from '../../../services/modal';
 import RandomPaintingOfTheDay from './random-painting-of-the-day';
 
 describe('<RandomPaintingOfTheDay/>', () => {
   let renderResult: RenderResult;
   let resolveLoadImage;
 
+  let setModal: jest.Mock;
+
   async function renderComponent() {
+    setModal = jest.fn();
+
     renderResult = await waitFor(() =>
       render(
         <RandomPaintingOfTheDay
+          modal={new Modal(setModal)}
           header="Painting of the day"
           credit="Credit goes to the Met"
           openHighResImage="Open high res image"
@@ -155,8 +161,8 @@ describe('<RandomPaintingOfTheDay/>', () => {
 
     fireEvent.click(openHighRes);
 
-    const highResImage = renderResult.queryByText('High res image shown.');
-    expect(highResImage).toBeTruthy();
+    const call = setModal.mock.calls[0];
+    expect(call).toBeTruthy();
   });
 
   test('shows an error message if the high-res image cannot load', async () => {
