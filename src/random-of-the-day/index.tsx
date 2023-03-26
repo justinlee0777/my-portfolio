@@ -22,6 +22,7 @@ import {
   animateSlides,
 } from '../utils/animate-slides.function';
 import { SlideAnimation } from '../config/slide-animation.enum';
+import RandomPaintingOfTheDay from './sections/random-painting-of-the-day/random-painting-of-the-day';
 
 export interface RandomOfTheDayPageProps {
   animation: SlideAnimation;
@@ -44,6 +45,7 @@ export default function RandomOfTheDayPage({
   const [controlsShown, setControlsShown] = useState(true);
   const [poemShown, setPoemShown] = useState(false);
   const [factShown, setFactShown] = useState(false);
+  const [paintingShown, setPaintingShown] = useState(false);
   const [randomOrder, setRandomOrder] = useState<Array<RandomType>>([]);
 
   const [animatedSlides, setAnimatedSlides] = useState<AnimatedSlides>({});
@@ -61,6 +63,9 @@ export default function RandomOfTheDayPage({
     setRandomOrder(sections);
     setPoemShown(sections.some((randomType) => randomType === RandomType.POEM));
     setFactShown(sections.some((randomType) => randomType === RandomType.FACT));
+    setPaintingShown(
+      sections.some((randomType) => randomType === RandomType.PAINTING)
+    );
   }, []);
 
   useEffect(() => {
@@ -209,6 +214,21 @@ export default function RandomOfTheDayPage({
             animated={animatedSlides[elementId] ? 'activated' : 'unactivated'}
             linkedErrorMessage={randomOfTheDayConfig.textContent.errorMessage}
             {...randomOfTheDayConfig.textContent.factOfTheDay}
+            randomOfTheDayApiUrl={randomOfTheDayApiUrl}
+          />
+        );
+        break;
+      case RandomType.PAINTING:
+        elementId = 'random-painting-of-the-day';
+        shown = paintingShown;
+        setShown = setSection(setPaintingShown, RandomType.PAINTING);
+        element = (
+          <RandomPaintingOfTheDay
+            id={elementId}
+            key={RandomType.PAINTING}
+            animated={animatedSlides[elementId] ? 'activated' : 'unactivated'}
+            linkedErrorMessage={randomOfTheDayConfig.textContent.errorMessage}
+            {...randomOfTheDayConfig.textContent.paintingOfTheDay}
             randomOfTheDayApiUrl={randomOfTheDayApiUrl}
           />
         );

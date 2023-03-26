@@ -1,0 +1,38 @@
+.dialog {
+  align-items: center;
+  background: rgba(0, 0, 0, 0.5);
+  border: 0;
+  box-sizing: border-box;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  left: 0;
+  max-height: 100vh;
+  max-width: 100vw;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.highResImage {
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.close {
+  $size: 2em;
+
+  align-items: center;
+  border: none;
+  border-radius: 50%;
+  bottom: 1em;
+  display: inline-flex;
+  font-size: $size;
+  height: $size;
+  justify-content: center;
+  padding: 0;
+  position: absolute;
+  right: 1em;
+  vertical-align: middle;
+  width: $size;
+}

@@ -17,6 +17,10 @@ export const defaultRandomOfTheDayConfig: RandomOfTheDayConfig = {
         text: 'Fact',
         type: RandomType.FACT,
       },
+      {
+        text: 'Painting',
+        type: RandomType.PAINTING,
+      },
     ],
     description: [
       'The Daily Scrum is the most visible face of Scrum.',
@@ -40,6 +44,12 @@ export const defaultRandomOfTheDayConfig: RandomOfTheDayConfig = {
     factOfTheDay: {
       header: 'Fact of the Day',
       credit: 'Fact taken from ${API_URL}',
+    },
+    paintingOfTheDay: {
+      header: 'Painting of the Day',
+      credit: 'From the collection of ${museum}',
+      openHighResImage: 'Open High Resolution Image',
+      highResImageLoadFailed: 'High resolution image could not be loaded.',
     },
   },
 };

@@ -3,6 +3,7 @@ import { Link } from '../config/link.model';
 export enum RandomType {
   POEM = 'poem',
   FACT = 'fact',
+  PAINTING = 'painting',
 }
 
 export interface RandomThing {
@@ -28,9 +29,20 @@ export interface RandomOfTheDayConfig {
     factOfTheDay: {
       header: string;
       /**
-       * This can be a regular string or a string with the token symbol ${API_URL}, to replace with the proper source and link to the proper source. This should pose no trouble for the translation, I believe, as it will treat it as a noun
+       * This can be a regular string or a string with the token symbol ${API_URL}, to replace with the proper source and link to the proper source.
+       * This should pose no trouble for the translation, I believe, as it will treat it as a noun
        */
       credit: string;
+    };
+    paintingOfTheDay: {
+      header: string;
+      /**
+       * This can be a regular string or a string with the token symbol ${API_URL}, to replace with the proper source and link to the proper source.
+       * This should pose no trouble for the translation, I believe, as it will treat it as a noun
+       */
+      credit: string;
+      openHighResImage: string;
+      highResImageLoadFailed: string;
     };
   };
 }

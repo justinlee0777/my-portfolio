@@ -9,6 +9,7 @@ import { getPoem } from '../../random-of-the-day.api';
 import LoadingScreen from '../../../components/loading-screen/loading-screen';
 import ErrorScreen from '../../../components/error-screen/error-screen';
 import { Link } from '../../../config/link.model';
+import UnitTestCheck from '../../../components/unit-test-check/unit-test-check';
 
 interface PoemProps {
   id?: string;
@@ -67,6 +68,7 @@ export default function RandomPoemOfTheDay({
   return (
     <Slide id={id} animated={animated} className={slideStyles.slide}>
       <>
+        <UnitTestCheck componentName="RandomPoemOfTheDay" />
         <h2>{header}</h2>
         {content}
       </>

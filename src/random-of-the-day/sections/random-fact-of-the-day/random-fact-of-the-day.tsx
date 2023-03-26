@@ -10,7 +10,7 @@ import { createLinkElement, Link } from '../../../config/link.model';
 import ErrorScreen from '../../../components/error-screen/error-screen';
 import UnitTestCheck from '../../../components/unit-test-check/unit-test-check';
 
-interface PoemProps {
+interface RandomFactOfTheDayProps {
   id?: string;
   animated?: 'activated' | 'unactivated';
 
@@ -28,7 +28,7 @@ export default function RandomFactOfTheDay({
   credit,
   randomOfTheDayApiUrl,
   linkedErrorMessage,
-}: PoemProps): JSX.Element {
+}: RandomFactOfTheDayProps): JSX.Element {
   const [error, setError] = useState<string | null>(null);
 
   const [fact, setFact] = useState<Fact | null>(null);
