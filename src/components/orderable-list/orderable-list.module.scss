@@ -14,8 +14,12 @@
 }
 
 .arrow {
+  $size: 3em;
+
   border-radius: 2px;
   border-style: solid;
+  height: $size;
+  width: $size;
 
   &:first-of-type {
     margin-left: auto;
@@ -23,5 +27,10 @@
 
   &:nth-of-type(n + 2) {
     margin-left: 8px;
+  }
+
+  &Hidden {
+    opacity: 0;
+    pointer-events: none;
   }
 }

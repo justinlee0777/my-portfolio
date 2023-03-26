@@ -24,7 +24,6 @@ export default function OrderableList({
   onReorder,
 }: OrderableListProps): JSX.Element {
   const orderableListClassName = classNames(styles.orderableList, className);
-  const upArrowClassName = classNames(styles.arrowUp, styles.arrow);
 
   const lastIndex = listElements.length - 1;
 
@@ -37,24 +36,24 @@ export default function OrderableList({
           return (
             <li className={styles.listItem} key={listElement.value}>
               {listElement.element}
-              {i !== 0 && (
-                <button
-                  className={upArrowClassName}
-                  aria-label={`Move "${listElement.value}" section up`}
-                  onClick={swapFn(i, i - 1)}
-                >
-                  {String.fromCharCode(8593)}
-                </button>
-              )}
-              {i !== lastIndex && (
-                <button
-                  className={styles.arrow}
-                  aria-label={`Move "${listElement.value}" section down`}
-                  onClick={swapFn(i, i + 1)}
-                >
-                  {String.fromCharCode(8595)}
-                </button>
-              )}
+              <button
+                className={classNames(styles.arrow, {
+                  [styles.arrowHidden]: i === 0,
+                })}
+                aria-label={`Move "${listElement.value}" section up`}
+                onClick={swapFn(i, i - 1)}
+              >
+                {String.fromCharCode(8593)}
+              </button>
+              <button
+                className={classNames(styles.arrow, {
+                  [styles.arrowHidden]: i === lastIndex,
+                })}
+                aria-label={`Move "${listElement.value}" section down`}
+                onClick={swapFn(i, i + 1)}
+              >
+                {String.fromCharCode(8595)}
+              </button>
             </li>
           );
         })}
