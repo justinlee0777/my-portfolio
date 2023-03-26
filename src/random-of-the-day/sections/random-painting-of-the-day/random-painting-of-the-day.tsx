@@ -68,7 +68,10 @@ export default function RandomPaintingOfTheDay({
   } else {
     let creditTemplateString: string;
 
-    const allowList = ['https://metmuseum.github.io'];
+    const allowList = [
+      'https://metmuseum.github.io',
+      'https://api.artic.edu/docs',
+    ];
 
     if (allowList.some((allowedUrl) => allowedUrl === painting.creditRef)) {
       const creditString = credit.replace(
