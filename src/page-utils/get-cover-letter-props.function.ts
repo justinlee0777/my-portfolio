@@ -1,5 +1,6 @@
 import { CoverLetterConfig } from '../cover-letter-page/cover-letter.config';
 import { defaultCoverLetterConfig } from '../cover-letter-page/default-cover-letter.config';
+import { coverLetterPageConfig } from '../cover-letter-page/default-page.config';
 import { getCoverLetterOpening } from '../cover-letter-page/get-cover-letter-opening.function';
 import {
   BasePageProps,
@@ -18,8 +19,9 @@ export async function getStaticProps(): Promise<{
 
   const coverLetterOpening = await getCoverLetterOpening();
 
-  const coverLetterProps = {
+  const coverLetterProps: CoverLetterPageProps = {
     ...baseProps,
+    pageConfig: coverLetterPageConfig,
     hideHeader: true,
 
     config: defaultCoverLetterConfig,
