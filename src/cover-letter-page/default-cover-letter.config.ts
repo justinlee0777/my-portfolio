@@ -5,11 +5,7 @@ export const defaultCoverLetterConfig: CoverLetterConfig = {
     secondSectionOpening: "Now, to show that I've done my research:",
     ending: [
       'Thank you for reading my application to the end, and I hope to hear from you soon.',
-      {
-        templateString:
-          'And if you have any suggestions for the site or bugs to report, please drop me a line at ${leej40@outlook.com}.',
-        urls: ['mailto:leej40@outlook.com'],
-      },
+      'And if you have any suggestions for the site or bugs to report, please drop me a line at leej40@outlook.com.',
     ],
   },
 };

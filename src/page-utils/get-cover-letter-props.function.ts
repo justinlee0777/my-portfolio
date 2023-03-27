@@ -18,13 +18,17 @@ export async function getStaticProps(): Promise<{
 
   const coverLetterOpening = await getCoverLetterOpening();
 
-  return {
-    props: {
-      ...baseProps,
-      hideHeader: true,
+  const coverLetterProps = {
+    ...baseProps,
+    hideHeader: true,
 
-      config: defaultCoverLetterConfig,
-      opening: coverLetterOpening,
-    },
+    config: defaultCoverLetterConfig,
+    opening: coverLetterOpening,
+  };
+
+  delete coverLetterProps.openSettingsConfig;
+
+  return {
+    props: coverLetterProps,
   };
 }

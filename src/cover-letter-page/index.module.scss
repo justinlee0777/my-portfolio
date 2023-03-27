@@ -4,6 +4,17 @@
   padding: 8px 18px;
   justify-content: flex-start;
   text-indent: 2em;
+
+  p {
+    line-break: anywhere;
+    white-space: pre-wrap;
+    word-break: break-all;
+
+    &[animation-finished] {
+      line-break: normal;
+      word-break: normal;
+    }
+  }
 }
 
 .upscaleWalkthrough {

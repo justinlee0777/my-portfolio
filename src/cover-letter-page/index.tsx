@@ -1,30 +1,25 @@
 import styles from './index.module.scss';
 
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 import { CoverLetterPageProps } from '../page-utils/get-cover-letter-props.function';
 import Slide from '../components/slide/slide';
-import { createLinkElement } from '../config/link.model';
+import { animateCoverLetter } from './animate-cover-letter.function';
 
 export default function CoverLetterPage({
   config,
   opening,
 }: CoverLetterPageProps): JSX.Element {
-  const endings = config.textContent.ending.map((line, i) => {
-    if (typeof line === 'object') {
-      return (
-        <p
-          dangerouslySetInnerHTML={{ __html: createLinkElement(line) }}
-          key={i}
-        ></p>
-      );
-    } else {
-      return <p key={i}>{line}</p>;
-    }
-  });
+  const slideRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const [, ...nonIntroParagraphs] = slideRef.current.querySelectorAll('p');
+
+    animateCoverLetter(nonIntroParagraphs);
+  }, []);
 
   return (
-    <Slide className={styles.coverLetter}>
+    <Slide className={styles.coverLetter} slideRef={slideRef}>
       <>
         <div dangerouslySetInnerHTML={{ __html: opening }} />
         <video
@@ -34,7 +29,9 @@ export default function CoverLetterPage({
           playsInline
         ></video>
         <p>{config.textContent.secondSectionOpening}</p>
-        {endings}
+        {config.textContent.ending.map((content, i) => (
+          <p key={i}>{content}</p>
+        ))}
       </>
     </Slide>
   );
