@@ -6,7 +6,7 @@
   flex-direction: row;
 
   &Links {
-    display: inline-flex;
+    display: flex;
     flex-direction: row;
     list-style: none;
     margin: 0;
@@ -15,7 +15,8 @@
     padding: 0;
 
     &Container {
-      flex: 1;
+      margin-left: auto;
+      min-width: 0;
       overflow-x: hidden;
       position: relative;
       text-align: right;
