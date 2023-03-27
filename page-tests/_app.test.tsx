@@ -63,6 +63,9 @@ jest.mock('../src/config/load-font.function', () => {
   };
 });
 
+import Page from '../src/page';
+jest.mock('next/dynamic', () => () => Page);
+
 import {
   act,
   cleanup,
@@ -123,12 +126,12 @@ describe('<App/>', () => {
     pageDefaults = undefined;
   });
 
-  function testChangingSettings(
+  async function testChangingSettings(
     page: string,
-    render: () => RenderResult
-  ): void {
+    render: () => Promise<RenderResult>
+  ): Promise<void> {
     test(`changes settings for ${page}`, async () => {
-      const renderResult = render();
+      const renderResult = await act(render);
 
       let containerElement = renderResult.queryByTestId('page-container');
 
@@ -172,7 +175,7 @@ describe('<App/>', () => {
 
       pageDefaults = config;
 
-      const renderResult = render();
+      const renderResult = await act(render);
 
       const containerElement = renderResult.queryByTestId('page-container');
 
@@ -198,7 +201,7 @@ describe('<App/>', () => {
   });
 
   describe('Homepage', () => {
-    function renderHomepage(): RenderResult {
+    async function renderHomepage(): Promise<RenderResult> {
       return render(
         <App
           Component={mockComponent}
@@ -215,8 +218,8 @@ describe('<App/>', () => {
       );
     }
 
-    test('renders the homepage', () => {
-      const renderResult = renderHomepage();
+    test('renders the homepage', async () => {
+      const renderResult = await act(renderHomepage);
 
       const component = renderResult.queryByText('Component here');
       expect(component).toBeTruthy();
@@ -232,7 +235,7 @@ describe('<App/>', () => {
   });
 
   describe('BuzzwordBingoPage', () => {
-    function renderBuzzwordBingo(): RenderResult {
+    async function renderBuzzwordBingo(): Promise<RenderResult> {
       return render(
         <App
           Component={mockComponent}
@@ -248,8 +251,8 @@ describe('<App/>', () => {
       );
     }
 
-    test('renders the buzzword bingo page', () => {
-      const renderResult = renderBuzzwordBingo();
+    test('renders the buzzword bingo page', async () => {
+      const renderResult = await act(renderBuzzwordBingo);
 
       const component = renderResult.queryByText('Component here');
       expect(component).toBeTruthy();
@@ -265,7 +268,7 @@ describe('<App/>', () => {
   });
 
   describe('RpgGamePage', () => {
-    function renderRpgGamePage(): RenderResult {
+    async function renderRpgGamePage(): Promise<RenderResult> {
       return render(
         <App
           Component={mockComponent}
@@ -281,8 +284,8 @@ describe('<App/>', () => {
       );
     }
 
-    test('renders the rpg page', () => {
-      const renderResult = renderRpgGamePage();
+    test('renders the rpg page', async () => {
+      const renderResult = await act(renderRpgGamePage);
 
       const component = renderResult.queryByText('Component here');
       expect(component).toBeTruthy();

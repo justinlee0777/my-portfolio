@@ -43,7 +43,10 @@ export default function Page({
   Component;
   pageProps: PageProps;
 }): JSX.Element {
-  const config = pageProps.pageConfig;
+  const config = useMemo(() => {
+    return getPageDefaults() || pageProps.pageConfig;
+  }, []);
+
   const [font, setFont] = useState(config.defaults.font);
   const [theme, setTheme] = useState(config.defaults.theme);
   const [animation, setAnimation] = useState(config.defaults.animation);
@@ -55,20 +58,6 @@ export default function Page({
   const [modal, setModal] = useState<JSX.Element | null>(null);
 
   const modalService = useMemo(() => new Modal(setModal), []);
-
-  // Getting saved page defaults from storage
-  useEffect(() => {
-    const savedPageConfig = getPageDefaults();
-
-    if (savedPageConfig) {
-      setFont(savedPageConfig.defaults.font);
-      setLoading(needsLoading(savedPageConfig.defaults.font));
-
-      setTheme(savedPageConfig.defaults.theme);
-      setAnimation(savedPageConfig.defaults.animation);
-      setDeveloperMode(savedPageConfig.defaults.developerMode);
-    }
-  }, []);
 
   // Saving page defaults into session storage
   useEffect(() => {

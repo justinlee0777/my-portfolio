@@ -1,3 +1,3 @@
 export function getStorage(): Storage {
-  return localStorage;
+  return window.localStorage;
 }

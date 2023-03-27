@@ -1,7 +1,7 @@
 import styles from './index.module.scss';
 
 import Head from 'next/head';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import classNames from 'classnames';
 
 import {
@@ -47,31 +47,38 @@ export default function RandomOfTheDayPage({
   randomOfTheDayConfig,
   randomOfTheDayApiUrl,
 }: RandomOfTheDayPageProps): JSX.Element {
-  const [controlsShown, setControlsShown] = useState(true);
-  const [poemShown, setPoemShown] = useState(false);
-  const [factShown, setFactShown] = useState(false);
-  const [paintingShown, setPaintingShown] = useState(false);
-  const [randomOrder, setRandomOrder] = useState<Array<RandomType>>([]);
-
-  const [animatedSlides, setAnimatedSlides] = useState<AnimatedSlides>({});
-
-  useEffect(() => {
+  const defaultConfig = useMemo(() => {
     const config = getRandomOfTheDayConfig();
 
-    if (!config) {
-      return;
-    }
-
-    const { showControls, sections } = config;
-
-    setControlsShown(showControls);
-    setRandomOrder(sections);
-    setPoemShown(sections.some((randomType) => randomType === RandomType.POEM));
-    setFactShown(sections.some((randomType) => randomType === RandomType.FACT));
-    setPaintingShown(
-      sections.some((randomType) => randomType === RandomType.PAINTING)
-    );
+    return {
+      controlsShown: config?.showControls ?? true,
+      sections: config?.sections ?? [],
+      poemShown:
+        config?.sections.some((randomType) => randomType === RandomType.POEM) ??
+        false,
+      factShown:
+        config?.sections.some((randomType) => randomType === RandomType.FACT) ??
+        false,
+      paintingShown:
+        config?.sections.some(
+          (randomType) => randomType === RandomType.PAINTING
+        ) ?? false,
+    };
   }, []);
+
+  const [controlsShown, setControlsShown] = useState(
+    defaultConfig.controlsShown
+  );
+  const [poemShown, setPoemShown] = useState(defaultConfig.poemShown);
+  const [factShown, setFactShown] = useState(defaultConfig.factShown);
+  const [paintingShown, setPaintingShown] = useState(
+    defaultConfig.paintingShown
+  );
+  const [randomOrder, setRandomOrder] = useState<Array<RandomType>>(
+    defaultConfig.sections
+  );
+
+  const [animatedSlides, setAnimatedSlides] = useState<AnimatedSlides>({});
 
   useEffect(() => {
     setRandomOfTheDayConfig({
