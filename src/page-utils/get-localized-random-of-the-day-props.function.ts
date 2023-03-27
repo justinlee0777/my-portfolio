@@ -11,7 +11,6 @@ import {
 
 export interface RandomOfTheDayPageProps extends BasePageProps {
   randomOfTheDayConfig: RandomOfTheDayConfig;
-  randomOfTheDayApiUrl: string;
 }
 
 export function getLocalizedStaticProps(
@@ -38,7 +37,6 @@ export function getLocalizedStaticProps(
       props: {
         ...baseProps,
         randomOfTheDayConfig: translatedConfig,
-        randomOfTheDayApiUrl: 'https://api.iamjustinlee.com',
       },
     };
   };

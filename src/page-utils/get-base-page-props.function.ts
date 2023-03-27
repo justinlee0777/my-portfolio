@@ -12,6 +12,7 @@ export interface BasePageProps {
   route: string;
   pageConfig: PageConfig;
   unitTestResult: UnitTestResults;
+  apiUrl: string;
 
   hideHeader?: boolean;
   openSettingsConfig?: OpenSettingsConfig;
@@ -27,6 +28,7 @@ export async function getBasePageProps(
     route,
     pageConfig,
     unitTestResult: loadUnitTestResult(),
+    apiUrl: 'https://api.iamjustinlee.com',
   };
 
   if (showSettings) {

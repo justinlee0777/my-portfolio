@@ -30,7 +30,7 @@ export interface RandomOfTheDayPageProps {
 
   animation: SlideAnimation;
   randomOfTheDayConfig: RandomOfTheDayConfig;
-  randomOfTheDayApiUrl: string;
+  apiUrl: string;
 }
 
 interface RandomThingSetting extends RandomThing {
@@ -45,7 +45,7 @@ export default function RandomOfTheDayPage({
 
   animation,
   randomOfTheDayConfig,
-  randomOfTheDayApiUrl,
+  apiUrl,
 }: RandomOfTheDayPageProps): JSX.Element {
   const defaultConfig = useMemo(() => {
     const config = getRandomOfTheDayConfig();
@@ -211,7 +211,7 @@ export default function RandomOfTheDayPage({
             animated={animatedSlides[elementId] ? 'activated' : 'unactivated'}
             header={randomOfTheDayConfig.textContent.poemOfTheDay.header}
             linkedErrorMessage={randomOfTheDayConfig.textContent.errorMessage}
-            randomOfTheDayApiUrl={randomOfTheDayApiUrl}
+            randomOfTheDayApiUrl={apiUrl}
           />
         );
         break;
@@ -226,7 +226,7 @@ export default function RandomOfTheDayPage({
             animated={animatedSlides[elementId] ? 'activated' : 'unactivated'}
             linkedErrorMessage={randomOfTheDayConfig.textContent.errorMessage}
             {...randomOfTheDayConfig.textContent.factOfTheDay}
-            randomOfTheDayApiUrl={randomOfTheDayApiUrl}
+            randomOfTheDayApiUrl={apiUrl}
           />
         );
         break;
@@ -242,7 +242,7 @@ export default function RandomOfTheDayPage({
             animated={animatedSlides[elementId] ? 'activated' : 'unactivated'}
             linkedErrorMessage={randomOfTheDayConfig.textContent.errorMessage}
             {...randomOfTheDayConfig.textContent.paintingOfTheDay}
-            randomOfTheDayApiUrl={randomOfTheDayApiUrl}
+            randomOfTheDayApiUrl={apiUrl}
           />
         );
         break;
