@@ -6,7 +6,7 @@ import html from 'remark-html';
 
 import { MusingConfig } from './components/musing/musing.config';
 
-const fileDirectory = join(process.cwd(), 'src/musing-files');
+const fileDirectory = join(process.cwd(), 'src/musings/musing-files');
 
 export namespace MusingFiles {
   let musingConfigs: Array<MusingConfig>;
