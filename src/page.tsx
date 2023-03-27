@@ -140,28 +140,30 @@ export default function Page({
       </Head>
       <div className={pageClassnames} data-testid="page-container">
         <UnitTestCheck componentName="App" style={{ zIndex: 5 }} />
-        <Navigation
-          className={styles.pageNavigation}
-          locale={pageProps.locale}
-          links={[
-            {
-              displayName: 'Random of the Day',
-              url: `/${pageProps.locale}/random-of-the-day`,
-            },
-            {
-              displayName: 'Musings',
-              url: '/musings',
-            },
-            {
-              displayName: 'Buzzword Bingo',
-              url: `/${pageProps.locale}/buzzword-bingo`,
-            },
-            {
-              displayName: 'RPG',
-              url: `/${pageProps.locale}/rpg-game`,
-            },
-          ]}
-        />
+        {!pageProps.hideHeader && (
+          <Navigation
+            className={styles.pageNavigation}
+            locale={pageProps.locale}
+            links={[
+              {
+                displayName: 'Random of the Day',
+                url: `/${pageProps.locale}/random-of-the-day`,
+              },
+              {
+                displayName: 'Musings',
+                url: '/musings',
+              },
+              {
+                displayName: 'Buzzword Bingo',
+                url: `/${pageProps.locale}/buzzword-bingo`,
+              },
+              {
+                displayName: 'RPG',
+                url: `/${pageProps.locale}/rpg-game`,
+              },
+            ]}
+          />
+        )}
         <div id="main-content" className={styles.pageContent}>
           <Component
             className={styles.pageComponent}

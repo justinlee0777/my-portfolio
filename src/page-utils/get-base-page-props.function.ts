@@ -13,6 +13,7 @@ export interface BasePageProps {
   pageConfig: PageConfig;
   unitTestResult: UnitTestResults;
 
+  hideHeader?: boolean;
   openSettingsConfig?: OpenSettingsConfig;
 }
 
