@@ -1,13 +1,12 @@
 import styles from './index.module.scss';
 
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 
 import { CoverLetterPageProps } from '../page-utils/get-cover-letter-props.function';
 import Slide from '../components/slide/slide';
-import { animateCoverLetter } from './animate-cover-letter.function';
-import { getCompanySpecificCoverLetter } from './cover-letter.api';
-import { useApi } from '../utils/hooks/use-api.hook';
 import LoadingScreen from '../components/loading-screen/loading-screen';
+import { useCompanySpecificResponse } from './use-company-specific-response.hook';
+import { useCoverLetterAnimation } from './use-cover-letter-animation.hook';
 
 export default function CoverLetterPage({
   apiUrl,
@@ -16,15 +15,30 @@ export default function CoverLetterPage({
 }: CoverLetterPageProps): JSX.Element {
   const slideRef = useRef<HTMLElement>(null);
 
-  const [companySpecificCover, error] = useApi(() =>
-    getCompanySpecificCoverLetter(apiUrl)
-  );
+  const [companySpecificCover, error, waitForCompanySpecificResponse] =
+    useCompanySpecificResponse(apiUrl);
 
-  useEffect(() => {
-    const [, ...nonIntroParagraphs] = slideRef.current.querySelectorAll('p');
+  const genericOpeningId = 'generic-opening';
+  const upscaleWalkthroughId = 'upscale-walkthrough';
+  const secondSectionOpeningId = 'second-section-opening';
+  const companySpecificId = 'company-specific';
+  const endingId = 'ending';
 
-    animateCoverLetter(nonIntroParagraphs);
-  }, []);
+  useCoverLetterAnimation(slideRef.current, [
+    () => [...document.getElementById(genericOpeningId).querySelectorAll('p')],
+    () => [document.getElementById(upscaleWalkthroughId)],
+    () => [document.getElementById(secondSectionOpeningId)],
+    waitForCompanySpecificResponse.then(([success]) => {
+      if (success) {
+        return () => [
+          ...document.getElementById(companySpecificId).querySelectorAll('p'),
+        ];
+      } else {
+        return () => [];
+      }
+    }),
+    () => [...document.getElementById(endingId).querySelectorAll('p')],
+  ]);
 
   let companySpecificContent: JSX.Element;
 
@@ -35,28 +49,41 @@ export default function CoverLetterPage({
       </p>
     );
   } else if (!companySpecificCover) {
-    companySpecificContent = <LoadingScreen />;
+    companySpecificContent = <LoadingScreen className={styles.loadingScreen} />;
   } else {
     companySpecificContent = (
-      <div dangerouslySetInnerHTML={{ __html: companySpecificCover }} />
+      <div
+        id={companySpecificId}
+        className={styles.companySpecificSection}
+        dangerouslySetInnerHTML={{ __html: companySpecificCover }}
+      />
     );
   }
 
   return (
     <Slide className={styles.coverLetter} slideRef={slideRef}>
       <>
-        <div dangerouslySetInnerHTML={{ __html: opening }} />
-        <video
-          className={styles.upscaleWalkthrough}
-          src="https://53-state-street.s3.amazonaws.com/SAP+Upscale+Commerce.mp4"
-          controls
-          playsInline
-        ></video>
-        <p>{config.textContent.secondSectionOpening}</p>
+        <div
+          id={genericOpeningId}
+          dangerouslySetInnerHTML={{ __html: opening }}
+        />
+        <div className={styles.videoContainer} id={upscaleWalkthroughId}>
+          <video
+            className={styles.upscaleWalkthrough}
+            src="https://53-state-street.s3.amazonaws.com/SAP+Upscale+Commerce.mp4"
+            controls
+            playsInline
+          ></video>
+        </div>
+        <p id={secondSectionOpeningId}>
+          {config.textContent.secondSectionOpening}
+        </p>
         {companySpecificContent}
-        {config.textContent.ending.map((content, i) => (
-          <p key={i}>{content}</p>
-        ))}
+        <div id={endingId}>
+          {config.textContent.ending.map((content, i) => (
+            <p key={i}>{content}</p>
+          ))}
+        </div>
       </>
     </Slide>
   );

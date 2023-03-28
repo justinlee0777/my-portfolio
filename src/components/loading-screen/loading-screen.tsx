@@ -5,7 +5,11 @@ import classNames from 'classnames';
 
 import UnitTestCheck from '../unit-test-check/unit-test-check';
 
-export default function LoadingScreen() {
+export interface LoadingScreenProps {
+  className?: string;
+}
+
+export default function LoadingScreen({ className }: LoadingScreenProps) {
   const [loadingTickIndex, setLoadingTickIndex] = useState(0);
   const maxTicks = 3;
 
@@ -32,10 +36,10 @@ export default function LoadingScreen() {
   }, [loadingTickIndex]);
 
   return (
-    <>
+    <div className={className}>
       <UnitTestCheck componentName="LoadingScreen" />
       <p>We&apos;re preparing your changes...</p>
       <div className={styles.loadingIcon}>{loadingTicks}</div>
-    </>
+    </div>
   );
 }

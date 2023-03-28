@@ -10,16 +10,38 @@
     white-space: pre-wrap;
     word-break: break-all;
 
-    &[animation-finished] {
+    &[data-activated] {
       line-break: normal;
       word-break: normal;
     }
   }
+
+  p,
+  .videoContainer {
+    &:not([data-activated]) {
+      opacity: 0;
+    }
+  }
+}
+
+.videoContainer {
+  margin: 2em 0;
+  overflow: hidden;
+  transform-origin: top left;
 }
 
 .upscaleWalkthrough {
-  margin: 2em auto;
   max-width: 83%;
+}
+
+@media (min-width: 1200px) {
+  .upscaleWalkthrough {
+    max-width: 66%;
+  }
+}
+
+.loadingScreen {
+  margin: 0 auto;
 }
 
 .errorMessage {
