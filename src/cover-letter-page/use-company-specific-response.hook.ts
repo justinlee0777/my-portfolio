@@ -4,10 +4,11 @@ import { useApi } from '../utils/hooks/use-api.hook';
 import { getCompanySpecificCoverLetter } from './cover-letter.api';
 
 export function useCompanySpecificResponse(
-  apiUrl: string
+  apiUrl: string,
+  companyId?: string
 ): [string, string, Promise<[string, string]>] {
   const [companySpecificCover, error] = useApi(() =>
-    getCompanySpecificCoverLetter(apiUrl)
+    getCompanySpecificCoverLetter(apiUrl, companyId)
   );
 
   let fn: (value: [string, string]) => void;

@@ -1,6 +1,6 @@
 import styles from './index.module.scss';
 
-import { useRef } from 'react';
+import { useMemo, useRef } from 'react';
 
 import { CoverLetterPageProps } from '../page-utils/get-cover-letter-props.function';
 import Slide from '../components/slide/slide';
@@ -13,10 +13,15 @@ export default function CoverLetterPage({
   config,
   opening,
 }: CoverLetterPageProps): JSX.Element {
+  const companyId = useMemo(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('company') ?? undefined;
+  }, []);
+
   const slideRef = useRef<HTMLElement>(null);
 
   const [companySpecificCover, error, waitForCompanySpecificResponse] =
-    useCompanySpecificResponse(apiUrl);
+    useCompanySpecificResponse(apiUrl, companyId);
 
   const genericOpeningId = 'generic-opening';
   const upscaleWalkthroughId = 'upscale-walkthrough';

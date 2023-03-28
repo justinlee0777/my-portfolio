@@ -60,6 +60,6 @@ async function animateParagraph(element: HTMLElement): Promise<void> {
 
 async function animateBlock(element: HTMLElement): Promise<void> {
   return element
-    .animate([{ transform: 'scale(0)' }, { transform: 'scale(1)' }], 1000)
+    .animate([{ transform: 'scaleX(0)' }, { transform: 'scaleX(1)' }], 1000)
     .finished.then();
 }
