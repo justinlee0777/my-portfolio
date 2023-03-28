@@ -6,13 +6,14 @@ import { useEffect, useState } from 'react';
 import Slide from '../../../components/slide/slide';
 import { createLinkElement, Link } from '../../../config/link.model';
 import { Painting } from '../../painting.interface';
-import { getPainting } from '../../random-of-the-day.api';
 import LoadingScreen from '../../../components/loading-screen/loading-screen';
 import ErrorScreen from '../../../components/error-screen/error-screen';
 import { loadImage } from '../../../utils/load-image.function';
 import HighResImageDialog from './high-res-image-dialog/high-res-image-dialog';
 import UnitTestCheck from '../../../components/unit-test-check/unit-test-check';
 import { Modal } from '../../../services/modal';
+import { useApi } from '../../../utils/hooks/use-api.hook';
+import { getPainting } from '../../random-of-the-day.api';
 
 interface RandomPaintingOfTheDayProps {
   id?: string;
@@ -25,7 +26,6 @@ interface RandomPaintingOfTheDayProps {
   openHighResImage: string;
   highResImageLoadFailed: string;
   randomOfTheDayApiUrl: string;
-  linkedErrorMessage: Link;
 }
 
 export default function RandomPaintingOfTheDay({
@@ -39,20 +39,13 @@ export default function RandomPaintingOfTheDay({
   openHighResImage,
   highResImageLoadFailed,
   randomOfTheDayApiUrl,
-  linkedErrorMessage,
 }: RandomPaintingOfTheDayProps): JSX.Element {
   const [highResImageLoaded, setHighResImageLoaded] = useState<boolean>(false);
   const [highResImageFailed, setHighResImageFailed] = useState<boolean>(false);
 
-  const [error, setError] = useState<string | null>(null);
-
-  const [painting, setPainting] = useState<Painting | null>(null);
-
-  useEffect(() => {
+  const [painting, error] = useApi<Painting>(() =>
     getPainting(randomOfTheDayApiUrl)
-      .then((poem) => setPainting(poem))
-      .catch((error) => setError(error.message));
-  }, [randomOfTheDayApiUrl]);
+  );
 
   useEffect(() => {
     if (painting) {
@@ -65,9 +58,7 @@ export default function RandomPaintingOfTheDay({
   let content: JSX.Element;
 
   if (error) {
-    content = (
-      <ErrorScreen linkedMessage={linkedErrorMessage} errorMessages={[error]} />
-    );
+    content = <ErrorScreen errorMessages={[error]} />;
   } else if (!painting) {
     content = <LoadingScreen />;
   } else {

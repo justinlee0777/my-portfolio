@@ -1,15 +1,14 @@
 import slideStyles from '../slide.module.scss';
 import styles from './random-poem-of-the-day.module.scss';
 
-import { useEffect, useState } from 'react';
-
 import Slide from '../../../components/slide/slide';
 import { Poem } from '../../poem.interface';
-import { getPoem } from '../../random-of-the-day.api';
 import LoadingScreen from '../../../components/loading-screen/loading-screen';
 import ErrorScreen from '../../../components/error-screen/error-screen';
 import { Link } from '../../../config/link.model';
 import UnitTestCheck from '../../../components/unit-test-check/unit-test-check';
+import { useApi } from '../../../utils/hooks/use-api.hook';
+import { getPoem } from '../../random-of-the-day.api';
 
 interface PoemProps {
   id?: string;
@@ -17,7 +16,6 @@ interface PoemProps {
 
   header: string;
   randomOfTheDayApiUrl: string;
-  linkedErrorMessage: Link;
 }
 
 export default function RandomPoemOfTheDay({
@@ -25,28 +23,13 @@ export default function RandomPoemOfTheDay({
   animated,
   header,
   randomOfTheDayApiUrl,
-  linkedErrorMessage,
 }: PoemProps): JSX.Element {
-  const [error, setError] = useState<string | null>(null);
-
-  const [poem, setPoem] = useState<Poem | null>(null);
-
-  useEffect(() => {
-    getPoem(randomOfTheDayApiUrl)
-      .then((poem) => {
-        setPoem(poem);
-      })
-      .catch((error) => {
-        setError(error.message);
-      });
-  }, [randomOfTheDayApiUrl]);
+  const [poem, error] = useApi<Poem>(() => getPoem(randomOfTheDayApiUrl));
 
   let content: JSX.Element;
 
   if (error) {
-    content = (
-      <ErrorScreen linkedMessage={linkedErrorMessage} errorMessages={[error]} />
-    );
+    content = <ErrorScreen errorMessages={[error]} />;
   } else if (!poem) {
     content = <LoadingScreen />;
   } else {

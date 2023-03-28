@@ -22,7 +22,6 @@ export interface RandomOfTheDayConfig {
     hideControls: string;
     showControls: string;
     randoms: Array<RandomThing>;
-    errorMessage: Link;
     poemOfTheDay: {
       header: string;
     };

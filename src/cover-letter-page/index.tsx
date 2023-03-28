@@ -1,11 +1,13 @@
 import styles from './index.module.scss';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 import { CoverLetterPageProps } from '../page-utils/get-cover-letter-props.function';
 import Slide from '../components/slide/slide';
 import { animateCoverLetter } from './animate-cover-letter.function';
 import { getCompanySpecificCoverLetter } from './cover-letter.api';
+import { useApi } from '../utils/hooks/use-api.hook';
+import LoadingScreen from '../components/loading-screen/loading-screen';
 
 export default function CoverLetterPage({
   apiUrl,
@@ -14,9 +16,9 @@ export default function CoverLetterPage({
 }: CoverLetterPageProps): JSX.Element {
   const slideRef = useRef<HTMLElement>(null);
 
-  const [companySpecificCover, setCompanySpecificCover] = useState<
-    string | null
-  >(null);
+  const [companySpecificCover, error] = useApi(() =>
+    getCompanySpecificCoverLetter(apiUrl)
+  );
 
   useEffect(() => {
     const [, ...nonIntroParagraphs] = slideRef.current.querySelectorAll('p');
@@ -24,11 +26,21 @@ export default function CoverLetterPage({
     animateCoverLetter(nonIntroParagraphs);
   }, []);
 
-  useEffect(() => {
-    getCompanySpecificCoverLetter(apiUrl).then((htmlString) =>
-      setCompanySpecificCover(htmlString)
+  let companySpecificContent: JSX.Element;
+
+  if (error) {
+    companySpecificContent = (
+      <p className={styles.errorMessage}>
+        {config.textContent.companySpecificCoverErrorMessage}
+      </p>
     );
-  }, []);
+  } else if (!companySpecificCover) {
+    companySpecificContent = <LoadingScreen />;
+  } else {
+    companySpecificContent = (
+      <div dangerouslySetInnerHTML={{ __html: companySpecificCover }} />
+    );
+  }
 
   return (
     <Slide className={styles.coverLetter} slideRef={slideRef}>
@@ -41,7 +53,7 @@ export default function CoverLetterPage({
           playsInline
         ></video>
         <p>{config.textContent.secondSectionOpening}</p>
-        <div dangerouslySetInnerHTML={{ __html: companySpecificCover }} />
+        {companySpecificContent}
         {config.textContent.ending.map((content, i) => (
           <p key={i}>{content}</p>
         ))}

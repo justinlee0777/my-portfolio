@@ -1,7 +1,5 @@
 import slideStyles from '../slide.module.scss';
 
-import { useEffect, useState } from 'react';
-
 import Slide from '../../../components/slide/slide';
 import LoadingScreen from '../../../components/loading-screen/loading-screen';
 import { Fact } from '../../fact.interface';
@@ -9,6 +7,7 @@ import { getFact } from '../../random-of-the-day.api';
 import { createLinkElement, Link } from '../../../config/link.model';
 import ErrorScreen from '../../../components/error-screen/error-screen';
 import UnitTestCheck from '../../../components/unit-test-check/unit-test-check';
+import { useApi } from '../../../utils/hooks/use-api.hook';
 
 interface RandomFactOfTheDayProps {
   id?: string;
@@ -17,7 +16,6 @@ interface RandomFactOfTheDayProps {
   header: string;
   credit: string;
   randomOfTheDayApiUrl: string;
-  linkedErrorMessage: Link;
 }
 
 export default function RandomFactOfTheDay({
@@ -27,28 +25,13 @@ export default function RandomFactOfTheDay({
   header,
   credit,
   randomOfTheDayApiUrl,
-  linkedErrorMessage,
 }: RandomFactOfTheDayProps): JSX.Element {
-  const [error, setError] = useState<string | null>(null);
-
-  const [fact, setFact] = useState<Fact | null>(null);
-
-  useEffect(() => {
-    getFact(randomOfTheDayApiUrl)
-      .then((fact) => {
-        setFact(fact);
-      })
-      .catch((error) => {
-        setError(error.message);
-      });
-  }, [randomOfTheDayApiUrl]);
+  const [fact, error] = useApi<Fact>(() => getFact(randomOfTheDayApiUrl));
 
   let content: JSX.Element;
 
   if (error) {
-    content = (
-      <ErrorScreen linkedMessage={linkedErrorMessage} errorMessages={[error]} />
-    );
+    content = <ErrorScreen errorMessages={[error]} />;
   } else if (!fact) {
     content = <LoadingScreen />;
   } else {
