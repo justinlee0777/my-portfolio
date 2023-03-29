@@ -213,6 +213,7 @@ describe('<App/>', () => {
             generatedProfilePictureUrl: '',
             profilePicturePrompt: '',
             unitTestResult,
+            apiUrl: 'http://api.example.com',
           }}
         />
       );
@@ -246,6 +247,7 @@ describe('<App/>', () => {
             buzzwordBingoConfig: {} as any,
             unitTestResult,
             openSettingsConfig: {} as any,
+            apiUrl: 'http://api.example.com',
           }}
         />
       );
@@ -279,6 +281,7 @@ describe('<App/>', () => {
             rpgGameConfig: {} as RpgGamePageConfig,
             openSettingsConfig: {} as any,
             unitTestResult,
+            apiUrl: 'http://api.example.com',
           }}
         />
       );

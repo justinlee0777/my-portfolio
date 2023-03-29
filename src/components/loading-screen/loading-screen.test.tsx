@@ -22,7 +22,7 @@ describe('<LoadingScreen/>', () => {
     expect(message).toBeTruthy();
 
     const ticks = [
-      ...renderResult.container.childNodes[1].childNodes,
+      ...renderResult.container.querySelector('.loadingIcon').childNodes,
     ] as Array<HTMLElement>;
 
     expect(ticks[0].className).toEqual('loadingTick animated');
@@ -34,7 +34,7 @@ describe('<LoadingScreen/>', () => {
     act(() => jest.advanceTimersByTime(333));
 
     const ticks = [
-      ...renderResult.container.childNodes[1].childNodes,
+      ...renderResult.container.querySelector('.loadingIcon').childNodes,
     ] as Array<HTMLElement>;
 
     expect(ticks[0].className).toEqual('loadingTick');

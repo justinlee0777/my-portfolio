@@ -32,10 +32,6 @@ describe('<RandomFactOfTheDay/>', () => {
           header="Fact of the day"
           credit="Credit goes to Mental Floss"
           randomOfTheDayApiUrl="http://example.com"
-          linkedErrorMessage={{
-            templateString: 'There was an error loading this resource',
-            urls: [],
-          }}
         />
       )
     );

@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
-import { animateElement } from './animate-cover-letter.function';
+
+import animateElement from './animations/animate-element.function';
 
 type GetNextElement = (parentElement: HTMLElement) => Array<HTMLElement>;
 type GetNextElementAsync = GetNextElement | Promise<GetNextElement>;

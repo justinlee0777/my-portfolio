@@ -61,10 +61,6 @@ describe('<RandomPaintingOfTheDay/>', () => {
           openHighResImage="Open high res image"
           highResImageLoadFailed="Did not load high res image"
           randomOfTheDayApiUrl="http://example.com"
-          linkedErrorMessage={{
-            templateString: 'There was an error loading this resource',
-            urls: [],
-          }}
         />
       )
     );
@@ -143,6 +139,9 @@ describe('<RandomPaintingOfTheDay/>', () => {
         credit: 'Met Museum',
         creditRef: 'https://metmuseum.github.io',
       })
+    );
+    loadImage.mockReturnValue(
+      new Promise((resolve) => (resolveLoadImage = resolve))
     );
 
     await renderComponent();
