@@ -22,7 +22,9 @@ export async function getStaticProps(): Promise<{
   const coverLetterProps: CoverLetterPageProps = {
     ...baseProps,
     pageConfig: coverLetterPageConfig,
-    hideHeader: true,
+    navbar: {
+      reverse: true,
+    },
 
     config: defaultCoverLetterConfig,
     opening: coverLetterOpening,

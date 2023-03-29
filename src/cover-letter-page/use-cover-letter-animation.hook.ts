@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 
 import animateElement from './animations/animate-element.function';
 
@@ -13,37 +13,46 @@ export function useCoverLetterAnimation(
   sequence: Array<GetNextElementAsync>
 ): [() => void, Promise<void>?] {
   let terminationFlag = false;
-  const terminateEarly = useCallback(() => terminationFlag, []);
+  const shouldTerminateEarly = useCallback(() => terminationFlag, []);
 
   const animationFinished = useMemo(() => {
     if (parentElement) {
-      return run(terminateEarly);
+      return run(parentElement, sequence, shouldTerminateEarly);
     }
   }, [parentElement]);
 
-  return [useCallback(() => (terminationFlag = true), []), animationFinished];
+  const terminateEarly: () => void = useCallback(
+    () => (terminationFlag = true),
+    []
+  );
 
-  async function run(terminateEarly: () => boolean): Promise<void> {
-    const postcleanup: Array<() => void> = [];
+  return [terminateEarly, animationFinished];
+}
 
-    for (const next of sequence) {
-      let getNextElement: GetNextElement;
-      if (typeof next === 'function') {
-        getNextElement = next;
-      } else {
-        getNextElement = await next;
-      }
+async function run(
+  parentElement: HTMLElement | null,
+  sequence: Array<GetNextElementAsync>,
+  terminateEarly: () => boolean
+): Promise<void> {
+  const postcleanup: Array<() => void> = [];
 
-      const elements = getNextElement(parentElement);
-
-      for (const element of elements) {
-        element.setAttribute('data-activated', '');
-        const postOp = await animateElement(element, terminateEarly);
-
-        postcleanup.push(postOp);
-      }
+  for (const next of sequence) {
+    let getNextElement: GetNextElement;
+    if (typeof next === 'function') {
+      getNextElement = next;
+    } else {
+      getNextElement = await next;
     }
 
-    postcleanup.forEach((op) => op());
+    const elements = getNextElement(parentElement);
+
+    for (const element of elements) {
+      element.setAttribute('data-activated', '');
+      const postOp = await animateElement(element, terminateEarly);
+
+      postcleanup.push(postOp);
+    }
   }
+
+  postcleanup.forEach((op) => op());
 }

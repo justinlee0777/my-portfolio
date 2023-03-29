@@ -7,6 +7,12 @@ import { loadUnitTestResult } from '../utils/load-unit-test-result.function';
 import { translateObject } from '../utils/translate-object.function';
 import { getTranslationKeys as getOpenSettingsTranslationKeys } from '../config/open-settings.config';
 
+export interface NavbarConfig {
+  hide?: boolean;
+  /** Show on the bottom instead. */
+  reverse?: boolean;
+}
+
 export interface BasePageProps {
   locale: string;
   route: string;
@@ -14,7 +20,7 @@ export interface BasePageProps {
   unitTestResult: UnitTestResults;
   apiUrl: string;
 
-  hideHeader?: boolean;
+  navbar?: NavbarConfig;
   openSettingsConfig?: OpenSettingsConfig;
 }
 

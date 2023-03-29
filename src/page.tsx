@@ -131,6 +131,47 @@ export default function Page({
     );
   }
 
+  let topNavbar: JSX.Element | undefined;
+  let bottomNavbar: JSX.Element | undefined;
+
+  const { hide, reverse } = pageProps.navbar ?? {};
+
+  if (!hide) {
+    const navigationClassnames = classNames(styles.pageNavigation, {
+      [styles.pageNavigationBottom]: reverse,
+    });
+    const navigationComponent = (
+      <Navigation
+        className={navigationClassnames}
+        locale={pageProps.locale}
+        links={[
+          {
+            displayName: 'Random of the Day',
+            url: `/${pageProps.locale}/random-of-the-day`,
+          },
+          {
+            displayName: 'Musings',
+            url: '/musings',
+          },
+          {
+            displayName: 'Buzzword Bingo',
+            url: `/${pageProps.locale}/buzzword-bingo`,
+          },
+          {
+            displayName: 'RPG',
+            url: `/${pageProps.locale}/rpg-game`,
+          },
+        ]}
+      />
+    );
+
+    if (reverse) {
+      bottomNavbar = navigationComponent;
+    } else {
+      topNavbar = navigationComponent;
+    }
+  }
+
   return (
     <UnitTestContext.Provider
       value={{ results: pageProps.unitTestResult, developerMode }}
@@ -140,30 +181,7 @@ export default function Page({
       </Head>
       <div className={pageClassnames} data-testid="page-container">
         <UnitTestCheck componentName="App" style={{ zIndex: 5 }} />
-        {!pageProps.hideHeader && (
-          <Navigation
-            className={styles.pageNavigation}
-            locale={pageProps.locale}
-            links={[
-              {
-                displayName: 'Random of the Day',
-                url: `/${pageProps.locale}/random-of-the-day`,
-              },
-              {
-                displayName: 'Musings',
-                url: '/musings',
-              },
-              {
-                displayName: 'Buzzword Bingo',
-                url: `/${pageProps.locale}/buzzword-bingo`,
-              },
-              {
-                displayName: 'RPG',
-                url: `/${pageProps.locale}/rpg-game`,
-              },
-            ]}
-          />
-        )}
+        {topNavbar}
         <div id="main-content" className={styles.pageContent}>
           <Component
             className={styles.pageComponent}
@@ -176,6 +194,7 @@ export default function Page({
           {modal}
         </div>
       </div>
+      {bottomNavbar}
     </UnitTestContext.Provider>
   );
 }
