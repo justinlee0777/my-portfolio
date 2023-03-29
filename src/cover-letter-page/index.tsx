@@ -75,7 +75,7 @@ export default function CoverLetterPage({
         <div className={styles.videoContainer} id={upscaleWalkthroughId}>
           <video
             className={styles.upscaleWalkthrough}
-            src="https://53-state-street.s3.amazonaws.com/SAP+Upscale+Commerce.mp4"
+            src="https://53-state-street.s3.amazonaws.com/SAP+Upscale+Commerce.mp4#t=0.001"
             controls
             playsInline
           ></video>
