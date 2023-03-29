@@ -7,6 +7,7 @@ import Slide from '../components/slide/slide';
 import LoadingScreen from '../components/loading-screen/loading-screen';
 import { useCompanySpecificResponse } from './use-company-specific-response.hook';
 import { useCoverLetterAnimation } from './use-cover-letter-animation.hook';
+import { createLinkElement } from '../config/link.model';
 
 export default function CoverLetterPage({
   apiUrl,
@@ -85,9 +86,20 @@ export default function CoverLetterPage({
         </p>
         {companySpecificContent}
         <div id={endingId}>
-          {config.textContent.ending.map((content, i) => (
-            <p key={i}>{content}</p>
-          ))}
+          {config.textContent.ending.map((content, i) => {
+            if (typeof content === 'object') {
+              return (
+                <p
+                  dangerouslySetInnerHTML={{
+                    __html: createLinkElement(content),
+                  }}
+                  key={i}
+                ></p>
+              );
+            } else {
+              return <p key={i}>{content}</p>;
+            }
+          })}
         </div>
       </>
     </Slide>

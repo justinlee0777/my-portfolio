@@ -16,6 +16,8 @@ export async function useCoverLetterAnimation(
   }, [parentElement]);
 
   async function run(): Promise<void> {
+    const postcleanup: Array<() => void> = [];
+
     for (const next of sequence) {
       let getNextElement: GetNextElement;
       if (typeof next === 'function') {
@@ -28,8 +30,12 @@ export async function useCoverLetterAnimation(
 
       for (const element of elements) {
         element.setAttribute('data-activated', '');
-        await animateElement(element);
+        const postOp = await animateElement(element);
+
+        postcleanup.push(postOp);
       }
     }
+
+    postcleanup.forEach((op) => op());
   }
 }

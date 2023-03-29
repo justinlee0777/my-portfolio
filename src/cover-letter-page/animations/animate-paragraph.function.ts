@@ -5,8 +5,9 @@ import { createMarker } from './create-marker.function';
  */
 export default async function animateParagraph(
   element: HTMLElement
-): Promise<void> {
+): Promise<() => void> {
   const previousHeight = element.clientHeight;
+  const cachedInnerHTML = element.innerHTML;
   const cachedTextContent = element.textContent;
   const textLength = cachedTextContent.length;
 
@@ -34,5 +35,5 @@ export default async function animateParagraph(
 
       i++;
     }, 1000 / 60);
-  });
+  }).then(() => () => (element.innerHTML = cachedInnerHTML));
 }
