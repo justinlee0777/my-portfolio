@@ -1,6 +1,6 @@
-export default async function animateBlock(
-  element: HTMLElement
-): Promise<void> {
+import { AnimateElement } from './animate-element.function';
+
+const animateBlock: AnimateElement = async function (element, terminateEarly) {
   const cover = document.createElement('div');
   cover.style.display = 'flex';
   cover.style.flexDirection = 'column';
@@ -39,8 +39,14 @@ export default async function animateBlock(
   element.appendChild(cover);
 
   for (const animation of animations) {
+    if (terminateEarly?.()) {
+      break;
+    }
+
     await animation();
   }
 
-  element.removeChild(cover);
-}
+  return () => element.removeChild(cover);
+};
+
+export default animateBlock;

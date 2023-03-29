@@ -1,6 +1,6 @@
 import styles from './index.module.scss';
 
-import { useMemo, useRef } from 'react';
+import { useMemo, useRef, useState } from 'react';
 
 import { CoverLetterPageProps } from '../page-utils/get-cover-letter-props.function';
 import Slide from '../components/slide/slide';
@@ -21,6 +21,8 @@ export default function CoverLetterPage({
 
   const slideRef = useRef<HTMLElement>(null);
 
+  const [animationTerminated, setAnimationTerminated] = useState(false);
+
   const [companySpecificCover, error, waitForCompanySpecificResponse] =
     useCompanySpecificResponse(apiUrl, companyId);
 
@@ -30,21 +32,28 @@ export default function CoverLetterPage({
   const companySpecificId = 'company-specific';
   const endingId = 'ending';
 
-  useCoverLetterAnimation(slideRef.current, [
-    () => [...document.getElementById(genericOpeningId).querySelectorAll('p')],
-    () => [document.getElementById(upscaleWalkthroughId)],
-    () => [document.getElementById(secondSectionOpeningId)],
-    waitForCompanySpecificResponse.then(([success]) => {
-      if (success) {
-        return () => [
-          ...document.getElementById(companySpecificId).querySelectorAll('p'),
-        ];
-      } else {
-        return () => [];
-      }
-    }),
-    () => [...document.getElementById(endingId).querySelectorAll('p')],
-  ]);
+  const [stopAnimation, animationFinished] = useCoverLetterAnimation(
+    slideRef.current,
+    [
+      () => [
+        ...document.getElementById(genericOpeningId).querySelectorAll('p'),
+      ],
+      () => [document.getElementById(upscaleWalkthroughId)],
+      () => [document.getElementById(secondSectionOpeningId)],
+      waitForCompanySpecificResponse.then(([success]) => {
+        if (success) {
+          return () => [
+            ...document.getElementById(companySpecificId).querySelectorAll('p'),
+          ];
+        } else {
+          return () => [];
+        }
+      }),
+      () => [...document.getElementById(endingId).querySelectorAll('p')],
+    ]
+  );
+
+  animationFinished?.then(() => setAnimationTerminated(true));
 
   let companySpecificContent: JSX.Element;
 
@@ -101,6 +110,17 @@ export default function CoverLetterPage({
             }
           })}
         </div>
+        {!animationTerminated && (
+          <button
+            className={styles.stopAnimation}
+            onClick={() => {
+              stopAnimation();
+              setAnimationTerminated(true);
+            }}
+          >
+            Stop animation
+          </button>
+        )}
       </>
     </Slide>
   );

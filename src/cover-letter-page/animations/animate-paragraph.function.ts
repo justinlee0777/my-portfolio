@@ -1,11 +1,13 @@
+import { AnimateElement } from './animate-element.function';
 import { createMarker } from './create-marker.function';
 
 /**
  * Wipes out text from element and iteratively fills it in.
  */
-export default async function animateParagraph(
-  element: HTMLElement
-): Promise<() => void> {
+const animateParagraph: AnimateElement = async function (
+  element,
+  terminateEarly
+) {
   const previousHeight = element.clientHeight;
   const cachedInnerHTML = element.innerHTML;
   const cachedTextContent = element.textContent;
@@ -21,11 +23,14 @@ export default async function animateParagraph(
     let i = 0;
 
     const intervalId = setInterval(() => {
-      if (i > textLength) {
+      if (i > textLength || terminateEarly?.()) {
         clearInterval(intervalId);
 
         element.style.height = null;
-        element.removeChild(marker);
+
+        try {
+          element.removeChild(marker);
+        } catch {}
 
         return resolve(undefined);
       }
@@ -36,4 +41,6 @@ export default async function animateParagraph(
       i++;
     }, 1000 / 60);
   }).then(() => () => (element.innerHTML = cachedInnerHTML));
-}
+};
+
+export default animateParagraph;

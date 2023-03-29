@@ -1,21 +1,29 @@
-import { useEffect } from 'react';
+import { useCallback, useMemo } from 'react';
 
 import animateElement from './animations/animate-element.function';
 
 type GetNextElement = (parentElement: HTMLElement) => Array<HTMLElement>;
 type GetNextElementAsync = GetNextElement | Promise<GetNextElement>;
 
-export async function useCoverLetterAnimation(
+/**
+ * @returns a Promise indicating that the animation is finished and a callback that allows the user to terminate the animation early.
+ */
+export function useCoverLetterAnimation(
   parentElement: HTMLElement | null,
   sequence: Array<GetNextElementAsync>
-): Promise<void> {
-  useEffect(() => {
+): [() => void, Promise<void>?] {
+  let terminationFlag = false;
+  const terminateEarly = useCallback(() => terminationFlag, []);
+
+  const animationFinished = useMemo(() => {
     if (parentElement) {
-      run();
+      return run(terminateEarly);
     }
   }, [parentElement]);
 
-  async function run(): Promise<void> {
+  return [useCallback(() => (terminationFlag = true), []), animationFinished];
+
+  async function run(terminateEarly: () => boolean): Promise<void> {
     const postcleanup: Array<() => void> = [];
 
     for (const next of sequence) {
@@ -30,7 +38,7 @@ export async function useCoverLetterAnimation(
 
       for (const element of elements) {
         element.setAttribute('data-activated', '');
-        const postOp = await animateElement(element);
+        const postOp = await animateElement(element, terminateEarly);
 
         postcleanup.push(postOp);
       }
