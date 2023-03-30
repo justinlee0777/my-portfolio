@@ -1,5 +1,12 @@
 jest.useFakeTimers();
 
+jest.mock('react-dom/server', () => {
+  return {
+    __esModule: true,
+    renderToString: (link) => link.templateString,
+  };
+});
+
 jest.mock('../components/loading-screen/loading-screen', () => () => {
   return <div>Loading...</div>;
 });
@@ -17,7 +24,8 @@ jest.mock('./animations/create-marker.function', () => {
 
 jest.mock(
   './animations/animate-block.function',
-  () => () => new Promise((resolve) => setTimeout(resolve, 1000))
+  () => () =>
+    new Promise((resolve) => setTimeout(() => resolve(() => {}), 1000))
 );
 
 const getCompanySpecificCoverLetter = jest.fn();
