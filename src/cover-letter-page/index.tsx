@@ -9,6 +9,7 @@ import { useApi } from '../utils/hooks/use-api.hook';
 import { getCompanySpecificCoverLetter } from './cover-letter.api';
 import { useHeaderAnimation } from './use-header-animation.hook';
 import classNames from 'classnames';
+import secondsToTimestamp from '../utils/seconds-to-timestamp.function';
 
 export default function CoverLetterPage({
   apiUrl,
@@ -24,6 +25,7 @@ export default function CoverLetterPage({
   );
 
   const headerRef = useRef<HTMLHeadingElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   const [startAnimation, contentAnimationBegun, headerAnimatonDone] =
     useHeaderAnimation(
@@ -51,6 +53,10 @@ export default function CoverLetterPage({
       [styles.coverLetterContentActivated]: contentAnimationBegun,
     });
 
+    const reelLength = videoRef.current
+      ? secondsToTimestamp(videoRef.current.duration)
+      : '';
+
     content = (
       <>
         <h1
@@ -62,10 +68,17 @@ export default function CoverLetterPage({
           <span></span>
           <span className={styles.marker}> </span>
         </h1>
-        <div
-          className={coverLetterContentClassname}
-          dangerouslySetInnerHTML={{ __html: coverLetter }}
-        />
+        <div className={coverLetterContentClassname}>
+          <div dangerouslySetInnerHTML={{ __html: coverLetter }} />
+          <h2 className={styles.videoHeader}>Upscale reel ({reelLength})</h2>
+          <video
+            className={styles.upscaleWalkthrough}
+            src="https://53-state-street.s3.amazonaws.com/Upscale+reel.mp4#t=0.001"
+            controls
+            playsInline
+            ref={videoRef}
+          />
+        </div>
       </>
     );
   }

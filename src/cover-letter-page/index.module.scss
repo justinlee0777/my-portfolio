@@ -1,6 +1,7 @@
 .coverLetter:first-of-type {
   align-items: flex-start;
   background-color: #252526;
+  box-sizing: border-box;
   color: #ce9178;
   justify-content: flex-start;
   line-height: 1.5;
@@ -52,20 +53,19 @@
   }
 }
 
-.videoContainer {
-  margin: 2em 0;
-  overflow: hidden;
-  position: relative;
-  transform-origin: top left;
+.videoHeader {
+  margin-top: 2em;
+  text-align: center;
 }
 
 .upscaleWalkthrough {
-  max-width: 83%;
-  position: relative;
+  margin: 0 8%;
+  max-width: 84%;
 }
 
 @media (min-width: 1200px) {
   .upscaleWalkthrough {
+    margin: 0 17%;
     max-width: 66%;
   }
 }
