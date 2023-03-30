@@ -7,6 +7,8 @@ import Slide from '../components/slide/slide';
 import LoadingScreen from '../components/loading-screen/loading-screen';
 import { useApi } from '../utils/hooks/use-api.hook';
 import { getCompanySpecificCoverLetter } from './cover-letter.api';
+import { useHeaderAnimation } from './use-header-animation.hook';
+import classNames from 'classnames';
 
 export default function CoverLetterPage({
   apiUrl,
@@ -17,11 +19,17 @@ export default function CoverLetterPage({
     return urlParams.get('company') ?? undefined;
   }, []);
 
-  const slideRef = useRef<HTMLElement>(null);
-
   const [coverLetter, error] = useApi(() =>
     getCompanySpecificCoverLetter(apiUrl, companyId)
   );
+
+  const headerRef = useRef<HTMLHeadingElement>(null);
+
+  const [startAnimation, contentAnimationBegun, headerAnimatonDone] =
+    useHeaderAnimation(
+      headerRef.current?.querySelector('span'),
+      config.textContent.header
+    );
 
   let content: JSX.Element;
 
@@ -39,16 +47,35 @@ export default function CoverLetterPage({
       />
     );
   } else {
+    const coverLetterContentClassname = classNames(styles.coverLetterContent, {
+      [styles.coverLetterContentActivated]: contentAnimationBegun,
+    });
+
     content = (
-      <div
-        className={styles.companySpecificSection}
-        dangerouslySetInnerHTML={{ __html: coverLetter }}
-      />
+      <>
+        <h1
+          ref={(ref) => {
+            headerRef.current = ref;
+            startAnimation();
+          }}
+        >
+          <span></span>
+          <span className={styles.marker}> </span>
+        </h1>
+        <div
+          className={coverLetterContentClassname}
+          dangerouslySetInnerHTML={{ __html: coverLetter }}
+        />
+      </>
     );
   }
 
+  const slideClassnames = classNames(styles.coverLetter, {
+    [styles.animated]: headerAnimatonDone,
+  });
+
   return (
-    <Slide className={styles.coverLetter} slideRef={slideRef}>
+    <Slide className={slideClassnames}>
       <>{content}</>
     </Slide>
   );

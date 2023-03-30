@@ -1,9 +1,55 @@
 .coverLetter:first-of-type {
+  align-items: flex-start;
+  background-color: #252526;
+  color: #ce9178;
+  justify-content: flex-start;
   line-height: 1.5;
   padding: 8px 18px 2em;
   position: relative;
   text-indent: 2em;
+  transition: 1s background-color, 1s color;
   width: 100%;
+
+  &:not(.animated) {
+    [data-emphasized] {
+      color: #9cdcfe;
+    }
+  }
+
+  &.animated {
+    background-color: white;
+    color: black;
+  }
+}
+
+.coverLetterContent {
+  opacity: 0;
+  transition: 1s opacity ease-in;
+
+  &Activated {
+    opacity: 1;
+  }
+}
+
+.marker {
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-name: flicker;
+  white-space: pre;
+
+  @keyframes flicker {
+    0% {
+      background-color: lightgray;
+    }
+
+    50% {
+      background-color: transparent;
+    }
+
+    100% {
+      background-color: lightgray;
+    }
+  }
 }
 
 .videoContainer {
@@ -25,7 +71,7 @@
 }
 
 .loadingScreen {
-  margin: 0 auto;
+  margin: auto;
 }
 
 .errorMessage {
