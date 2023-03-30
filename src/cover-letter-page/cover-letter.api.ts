@@ -1,7 +1,5 @@
-import { remark } from 'remark';
-import html from 'remark-html';
-
 import { failHttpResponse } from '../utils/fail-http-response.function';
+import { markdownToHtmlString } from '../utils/markdown-to-html-string.function';
 
 export async function getCompanySpecificCoverLetter(
   apiUrl: string,
@@ -12,8 +10,5 @@ export async function getCompanySpecificCoverLetter(
 
   const markdownContent = await response.text();
 
-  return remark()
-    .use(html, { sanitize: false })
-    .process(markdownContent)
-    .then((content) => content.toString());
+  return markdownToHtmlString(markdownContent);
 }

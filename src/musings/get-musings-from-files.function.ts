@@ -1,9 +1,8 @@
 import { readdirSync, readFile } from 'fs';
 import matter from 'gray-matter';
 import { join } from 'path';
-import { remark } from 'remark';
-import html from 'remark-html';
 
+import { markdownToHtmlString } from '../utils/markdown-to-html-string.function';
 import { MusingConfig } from './components/musing/musing.config';
 
 const fileDirectory = join(process.cwd(), 'src/musings/musing-files');
@@ -30,29 +29,23 @@ export namespace MusingFiles {
         ).then((file: string) => {
           const result = matter(file);
 
-          return (
-            remark()
-              // As the files are only built on my local machine, I feel this is safe. If ever this site needs an SSR solution, this needs to be properly sanitized.
-              .use(html, { sanitize: false })
-              .process(result.content)
-              .then((content) => {
-                const contentHtml = content.toString();
+          return markdownToHtmlString(result.content).then((content) => {
+            const contentHtml = content.toString();
 
-                return {
-                  slug: result.data.slug,
-                  display: {
-                    contentHtml,
-                    title: result.data.title,
-                    description: result.data.description,
-                  },
-                  seo: {
-                    title: result.data.seoTitle,
-                    description: result.data.seoDescription,
-                  },
-                  timestamp: new Date(result.data.timestamp),
-                };
-              })
-          );
+            return {
+              slug: result.data.slug,
+              display: {
+                contentHtml,
+                title: result.data.title,
+                description: result.data.description,
+              },
+              seo: {
+                title: result.data.seoTitle,
+                description: result.data.seoDescription,
+              },
+              timestamp: new Date(result.data.timestamp),
+            };
+          });
         });
       });
 

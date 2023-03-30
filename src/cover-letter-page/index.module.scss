@@ -1,28 +1,9 @@
 .coverLetter:first-of-type {
-  align-items: flex-start;
   line-height: 1.5;
   padding: 8px 18px 2em;
   position: relative;
-  justify-content: flex-start;
   text-indent: 2em;
-
-  p {
-    line-break: anywhere;
-    white-space: pre-wrap;
-    word-break: break-all;
-
-    &[data-activated] {
-      line-break: normal;
-      word-break: normal;
-    }
-  }
-
-  p,
-  .videoContainer {
-    &:not([data-activated]) {
-      opacity: 0;
-    }
-  }
+  width: 100%;
 }
 
 .videoContainer {

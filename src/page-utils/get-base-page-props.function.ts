@@ -34,7 +34,8 @@ export async function getBasePageProps(
     route,
     pageConfig,
     unitTestResult: loadUnitTestResult(),
-    apiUrl: 'https://api.iamjustinlee.com',
+    // apiUrl: 'https://api.iamjustinlee.com',
+    apiUrl: 'http://localhost:9292',
   };
 
   if (showSettings) {
