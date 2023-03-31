@@ -11,23 +11,6 @@ jest.mock('../components/loading-screen/loading-screen', () => () => {
   return <div>Loading...</div>;
 });
 
-jest.mock('./animations/create-marker.function', () => {
-  return {
-    __esModule: true,
-    createMarker: () => {
-      const marker = document.createElement('div');
-      marker.classList.add('marker');
-      return marker;
-    },
-  };
-});
-
-jest.mock(
-  './animations/animate-block.function',
-  () => () =>
-    new Promise((resolve) => setTimeout(() => resolve(() => {}), 1000))
-);
-
 const getCompanySpecificCoverLetter = jest.fn();
 
 jest.mock('./cover-letter.api', () => {
@@ -64,11 +47,9 @@ describe('<CoverLetterPage/>', () => {
           apiUrl="http://api.example.com"
           unitTestResult={{} as any}
           pageConfig={{} as any}
-          opening="<p>Foo.</p><p>Bar.</p><p>Baz.</p>"
           config={{
             textContent: {
-              secondSectionOpening: 'Company specific info incoming.',
-              ending: ['I hope to hear back soon.', 'Sincerely, Justin.'],
+              header: "Hello, I'm <span id='justin-lee'>Justin Lee<span>.",
               companySpecificCoverErrorMessage:
                 'For some reason, the company-specific content did not load.',
             },
@@ -86,6 +67,22 @@ describe('<CoverLetterPage/>', () => {
 
   test('renders', async () => {
     await renderComponent();
+
+    await act(async () =>
+      resolveFn(
+        `
+        <p>Foo.</p>
+        <p>Bar.</p>
+        <p>Baz.</p>
+        <p>Company specific info incoming.</p>
+        <p>I have done research on your company.</p>
+        <p>I think it is swell.</p>
+        <p>Let's talk more.</p>
+        <p>I hope to hear back soon.</p>
+        <p>Sincerely, Justin.</p>
+        `
+      )
+    );
 
     const coverLetter = renderResult.container.children[0];
     expect(coverLetter).toBeTruthy();
@@ -106,6 +103,16 @@ describe('<CoverLetterPage/>', () => {
     );
     expect(secondSectionOpening).toBeTruthy();
 
+    const companySpecific = [
+      renderResult.queryByText('I have done research on your company.'),
+      renderResult.queryByText('I think it is swell.'),
+      renderResult.queryByText("Let's talk more."),
+    ];
+
+    expect(companySpecific[0]).toBeTruthy();
+    expect(companySpecific[1]).toBeTruthy();
+    expect(companySpecific[2]).toBeTruthy();
+
     const ending = [
       renderResult.queryByText('I hope to hear back soon.'),
       renderResult.queryByText('Sincerely, Justin.'),
@@ -120,116 +127,67 @@ describe('<CoverLetterPage/>', () => {
 
     await act(async () =>
       resolveFn(
-        "<p>I have done research on your company.</p><p>I think it is swell.</p><p>Let's talk more.</p>"
+        `
+        <p>Foo.</p>
+        <p>Bar.</p>
+        <p>Baz.</p>
+        <p>Company specific info incoming.</p>
+        <p>I have done research on your company.</p>
+        <p>I think it is swell.</p>
+        <p>Let's talk more.</p>
+        <p>I hope to hear back soon.</p>
+        <p>Sincerely, Justin.</p>
+        `
       )
     );
 
-    const companySpecific = [
-      renderResult.queryByText('I have done research on your company.'),
-      renderResult.queryByText('I think it is swell.'),
-      renderResult.queryByText("Let's talk more."),
-    ];
+    let header = renderResult.container.querySelector('h1');
+    expect(header).toBeTruthy();
+    expect(header.textContent).toBe(' ');
 
-    expect(companySpecific[0]).toBeTruthy();
-    expect(companySpecific[1]).toBeTruthy();
-    expect(companySpecific[2]).toBeTruthy();
-
-    let activatedElements =
-      renderResult.container.querySelectorAll('[data-activated]');
-    expect(activatedElements.length).toBe(1);
-
-    const renderingTimeInMS = 1000 / 60;
-    // Offset for beginning and ending the timer.
-    const offset = renderingTimeInMS * 2;
+    const renderingTimeInMS = 100;
     await act(async () =>
-      jest.advanceTimersByTime(offset + 'Foo.'.length * renderingTimeInMS)
+      jest.advanceTimersByTime('Hello'.length * renderingTimeInMS)
     );
 
-    activatedElements =
-      renderResult.container.querySelectorAll('[data-activated]');
-    expect(activatedElements.length).toBe(2);
+    header = renderResult.container.querySelector('h1');
+    expect(header.textContent).toBe('Hello ');
 
     await act(async () =>
-      jest.advanceTimersByTime(offset + 'Bar.'.length * renderingTimeInMS)
+      jest.advanceTimersByTime((", I'm ".length + 1) * renderingTimeInMS)
     );
 
-    activatedElements =
-      renderResult.container.querySelectorAll('[data-activated]');
-    expect(activatedElements.length).toBe(3);
+    header = renderResult.container.querySelector('h1');
+    expect(header.textContent).toBe("Hello, I'm  ");
 
     await act(async () =>
-      jest.advanceTimersByTime(offset + 'Baz.'.length * renderingTimeInMS)
+      jest.advanceTimersByTime('Justin'.length * renderingTimeInMS)
     );
 
-    activatedElements =
-      renderResult.container.querySelectorAll('[data-activated]');
-    expect(activatedElements.length).toBe(4);
+    header = renderResult.container.querySelector('h1');
+    expect(header.textContent).toBe("Hello, I'm Justin ");
 
-    // This is animating the video.
-    await act(async () => jest.advanceTimersByTime(1000));
+    let renderedSpan = header.querySelector('#justin-lee');
+    expect(renderedSpan).toBeTruthy();
+    expect(renderedSpan.textContent).toBe('Justin');
 
-    activatedElements =
-      renderResult.container.querySelectorAll('[data-activated]');
-    expect(activatedElements.length).toBe(5);
+    const coverLetterContentAnimated = renderResult.container.querySelector(
+      '.coverLetterContentActivated'
+    );
+    expect(coverLetterContentAnimated).toBeTruthy();
 
     await act(async () =>
-      jest.advanceTimersByTime(
-        offset + 'Company specific info incoming.'.length * renderingTimeInMS
-      )
+      jest.advanceTimersByTime(' Lee'.length * renderingTimeInMS)
     );
-
-    activatedElements =
-      renderResult.container.querySelectorAll('[data-activated]');
-    expect(activatedElements.length).toBe(6);
 
     await act(async () =>
-      jest.advanceTimersByTime(
-        offset +
-          'I have done research on your company.'.length * renderingTimeInMS
-      )
+      jest.advanceTimersByTime('.'.length * renderingTimeInMS)
     );
 
-    activatedElements =
-      renderResult.container.querySelectorAll('[data-activated]');
-    expect(activatedElements.length).toBe(7);
+    header = renderResult.container.querySelector('h1');
+    expect(header.textContent).toBe("Hello, I'm Justin Lee. ");
 
-    await act(async () =>
-      jest.advanceTimersByTime(
-        offset + 'I think it is swell.'.length * renderingTimeInMS
-      )
-    );
-
-    activatedElements =
-      renderResult.container.querySelectorAll('[data-activated]');
-    expect(activatedElements.length).toBe(8);
-
-    await act(async () =>
-      jest.advanceTimersByTime(
-        offset + "Let's talk more.".length * renderingTimeInMS
-      )
-    );
-
-    activatedElements =
-      renderResult.container.querySelectorAll('[data-activated]');
-    expect(activatedElements.length).toBe(9);
-
-    await act(async () =>
-      jest.advanceTimersByTime(
-        offset + 'I hope to hear back soon.'.length * renderingTimeInMS
-      )
-    );
-
-    activatedElements =
-      renderResult.container.querySelectorAll('[data-activated]');
-    expect(activatedElements.length).toBe(10);
-
-    await act(async () =>
-      jest.advanceTimersByTime(
-        offset + 'Sincerely, Justin.'.length * renderingTimeInMS
-      )
-    );
-
-    const lastLine = renderResult.queryByText('Sincerely, Justin.');
-    expect(lastLine).toBeTruthy();
+    renderedSpan = header.querySelector('#justin-lee');
+    expect(renderedSpan.textContent).toBe('Justin Lee.');
   });
 });

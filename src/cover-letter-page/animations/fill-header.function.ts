@@ -1,5 +1,3 @@
-import { createMarker } from './create-marker.function';
-
 /**
  * @params offsetInWords which indicates when to notify the client when to start their own animation. The offset is in words -
  *   it is expected that the string in "headerElement" has more words than passed into "offsetInWords".
