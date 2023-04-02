@@ -53,26 +53,11 @@ export default function RandomOfTheDayPage({
     return {
       controlsShown: config?.showControls ?? true,
       sections: config?.sections ?? [],
-      poemShown:
-        config?.sections.some((randomType) => randomType === RandomType.POEM) ??
-        false,
-      factShown:
-        config?.sections.some((randomType) => randomType === RandomType.FACT) ??
-        false,
-      paintingShown:
-        config?.sections.some(
-          (randomType) => randomType === RandomType.PAINTING
-        ) ?? false,
     };
   }, []);
 
   const [controlsShown, setControlsShown] = useState(
     defaultConfig.controlsShown
-  );
-  const [poemShown, setPoemShown] = useState(defaultConfig.poemShown);
-  const [factShown, setFactShown] = useState(defaultConfig.factShown);
-  const [paintingShown, setPaintingShown] = useState(
-    defaultConfig.paintingShown
   );
   const [randomOrder, setRandomOrder] = useState<Array<RandomType>>(
     defaultConfig.sections
@@ -202,8 +187,8 @@ export default function RandomOfTheDayPage({
     switch (randomThing.type) {
       case RandomType.POEM:
         elementId = 'random-poem-of-the-day';
-        shown = poemShown;
-        setShown = setSection(setPoemShown, RandomType.POEM);
+        shown = randomOrder.some((random) => random === RandomType.POEM);
+        setShown = toggleSection(RandomType.POEM);
         element = (
           <RandomPoemOfTheDay
             id={elementId}
@@ -216,8 +201,8 @@ export default function RandomOfTheDayPage({
         break;
       case RandomType.FACT:
         elementId = 'random-fact-of-the-day';
-        shown = factShown;
-        setShown = setSection(setFactShown, RandomType.FACT);
+        shown = randomOrder.some((random) => random === RandomType.FACT);
+        setShown = toggleSection(RandomType.FACT);
         element = (
           <RandomFactOfTheDay
             id={elementId}
@@ -230,8 +215,8 @@ export default function RandomOfTheDayPage({
         break;
       case RandomType.PAINTING:
         elementId = 'random-painting-of-the-day';
-        shown = paintingShown;
-        setShown = setSection(setPaintingShown, RandomType.PAINTING);
+        shown = randomOrder.some((random) => random === RandomType.PAINTING);
+        setShown = toggleSection(RandomType.PAINTING);
         element = (
           <RandomPaintingOfTheDay
             id={elementId}
@@ -248,12 +233,8 @@ export default function RandomOfTheDayPage({
     return { ...randomThing, shown, setShown, element, elementId };
   }
 
-  function setSection(
-    set: (state: boolean) => void,
-    value: RandomType
-  ): (state: boolean) => void {
+  function toggleSection(value: RandomType): (state: boolean) => void {
     return (state: boolean) => {
-      set(state);
       setRandomOrder(
         state
           ? randomOrder.concat(value)
