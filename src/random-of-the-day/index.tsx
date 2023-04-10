@@ -147,6 +147,7 @@ export default function RandomOfTheDayPage({
           })}
           onReorder={setRandomOrder as (items: Array<string>) => void}
         ></OrderableList>
+        <button>Add custom random</button>
       </div>
       <button
         className={styles.hidePageDescription}

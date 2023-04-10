@@ -1,14 +1,19 @@
-import { Link } from '../config/link.model';
-
 export enum RandomType {
   POEM = 'poem',
   FACT = 'fact',
   PAINTING = 'painting',
 }
 
+export interface CustomThing {
+  /** This is also used as the display name. */
+  type: string;
+  options: Array<string>;
+}
+
 export interface RandomThing {
   text: string;
-  type: RandomType;
+  type?: RandomType;
+  custom?: CustomThing;
 }
 
 export interface RandomOfTheDayConfig {
