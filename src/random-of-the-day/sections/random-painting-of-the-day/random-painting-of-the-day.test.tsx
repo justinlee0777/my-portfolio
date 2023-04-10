@@ -153,10 +153,13 @@ describe('<RandomPaintingOfTheDay/>', () => {
 
     await act(async () => resolveLoadImage());
 
-    openHighRes = renderResult.queryByText(
-      'Open high res image'
-    ) as HTMLButtonElement;
-    expect(openHighRes.disabled).toBe(false);
+    await waitFor(() => {
+      openHighRes = renderResult.queryByText(
+        'Open high res image'
+      ) as HTMLButtonElement;
+
+      expect(openHighRes.disabled).toBe(false);
+    });
 
     fireEvent.click(openHighRes);
 
