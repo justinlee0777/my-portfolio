@@ -1,16 +1,10 @@
 import styles from './index.module.scss';
 
 import Head from 'next/head';
-import { useEffect, useMemo, useState } from 'react';
+import { ChangeEvent, useEffect, useMemo, useState } from 'react';
 import classNames from 'classnames';
 
-import {
-  RandomOfTheDayConfig,
-  RandomThing,
-  RandomType,
-} from './random-of-the-day.config';
-import RandomPoemOfTheDay from './sections/random-poem-of-the-day/random-poem-of-the-day';
-import RandomFactOfTheDay from './sections/random-fact-of-the-day/random-fact-of-the-day';
+import { RandomOfTheDayConfig, RandomType } from './random-of-the-day.config';
 import FieldSet from '../components/fieldset/fieldset';
 import OrderableList from '../components/orderable-list/orderable-list';
 import {
@@ -22,8 +16,8 @@ import {
   animateSlides,
 } from '../utils/animate-slides.function';
 import { SlideAnimation } from '../config/slide-animation.enum';
-import RandomPaintingOfTheDay from './sections/random-painting-of-the-day/random-painting-of-the-day';
 import { Modal } from '../services/modal';
+import RandomOfTheDaySection from './sections/random-of-the-day-section';
 
 export interface RandomOfTheDayPageProps {
   modal: Modal;
@@ -31,13 +25,6 @@ export interface RandomOfTheDayPageProps {
   animation: SlideAnimation;
   randomOfTheDayConfig: RandomOfTheDayConfig;
   apiUrl: string;
-}
-
-interface RandomThingSetting extends RandomThing {
-  shown: boolean;
-  setShown: (state: boolean) => void;
-  element: JSX.Element;
-  elementId: string;
 }
 
 export default function RandomOfTheDayPage({
@@ -72,16 +59,7 @@ export default function RandomOfTheDayPage({
     });
   }, [controlsShown, randomOrder]);
 
-  const settings: Array<RandomThingSetting> =
-    randomOfTheDayConfig.textContent.randoms.map(createRandomThingSetting);
-
-  let addedRandoms: Array<RandomThingSetting> = settings.filter(
-    (setting) => setting.shown
-  );
-
-  addedRandoms = randomOrder.map((randomType) => {
-    return addedRandoms.find((addedRandom) => addedRandom.type === randomType);
-  });
+  const createSectionId = (random: RandomType) => `${random}-of-the-day`;
 
   useEffect(() => {
     return animateSlides(
@@ -89,17 +67,13 @@ export default function RandomOfTheDayPage({
       [
         document.getElementById('toggle-randoms'),
         document.getElementById('ordered-randoms'),
-        ...addedRandoms.map((random) =>
-          document.getElementById(random.elementId)
+        ...randomOrder.map((random) =>
+          document.getElementById(createSectionId(random))
         ),
       ] as Array<HTMLElement>,
       { get: animatedSlides, set: setAnimatedSlides }
     );
-  }, [addedRandoms, animation, animatedSlides]);
-
-  const addedRandomElements: Array<JSX.Element> = addedRandoms.map(
-    (setting) => setting.element
-  );
+  }, [randomOrder, animation, animatedSlides]);
 
   const controlsClassName = classNames(styles.controls, {
     [styles.controlsHidden]: !controlsShown,
@@ -134,18 +108,22 @@ export default function RandomOfTheDayPage({
           legend="Randoms"
         >
           <>
-            {settings.map((setting) => {
-              const checkboxId = `random-of-the-day-${setting.type}`;
+            {randomOfTheDayConfig.textContent.randoms.map((randomThing) => {
+              const checkboxId = `random-of-the-day-${randomThing.type}`;
+              const isChecked = randomOrder.some(
+                (random) => random === randomThing.type
+              );
+              const onCheckboxChange = toggleSection(randomThing.type);
 
               return (
-                <div className={styles.randomCheckbox} key={setting.type}>
+                <div className={styles.randomCheckbox} key={randomThing.type}>
                   <input
                     id={checkboxId}
                     type="checkbox"
-                    checked={setting.shown}
-                    onChange={() => setting.setShown(!setting.shown)}
+                    checked={isChecked}
+                    onChange={() => onCheckboxChange(!isChecked)}
                   />
-                  <label htmlFor={checkboxId}>{setting.text}</label>
+                  <label htmlFor={checkboxId}>{randomThing.text}</label>
                 </div>
               );
             })}
@@ -157,10 +135,16 @@ export default function RandomOfTheDayPage({
           animated={
             animatedSlides['ordered-randoms'] ? 'activated' : 'unactivated'
           }
-          listElements={addedRandoms.map((random) => ({
-            value: random.type,
-            element: <span>{random.text}</span>,
-          }))}
+          listElements={randomOrder.map((random) => {
+            const text = randomOfTheDayConfig.textContent.randoms.find(
+              (randomThing) => randomThing.type === random
+            )?.text;
+
+            return {
+              value: random,
+              element: <span>{text}</span>,
+            };
+          })}
           onReorder={setRandomOrder as (items: Array<string>) => void}
         ></OrderableList>
       </div>
@@ -172,71 +156,28 @@ export default function RandomOfTheDayPage({
           ? randomOfTheDayConfig.textContent.hideControls
           : randomOfTheDayConfig.textContent.showControls}
       </button>
-      {addedRandomElements}
+      {randomOrder.map((random) => (
+        <RandomOfTheDaySection
+          random={random}
+          key={random}
+          animated={
+            animatedSlides[createSectionId(random)]
+              ? 'activated'
+              : 'unactivated'
+          }
+          apiUrl={apiUrl}
+          modal={modal}
+          createId={createSectionId}
+          config={randomOfTheDayConfig}
+        />
+      ))}
     </div>
   );
 
-  function createRandomThingSetting(
-    randomThing: RandomThing
-  ): RandomThingSetting {
-    let shown: boolean;
-    let setShown: (state: boolean) => void;
-    let elementId: string;
-    let element: JSX.Element;
-
-    switch (randomThing.type) {
-      case RandomType.POEM:
-        elementId = 'random-poem-of-the-day';
-        shown = randomOrder.some((random) => random === RandomType.POEM);
-        setShown = toggleSection(RandomType.POEM);
-        element = (
-          <RandomPoemOfTheDay
-            id={elementId}
-            key={RandomType.POEM}
-            animated={animatedSlides[elementId] ? 'activated' : 'unactivated'}
-            header={randomOfTheDayConfig.textContent.poemOfTheDay.header}
-            randomOfTheDayApiUrl={apiUrl}
-          />
-        );
-        break;
-      case RandomType.FACT:
-        elementId = 'random-fact-of-the-day';
-        shown = randomOrder.some((random) => random === RandomType.FACT);
-        setShown = toggleSection(RandomType.FACT);
-        element = (
-          <RandomFactOfTheDay
-            id={elementId}
-            key={RandomType.FACT}
-            animated={animatedSlides[elementId] ? 'activated' : 'unactivated'}
-            {...randomOfTheDayConfig.textContent.factOfTheDay}
-            randomOfTheDayApiUrl={apiUrl}
-          />
-        );
-        break;
-      case RandomType.PAINTING:
-        elementId = 'random-painting-of-the-day';
-        shown = randomOrder.some((random) => random === RandomType.PAINTING);
-        setShown = toggleSection(RandomType.PAINTING);
-        element = (
-          <RandomPaintingOfTheDay
-            id={elementId}
-            key={RandomType.PAINTING}
-            modal={modal}
-            animated={animatedSlides[elementId] ? 'activated' : 'unactivated'}
-            {...randomOfTheDayConfig.textContent.paintingOfTheDay}
-            randomOfTheDayApiUrl={apiUrl}
-          />
-        );
-        break;
-    }
-
-    return { ...randomThing, shown, setShown, element, elementId };
-  }
-
   function toggleSection(value: RandomType): (state: boolean) => void {
-    return (state: boolean) => {
+    return (state) => {
       setRandomOrder(
-        state
+        state === true
           ? randomOrder.concat(value)
           : randomOrder.filter((randomType) => randomType !== value)
       );

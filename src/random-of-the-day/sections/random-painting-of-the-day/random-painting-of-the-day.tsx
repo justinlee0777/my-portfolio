@@ -4,7 +4,7 @@ import styles from './random-painting-of-the-day.module.scss';
 import { useEffect, useState } from 'react';
 
 import Slide from '../../../components/slide/slide';
-import { createLinkElement, Link } from '../../../config/link.model';
+import { createLinkElement } from '../../../config/link.model';
 import { Painting } from '../../painting.interface';
 import LoadingScreen from '../../../components/loading-screen/loading-screen';
 import ErrorScreen from '../../../components/error-screen/error-screen';
@@ -14,14 +14,11 @@ import UnitTestCheck from '../../../components/unit-test-check/unit-test-check';
 import { Modal } from '../../../services/modal';
 import { useApi } from '../../../utils/hooks/use-api.hook';
 import { getPainting } from '../../random-of-the-day.api';
+import { BaseSectionProps } from '../base-section.props';
 
-interface RandomPaintingOfTheDayProps {
-  id?: string;
-  animated?: 'activated' | 'unactivated';
-
+interface RandomPaintingOfTheDayProps extends BaseSectionProps {
   modal: Modal;
 
-  header: string;
   credit: string;
   openHighResImage: string;
   highResImageLoadFailed: string;
