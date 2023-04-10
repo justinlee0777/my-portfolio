@@ -1,7 +1,7 @@
 import styles from './index.module.scss';
 
 import Head from 'next/head';
-import { ChangeEvent, useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import classNames from 'classnames';
 
 import { RandomOfTheDayConfig, RandomType } from './random-of-the-day.config';

@@ -94,6 +94,7 @@ export default function RandomPaintingOfTheDay({
         <button
           className={styles.openHighResImage}
           disabled={!highResImageLoaded}
+          aria-disabled={!highResImageLoaded}
           onClick={() => modal.set(dialog)}
         >
           {openHighResImage}
