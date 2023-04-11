@@ -104,7 +104,7 @@ describe('<RandomObliqueStrategyOfTheDay/>', () => {
 
     await renderComponent();
 
-    let card = renderResult.queryByText('The line is a line.');
+    let card = renderResult.queryByText('The line is a line.').parentElement;
     expect(card.className).toEqual('card');
 
     const cardBack = renderResult.queryByLabelText(
@@ -112,7 +112,7 @@ describe('<RandomObliqueStrategyOfTheDay/>', () => {
     );
     fireEvent.click(cardBack);
 
-    card = renderResult.queryByText('The line is a line.');
+    card = renderResult.queryByText('The line is a line.').parentElement;
     expect(card.className).toEqual('card cardFlipped');
   });
 });

@@ -145,12 +145,12 @@ $backgroundColorAnimation: 1s background-color;
   button,
   td,
   input,
-  p,
   [role='button'],
   [role='tooltip'],
   .pageNavigation,
   .loadingScreen,
-  .settingsMenu {
+  .settingsMenu,
+  [data-theme-background] {
     background-color: $backgroundColor;
   }
 

@@ -44,9 +44,11 @@ export default function RandomObliqueStrategyOfTheDay({
     content = (
       <section>
         <p className={cardClassName}>
-          {obliqueStrategy.content}
+          <span className={styles.cardSide} data-theme-background>
+            {obliqueStrategy.content}
+          </span>
           <button
-            className={styles.cardBack}
+            className={classNames(styles.cardSide, styles.cardBack)}
             aria-label="Clicking on this will activate an animation and expose the oblique strategy of the day."
             aria-hidden={flipped}
             onClick={() => setFlipped(true)}
