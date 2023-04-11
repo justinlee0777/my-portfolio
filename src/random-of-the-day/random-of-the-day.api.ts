@@ -1,6 +1,7 @@
 import { failHttpResponse } from '../utils/fail-http-response.function';
 import { loadImage } from '../utils/load-image.function';
 import { Fact } from './fact.interface';
+import { ObliqueStrategy } from './oblique-strategy.interface';
 import { Painting } from './painting.interface';
 import { Poem } from './poem.interface';
 
@@ -24,4 +25,12 @@ export async function getPainting(apiUrl: string): Promise<Painting> {
   await loadImage(painting.images.inline);
 
   return painting;
+}
+
+export async function getObliqueStrategy(
+  apiUrl: string
+): Promise<ObliqueStrategy> {
+  const response = await fetch(`${apiUrl}/oblique-strategy`);
+  failHttpResponse(response);
+  return response.json();
 }

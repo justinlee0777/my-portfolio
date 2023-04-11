@@ -21,6 +21,10 @@ export const defaultRandomOfTheDayConfig: RandomOfTheDayConfig = {
         text: 'Painting',
         type: RandomType.PAINTING,
       },
+      {
+        text: 'Oblique strategy',
+        type: RandomType.OBLIQUE_STRATEGY,
+      },
     ],
     description: [
       'The Daily Scrum is the most visible face of Scrum.',
@@ -45,6 +49,13 @@ export const defaultRandomOfTheDayConfig: RandomOfTheDayConfig = {
       credit: 'From the collection of ${museum}',
       openHighResImage: 'Open High Resolution Image',
       highResImageLoadFailed: 'High resolution image could not be loaded.',
+    },
+    obliqueStrategyOfTheDay: {
+      header: 'Oblique strategy of the day',
+      explanation: {
+        templateString: 'The origin and use of the ${Oblique Strategies}',
+        urls: ['https://en.wikipedia.org/wiki/Oblique_Strategies'],
+      },
     },
   },
 };

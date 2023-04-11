@@ -4,6 +4,7 @@ export enum RandomType {
   POEM = 'poem',
   FACT = 'fact',
   PAINTING = 'painting',
+  OBLIQUE_STRATEGY = 'oblique strategy',
 }
 
 export interface RandomThing {
@@ -43,6 +44,10 @@ export interface RandomOfTheDayConfig {
       openHighResImage: string;
       highResImageLoadFailed: string;
     };
+    obliqueStrategyOfTheDay: {
+      header: string;
+      explanation: Link;
+    };
   };
 }
 
@@ -56,6 +61,8 @@ const keysToTranslate = [
     ...['header', 'credit', 'openHighResImage', 'highResImageLoadFailed'].map(
       (key) => `paintingOfTheDay.${key}`
     ),
+    'obliqueStrategyOfTheDay.header',
+    'obliqueStrategyOfTheDay.explanation.templateString',
   ].map((key) => `textContent.${key}`),
 ];
 

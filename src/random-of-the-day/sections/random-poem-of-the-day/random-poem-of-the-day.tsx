@@ -11,9 +11,6 @@ import { getPoem } from '../../random-of-the-day.api';
 import { BaseSectionProps } from '../base-section.props';
 
 interface PoemProps extends BaseSectionProps {
-  id?: string;
-  animated?: 'activated' | 'unactivated';
-
   randomOfTheDayApiUrl: string;
 }
 
