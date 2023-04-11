@@ -92,6 +92,7 @@ export default function RandomOfTheDayPage({
           property="og:description"
           content={randomOfTheDayConfig.seo.description}
         />
+        <link rel="preconnect" href={apiUrl} />
       </Head>
       <h1>{randomOfTheDayConfig.textContent.header}</h1>
       <div className={controlsClassName}>

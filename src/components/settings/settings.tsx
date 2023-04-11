@@ -120,6 +120,7 @@ export default function Settings({
               className={styles.localizedSite}
               key={locale.code}
               href={`/${locale.code}${route}`}
+              prefetch={false}
             >
               {locale.displayName}
             </Link>

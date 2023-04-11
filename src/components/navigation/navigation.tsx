@@ -28,6 +28,7 @@ export function Navigation({
       <Link
         className={classNames(styles.navigationLink, styles.homeLink)}
         href={`/${locale}/`}
+        prefetch={false}
       >
         Justin Lee
       </Link>
@@ -38,7 +39,9 @@ export function Navigation({
               className={classNames(styles.navigationLink)}
               key={link.displayName}
             >
-              <Link href={link.url}>{link.displayName}</Link>
+              <Link href={link.url} prefetch={false}>
+                {link.displayName}
+              </Link>
             </li>
           ))}
         </ul>
