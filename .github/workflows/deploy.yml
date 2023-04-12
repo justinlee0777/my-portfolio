@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   deploy-via-FTP:
@@ -20,7 +21,6 @@ jobs:
     - name: Create env
       run: |
         echo "${{ secrets.ENV_FILE }}" > .env
-        echo "${{ secrets.GCLOUD_CREDENTIALS_JSON }}" > gcloud-credentials.json
     - name: Authenticate to Google Cloud
       uses: google-github-actions/auth@v1
       with:
@@ -35,5 +35,5 @@ jobs:
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        local-dir: /out
-        server-dir: /public_html
+        local-dir: ./out/
+        server-dir: ./public_html/
