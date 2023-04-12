@@ -1,0 +1,31 @@
+name: Deploy portfolio
+run-name: Deploying portfolio
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy-via-FTP:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - name: Use Node.js
+      uses: actions/setup-node@v3
+    - name: Install Dependencies
+      run: npm ci
+    - name: Build app
+      run: npm run build
+    - name: Sync folders and files to the server
+      uses: SamKirkland/FTP-Deploy-Action@4.3.3
+      with:
+        server: ${{ secrets.FTP_SERVER }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        local-dir: /out
+        server-dir: /public_html
