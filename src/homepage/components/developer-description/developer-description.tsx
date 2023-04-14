@@ -40,6 +40,7 @@ export default function DeveloperDescription({
         alt={config.textContent.profileDescription}
         width={256}
         height={256}
+        loading="eager"
         onError={() => setImageLoadFailed(true)}
       />
     );
