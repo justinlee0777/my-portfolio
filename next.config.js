@@ -8,6 +8,9 @@ const config = {
   images: {
     unoptimized: true,
   },
+  experimental: {
+    optimizeCss: false,
+  },
   webpack: (config) => {
     return {
       ...config,
