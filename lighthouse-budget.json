@@ -1,15 +1,15 @@
 [
-    {
-        "path": "/*",
-        "resourceSizes": [
-            {
-                "resourceType": "document",
-                "budget": 18
-            },
-            {
-                "resourceType": "total",
-                "budget": 400
-            }
-        ]
-    }
+  {
+    "path": "/*",
+    "resourceSizes": [
+      {
+        "resourceType": "document",
+        "budget": 18
+      },
+      {
+        "resourceType": "total",
+        "budget": 400
+      }
+    ]
+  }
 ]
