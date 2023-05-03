@@ -17,21 +17,29 @@ export interface HomePageProps extends BasePageProps {
   profilePicturePrompt: string;
 }
 
+const profilePicturePrompt = 'A photo of Justin Lee, a web developer';
+const savedFile = 'profile-picture.png';
+
+let called = false;
+async function saveProfileImage() {
+  if (called) {
+    return;
+  }
+
+  called = true;
+
+  const generatedProfilePictureUrl = await createImage({
+    prompt: profilePicturePrompt,
+    size: '256x256',
+  });
+
+  await saveImageFromUrl(generatedProfilePictureUrl, savedFile);
+}
+
 export function getLocalizedStaticProps(
   locale: string
 ): () => Promise<{ props: HomePageProps }> {
   return async function getStaticProps(): Promise<{ props: HomePageProps }> {
-    const profilePicturePrompt = 'A photo of Justin Lee, a web developer';
-
-    const generatedProfilePictureUrl = await createImage({
-      prompt: profilePicturePrompt,
-      size: '256x256',
-    });
-
-    const savedFile = 'profile-picture.png';
-
-    await saveImageFromUrl(generatedProfilePictureUrl, savedFile);
-
     let translatedConfig = homepageConfig;
 
     if (locale !== 'en') {
