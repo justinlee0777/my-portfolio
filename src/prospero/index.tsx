@@ -13,6 +13,7 @@ import { useEffect, useRef } from 'react';
 
 import ProsperoConfig from './prospero.config';
 import Slide from '../components/slide/slide';
+import { createLinkElement } from '../config/link.model';
 
 export interface ProsperoProps {
   config: ProsperoConfig;
@@ -62,9 +63,22 @@ export default function ProsperoPage({
         <>
           <h1 className={styles.prosperoHeader}>{config.textContent.header}</h1>
           <main ref={containerRef}>
-            <p className={styles.description}>
-              {config.textContent.description}
-            </p>
+            <div className={styles.description}>
+              {config.textContent.description.map((line, i) => {
+                if (typeof line === 'object') {
+                  return (
+                    <p
+                      key={i}
+                      dangerouslySetInnerHTML={{
+                        __html: createLinkElement(line),
+                      }}
+                    />
+                  );
+                } else {
+                  return <p key={i}>{line}</p>;
+                }
+              })}
+            </div>
           </main>
         </>
       </Slide>

@@ -1,3 +1,5 @@
+import { Link } from '../config/link.model';
+
 export default interface ProsperoConfig {
   seo: {
     title: string;
@@ -5,6 +7,6 @@ export default interface ProsperoConfig {
   };
   textContent: {
     header: string;
-    description: string;
+    description: Array<string | Link>;
   };
 }

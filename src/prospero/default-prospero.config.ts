@@ -8,8 +8,16 @@ const defaultProsperoConfig: ProsperoConfig = {
   },
   textContent: {
     header: 'Prospero: Render text on the web as a book',
-    description:
-      'Prospero paginates text on the server and renders the pages on the web in the form of an e-book.\nClick on the book and flip through the book with the keyboard arrow keys or swiping.',
+    description: [
+      'Prospero paginates text on the server and renders the pages on the web in the form of an e-book.',
+      'Click on the sides of the page to navigate.',
+      'For desktop, the keyboard arrows also navigate.',
+      'For mobile, swipe gestures work.',
+      {
+        templateString: 'The software is documented ${here}.',
+        urls: ['https://github.com/justinlee0777/prospero'],
+      },
+    ],
   },
 };
 
