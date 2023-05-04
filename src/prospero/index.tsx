@@ -60,7 +60,7 @@ export default function ProsperoPage({
       </Head>
       <Slide className={styles.prosperoPage}>
         <>
-          <h1 className={styles.musingsHeader}>{config.textContent.header}</h1>
+          <h1 className={styles.prosperoHeader}>{config.textContent.header}</h1>
           <main ref={containerRef}>
             <p className={styles.description}>
               {config.textContent.description}
