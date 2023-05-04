@@ -150,6 +150,10 @@ export default function Page({
             url: `/${pageProps.locale}/random-of-the-day`,
           },
           {
+            displayName: 'Prospero',
+            url: '/prospero',
+          },
+          {
             displayName: 'Musings',
             url: '/musings',
           },

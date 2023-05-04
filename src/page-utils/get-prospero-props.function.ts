@@ -18,7 +18,7 @@ export interface ProsperoPageProps extends BasePageProps {
 }
 
 export async function getStaticProps(): Promise<{ props: ProsperoPageProps }> {
-  const baseProps = await getBasePageProps('en', '/prospero', true);
+  const baseProps = await getBasePageProps('en', '', true);
 
   const loaderBuilder = await LoaderBuilder.fromFile(
     join(cwd(), './src/prospero/tempest.txt')
