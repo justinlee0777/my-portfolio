@@ -5,7 +5,6 @@ import {
   BooksComponent,
   BookComponent,
   listenToClickEvents,
-  listenToSwipeEvents,
   listenToKeyboardEvents,
 } from 'prospero/web';
 import { PagesOutput } from 'prospero/types';
@@ -33,7 +32,7 @@ export default function ProsperoPage({
             pages,
             {
               pagesShown: 1,
-              listeners: [listenToClickEvents, listenToSwipeEvents],
+              listeners: [listenToClickEvents],
             },
             { classnames: [styles.book] }
           ),
