@@ -1,7 +1,13 @@
 import styles from './index.module.scss';
 
 import Head from 'next/head';
-import { BooksComponent, BookComponent } from 'prospero/web';
+import {
+  BooksComponent,
+  BookComponent,
+  listenToClickEvents,
+  listenToSwipeEvents,
+  listenToKeyboardEvents,
+} from 'prospero/web';
 import { PagesOutput } from 'prospero/types';
 import { useEffect, useRef } from 'react';
 
@@ -24,12 +30,19 @@ export default function ProsperoPage({
         children: [
           BookComponent(
             pages,
-            { pagesShown: 1 },
+            {
+              pagesShown: 1,
+              listeners: [listenToClickEvents, listenToSwipeEvents],
+            },
             { classnames: [styles.book] }
           ),
           BookComponent(
             pages,
-            { pagesShown: 2, media: { minWidth: 1125 } },
+            {
+              pagesShown: 2,
+              listeners: [listenToClickEvents, listenToKeyboardEvents],
+              media: { minWidth: 1125 },
+            },
             { classnames: [styles.book] }
           ),
         ],
@@ -49,7 +62,9 @@ export default function ProsperoPage({
         <>
           <h1 className={styles.musingsHeader}>{config.textContent.header}</h1>
           <main ref={containerRef}>
-            <p>{config.textContent.description}</p>
+            <p className={styles.description}>
+              {config.textContent.description}
+            </p>
           </main>
         </>
       </Slide>
