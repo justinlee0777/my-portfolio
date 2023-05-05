@@ -1,4 +1,5 @@
 <span style="font-weight: bold;text-align: center;">The Tempest</span>
+<span style="font-weight: bold">William Shakespeare</span>
 
 <span style="font-weight: bold;text-align: center;">Act I, Scene 1</span>
 

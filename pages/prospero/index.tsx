@@ -1,3 +1,3 @@
-export { default } from '../../src/prospero/index';
+export { default } from '../../src/prospero/tempest-page';
 
-export { getStaticProps } from '../../src/page-utils/get-prospero-props.function';
+export { getStaticProps } from '../../src/page-utils/prospero/get-tempest-props.function';

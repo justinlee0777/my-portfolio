@@ -1,12 +1,12 @@
 import { Font } from './font.enum';
 
-export function loadFont(font: Font): Promise<void> {
+export async function loadFont(font: Font): Promise<void> {
   const fontUrl = getFontUrl(font);
   const fontFace = new FontFace(font, `url(${fontUrl})`);
 
   document.fonts.add(fontFace);
 
-  return fontFace.load().then();
+  await fontFace.load();
 }
 
 export function getFontUrl(font: Font): string {
