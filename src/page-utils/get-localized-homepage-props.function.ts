@@ -40,6 +40,8 @@ export function getLocalizedStaticProps(
   locale: string
 ): () => Promise<{ props: HomePageProps }> {
   return async function getStaticProps(): Promise<{ props: HomePageProps }> {
+    await saveProfileImage();
+
     let translatedConfig = homepageConfig;
 
     if (locale !== 'en') {
