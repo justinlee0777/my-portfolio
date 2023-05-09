@@ -3,25 +3,22 @@ import { PagesOutput } from 'prospero/types';
 import { join } from 'path';
 import { cwd } from 'process';
 
-import {
-  BasePageProps,
-  getBasePageProps,
-} from './get-base-page-props.function';
-import ProsperoConfig from '../prospero/prospero.config';
-import defaultProsperoConfig from '../prospero/default-prospero.config';
-import { getFontUrl } from '../config/load-font.function';
-import { Font } from '../config/font.enum';
+import { BasePageProps } from '../get-base-page-props.function';
+import ProsperoConfig from '../../prospero/prospero.config';
+import { getFontUrl } from '../../config/load-font.function';
+import { Font } from '../../config/font.enum';
+import { getBaseProsperoProps } from './get-base-props.function';
 
-export interface ProsperoPageProps extends BasePageProps {
+export interface TempestPageProps extends BasePageProps {
   config: ProsperoConfig;
   pages: PagesOutput;
 }
 
-export async function getStaticProps(): Promise<{ props: ProsperoPageProps }> {
-  const baseProps = await getBasePageProps('en', '', true);
+export async function getStaticProps(): Promise<{ props: TempestPageProps }> {
+  const props = await getBaseProsperoProps();
 
   const loaderBuilder = await LoaderBuilder.fromFile(
-    join(cwd(), './src/prospero/tempest.txt')
+    join(cwd(), './src/prospero/texts/tempest.txt')
   );
   const text = loaderBuilder.getText();
 
@@ -33,9 +30,9 @@ export async function getStaticProps(): Promise<{ props: ProsperoPageProps }> {
     )
     .setLineHeight(24)
     .setPadding({
-      top: 12,
+      top: 36,
       right: 12,
-      bottom: 12,
+      bottom: 36,
       left: 12,
     })
     .setText(text)
@@ -47,8 +44,7 @@ export async function getStaticProps(): Promise<{ props: ProsperoPageProps }> {
 
   return {
     props: {
-      ...baseProps,
-      config: defaultProsperoConfig,
+      ...props,
       pages,
     },
   };
