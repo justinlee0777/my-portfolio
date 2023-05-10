@@ -1,53 +1,35 @@
 import styles from './index.module.scss';
 
 import Head from 'next/head';
-import {
-  BooksComponent,
-  BookComponent,
-  listenToClickEvents,
-  listenToKeyboardEvents,
-} from 'prospero/web';
-import { PagesOutput } from 'prospero/types';
+import { BooksElement } from 'prospero/types';
 import { useEffect, useRef } from 'react';
 
 import ProsperoConfig from './prospero.config';
 import Slide from '../components/slide/slide';
 import { createLinkElement } from '../config/link.model';
+import { loadFont } from '../config/load-font.function';
+import { Font } from '../config/font.enum';
 
-export interface ProsperoProps {
+export interface BaseProsperoProps {
   config: ProsperoConfig;
-  pages: PagesOutput;
+  books: BooksElement;
+  bookTitle: string;
+  bookAuthor: string;
 }
 
 export default function ProsperoPage({
   config,
-  pages,
-}: ProsperoProps): JSX.Element {
+  books,
+  bookTitle,
+  bookAuthor,
+}: BaseProsperoProps): JSX.Element {
   const containerRef = useRef<HTMLElement>(null);
   useEffect(() => {
-    containerRef.current?.appendChild(
-      BooksComponent({
-        children: [
-          BookComponent(
-            pages,
-            {
-              pagesShown: 1,
-              listeners: [listenToClickEvents],
-            },
-            { classnames: [styles.book] }
-          ),
-          BookComponent(
-            pages,
-            {
-              pagesShown: 2,
-              listeners: [listenToClickEvents, listenToKeyboardEvents],
-              media: { minWidth: 1125 },
-            },
-            { classnames: [styles.book] }
-          ),
-        ],
-      })
-    );
+    (async function () {
+      await loadFont(Font.BOOKERLY);
+
+      containerRef.current?.appendChild(books);
+    })();
   }, [containerRef]);
 
   return (
@@ -78,7 +60,17 @@ export default function ProsperoPage({
                 }
               })}
             </div>
+            <h2>{bookTitle}</h2>
+            <h3>{bookAuthor}</h3>
           </main>
+          <h4>Other readings</h4>
+          <ul>
+            {config.links.map(({ text, url }) => (
+              <li>
+                <a href={url}>{text}</a>
+              </li>
+            ))}
+          </ul>
         </>
       </Slide>
     </>
