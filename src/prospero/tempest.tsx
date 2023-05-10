@@ -3,8 +3,9 @@ import styles from './index.module.scss';
 import {
   BooksComponent,
   BookComponent,
-  listenToClickEvents,
-  listenToKeyboardEvents,
+  DefaultBookThemeClassName,
+  SinglePageBookPreset,
+  DoublePageBookPreset,
 } from 'prospero/web';
 
 import ProsperoPage from './base-page';
@@ -19,19 +20,17 @@ export default function TempestPage({
       BookComponent(
         pages,
         {
-          pagesShown: 1,
-          listeners: [listenToClickEvents],
+          ...SinglePageBookPreset(),
         },
-        { classnames: [styles.book] }
+        { classnames: [styles.book, DefaultBookThemeClassName] }
       ),
       BookComponent(
         pages,
         {
-          pagesShown: 2,
-          listeners: [listenToClickEvents, listenToKeyboardEvents],
+          ...DoublePageBookPreset(),
           media: { minWidth: 1125 },
         },
-        { classnames: [styles.book] }
+        { classnames: [styles.book, DefaultBookThemeClassName] }
       ),
     ],
   });

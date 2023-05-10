@@ -3,8 +3,9 @@ import styles from './index.module.scss';
 import {
   BooksComponent,
   BookComponent,
-  listenToClickEvents,
-  listenToKeyboardEvents,
+  SinglePageBookPreset,
+  DoublePageBookPreset,
+  DefaultBookThemeClassName,
 } from 'prospero/web';
 
 import ProsperoPage from './base-page';
@@ -20,28 +21,25 @@ export default function DijkstraEssayPage({
       BookComponent(
         galaxyFold,
         {
-          pagesShown: 1,
-          listeners: [listenToClickEvents],
+          ...SinglePageBookPreset(),
         },
-        { classnames: [styles.book] }
+        { classnames: [styles.book, DefaultBookThemeClassName] }
       ),
       BookComponent(
         iphoneXR,
         {
-          pagesShown: 1,
-          listeners: [listenToClickEvents],
+          ...SinglePageBookPreset(),
           media: { minWidth: 414 },
         },
-        { classnames: [styles.book] }
+        { classnames: [styles.book, DefaultBookThemeClassName] }
       ),
       BookComponent(
         iphoneXR,
         {
-          pagesShown: 2,
-          listeners: [listenToClickEvents, listenToKeyboardEvents],
+          ...DoublePageBookPreset(),
           media: { minWidth: 818 },
         },
-        { classnames: [styles.book] }
+        { classnames: [styles.book, DefaultBookThemeClassName] }
       ),
     ],
   });
