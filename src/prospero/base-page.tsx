@@ -66,7 +66,7 @@ export default function ProsperoPage({
           <h4>Other readings</h4>
           <ul>
             {config.links.map(({ text, url }) => (
-              <li>
+              <li key={url}>
                 <a href={url}>{text}</a>
               </li>
             ))}
