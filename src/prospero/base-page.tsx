@@ -63,6 +63,14 @@ export default function ProsperoPage({
             <h2>{bookTitle}</h2>
             <h3>{bookAuthor}</h3>
           </main>
+          <h4>Other readings</h4>
+          <ul>
+            {config.links.map(({ text, url }) => (
+              <li>
+                <a href={url}>{text}</a>
+              </li>
+            ))}
+          </ul>
         </>
       </Slide>
     </>

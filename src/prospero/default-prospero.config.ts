@@ -18,6 +18,16 @@ const defaultProsperoConfig: ProsperoConfig = {
       },
     ],
   },
+  links: [
+    {
+      text: 'The Tempest by William Shakespeare',
+      url: '/prospero',
+    },
+    {
+      text: 'On The Cruelty Of Really Teaching Computing Science by Edsger Dijkstra',
+      url: '/prospero/on-the-cruelty-of-really-teaching-computing-science',
+    },
+  ],
 };
 
 export default defaultProsperoConfig;
