@@ -1,5 +1,5 @@
-import { HTMLProcessor, LoaderBuilder, PagesBuilder } from 'prospero/server';
-import { PagesOutput } from 'prospero/types';
+import { Pages } from 'prospero/server';
+import { PagesOutput, PageStyles } from 'prospero/types';
 import { join } from 'path';
 import { cwd } from 'process';
 
@@ -8,6 +8,7 @@ import ProsperoConfig from '../../prospero/prospero.config';
 import { getFontUrl } from '../../config/load-font.function';
 import { Font } from '../../config/font.enum';
 import { getBaseProsperoProps } from './get-base-props.function';
+import readFile from '../../utils/read-file.function';
 
 export interface TempestPageProps extends BasePageProps {
   config: ProsperoConfig;
@@ -17,35 +18,31 @@ export interface TempestPageProps extends BasePageProps {
 export async function getStaticProps(): Promise<{ props: TempestPageProps }> {
   const props = await getBaseProsperoProps();
 
-  const loaderBuilder = await LoaderBuilder.fromFile(
-    join(cwd(), './src/prospero/texts/tempest.txt')
-  );
-  const text = loaderBuilder.getText();
+  const text = await readFile(join(cwd(), './src/prospero/texts/tempest.txt'));
 
-  const pages = new PagesBuilder()
-    .setFont(
-      '12px',
-      'Bookerly',
-      join(cwd(), 'public', getFontUrl(Font.BOOKERLY))
-    )
-    .setLineHeight(24)
-    .setPadding({
+  const pageStyles: PageStyles = {
+    computedFontSize: '12px',
+    computedFontFamily: 'Bookerly',
+    lineHeight: 24,
+    width: 375,
+    height: 667,
+    padding: {
       top: 36,
       right: 12,
       bottom: 36,
       left: 12,
-    })
-    .setText(text)
-    .setProcessors([new HTMLProcessor()])
-    .addSize(375, 667)
-    .build()
-    .at(0)
-    .getData();
+    },
+  };
+
+  const pages = new Pages(pageStyles, text, [], {
+    fontLocation: join(cwd(), 'public', getFontUrl(Font.BOOKERLY)),
+    html: true,
+  });
 
   return {
     props: {
       ...props,
-      pages,
+      pages: pages.getData(),
     },
   };
 }

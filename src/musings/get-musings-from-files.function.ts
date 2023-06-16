@@ -1,9 +1,10 @@
-import { readdirSync, readFile } from 'fs';
+import { readdirSync } from 'fs';
 import matter from 'gray-matter';
 import { join } from 'path';
 
 import { markdownToHtmlString } from '../utils/markdown-to-html-string.function';
 import { MusingConfig } from './components/musing/musing.config';
+import readFile from '../utils/read-file.function';
 
 const fileDirectory = join(process.cwd(), 'src/musings/musing-files');
 
@@ -22,31 +23,29 @@ export namespace MusingFiles {
     const asyncLoadedFileContent = readdirSync(fileDirectory) // Get all saved .md files
       .filter((filename) => filename.includes('.md'))
       .map((markdownFile) => {
-        return new Promise((resolve, reject) =>
-          readFile(join(fileDirectory, markdownFile), 'utf8', (err, file) =>
-            err ? reject(err) : resolve(file)
-          )
-        ).then((file: string) => {
-          const result = matter(file);
+        return readFile(join(fileDirectory, markdownFile)).then(
+          (file: string) => {
+            const result = matter(file);
 
-          return markdownToHtmlString(result.content).then((content) => {
-            const contentHtml = content.toString();
+            return markdownToHtmlString(result.content).then((content) => {
+              const contentHtml = content.toString();
 
-            return {
-              slug: result.data.slug,
-              display: {
-                contentHtml,
-                title: result.data.title,
-                description: result.data.description,
-              },
-              seo: {
-                title: result.data.seoTitle,
-                description: result.data.seoDescription,
-              },
-              timestamp: new Date(result.data.timestamp),
-            };
-          });
-        });
+              return {
+                slug: result.data.slug,
+                display: {
+                  contentHtml,
+                  title: result.data.title,
+                  description: result.data.description,
+                },
+                seo: {
+                  title: result.data.seoTitle,
+                  description: result.data.seoDescription,
+                },
+                timestamp: new Date(result.data.timestamp),
+              };
+            });
+          }
+        );
       });
 
     const fileContent = await Promise.all(asyncLoadedFileContent);
