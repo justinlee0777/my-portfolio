@@ -188,6 +188,10 @@ describe('<RandomPaintingOfTheDay/>', () => {
 
     await renderComponent();
 
+    await waitFor(
+      () => renderResult.queryByText('Open high res image') as HTMLButtonElement
+    );
+
     await act(async () => rejectLoadImage());
 
     const errorMessage = await waitFor(() =>
