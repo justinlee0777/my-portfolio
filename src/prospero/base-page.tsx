@@ -24,13 +24,17 @@ export default function ProsperoPage({
   bookAuthor,
 }: BaseProsperoProps): JSX.Element {
   const containerRef = useRef<HTMLElement>(null);
-  useEffect(() => {
-    (async function () {
-      await loadFont(Font.BOOKERLY);
 
-      containerRef.current?.appendChild(books);
-    })();
-  }, [containerRef]);
+  useEffect(() => {
+    loadFont(Font.BOOKERLY);
+  }, []);
+
+  useEffect(() => {
+    if (containerRef.current && books) {
+      containerRef.current.appendChild(books);
+      return () => books.destroy();
+    }
+  }, [containerRef, books]);
 
   return (
     <>
@@ -60,8 +64,8 @@ export default function ProsperoPage({
                 }
               })}
             </div>
-            <h2>{bookTitle}</h2>
-            <h3>{bookAuthor}</h3>
+            <h2 className={styles.bookTitle}>{bookTitle}</h2>
+            <h3 className={styles.bookAuthor}>{bookAuthor}</h3>
           </main>
           <h4>Other readings</h4>
           <ul>

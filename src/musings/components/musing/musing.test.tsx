@@ -5,11 +5,13 @@ jest.mock('../../../components/unit-test-check/unit-test-check', () => () => (
 import { render, RenderResult } from '@testing-library/react';
 
 import Musing from './musing';
+import { Font } from '../../../config/font.enum';
 
 describe('<Musing/>', () => {
   function renderMusing(): RenderResult {
     return render(
       <Musing
+        font={Font.ARIAL}
         config={{
           slug: 'good-article',
           display: {

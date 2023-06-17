@@ -27,6 +27,10 @@ const defaultProsperoConfig: ProsperoConfig = {
       text: 'On The Cruelty Of Really Teaching Computing Science by Edsger Dijkstra',
       url: '/prospero/on-the-cruelty-of-really-teaching-computing-science',
     },
+    {
+      text: 'Ulysses by James Joyce',
+      url: '/prospero/ulysses',
+    },
   ],
 };
 

@@ -3,15 +3,15 @@ import { PagesOutput, PageStyles } from 'prospero/types';
 import { join } from 'path';
 import { cwd } from 'process';
 
-import { BasePageProps } from '../get-base-page-props.function';
-import ProsperoConfig from '../../prospero/prospero.config';
 import { getFontUrl } from '../../config/load-font.function';
 import { Font } from '../../config/font.enum';
-import { getBaseProsperoProps } from './get-base-props.function';
+import {
+  ProsperoPageProps,
+  getBaseProsperoProps,
+} from './get-base-props.function';
 import readFile from '../../utils/read-file.function';
 
-export interface DijkstraEssayPageProps extends BasePageProps {
-  config: ProsperoConfig;
+export interface DijkstraEssayPageProps extends ProsperoPageProps {
   galaxyFold: PagesOutput;
   iphoneXR: PagesOutput;
 }
