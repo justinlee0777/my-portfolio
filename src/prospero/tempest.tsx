@@ -1,12 +1,16 @@
 import styles from './index.module.scss';
 
+import BooksComponent from 'prospero/web/books';
+import BookComponent from 'prospero/web/book';
+import { DefaultBookTheme } from 'prospero/web/theming';
 import {
-  BooksComponent,
-  BookComponent,
-  DefaultBookTheme,
-  SinglePageBookPreset,
-  DoublePageBookPreset,
-} from 'prospero/web';
+  listenToClickEvents,
+  listenToKeyboardEvents,
+} from 'prospero/web/listeners';
+import {
+  DoublePageBookAnimation,
+  SinglePageBookAnimation,
+} from 'prospero/web/animations';
 import { BookConfig } from 'prospero/types';
 
 import ProsperoPage from './base-page';
@@ -35,17 +39,21 @@ export default function TempestPage({
       BookComponent(
         pages,
         {
-          ...SinglePageBookPreset(),
           ...getBookConfig('tempest-mobile-bookmark'),
+          pagesShown: 1,
+          listeners: [listenToClickEvents],
+          animation: new SinglePageBookAnimation(),
         },
         { classnames: [styles.book] }
       ),
       BookComponent(
         pages,
         {
-          ...DoublePageBookPreset(),
           ...getBookConfig('tempest-desktop-bookmark'),
           media: { minWidth: 1125 },
+          pagesShown: 2,
+          listeners: [listenToClickEvents, listenToKeyboardEvents],
+          animation: new DoublePageBookAnimation(),
         },
         { classnames: [styles.book] }
       ),

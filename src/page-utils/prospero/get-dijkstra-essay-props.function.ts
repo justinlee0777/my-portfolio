@@ -1,4 +1,4 @@
-import { IndentTransformer, Pages } from 'prospero/server';
+import { Pages, IndentTransformer } from 'prospero/server';
 import { PagesOutput, PageStyles } from 'prospero/types';
 import { join } from 'path';
 import { cwd } from 'process';

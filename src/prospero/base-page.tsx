@@ -32,7 +32,7 @@ export default function ProsperoPage({
   useEffect(() => {
     if (containerRef.current && books) {
       containerRef.current.appendChild(books);
-      return () => books.destroy();
+      return () => books.prospero.destroy();
     }
   }, [containerRef, books]);
 

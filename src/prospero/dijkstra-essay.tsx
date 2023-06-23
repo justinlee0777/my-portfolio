@@ -1,12 +1,16 @@
 import styles from './index.module.scss';
 
+import BooksComponent from 'prospero/web/books';
+import BookComponent from 'prospero/web/book';
+import { DefaultBookTheme } from 'prospero/web/theming';
 import {
-  BooksComponent,
-  BookComponent,
-  SinglePageBookPreset,
-  DoublePageBookPreset,
-  DefaultBookTheme,
-} from 'prospero/web';
+  listenToClickEvents,
+  listenToKeyboardEvents,
+} from 'prospero/web/listeners';
+import {
+  DoublePageBookAnimation,
+  SinglePageBookAnimation,
+} from 'prospero/web/animations';
 import { BookConfig } from 'prospero/types';
 
 import ProsperoPage from './base-page';
@@ -36,26 +40,32 @@ export default function DijkstraEssayPage({
       BookComponent(
         galaxyFold,
         {
-          ...SinglePageBookPreset(),
           ...getBookConfig('dijkstra-galaxy-fold-bookmark'),
+          pagesShown: 1,
+          listeners: [listenToClickEvents],
+          animation: new SinglePageBookAnimation(),
         },
         { classnames: [styles.book] }
       ),
       BookComponent(
         iphoneXR,
         {
-          ...SinglePageBookPreset(),
           media: { minWidth: 414 },
           ...getBookConfig('dijkstra-iphone-bookmark'),
+          pagesShown: 1,
+          listeners: [listenToClickEvents],
+          animation: new SinglePageBookAnimation(),
         },
         { classnames: [styles.book] }
       ),
       BookComponent(
         iphoneXR,
         {
-          ...DoublePageBookPreset(),
           media: { minWidth: 818 },
           ...getBookConfig('dijkstra-iphone-bookmark'),
+          pagesShown: 2,
+          listeners: [listenToClickEvents, listenToKeyboardEvents],
+          animation: new DoublePageBookAnimation(),
         },
         { classnames: [styles.book] }
       ),

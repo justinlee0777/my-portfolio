@@ -1,5 +1,3 @@
-import { renderToString } from 'react-dom/server';
-
 export interface Link {
   /** Use ${link text content} to replace with links. The number of ${link text content} should be equal to the number of elements in the 'urls', and the order should be the same. */
   templateString: string;
@@ -14,11 +12,7 @@ export function createLinkElement(link: Link): string {
     const url = link.urls[index] ?? '';
     const text = searchTerm.replace(/[\$\{\}]/g, '');
 
-    const htmlString = renderToString(
-      <a href={url} rel="noopener noreferrer" target="_blank">
-        {text}
-      </a>
-    );
+    const htmlString = `<a href="${url}" rel="noopener noreferrer" target="_blank">${text}</a>`;
 
     index++;
 

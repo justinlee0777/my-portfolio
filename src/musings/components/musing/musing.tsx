@@ -2,12 +2,17 @@ import styles from './index.module.scss';
 
 import Head from 'next/head';
 import Link from 'next/link';
+
+import FlexibleBookComponent from 'prospero/web/flexible-book';
+import { NewlineTransformer } from 'prospero/web/transformers';
 import {
-  DoublePageBookPreset,
-  FlexibleBookComponent,
-  NewlineTransformer,
-  SinglePageBookPreset,
-} from 'prospero/web';
+  listenToClickEvents,
+  listenToKeyboardEvents,
+} from 'prospero/web/listeners';
+import {
+  DoublePageBookAnimation,
+  SinglePageBookAnimation,
+} from 'prospero/web/animations';
 import { useBook } from 'prospero/web/react';
 import { useRef, useState } from 'react';
 
@@ -29,7 +34,6 @@ export default function MusingPage({
   const mainRef = useRef<HTMLElement>(null);
 
   const [bookMode, setBookMode] = useState(false);
-
   useBook(
     mainRef,
     () => {
@@ -49,12 +53,20 @@ export default function MusingPage({
               },
             },
             mediaQueryList: [
-              SinglePageBookPreset(),
+              {
+                pagesShown: 1,
+                listeners: [listenToClickEvents],
+                animation: new SinglePageBookAnimation(),
+              },
               {
                 pattern: {
                   minWidth: 800,
                 },
-                config: DoublePageBookPreset(),
+                config: {
+                  pagesShown: 2,
+                  listeners: [listenToClickEvents, listenToKeyboardEvents],
+                  animation: new DoublePageBookAnimation(),
+                },
               },
             ],
           },
@@ -97,7 +109,7 @@ export default function MusingPage({
             />
             Show as book
           </p>
-          <main ref={mainRef}>
+          <main className={styles.musingArticle} ref={mainRef}>
             {!bookMode && (
               <div
                 dangerouslySetInnerHTML={{
