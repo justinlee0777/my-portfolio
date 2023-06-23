@@ -2,7 +2,6 @@ import styles from './navigation.module.scss';
 
 import Link from 'next/link';
 import classNames from 'classnames';
-import { useState } from 'react';
 
 export interface NavigationProps {
   locale: string;

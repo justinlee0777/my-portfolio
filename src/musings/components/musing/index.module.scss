@@ -1,10 +1,25 @@
 .musingPage {
-  align-items: flex-start;
+  flex: 1;
   line-height: 1.5;
   padding: 8px 18px;
   position: relative;
 }
 
+.musingArticle {
+  flex: 1;
+}
+
 .musingBack {
   margin-top: 18px;
+}
+
+.bookMode {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  &Switch {
+    margin-right: 12px;
+  }
 }

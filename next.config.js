@@ -4,6 +4,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 });
 
 const config = {
+  transpilePackages: ['prospero'],
   trailingSlash: true,
   images: {
     unoptimized: true,

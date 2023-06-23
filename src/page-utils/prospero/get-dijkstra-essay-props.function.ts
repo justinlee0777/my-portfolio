@@ -1,16 +1,17 @@
-import { IndentProcessor, LoaderBuilder, PagesBuilder } from 'prospero/server';
-import { PagesOutput } from 'prospero/types';
+import { Pages, IndentTransformer } from 'prospero/server';
+import { PagesOutput, PageStyles } from 'prospero/types';
 import { join } from 'path';
 import { cwd } from 'process';
 
-import { BasePageProps } from '../get-base-page-props.function';
-import ProsperoConfig from '../../prospero/prospero.config';
 import { getFontUrl } from '../../config/load-font.function';
 import { Font } from '../../config/font.enum';
-import { getBaseProsperoProps } from './get-base-props.function';
+import {
+  ProsperoPageProps,
+  getBaseProsperoProps,
+} from './get-base-props.function';
+import readFile from '../../utils/read-file.function';
 
-export interface DijkstraEssayPageProps extends BasePageProps {
-  config: ProsperoConfig;
+export interface DijkstraEssayPageProps extends ProsperoPageProps {
   galaxyFold: PagesOutput;
   iphoneXR: PagesOutput;
 }
@@ -20,55 +21,59 @@ export async function getStaticProps(): Promise<{
 }> {
   const props = await getBaseProsperoProps();
 
-  const loaderBuilder = await LoaderBuilder.fromFile(
+  const text = await readFile(
     join(
       cwd(),
       './src/prospero/texts/on-the-cruelty-of-really-teaching-computing-science.txt'
     )
   );
-  const text = loaderBuilder.getText();
 
-  const [galaxyFold] = new PagesBuilder()
-    .setLineHeight(28)
-    .setPadding({
+  const indentTransformer = new IndentTransformer(5);
+  const bookerlyLocation = join(cwd(), 'public', getFontUrl(Font.BOOKERLY));
+
+  const galaxyFoldStyles: PageStyles = {
+    computedFontFamily: 'Bookerly',
+    computedFontSize: '14px',
+    lineHeight: 28,
+    width: 280,
+    height: 653,
+    padding: {
       top: 12,
       right: 12,
       bottom: 12,
       left: 12,
-    })
-    .setText(text)
-    .setProcessors([new IndentProcessor(5)])
-    .setFont(
-      '14px',
-      'Bookerly',
-      join(cwd(), 'public', getFontUrl(Font.BOOKERLY))
-    )
-    .addSize(280, 653)
-    .build();
+    },
+  };
 
-  const [iphoneXR] = new PagesBuilder()
-    .setLineHeight(32)
-    .setPadding({
+  const galaxyFold = new Pages(galaxyFoldStyles, text, [indentTransformer], {
+    fontLocation: bookerlyLocation,
+    html: true,
+  }).getData();
+
+  const iphoneXRStyles: PageStyles = {
+    computedFontFamily: 'Bookerly',
+    computedFontSize: '16px',
+    lineHeight: 32,
+    width: 414,
+    height: 700,
+    padding: {
       top: 36,
       right: 24,
       bottom: 36,
       left: 24,
-    })
-    .setText(text)
-    .setProcessors([new IndentProcessor(5)])
-    .setFont(
-      '16px',
-      'Bookerly',
-      join(cwd(), 'public', getFontUrl(Font.BOOKERLY))
-    )
-    .addSize(414, 700)
-    .build();
+    },
+  };
+
+  const iphoneXR = new Pages(iphoneXRStyles, text, [indentTransformer], {
+    fontLocation: bookerlyLocation,
+    html: true,
+  }).getData();
 
   return {
     props: {
       ...props,
-      galaxyFold: galaxyFold.getData(),
-      iphoneXR: iphoneXR.getData(),
+      galaxyFold,
+      iphoneXR,
     },
   };
 }
