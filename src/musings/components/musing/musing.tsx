@@ -3,16 +3,16 @@ import styles from './index.module.scss';
 import Head from 'next/head';
 import Link from 'next/link';
 
-import FlexibleBookComponent from 'prospero/web/flexible-book';
+import { FlexibleBookComponent } from 'prospero/web/flexible-book';
 import { NewlineTransformer } from 'prospero/web/transformers';
 import {
   listenToClickEvents,
   listenToKeyboardEvents,
-} from 'prospero/web/listeners';
+} from 'prospero/web/book/listeners';
 import {
   DoublePageBookAnimation,
   SinglePageBookAnimation,
-} from 'prospero/web/animations';
+} from 'prospero/web/book/animations';
 import { useBook } from 'prospero/web/react';
 import { useRef, useState } from 'react';
 

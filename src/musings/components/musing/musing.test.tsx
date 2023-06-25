@@ -2,11 +2,11 @@ jest.mock('prospero/web/flexible-book', () => () => null);
 jest.mock('prospero/web/transformers', () => ({
   NewlineTransformer: null,
 }));
-jest.mock('prospero/web/listeners', () => ({
+jest.mock('prospero/web/book/listeners', () => ({
   listenToClickEvents: null,
   listenToKeyboardEvents: null,
 }));
-jest.mock('prospero/web/animations', () => ({
+jest.mock('prospero/web/book/animations', () => ({
   DoublePageBookAnimation: null,
   SinglePageBookAnimation: null,
 }));

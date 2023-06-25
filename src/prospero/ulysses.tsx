@@ -1,18 +1,17 @@
 import styles from './index.module.scss';
 
-import BookComponent from 'prospero/web/book';
-import BooksComponent from 'prospero/web/books';
+import { BookComponent } from 'prospero/web/book';
+import { BooksComponent } from 'prospero/web/books';
 import {
   DoublePageBookAnimation,
   SinglePageBookAnimation,
-} from 'prospero/web/animations';
-import { DefaultBookTheme } from 'prospero/web/theming';
+} from 'prospero/web/book/animations';
+import { DefaultBookTheme } from 'prospero/web/book/theming';
 import ServerPages from 'prospero/web/server-pages';
 import {
   listenToClickEvents,
   listenToKeyboardEvents,
-  listenToSwipeEvents,
-} from 'prospero/web/listeners';
+} from 'prospero/web/book/listeners';
 import { BookConfig, PageStyles } from 'prospero/types';
 import { useEffect, useMemo, useState } from 'react';
 
@@ -81,7 +80,7 @@ export default function UlyssesPage({
       },
       {
         animation: new SinglePageBookAnimation(),
-        listeners: [listenToClickEvents, listenToSwipeEvents],
+        listeners: [listenToClickEvents],
         pagesShown: 1,
         ...getBookConfig('mobile-ulysses-bookmark'),
       },

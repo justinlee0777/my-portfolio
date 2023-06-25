@@ -1,16 +1,16 @@
 import styles from './index.module.scss';
 
-import BooksComponent from 'prospero/web/books';
-import BookComponent from 'prospero/web/book';
-import { DefaultBookTheme } from 'prospero/web/theming';
+import { BooksComponent } from 'prospero/web/books';
+import { BookComponent } from 'prospero/web/book';
+import { DefaultBookTheme } from 'prospero/web/book/theming';
 import {
   listenToClickEvents,
   listenToKeyboardEvents,
-} from 'prospero/web/listeners';
+} from 'prospero/web/book/listeners';
 import {
   DoublePageBookAnimation,
   SinglePageBookAnimation,
-} from 'prospero/web/animations';
+} from 'prospero/web/book/animations';
 import { BookConfig } from 'prospero/types';
 
 import ProsperoPage from './base-page';

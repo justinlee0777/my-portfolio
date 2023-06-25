@@ -14,5 +14,3 @@ To build a zip to deploy, run
 ```
 yarn build:zip
 ```
-
-...though it wouldn't be cool to copy my site, would it.
