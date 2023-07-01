@@ -11,7 +11,7 @@ $animationTime: 1s;
   width: $iconWidth + $iconMargin;
 
   & &Triangle {
-    border-color: transparent currentColor transparent transparent;
+    border-color: transparent currentColor transparent transparent !important;
 
     border-width: 8px;
     border-style: solid;
