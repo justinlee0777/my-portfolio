@@ -7,7 +7,7 @@ $animationTime: 1s;
   box-sizing: border-box;
   padding: 8px;
   transition: $animationTime width ease-in, $animationTime max-height ease-in,
-    $animationTime box-shadow, $animationTime background-color;
+    $animationTime box-shadow, $animationTime ease-in background-color;
   width: $iconWidth + $iconMargin;
 
   & &Triangle {

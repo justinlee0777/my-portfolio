@@ -1,7 +1,7 @@
 import styles from './index.module.scss';
 
 import Head from 'next/head';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import classNames from 'classnames';
 
 import { RandomOfTheDayConfig, RandomType } from './random-of-the-day.config';
@@ -34,23 +34,19 @@ export default function RandomOfTheDayPage({
   randomOfTheDayConfig,
   apiUrl,
 }: RandomOfTheDayPageProps): JSX.Element {
-  const defaultConfig = useMemo(() => {
-    const config = getRandomOfTheDayConfig();
-
-    return {
-      controlsShown: config?.showControls ?? true,
-      sections: config?.sections ?? [],
-    };
-  }, []);
-
-  const [controlsShown, setControlsShown] = useState(
-    defaultConfig.controlsShown
-  );
-  const [randomOrder, setRandomOrder] = useState<Array<RandomType>>(
-    defaultConfig.sections
-  );
+  const [controlsShown, setControlsShown] = useState(true);
+  const [randomOrder, setRandomOrder] = useState<Array<RandomType>>([]);
 
   const [animatedSlides, setAnimatedSlides] = useState<AnimatedSlides>({});
+
+  useEffect(() => {
+    const config = getRandomOfTheDayConfig();
+
+    if (config) {
+      setControlsShown(config.showControls);
+      setRandomOrder(config.sections);
+    }
+  }, []);
 
   useEffect(() => {
     setRandomOfTheDayConfig({

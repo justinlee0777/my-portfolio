@@ -1,6 +1,6 @@
 import styles from './index.module.scss';
 
-import { useMemo, useRef } from 'react';
+import { useRef } from 'react';
 
 import { CoverLetterPageProps } from '../page-utils/get-cover-letter-props.function';
 import Slide from '../components/slide/slide';
@@ -15,14 +15,11 @@ export default function CoverLetterPage({
   apiUrl,
   config,
 }: CoverLetterPageProps): JSX.Element {
-  const companyId = useMemo(() => {
+  const [coverLetter, error] = useApi(() => {
     const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get('company') ?? undefined;
-  }, []);
-
-  const [coverLetter, error] = useApi(() =>
-    getCompanySpecificCoverLetter(apiUrl, companyId)
-  );
+    const companyId = urlParams.get('company') ?? undefined;
+    return getCompanySpecificCoverLetter(apiUrl, companyId);
+  });
 
   const headerRef = useRef<HTMLHeadingElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);

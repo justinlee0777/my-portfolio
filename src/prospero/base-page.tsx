@@ -12,14 +12,14 @@ import { Font } from '../config/font.enum';
 
 export interface BaseProsperoProps {
   config: ProsperoConfig;
-  books: BooksElement;
+  createBooks: () => BooksElement;
   bookTitle: string;
   bookAuthor: string;
 }
 
 export default function ProsperoPage({
   config,
-  books,
+  createBooks,
   bookTitle,
   bookAuthor,
 }: BaseProsperoProps): JSX.Element {
@@ -30,11 +30,13 @@ export default function ProsperoPage({
   }, []);
 
   useEffect(() => {
+    const books = createBooks();
+
     if (containerRef.current && books) {
       containerRef.current.appendChild(books);
       return () => books.prospero.destroy();
     }
-  }, [containerRef, books]);
+  }, [containerRef, createBooks]);
 
   return (
     <>

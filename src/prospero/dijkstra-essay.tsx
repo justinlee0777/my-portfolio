@@ -15,6 +15,7 @@ import { BookConfig } from 'prospero/types';
 
 import ProsperoPage from './base-page';
 import { DijkstraEssayPageProps } from '../page-utils/prospero/get-dijkstra-essay-props.function';
+import { useMemo } from 'react';
 
 export default function DijkstraEssayPage({
   config,
@@ -35,47 +36,51 @@ export default function DijkstraEssayPage({
     };
   }
 
-  const books = BooksComponent({
-    children: [
-      BookComponent(
-        galaxyFold,
-        {
-          ...getBookConfig('dijkstra-galaxy-fold-bookmark'),
-          pagesShown: 1,
-          listeners: [listenToClickEvents],
-          animation: new SinglePageBookAnimation(),
-        },
-        { classnames: [styles.book] }
-      ),
-      BookComponent(
-        iphoneXR,
-        {
-          media: { minWidth: 414 },
-          ...getBookConfig('dijkstra-iphone-bookmark'),
-          pagesShown: 1,
-          listeners: [listenToClickEvents],
-          animation: new SinglePageBookAnimation(),
-        },
-        { classnames: [styles.book] }
-      ),
-      BookComponent(
-        iphoneXR,
-        {
-          media: { minWidth: 818 },
-          ...getBookConfig('dijkstra-iphone-bookmark'),
-          pagesShown: 2,
-          listeners: [listenToClickEvents, listenToKeyboardEvents],
-          animation: new DoublePageBookAnimation(),
-        },
-        { classnames: [styles.book] }
-      ),
-    ],
-  });
+  const createBooks = useMemo(
+    () => () =>
+      BooksComponent({
+        children: [
+          BookComponent(
+            galaxyFold,
+            {
+              ...getBookConfig('dijkstra-galaxy-fold-bookmark'),
+              pagesShown: 1,
+              listeners: [listenToClickEvents],
+              animation: new SinglePageBookAnimation(),
+            },
+            { classnames: [styles.book] }
+          ),
+          BookComponent(
+            iphoneXR,
+            {
+              media: { minWidth: 414 },
+              ...getBookConfig('dijkstra-iphone-bookmark'),
+              pagesShown: 1,
+              listeners: [listenToClickEvents],
+              animation: new SinglePageBookAnimation(),
+            },
+            { classnames: [styles.book] }
+          ),
+          BookComponent(
+            iphoneXR,
+            {
+              media: { minWidth: 818 },
+              ...getBookConfig('dijkstra-iphone-bookmark'),
+              pagesShown: 2,
+              listeners: [listenToClickEvents, listenToKeyboardEvents],
+              animation: new DoublePageBookAnimation(),
+            },
+            { classnames: [styles.book] }
+          ),
+        ],
+      }),
+    []
+  );
 
   return (
     <ProsperoPage
       config={config}
-      books={books}
+      createBooks={createBooks}
       bookTitle="On the cruelty of really teaching computing science"
       bookAuthor="Edsger W. Dijkstra"
     ></ProsperoPage>

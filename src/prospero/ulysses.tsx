@@ -37,60 +37,63 @@ export default function UlyssesPage({
     []
   );
 
-  const books = useMemo(() => {
-    if (!(mobileStyles && desktopStyles)) {
-      return null;
-    }
+  const createBooks = useMemo(
+    () => () => {
+      if (!(mobileStyles && desktopStyles)) {
+        return null;
+      }
 
-    function getBookConfig(bookmarkKey: string): BookConfig {
-      return {
-        showBookmark: {
-          storage: {
-            get: () => JSON.parse(localStorage.getItem(bookmarkKey)),
-            save: (bookmarkData) =>
-              localStorage.setItem(bookmarkKey, JSON.stringify(bookmarkData)),
+      function getBookConfig(bookmarkKey: string): BookConfig {
+        return {
+          showBookmark: {
+            storage: {
+              get: () => JSON.parse(localStorage.getItem(bookmarkKey)),
+              save: (bookmarkData) =>
+                localStorage.setItem(bookmarkKey, JSON.stringify(bookmarkData)),
+            },
           },
+          showPagePicker: true,
+          theme: DefaultBookTheme,
+        };
+      }
+
+      const desktopBook = BookComponent(
+        {
+          getPage: (pageNumber) => desktopPages.get(pageNumber),
+          pageStyles: desktopStyles,
         },
-        showPagePicker: true,
-        theme: DefaultBookTheme,
-      };
-    }
-
-    const desktopBook = BookComponent(
-      {
-        getPage: (pageNumber) => desktopPages.get(pageNumber),
-        pageStyles: desktopStyles,
-      },
-      {
-        animation: new DoublePageBookAnimation(),
-        listeners: [listenToClickEvents, listenToKeyboardEvents],
-        pagesShown: 2,
-        media: {
-          minWidth: 750,
+        {
+          animation: new DoublePageBookAnimation(),
+          listeners: [listenToClickEvents, listenToKeyboardEvents],
+          pagesShown: 2,
+          media: {
+            minWidth: 750,
+          },
+          ...getBookConfig('desktop-ulysses-bookmark'),
         },
-        ...getBookConfig('desktop-ulysses-bookmark'),
-      },
-      { classnames: [styles.book] }
-    );
+        { classnames: [styles.book] }
+      );
 
-    const mobileBook = BookComponent(
-      {
-        getPage: (pageNumber) => mobilePages.get(pageNumber),
-        pageStyles: mobileStyles,
-      },
-      {
-        animation: new SinglePageBookAnimation(),
-        listeners: [listenToClickEvents],
-        pagesShown: 1,
-        ...getBookConfig('mobile-ulysses-bookmark'),
-      },
-      { classnames: [styles.book] }
-    );
+      const mobileBook = BookComponent(
+        {
+          getPage: (pageNumber) => mobilePages.get(pageNumber),
+          pageStyles: mobileStyles,
+        },
+        {
+          animation: new SinglePageBookAnimation(),
+          listeners: [listenToClickEvents],
+          pagesShown: 1,
+          ...getBookConfig('mobile-ulysses-bookmark'),
+        },
+        { classnames: [styles.book] }
+      );
 
-    return BooksComponent({
-      children: [mobileBook, desktopBook],
-    });
-  }, [mobileStyles, desktopStyles]);
+      return BooksComponent({
+        children: [mobileBook, desktopBook],
+      });
+    },
+    [mobileStyles, desktopStyles]
+  );
 
   useEffect(() => {
     Promise.all([
@@ -106,7 +109,7 @@ export default function UlyssesPage({
   return (
     <ProsperoPage
       config={config}
-      books={books}
+      createBooks={createBooks}
       bookTitle="Ulysses"
       bookAuthor="James Joyce"
     ></ProsperoPage>

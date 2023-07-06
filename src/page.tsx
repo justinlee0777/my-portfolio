@@ -2,7 +2,6 @@ import styles from './page.module.scss';
 
 import { useEffect, useMemo, useState } from 'react';
 import classNames from 'classnames';
-import { cloneDeep } from 'lodash-es';
 import Head from 'next/head';
 
 import { needsLoading } from './config/font.enum';
@@ -43,45 +42,57 @@ export default function Page({
   Component;
   pageProps: PageProps;
 }): JSX.Element {
-  const config = useMemo(() => {
-    return getPageDefaults() || pageProps.pageConfig;
-  }, []);
-
-  const [font, setFont] = useState(config.defaults.font);
-  const [theme, setTheme] = useState(config.defaults.theme);
-  const [animation, setAnimation] = useState(config.defaults.animation);
-  const [developerMode, setDeveloperMode] = useState(
-    config.defaults.developerMode
+  const [font, setFont] = useState<Font>(pageProps.pageConfig.defaults.font);
+  const [theme, setTheme] = useState<Theme>(
+    pageProps.pageConfig.defaults.theme
+  );
+  const [animation, setAnimation] = useState<SlideAnimation>(
+    pageProps.pageConfig.defaults.animation
+  );
+  const [developerMode, setDeveloperMode] = useState<boolean>(
+    pageProps.pageConfig.defaults.developerMode
   );
 
-  const [loading, setLoading] = useState(needsLoading(font));
+  const [fontLoading, setFontLoading] = useState(needsLoading(font));
   const [modal, setModal] = useState<JSX.Element | null>(null);
 
   const modalService = useMemo(() => new Modal(setModal), []);
 
+  useEffect(() => {
+    const savedConfig = getPageDefaults();
+
+    if (savedConfig) {
+      setFont(savedConfig.defaults.font);
+      setTheme(savedConfig.defaults.theme);
+      setAnimation(savedConfig.defaults.animation);
+      setDeveloperMode(savedConfig.defaults.developerMode);
+    }
+  }, []);
+
   // Saving page defaults into session storage
   useEffect(() => {
-    const clonedPageConfig = cloneDeep(config);
-    clonedPageConfig.defaults.font = font;
-    clonedPageConfig.defaults.theme = theme;
-    clonedPageConfig.defaults.animation = animation;
-    clonedPageConfig.defaults.developerMode = developerMode;
-
-    setPageDefaults(clonedPageConfig);
-  }, [config, font, theme, animation, developerMode]);
+    setPageDefaults({
+      defaults: {
+        font,
+        theme,
+        animation,
+        developerMode,
+      },
+    });
+  }, [font, theme, animation, developerMode]);
 
   // Loading fonts
   useEffect(() => {
-    if (loading) {
+    if (fontLoading) {
       loadFont(font).then(() => {
-        setLoading(false);
+        setFontLoading(false);
       });
     }
-  }, [loading, font]);
+  }, [fontLoading, font]);
 
   let loadingScreen: JSX.Element;
 
-  if (loading) {
+  if (fontLoading) {
     loadingScreen = (
       <Slide
         className={`${styles.slide} ${styles.loadingScreen}`}
@@ -110,7 +121,7 @@ export default function Page({
     developerMode,
     onFontChange: (font: Font) => {
       setFont(font);
-      setLoading(needsLoading(font));
+      setFontLoading(needsLoading(font));
     },
     onThemeChange: (theme: Theme) => setTheme(theme),
     onAnimationChange: (animation: SlideAnimation) => setAnimation(animation),

@@ -1,12 +1,6 @@
 import './styles.scss';
 
-import dynamic from 'next/dynamic';
-
-import { PageProps } from '../src/page';
-
-const Page = dynamic(() => import('../src/page'), {
-  ssr: false,
-});
+import Page, { PageProps } from '../src/page';
 
 interface ErrorPageProps {
   statusCode: number;

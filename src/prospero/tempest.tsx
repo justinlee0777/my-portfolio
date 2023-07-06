@@ -12,6 +12,7 @@ import {
   SinglePageBookAnimation,
 } from 'prospero/web/book/animations';
 import { BookConfig } from 'prospero/types';
+import { useMemo } from 'react';
 
 import ProsperoPage from './base-page';
 import { TempestPageProps } from '../page-utils/prospero/get-tempest-props.function';
@@ -34,36 +35,40 @@ export default function TempestPage({
     };
   }
 
-  const books = BooksComponent({
-    children: [
-      BookComponent(
-        pages,
-        {
-          ...getBookConfig('tempest-mobile-bookmark'),
-          pagesShown: 1,
-          listeners: [listenToClickEvents],
-          animation: new SinglePageBookAnimation(),
-        },
-        { classnames: [styles.book] }
-      ),
-      BookComponent(
-        pages,
-        {
-          ...getBookConfig('tempest-desktop-bookmark'),
-          media: { minWidth: 1125 },
-          pagesShown: 2,
-          listeners: [listenToClickEvents, listenToKeyboardEvents],
-          animation: new DoublePageBookAnimation(),
-        },
-        { classnames: [styles.book] }
-      ),
-    ],
-  });
+  const createBooks = useMemo(
+    () => () =>
+      BooksComponent({
+        children: [
+          BookComponent(
+            pages,
+            {
+              ...getBookConfig('tempest-mobile-bookmark'),
+              pagesShown: 1,
+              listeners: [listenToClickEvents],
+              animation: new SinglePageBookAnimation(),
+            },
+            { classnames: [styles.book] }
+          ),
+          BookComponent(
+            pages,
+            {
+              ...getBookConfig('tempest-desktop-bookmark'),
+              media: { minWidth: 1125 },
+              pagesShown: 2,
+              listeners: [listenToClickEvents, listenToKeyboardEvents],
+              animation: new DoublePageBookAnimation(),
+            },
+            { classnames: [styles.book] }
+          ),
+        ],
+      }),
+    []
+  );
 
   return (
     <ProsperoPage
       config={config}
-      books={books}
+      createBooks={createBooks}
       bookTitle="The Tempest"
       bookAuthor="William Shakespeare"
     ></ProsperoPage>
