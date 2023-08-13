@@ -1,4 +1,4 @@
-<span style="font-weight: bold;text-align: center;">Act I, Scene 1</span>
+<p><span style="font-weight: bold;text-align: center;">Act I, Scene 1</span>
 
 On a ship at sea: a tempestuous noise
 of thunder and lightning heard.
@@ -2447,4 +2447,4 @@ Unless I be relieved by prayer,
 Which pierces so that it assaults
 Mercy itself and frees all faults.
 As you from crimes would pardon'd be,
-Let your indulgence set me free.
+Let your indulgence set me free.</p>

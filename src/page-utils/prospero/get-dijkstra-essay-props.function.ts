@@ -47,7 +47,6 @@ export async function getStaticProps(): Promise<{
 
   const galaxyFold = new Pages(galaxyFoldStyles, text, [indentTransformer], {
     fontLocation: bookerlyLocation,
-    html: true,
   }).getData();
 
   const iphoneXRStyles: PageStyles = {
@@ -66,7 +65,6 @@ export async function getStaticProps(): Promise<{
 
   const iphoneXR = new Pages(iphoneXRStyles, text, [indentTransformer], {
     fontLocation: bookerlyLocation,
-    html: true,
   }).getData();
 
   return {
