@@ -59,6 +59,7 @@ export default function UlyssesPage({
 
       const desktopBook = BookComponent(
         {
+          html: false,
           getPage: (pageNumber) => desktopPages.get(pageNumber),
           pageStyles: desktopStyles,
         },
@@ -76,6 +77,7 @@ export default function UlyssesPage({
 
       const mobileBook = BookComponent(
         {
+          html: false,
           getPage: (pageNumber) => mobilePages.get(pageNumber),
           pageStyles: mobileStyles,
         },
