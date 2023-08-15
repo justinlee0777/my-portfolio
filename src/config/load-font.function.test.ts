@@ -5,13 +5,19 @@ describe('loadFont()', () => {
   let savedFont: Font;
   let savedUrl: string;
 
-  let addedFonts = [];
+  let addedFonts: Array<FontFace>;
 
   let loadCalled = false;
   class MockFontFace {
-    constructor(font: Font, url: string) {
-      savedFont = font;
+    weight;
+    style;
+
+    constructor(public family: Font, public url: string, public descriptors) {
+      savedFont = family;
       savedUrl = url;
+
+      this.weight = descriptors?.weight;
+      this.style = descriptors?.style;
     }
 
     load = jest.fn().mockImplementationOnce(() => {
@@ -21,11 +27,15 @@ describe('loadFont()', () => {
   }
   global.FontFace = <any>MockFontFace;
 
-  (<any>document.fonts) = {
-    add: jest
-      .fn()
-      .mockImplementationOnce((fontFace) => addedFonts.push(fontFace)),
-  };
+  beforeEach(() => {
+    addedFonts = [];
+
+    (<any>document.fonts) = {
+      add: jest
+        .fn()
+        .mockImplementation((fontFace) => addedFonts.push(fontFace)),
+    };
+  });
 
   afterEach(() => {
     jest.resetModules();
@@ -38,6 +48,23 @@ describe('loadFont()', () => {
     expect(savedUrl).toMatch(/url\(.*\)/);
 
     expect(addedFonts.length).toBe(1);
+
+    expect(loadCalled).toBe(true);
+  });
+
+  test('loads multiple font', async () => {
+    await loadFont(Font.BOOKERLY);
+
+    expect(savedFont).toBe(Font.BOOKERLY);
+
+    expect(addedFonts.length).toBe(3);
+
+    expect(addedFonts.map((font) => font.family)).toEqual(
+      Array(3).fill('Bookerly')
+    );
+
+    expect(addedFonts[1].weight).toBe('bold');
+    expect(addedFonts[2].style).toBe('italic');
 
     expect(loadCalled).toBe(true);
   });

@@ -34,8 +34,22 @@ export async function getStaticProps(): Promise<{ props: TempestPageProps }> {
     },
   };
 
+  const baseBookerlyPath = join(cwd(), 'public/Bookerly');
+
   const pages = new Pages(pageStyles, text, [], {
-    fontLocation: join(cwd(), 'public', getFontUrl(Font.BOOKERLY)),
+    fontLocation: [
+      {
+        url: join(baseBookerlyPath, '/Bookerly-Regular.ttf'),
+      },
+      {
+        url: join(baseBookerlyPath, '/Bookerly-Bold.ttf'),
+        weight: 'bold',
+      },
+      {
+        url: join(baseBookerlyPath, '/Bookerly-Italic.ttf'),
+        style: 'italic',
+      },
+    ],
     html: true,
   });
 

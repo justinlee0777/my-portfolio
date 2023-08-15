@@ -2,17 +2,25 @@ import { Font } from './font.enum';
 
 export function loadFont(font: Font): Promise<void> {
   const fontUrl = getFontUrl(font);
-  const fontFace = new FontFace(font, `url(${fontUrl})`);
+  const additionalFontUrls = getAdditionalFontSources(font);
 
-  document.fonts.add(fontFace);
+  const loadFonts = [[null, fontUrl], ...additionalFontUrls].map(
+    ([descriptor, url]: [FontFaceDescriptors, string]) => {
+      const fontFace = new FontFace(font, `url(${url})`, descriptor);
 
-  return fontFace.load().then();
+      document.fonts.add(fontFace);
+
+      return fontFace.load();
+    }
+  );
+
+  return Promise.all(loadFonts).then();
 }
 
 export function getFontUrl(font: Font): string {
   switch (font) {
     case Font.BOOKERLY:
-      return '/Bookerly-Regular.ttf';
+      return '/Bookerly/Bookerly-Regular.ttf';
     case Font.ROBOTO:
       return 'https://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92Fr1Mu7mxKKTU1Kvnz.woff2';
     case Font.TILT_PRISM:
@@ -21,5 +29,19 @@ export function getFontUrl(font: Font): string {
       return 'https://fonts.gstatic.com/s/eater/v21/mtG04_FCK7bOvquxsXBSsmsQ.woff2';
     default:
       throw new Error(`No font url for ${font}`);
+  }
+}
+
+export function getAdditionalFontSources(
+  font: Font
+): Array<[FontFaceDescriptors, string]> {
+  switch (font) {
+    case Font.BOOKERLY:
+      return [
+        [{ weight: 'bold' }, '/Bookerly/Bookerly-Bold.ttf'],
+        [{ style: 'italic' }, '/Bookerly/Bookerly-Italic.ttf'],
+      ];
+    default:
+      return [];
   }
 }
