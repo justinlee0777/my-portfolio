@@ -20,7 +20,6 @@ import { Navigation } from './components/navigation/navigation';
 import { UnitTestContext } from './contexts/unit-test.context';
 import { HomePageProps } from './page-utils/get-localized-homepage-props.function';
 import { BuzzwordBingoPageProps } from './page-utils/get-localized-buzzword-bingo-props.function';
-import { RpgGamePageProps } from './page-utils/get-localized-rpg-game-props.function';
 import { MusingPageProps } from './page-utils/get-musing-props.function';
 import { MusingsPageProps } from './page-utils/get-musings-props.function';
 import UnitTestCheck from './components/unit-test-check/unit-test-check';
@@ -30,7 +29,6 @@ import { Modal } from './services/modal';
 export type PageProps =
   | HomePageProps
   | BuzzwordBingoPageProps
-  | RpgGamePageProps
   | MusingPageProps
   | MusingsPageProps
   | RandomOfTheDayPageProps;
@@ -171,10 +169,6 @@ export default function Page({
           {
             displayName: 'Buzzword Bingo',
             url: `/${pageProps.locale}/buzzword-bingo`,
-          },
-          {
-            displayName: 'RPG',
-            url: `/${pageProps.locale}/rpg-game`,
           },
         ]}
       />

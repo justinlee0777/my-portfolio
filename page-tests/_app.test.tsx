@@ -79,7 +79,6 @@ import { PageConfig } from '../src/config/page.config';
 import { SlideAnimation } from '../src/config/slide-animation.enum';
 import { Theme } from '../src/config/theme.enum';
 import { UnitTestResults } from '../src/contexts/unit-test.context';
-import { RpgGamePageConfig } from '../src/rpg-game-page/rpg-game-page.config';
 import App from '../pages/_app';
 
 describe('<App/>', () => {
@@ -267,39 +266,5 @@ describe('<App/>', () => {
     });
 
     testChangingSettings('buzzword bingo', renderBuzzwordBingo);
-  });
-
-  describe('RpgGamePage', () => {
-    async function renderRpgGamePage(): Promise<RenderResult> {
-      return render(
-        <App
-          Component={mockComponent}
-          pageProps={{
-            locale: 'en',
-            route: '',
-            pageConfig,
-            rpgGameConfig: {} as RpgGamePageConfig,
-            openSettingsConfig: {} as any,
-            unitTestResult,
-            apiUrl: 'http://api.example.com',
-          }}
-        />
-      );
-    }
-
-    test('renders the rpg page', async () => {
-      const renderResult = await act(renderRpgGamePage);
-
-      const component = renderResult.queryByText('Component here');
-      expect(component).toBeTruthy();
-
-      const navigation = renderResult.queryByText('Navigation here');
-      expect(navigation).toBeTruthy();
-
-      const openSettings = renderResult.queryByText('Open Settings');
-      expect(openSettings).toBeTruthy();
-    });
-
-    testChangingSettings('rpg game', renderRpgGamePage);
   });
 });
