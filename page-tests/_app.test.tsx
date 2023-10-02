@@ -75,7 +75,7 @@ import {
 } from '@testing-library/react';
 
 import { Font } from '../src/config/font.enum';
-import { PageConfig } from '../src/config/page.config';
+import PageConfig from '../src/config/page-config.model';
 import { SlideAnimation } from '../src/config/slide-animation.enum';
 import { Theme } from '../src/config/theme.enum';
 import { UnitTestResults } from '../src/contexts/unit-test.context';
@@ -98,6 +98,7 @@ describe('<App/>', () => {
         animation: SlideAnimation.SWEEPY,
         developerMode: false,
       },
+      navigationLinks: [],
     };
 
     unitTestResult = {
@@ -170,9 +171,10 @@ describe('<App/>', () => {
           animation: SlideAnimation.SWOOPY,
           developerMode: true,
         },
+        navigationLinks: [],
       };
 
-      pageDefaults = config;
+      pageDefaults = config.defaults;
 
       const renderResult = await act(render);
 

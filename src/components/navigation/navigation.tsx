@@ -2,15 +2,7 @@ import styles from './navigation.module.scss';
 
 import Link from 'next/link';
 import classNames from 'classnames';
-
-export interface NavigationProps {
-  locale: string;
-  links: Array<{
-    displayName: string;
-    url: string;
-  }>;
-  className?: string;
-}
+import NavigationProps from './models/navigation-props.interface';
 
 export function Navigation({
   locale,

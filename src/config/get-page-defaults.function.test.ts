@@ -12,12 +12,10 @@ describe('getPageDefaults() and setPageDefaults()', () => {
     expect(getPageDefaults()).toBeNull();
 
     const defaults = {
-      defaults: {
-        font: Font.COMIC_SANS_MS,
-        theme: Theme.ULYSSES,
-        animation: SlideAnimation.MARQUEE,
-        developerMode: true,
-      },
+      font: Font.COMIC_SANS_MS,
+      theme: Theme.ULYSSES,
+      animation: SlideAnimation.MARQUEE,
+      developerMode: true,
     };
 
     setPageDefaults(defaults);

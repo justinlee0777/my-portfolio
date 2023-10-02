@@ -1,11 +1,11 @@
 import { defaultOpenSettingsConfig } from '../config/default-open-settings.config';
-import { pageConfig } from '../config/default-page.config';
-import { OpenSettingsConfig } from '../config/open-settings.config';
-import { PageConfig } from '../config/page.config';
 import { UnitTestResults } from '../contexts/unit-test.context';
 import { loadUnitTestResult } from '../utils/load-unit-test-result.function';
 import { translateObject } from '../utils/translate-object.function';
-import { getTranslationKeys as getOpenSettingsTranslationKeys } from '../config/open-settings.config';
+import getOpenSettingsTranslationKeys from '../components/open-settings/constants/translation-keys.const';
+import OpenSettingsConfig from '../components/open-settings/models/open-settings-config.interface';
+import PageConfig from '../config/page-config.model';
+import getPageConfig from '../config/default-page.config';
 
 export interface NavbarConfig {
   hide?: boolean;
@@ -32,7 +32,7 @@ export async function getBasePageProps(
   const props: BasePageProps = {
     locale,
     route,
-    pageConfig,
+    pageConfig: getPageConfig(locale),
     unitTestResult: loadUnitTestResult(),
     apiUrl: 'https://api.iamjustinlee.com',
   };

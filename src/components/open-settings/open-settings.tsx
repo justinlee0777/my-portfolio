@@ -3,9 +3,10 @@ import styles from './open-settings.module.scss';
 import classNames from 'classnames';
 import { useState } from 'react';
 
-import Settings, { SettingsProps } from '../settings/settings';
-import { OpenSettingsConfig } from '../../config/open-settings.config';
+import Settings from '../settings/settings';
 import UnitTestCheck from '../unit-test-check/unit-test-check';
+import OpenSettingsConfig from './models/open-settings-config.interface';
+import SettingsProps from '../settings/models/settings-props.interface';
 
 export interface OpenSettingsProps extends Omit<SettingsProps, 'config'> {
   config: OpenSettingsConfig;

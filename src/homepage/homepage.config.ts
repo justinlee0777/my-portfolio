@@ -1,8 +1,6 @@
 import { Link } from '../config/link.model';
-import {
-  SettingsConfig,
-  keysToTranslate as settingsKeysToTranslate,
-} from '../config/settings.config';
+import getSettingsTranslationKeys from '../components/settings/constants/translation-keys.const';
+import SettingsConfig from '../components/settings/models/settings-config.interface';
 
 export interface DeveloperDescriptionConfig {
   textContent: {
@@ -56,7 +54,7 @@ const keysToTranslate = [
   'seo.title',
   'seo.description',
   ...developerDescriptionKeys,
-  ...settingsKeysToTranslate.map((key) => `settings.${key}`),
+  ...getSettingsTranslationKeys().map((key) => `settings.${key}`),
 ];
 
 export function getTranslationKeys(config: HomepageConfig): Array<string> {

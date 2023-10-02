@@ -1,9 +1,9 @@
 import { getStorage } from '../utils/get-storage.function';
-import { PageConfig } from './page.config';
+import PageConfig from './page-config.model';
 
 const storageKey = 'app-settings';
 
-export function getPageDefaults(): PageConfig | undefined {
+export function getPageDefaults(): PageConfig['defaults'] | undefined {
   const stringifiedObject = getStorage().getItem(storageKey);
 
   try {
@@ -13,6 +13,6 @@ export function getPageDefaults(): PageConfig | undefined {
   }
 }
 
-export function setPageDefaults(pageConfig: PageConfig): void {
-  getStorage().setItem(storageKey, JSON.stringify(pageConfig));
+export function setPageDefaults(pageDefaults: PageConfig['defaults']): void {
+  getStorage().setItem(storageKey, JSON.stringify(pageDefaults));
 }

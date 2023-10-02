@@ -7,31 +7,11 @@ import { Font } from '../../config/font.enum';
 import { SlideAnimation } from '../../config/slide-animation.enum';
 import { Theme } from '../../config/theme.enum';
 import { createLinkElement } from '../../config/link.model';
-import { SettingsConfig } from '../../config/settings.config';
 import UnitTestCheck from '../unit-test-check/unit-test-check';
 import Switch from '../switch/switch';
 import { locales } from '../../page-utils/locales.config';
-
-export interface SettingsProps {
-  config: SettingsConfig;
-  font: string;
-  theme: string;
-  animation: string;
-  developerMode: boolean;
-  onFontChange: (font: Font) => void;
-  onThemeChange: (theme: Theme) => void;
-  onAnimationChange: (animation: SlideAnimation) => void;
-  onDeveloperModeChange: (developerMode: boolean) => void;
-
-  route?: string;
-}
-
-interface SettingsSection {
-  enumeratedType: { [key: string]: string };
-  legend: string;
-  selectedValue: string;
-  onChange: (value: string) => void;
-}
+import SettingsProps from './models/settings-props.interface';
+import SettingsSection from './models/settings-section.interface';
 
 export default function Settings({
   config,

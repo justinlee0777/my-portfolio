@@ -1,5 +1,5 @@
 import { Font } from '../config/font.enum';
-import { PageConfig } from '../config/page.config';
+import PageConfig from '../config/page-config.model';
 import { SlideAnimation } from '../config/slide-animation.enum';
 import { Theme } from '../config/theme.enum';
 
@@ -10,4 +10,5 @@ export const coverLetterPageConfig: PageConfig = {
     animation: SlideAnimation.NONE,
     developerMode: false,
   },
+  navigationLinks: [],
 };

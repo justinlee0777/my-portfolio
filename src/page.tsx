@@ -40,15 +40,15 @@ export default function Page({
   Component;
   pageProps: PageProps;
 }): JSX.Element {
-  const [font, setFont] = useState<Font>(pageProps.pageConfig.defaults.font);
-  const [theme, setTheme] = useState<Theme>(
-    pageProps.pageConfig.defaults.theme
-  );
+  const pageDefaults = pageProps.pageConfig.defaults;
+
+  const [font, setFont] = useState<Font>(pageDefaults.font);
+  const [theme, setTheme] = useState<Theme>(pageDefaults.theme);
   const [animation, setAnimation] = useState<SlideAnimation>(
-    pageProps.pageConfig.defaults.animation
+    pageDefaults.animation
   );
   const [developerMode, setDeveloperMode] = useState<boolean>(
-    pageProps.pageConfig.defaults.developerMode
+    pageDefaults.developerMode
   );
 
   const [fontLoading, setFontLoading] = useState(needsLoading(font));
@@ -60,22 +60,20 @@ export default function Page({
     const savedConfig = getPageDefaults();
 
     if (savedConfig) {
-      setFont(savedConfig.defaults.font);
-      setTheme(savedConfig.defaults.theme);
-      setAnimation(savedConfig.defaults.animation);
-      setDeveloperMode(savedConfig.defaults.developerMode);
+      setFont(savedConfig.font);
+      setTheme(savedConfig.theme);
+      setAnimation(savedConfig.animation);
+      setDeveloperMode(savedConfig.developerMode);
     }
   }, []);
 
   // Saving page defaults into session storage
   useEffect(() => {
     setPageDefaults({
-      defaults: {
-        font,
-        theme,
-        animation,
-        developerMode,
-      },
+      font,
+      theme,
+      animation,
+      developerMode,
     });
   }, [font, theme, animation, developerMode]);
 
@@ -153,24 +151,7 @@ export default function Page({
       <Navigation
         className={navigationClassnames}
         locale={pageProps.locale}
-        links={[
-          {
-            displayName: 'Random of the Day',
-            url: `/${pageProps.locale}/random-of-the-day`,
-          },
-          {
-            displayName: 'Prospero',
-            url: '/prospero',
-          },
-          {
-            displayName: 'Musings',
-            url: '/musings',
-          },
-          {
-            displayName: 'Buzzword Bingo',
-            url: `/${pageProps.locale}/buzzword-bingo`,
-          },
-        ]}
+        links={pageProps.pageConfig.navigationLinks}
       />
     );
 

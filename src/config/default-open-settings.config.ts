@@ -1,4 +1,4 @@
-import { OpenSettingsConfig } from './open-settings.config';
+import OpenSettingsConfig from '../components/open-settings/models/open-settings-config.interface';
 
 export const defaultOpenSettingsConfig: OpenSettingsConfig = {
   settings: {

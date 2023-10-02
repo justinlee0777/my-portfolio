@@ -9,11 +9,11 @@ import {
 } from '@testing-library/react';
 
 import { Font } from '../../config/font.enum';
-import { OpenSettingsConfig } from '../../config/open-settings.config';
 import { SlideAnimation } from '../../config/slide-animation.enum';
 import { Theme } from '../../config/theme.enum';
 
 import OpenSettings from './open-settings';
+import OpenSettingsConfig from './models/open-settings-config.interface';
 
 describe('<OpenSettings/>', () => {
   const config: OpenSettingsConfig = {

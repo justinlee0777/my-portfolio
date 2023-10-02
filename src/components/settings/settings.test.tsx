@@ -43,8 +43,8 @@ import {
 import { Font } from '../../config/font.enum';
 import { SlideAnimation } from '../../config/slide-animation.enum';
 import { Theme } from '../../config/theme.enum';
-import { SettingsConfig } from '../../config/settings.config';
 import Settings from './settings';
+import SettingsConfig from './models/settings-config.interface';
 
 describe('<Settings/>', () => {
   const config: SettingsConfig = {
