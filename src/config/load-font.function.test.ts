@@ -1,5 +1,5 @@
-import { Font } from './font.enum';
-import { getFontUrl, loadFont } from './load-font.function';
+import Font from '../models/font.enum';
+import loadFont from './load-font.function';
 
 describe('loadFont()', () => {
   let savedFont: Font;
@@ -67,17 +67,5 @@ describe('loadFont()', () => {
     expect(addedFonts[2].style).toBe('italic');
 
     expect(loadCalled).toBe(true);
-  });
-});
-
-describe('getFontUrl()', () => {
-  test('gets the font URL if the font is not provided in the browser', () => {
-    expect(() => getFontUrl(Font.ARIAL)).toThrow('No font url for Arial');
-
-    expect(() => getFontUrl(Font.COMIC_SANS_MS)).toThrow(
-      'No font url for Comic Sans MS'
-    );
-
-    expect(() => getFontUrl(Font.ROBOTO)).toBeTruthy();
   });
 });

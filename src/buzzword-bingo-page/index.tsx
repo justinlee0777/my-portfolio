@@ -6,12 +6,12 @@ import { useEffect, useRef, useState } from 'react';
 
 import Slide from '../components/slide/slide';
 import { BuzzwordBingoConfig } from './buzzword-bingo.config';
-import { SlideAnimation } from '../config/slide-animation.enum';
 import UnitTestCheck from '../components/unit-test-check/unit-test-check';
 import {
   AnimatedSlides,
   animateSlides,
 } from '../utils/animate-slides.function';
+import SlideAnimation from '../models/slide-animation.enum';
 
 export interface BuzzwordBingoProps {
   buzzwordBingoConfig: BuzzwordBingoConfig;

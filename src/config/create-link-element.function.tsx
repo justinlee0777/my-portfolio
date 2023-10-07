@@ -1,10 +1,6 @@
-export interface Link {
-  /** Use ${link text content} to replace with links. The number of ${link text content} should be equal to the number of elements in the 'urls', and the order should be the same. */
-  templateString: string;
-  urls: Array<string>;
-}
+import LinkedString from '../models/linked-string.model';
 
-export function createLinkElement(link: Link): string {
+export default function createLinkElement(link: LinkedString): string {
   const pattern = /\$\{.*?\}/g;
 
   let index = 0;

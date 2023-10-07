@@ -1,4 +1,4 @@
-import { Link } from '../config/link.model';
+import LinkedString from '../models/linked-string.model';
 
 export enum RandomType {
   POEM = 'poem',
@@ -46,7 +46,7 @@ export interface RandomOfTheDayConfig {
     };
     obliqueStrategyOfTheDay: {
       header: string;
-      explanation: Link;
+      explanation: LinkedString;
     };
   };
 }

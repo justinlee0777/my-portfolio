@@ -1,6 +1,6 @@
-import { Link } from '../config/link.model';
 import getSettingsTranslationKeys from '../components/settings/constants/translation-keys.const';
 import SettingsConfig from '../components/settings/models/settings-config.interface';
+import LinkedString from '../models/linked-string.model';
 
 export interface DeveloperDescriptionConfig {
   textContent: {
@@ -9,13 +9,13 @@ export interface DeveloperDescriptionConfig {
     tongueInCheck: string;
     profileCaption: string;
     profileDescription: string;
-    profileErrorMessage: Link;
+    profileErrorMessage: LinkedString;
   };
 }
 
 export interface ResumeConfig {
   textContent: {
-    lines: Array<string | Link>;
+    lines: Array<string | LinkedString>;
   };
 }
 

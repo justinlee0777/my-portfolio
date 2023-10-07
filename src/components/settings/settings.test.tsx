@@ -40,11 +40,11 @@ import {
   screen,
 } from '@testing-library/react';
 
-import { Font } from '../../config/font.enum';
-import { SlideAnimation } from '../../config/slide-animation.enum';
-import { Theme } from '../../config/theme.enum';
 import Settings from './settings';
 import SettingsConfig from './models/settings-config.interface';
+import Font from '../../models/font.enum';
+import Theme from '../../models/theme.enum';
+import SlideAnimation from '../../models/slide-animation.enum';
 
 describe('<Settings/>', () => {
   const config: SettingsConfig = {

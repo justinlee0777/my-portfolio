@@ -8,12 +8,11 @@ import {
   fireEvent,
 } from '@testing-library/react';
 
-import { Font } from '../../config/font.enum';
-import { SlideAnimation } from '../../config/slide-animation.enum';
-import { Theme } from '../../config/theme.enum';
-
 import OpenSettings from './open-settings';
 import OpenSettingsConfig from './models/open-settings-config.interface';
+import Font from '../../models/font.enum';
+import Theme from '../../models/theme.enum';
+import SlideAnimation from '../../models/slide-animation.enum';
 
 describe('<OpenSettings/>', () => {
   const config: OpenSettingsConfig = {

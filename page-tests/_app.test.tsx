@@ -56,12 +56,9 @@ jest.mock('../src/config/get-page-defaults.function', () => {
 
 let loadFontReturnValue;
 
-jest.mock('../src/config/load-font.function', () => {
-  return {
-    __esModule: true,
-    loadFont: jest.fn().mockImplementation(() => loadFontReturnValue),
-  };
-});
+jest.mock('../src/config/load-font.function', () =>
+  jest.fn().mockImplementation(() => loadFontReturnValue)
+);
 
 import Page from '../src/page';
 jest.mock('next/dynamic', () => () => Page);
@@ -74,12 +71,12 @@ import {
   waitForElementToBeRemoved,
 } from '@testing-library/react';
 
-import { Font } from '../src/config/font.enum';
-import PageConfig from '../src/config/page-config.model';
-import { SlideAnimation } from '../src/config/slide-animation.enum';
-import { Theme } from '../src/config/theme.enum';
+import PageConfig from '../src/models/page-config.model';
 import { UnitTestResults } from '../src/contexts/unit-test.context';
 import App from '../pages/_app';
+import Font from '../src/models/font.enum';
+import Theme from '../src/models/theme.enum';
+import SlideAnimation from '../src/models/slide-animation.enum';
 
 describe('<App/>', () => {
   let mockComponent: jest.Mock;

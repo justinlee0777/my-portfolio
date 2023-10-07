@@ -4,11 +4,11 @@ import Slide from '../../../components/slide/slide';
 import LoadingScreen from '../../../components/loading-screen/loading-screen';
 import { Fact } from '../../fact.interface';
 import { getFact } from '../../random-of-the-day.api';
-import { createLinkElement } from '../../../config/link.model';
 import ErrorScreen from '../../../components/error-screen/error-screen';
 import UnitTestCheck from '../../../components/unit-test-check/unit-test-check';
 import { useApi } from '../../../utils/hooks/use-api.hook';
 import { BaseSectionProps } from '../base-section.props';
+import createLinkElement from '../../../config/create-link-element.function';
 
 interface RandomFactOfTheDayProps extends BaseSectionProps {
   credit: string;

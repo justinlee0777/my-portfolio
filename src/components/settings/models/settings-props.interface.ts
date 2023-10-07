@@ -1,6 +1,6 @@
-import { Font } from '../../../config/font.enum';
-import { SlideAnimation } from '../../../config/slide-animation.enum';
-import { Theme } from '../../../config/theme.enum';
+import Font from '../../../models/font.enum';
+import SlideAnimation from '../../../models/slide-animation.enum';
+import Theme from '../../../models/theme.enum';
 import SettingsConfig from './settings-config.interface';
 
 export default interface SettingsProps {

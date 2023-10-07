@@ -11,11 +11,12 @@ import UnitTestCheck from '../../../components/unit-test-check/unit-test-check';
 import Slide from '../../../components/slide/slide';
 import { useState } from 'react';
 import classNames from 'classnames';
-import { Link, createLinkElement } from '../../../config/link.model';
+import LinkedString from '../../../models/linked-string.model';
+import createLinkElement from '../../../config/create-link-element.function';
 
 interface ObliqueStrategyProps extends BaseSectionProps {
   randomOfTheDayApiUrl: string;
-  explanation: Link;
+  explanation: LinkedString;
 }
 
 export default function RandomObliqueStrategyOfTheDay({

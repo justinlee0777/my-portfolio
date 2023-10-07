@@ -4,11 +4,6 @@ import { useEffect, useMemo, useState } from 'react';
 import classNames from 'classnames';
 import Head from 'next/head';
 
-import { needsLoading } from './config/font.enum';
-import { loadFont } from './config/load-font.function';
-import { Font } from './config/font.enum';
-import { SlideAnimation } from './config/slide-animation.enum';
-import { Theme } from './config/theme.enum';
 import LoadingScreen from './components/loading-screen/loading-screen';
 import Slide from './components/slide/slide';
 import {
@@ -25,6 +20,11 @@ import { MusingsPageProps } from './page-utils/get-musings-props.function';
 import UnitTestCheck from './components/unit-test-check/unit-test-check';
 import { RandomOfTheDayPageProps } from './page-utils/get-localized-random-of-the-day-props.function';
 import { Modal } from './services/modal';
+import needsLoading from './config/needs-loading.function';
+import SlideAnimation from './models/slide-animation.enum';
+import Theme from './models/theme.enum';
+import Font from './models/font.enum';
+import loadFont from './config/load-font.function';
 
 export type PageProps =
   | HomePageProps

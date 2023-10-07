@@ -4,7 +4,6 @@ import styles from './random-painting-of-the-day.module.scss';
 import { useEffect, useState } from 'react';
 
 import Slide from '../../../components/slide/slide';
-import { createLinkElement } from '../../../config/link.model';
 import { Painting } from '../../painting.interface';
 import LoadingScreen from '../../../components/loading-screen/loading-screen';
 import ErrorScreen from '../../../components/error-screen/error-screen';
@@ -15,6 +14,7 @@ import { Modal } from '../../../services/modal';
 import { useApi } from '../../../utils/hooks/use-api.hook';
 import { getPainting } from '../../random-of-the-day.api';
 import { BaseSectionProps } from '../base-section.props';
+import createLinkElement from '../../../config/create-link-element.function';
 
 interface RandomPaintingOfTheDayProps extends BaseSectionProps {
   modal: Modal;

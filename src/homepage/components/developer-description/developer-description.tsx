@@ -5,8 +5,8 @@ import Image from 'next/image';
 import classNames from 'classnames';
 
 import { DeveloperDescriptionConfig } from '../../homepage.config';
-import { createLinkElement } from '../../../config/link.model';
 import UnitTestCheck from '../../../components/unit-test-check/unit-test-check';
+import createLinkElement from '../../../config/create-link-element.function';
 
 export default function DeveloperDescription({
   config,

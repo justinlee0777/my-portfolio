@@ -3,13 +3,13 @@ import { PagesOutput, PageStyles } from 'prospero/types';
 import { join } from 'path';
 import { cwd } from 'process';
 
-import { getFontUrl } from '../../config/load-font.function';
-import { Font } from '../../config/font.enum';
 import {
   ProsperoPageProps,
   getBaseProsperoProps,
 } from './get-base-props.function';
 import readFile from '../../utils/read-file.function';
+import getFontUrl from '../../config/get-font-url.function';
+import Font from '../../models/font.enum';
 
 export interface DijkstraEssayPageProps extends ProsperoPageProps {
   galaxyFold: PagesOutput;

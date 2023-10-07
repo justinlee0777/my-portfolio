@@ -19,8 +19,8 @@ import { useRef, useState } from 'react';
 import Slide from '../../../components/slide/slide';
 import { MusingConfig } from './musing.config';
 import UnitTestCheck from '../../../components/unit-test-check/unit-test-check';
-import { Font } from '../../../config/font.enum';
 import Switch from '../../../components/switch/switch';
+import Font from '../../../models/font.enum';
 
 export interface MusingPageProps {
   config: MusingConfig;

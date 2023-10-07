@@ -3,15 +3,15 @@ import styles from './settings.module.scss';
 import Link from 'next/link';
 
 import RadioGroup, { RadioGroupOption } from '../radiogroup/radiogroup';
-import { Font } from '../../config/font.enum';
-import { SlideAnimation } from '../../config/slide-animation.enum';
-import { Theme } from '../../config/theme.enum';
-import { createLinkElement } from '../../config/link.model';
 import UnitTestCheck from '../unit-test-check/unit-test-check';
 import Switch from '../switch/switch';
 import { locales } from '../../page-utils/locales.config';
 import SettingsProps from './models/settings-props.interface';
 import SettingsSection from './models/settings-section.interface';
+import Font from '../../models/font.enum';
+import Theme from '../../models/theme.enum';
+import SlideAnimation from '../../models/slide-animation.enum';
+import createLinkElement from '../../config/create-link-element.function';
 
 export default function Settings({
   config,

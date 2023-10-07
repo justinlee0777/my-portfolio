@@ -9,13 +9,13 @@ import Resume from './components/resume/resume';
 import Settings from '../components/settings/settings';
 import Slide from '../components/slide/slide';
 import { HomepageConfig } from './homepage.config';
-import { Font } from '../config/font.enum';
-import { SlideAnimation } from '../config/slide-animation.enum';
-import { Theme } from '../config/theme.enum';
 import {
   AnimatedSlides,
   animateSlides,
 } from '../utils/animate-slides.function';
+import Font from '../models/font.enum';
+import Theme from '../models/theme.enum';
+import SlideAnimation from '../models/slide-animation.enum';
 
 export interface HomepageProps {
   locale: string;

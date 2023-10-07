@@ -3,8 +3,6 @@ import { PagesOutput, PageStyles } from 'prospero/types';
 import { join } from 'path';
 import { cwd } from 'process';
 
-import { getFontUrl } from '../../config/load-font.function';
-import { Font } from '../../config/font.enum';
 import {
   getBaseProsperoProps,
   ProsperoPageProps,

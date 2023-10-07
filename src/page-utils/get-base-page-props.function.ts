@@ -4,7 +4,7 @@ import { loadUnitTestResult } from '../utils/load-unit-test-result.function';
 import { translateObject } from '../utils/translate-object.function';
 import getOpenSettingsTranslationKeys from '../components/open-settings/constants/translation-keys.const';
 import OpenSettingsConfig from '../components/open-settings/models/open-settings-config.interface';
-import PageConfig from '../config/page-config.model';
+import PageConfig from '../models/page-config.model';
 import getPageConfig from '../config/default-page.config';
 
 export interface NavbarConfig {

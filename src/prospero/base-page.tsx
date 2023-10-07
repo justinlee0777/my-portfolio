@@ -6,9 +6,9 @@ import { useEffect, useRef } from 'react';
 
 import ProsperoConfig from './prospero.config';
 import Slide from '../components/slide/slide';
-import { createLinkElement } from '../config/link.model';
-import { loadFont } from '../config/load-font.function';
-import { Font } from '../config/font.enum';
+import loadFont from '../config/load-font.function';
+import Font from '../models/font.enum';
+import createLinkElement from '../config/create-link-element.function';
 
 export interface BaseProsperoProps {
   config: ProsperoConfig;

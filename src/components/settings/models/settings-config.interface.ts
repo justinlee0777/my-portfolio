@@ -1,4 +1,4 @@
-import { Link } from '../../../config/link.model';
+import LinkedString from '../../../models/linked-string.model';
 
 export default interface SettingsConfig {
   textContent: {
@@ -6,10 +6,10 @@ export default interface SettingsConfig {
     subheader: string;
     prompt: string;
     explanation: {
-      translation: Link;
-      marquee: Link;
-      tiltPrism: Link;
-      eater: Link;
+      translation: LinkedString;
+      marquee: LinkedString;
+      tiltPrism: LinkedString;
+      eater: LinkedString;
       developerMode: string;
     };
   };

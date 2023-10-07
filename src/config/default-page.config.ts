@@ -1,7 +1,7 @@
-import { Font } from './font.enum';
-import PageConfig from './page-config.model';
-import { SlideAnimation } from './slide-animation.enum';
-import { Theme } from './theme.enum';
+import Font from '../models/font.enum';
+import SlideAnimation from '../models/slide-animation.enum';
+import Theme from '../models/theme.enum';
+import PageConfig from '../models/page-config.model';
 
 export default function getPageConfig(locale: string): PageConfig {
   return {

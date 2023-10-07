@@ -15,9 +15,9 @@ import {
   AnimatedSlides,
   animateSlides,
 } from '../utils/animate-slides.function';
-import { SlideAnimation } from '../config/slide-animation.enum';
 import { Modal } from '../services/modal';
 import RandomOfTheDaySection from './sections/random-of-the-day-section';
+import SlideAnimation from '../models/slide-animation.enum';
 
 export interface RandomOfTheDayPageProps {
   modal: Modal;
