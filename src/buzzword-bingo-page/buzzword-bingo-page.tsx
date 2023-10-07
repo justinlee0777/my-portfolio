@@ -5,18 +5,12 @@ import Head from 'next/head';
 import { useEffect, useRef, useState } from 'react';
 
 import Slide from '../components/slide/slide';
-import { BuzzwordBingoConfig } from './buzzword-bingo.config';
 import UnitTestCheck from '../components/unit-test-check/unit-test-check';
 import {
   AnimatedSlides,
   animateSlides,
 } from '../utils/animate-slides.function';
-import SlideAnimation from '../models/slide-animation.enum';
-
-export interface BuzzwordBingoProps {
-  buzzwordBingoConfig: BuzzwordBingoConfig;
-  animation: SlideAnimation;
-}
+import BuzzwordBingoProps from './models/buzzword-bingo-page-props.model';
 
 export default function BuzzwordBingoPage({
   buzzwordBingoConfig,

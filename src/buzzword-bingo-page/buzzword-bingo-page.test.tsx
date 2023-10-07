@@ -13,9 +13,9 @@ jest.mock('../utils/animate-slides.function', () => {
 
 import { cleanup, render, screen } from '@testing-library/react';
 
-import { BuzzwordBingoConfig } from './buzzword-bingo.config';
-import BuzzwordBingoPage from './index';
+import BuzzwordBingoPage from './buzzword-bingo-page';
 import SlideAnimation from '../models/slide-animation.enum';
+import BuzzwordBingoConfig from './models/buzzword-bingo-config.model';
 
 describe('<BuzzwordBingoPage/>', () => {
   const buzzwordBingoConfig: BuzzwordBingoConfig = {
