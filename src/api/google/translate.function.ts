@@ -1,9 +1,9 @@
-import { googleTranslateClient } from './translate.client';
+import googleTranslateClient from './translate.client';
 
 /**
  * @returns the strings translated preserved in the order they were sent (as I trust Google to preserve ordinality).
  */
-export async function translate(
+export default async function translate(
   strings: Array<string>,
   targetLang: string,
   sourceLang = 'en'

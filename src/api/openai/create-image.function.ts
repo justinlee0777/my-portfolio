@@ -1,10 +1,9 @@
-import { CreateImageRequest } from 'openai';
+import CreateImageParams from './create-image-params.type';
+import openAIApi from './open-ai.client';
 
-import { openAIApi } from './open-ai.client';
-
-export type CreateImageParams = Omit<CreateImageRequest, 'n'>;
-
-export async function createImage(params: CreateImageParams): Promise<string> {
+export default async function createImage(
+  params: CreateImageParams
+): Promise<string> {
   return openAIApi
     .createImage({
       ...params,

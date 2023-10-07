@@ -1,4 +1,4 @@
-import { createImage } from '../api/openai';
+import createImage from '../api/openai/create-image.function';
 import { homepageConfig } from '../homepage/default-homepage.config';
 import {
   getTranslationKeys,
