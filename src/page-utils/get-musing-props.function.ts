@@ -1,5 +1,5 @@
-import { MusingFiles } from '../musings/get-musings-from-files.function';
 import { MusingConfig } from '../musings/components/musing/musing.config';
+import { MusingFiles } from '../musings/get-musings-from-files.function';
 import {
   BasePageProps,
   getBasePageProps,

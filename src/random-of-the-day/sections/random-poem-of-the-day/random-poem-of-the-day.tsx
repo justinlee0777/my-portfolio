@@ -1,12 +1,12 @@
 import slideStyles from '../slide.module.scss';
 import styles from './random-poem-of-the-day.module.scss';
 
-import Slide from '../../../components/slide/slide';
-import { Poem } from '../../poem.interface';
-import LoadingScreen from '../../../components/loading-screen/loading-screen';
 import ErrorScreen from '../../../components/error-screen/error-screen';
+import LoadingScreen from '../../../components/loading-screen/loading-screen';
+import Slide from '../../../components/slide/slide';
 import UnitTestCheck from '../../../components/unit-test-check/unit-test-check';
 import { useApi } from '../../../utils/hooks/use-api.hook';
+import { Poem } from '../../poem.interface';
 import { getPoem } from '../../random-of-the-day.api';
 import { BaseSectionProps } from '../base-section.props';
 

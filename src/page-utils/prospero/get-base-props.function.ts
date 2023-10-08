@@ -1,9 +1,9 @@
+import defaultProsperoConfig from '../../prospero/default-prospero.config';
+import ProsperoConfig from '../../prospero/prospero.config';
 import {
   BasePageProps,
   getBasePageProps,
 } from '../get-base-page-props.function';
-import ProsperoConfig from '../../prospero/prospero.config';
-import defaultProsperoConfig from '../../prospero/default-prospero.config';
 
 export interface ProsperoPageProps extends BasePageProps {
   config: ProsperoConfig;

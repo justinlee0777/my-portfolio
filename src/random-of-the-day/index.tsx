@@ -1,23 +1,23 @@
 import styles from './index.module.scss';
 
+import classNames from 'classnames';
 import Head from 'next/head';
 import { useContext, useEffect, useState } from 'react';
-import classNames from 'classnames';
 
-import { RandomOfTheDayConfig, RandomType } from './random-of-the-day.config';
 import FieldSet from '../components/fieldset/fieldset';
 import OrderableList from '../components/orderable-list/orderable-list';
-import {
-  getRandomOfTheDayConfig,
-  setRandomOfTheDayConfig,
-} from './utils/random-of-the-day-config.function';
+import SettingsContext from '../contexts/settings/settings.context';
+import { Modal } from '../services/modal';
 import {
   AnimatedSlides,
   animateSlides,
 } from '../utils/animate-slides.function';
-import { Modal } from '../services/modal';
+import { RandomOfTheDayConfig, RandomType } from './random-of-the-day.config';
 import RandomOfTheDaySection from './sections/random-of-the-day-section';
-import SettingsContext from '../contexts/settings/settings.context';
+import {
+  getRandomOfTheDayConfig,
+  setRandomOfTheDayConfig,
+} from './utils/random-of-the-day-config.function';
 
 export interface RandomOfTheDayPageProps {
   modal: Modal;

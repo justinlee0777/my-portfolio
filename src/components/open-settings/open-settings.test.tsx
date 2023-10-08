@@ -2,14 +2,14 @@ jest.mock('../settings/settings', () => () => <div></div>);
 
 import {
   cleanup,
-  render,
-  screen,
-  RenderResult,
   fireEvent,
+  render,
+  RenderResult,
+  screen,
 } from '@testing-library/react';
 
-import OpenSettings from './open-settings';
 import OpenSettingsConfig from './models/open-settings-config.interface';
+import OpenSettings from './open-settings';
 
 describe('<OpenSettings/>', () => {
   const config: OpenSettingsConfig = {

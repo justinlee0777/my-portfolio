@@ -20,8 +20,8 @@ jest.mock('../../../components/unit-test-check/unit-test-check', () => () => (
 
 import { render, RenderResult } from '@testing-library/react';
 
-import Musing from './musing';
 import Font from '../../../models/font.enum';
+import Musing from './musing';
 
 describe('<Musing/>', () => {
   function renderMusing(): RenderResult {

@@ -4,8 +4,8 @@ import Head from 'next/head';
 
 import Slide from '../components/slide/slide';
 import { MusingConfig } from './components/musing/musing.config';
-import { MusingsPageConfig } from './musings-page.config';
 import Musings from './components/musings/musings';
+import { MusingsPageConfig } from './musings-page.config';
 
 export interface MusingsPageProps {
   config: MusingsPageConfig;

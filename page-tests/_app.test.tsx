@@ -58,20 +58,14 @@ jest.mock('../src/config/load-font.function', () =>
 import Page from '../src/page';
 jest.mock('next/dynamic', () => () => Page);
 
-import {
-  act,
-  cleanup,
-  render,
-  RenderResult,
-  waitForElementToBeRemoved,
-} from '@testing-library/react';
+import { act, cleanup, render, RenderResult } from '@testing-library/react';
 
-import PageConfig from '../src/models/page-config.model';
 import App from '../pages/_app';
-import Font from '../src/models/font.enum';
-import Theme from '../src/models/theme.enum';
-import SlideAnimation from '../src/models/slide-animation.enum';
 import { UnitTestResults } from '../src/contexts/unit-test/unit-test-results.model';
+import Font from '../src/models/font.enum';
+import PageConfig from '../src/models/page-config.model';
+import SlideAnimation from '../src/models/slide-animation.enum';
+import Theme from '../src/models/theme.enum';
 
 describe('<App/>', () => {
   let mockComponent: jest.Mock;

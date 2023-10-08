@@ -1,7 +1,7 @@
-import { MusingFiles } from '../musings/get-musings-from-files.function';
-import { defaultMusingsPageConfig } from '../musings/default-musings-page.config';
-import { MusingsPageConfig } from '../musings/musings-page.config';
 import { MusingConfig } from '../musings/components/musing/musing.config';
+import { defaultMusingsPageConfig } from '../musings/default-musings-page.config';
+import { MusingFiles } from '../musings/get-musings-from-files.function';
+import { MusingsPageConfig } from '../musings/musings-page.config';
 import {
   BasePageProps,
   getBasePageProps,

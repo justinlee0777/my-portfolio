@@ -3,18 +3,18 @@ import styles from './random-painting-of-the-day.module.scss';
 
 import { useEffect, useState } from 'react';
 
-import Slide from '../../../components/slide/slide';
-import { Painting } from '../../painting.interface';
-import LoadingScreen from '../../../components/loading-screen/loading-screen';
 import ErrorScreen from '../../../components/error-screen/error-screen';
-import { loadImage } from '../../../utils/load-image.function';
-import HighResImageDialog from './high-res-image-dialog/high-res-image-dialog';
+import LoadingScreen from '../../../components/loading-screen/loading-screen';
+import Slide from '../../../components/slide/slide';
 import UnitTestCheck from '../../../components/unit-test-check/unit-test-check';
+import createLinkElement from '../../../config/create-link-element.function';
 import { Modal } from '../../../services/modal';
 import { useApi } from '../../../utils/hooks/use-api.hook';
+import { loadImage } from '../../../utils/load-image.function';
+import { Painting } from '../../painting.interface';
 import { getPainting } from '../../random-of-the-day.api';
 import { BaseSectionProps } from '../base-section.props';
-import createLinkElement from '../../../config/create-link-element.function';
+import HighResImageDialog from './high-res-image-dialog/high-res-image-dialog';
 
 interface RandomPaintingOfTheDayProps extends BaseSectionProps {
   modal: Modal;

@@ -1,18 +1,18 @@
 import styles from './index.module.scss';
 
-import { useContext, useEffect, useRef, useState } from 'react';
 import Head from 'next/head';
+import { useContext, useEffect, useRef, useState } from 'react';
 
-import DeveloperDescription from './components/developer-description/developer-description';
-import Resume from './components/resume/resume';
 import Settings from '../components/settings/settings';
 import Slide from '../components/slide/slide';
-import { HomepageConfig } from './homepage.config';
+import SettingsContext from '../contexts/settings/settings.context';
 import {
   AnimatedSlides,
   animateSlides,
 } from '../utils/animate-slides.function';
-import SettingsContext from '../contexts/settings/settings.context';
+import DeveloperDescription from './components/developer-description/developer-description';
+import Resume from './components/resume/resume';
+import { HomepageConfig } from './homepage.config';
 
 export interface HomepageProps {
   locale: string;

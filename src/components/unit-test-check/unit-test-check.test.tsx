@@ -5,9 +5,9 @@ import {
   screen,
 } from '@testing-library/react';
 
-import UnitTestCheck from './unit-test-check';
-import UnitTestContext from '../../contexts/unit-test/unit-test.context';
 import UnitTestContextData from '../../contexts/unit-test/unit-test-context-data.model';
+import UnitTestContext from '../../contexts/unit-test/unit-test.context';
+import UnitTestCheck from './unit-test-check';
 
 describe('UnitTestCheck', () => {
   let result: UnitTestContextData;

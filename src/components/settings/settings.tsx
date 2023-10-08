@@ -2,18 +2,18 @@ import styles from './settings.module.scss';
 
 import Link from 'next/link';
 
-import RadioGroup, { RadioGroupOption } from '../radiogroup/radiogroup';
-import UnitTestCheck from '../unit-test-check/unit-test-check';
-import Switch from '../switch/switch';
+import { useContext } from 'react';
+import createLinkElement from '../../config/create-link-element.function';
+import SettingsContext from '../../contexts/settings/settings.context';
+import Font from '../../models/font.enum';
+import SlideAnimation from '../../models/slide-animation.enum';
+import Theme from '../../models/theme.enum';
 import { locales } from '../../page-utils/locales.config';
+import RadioGroup, { RadioGroupOption } from '../radiogroup/radiogroup';
+import Switch from '../switch/switch';
+import UnitTestCheck from '../unit-test-check/unit-test-check';
 import SettingsProps from './models/settings-props.interface';
 import SettingsSection from './models/settings-section.interface';
-import Font from '../../models/font.enum';
-import Theme from '../../models/theme.enum';
-import SlideAnimation from '../../models/slide-animation.enum';
-import createLinkElement from '../../config/create-link-element.function';
-import { useContext } from 'react';
-import SettingsContext from '../../contexts/settings/settings.context';
 
 export default function Settings({
   config,

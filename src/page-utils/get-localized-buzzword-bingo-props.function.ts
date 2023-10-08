@@ -1,6 +1,6 @@
+import buzzwordBingoConfig from '../buzzword-bingo-page/default-buzzword-bingo.config';
 import BuzzwordBingoConfig from '../buzzword-bingo-page/models/buzzword-bingo-config.model';
 import { getTranslationKeys } from '../buzzword-bingo-page/translations/get-translation-keys.function';
-import buzzwordBingoConfig from '../buzzword-bingo-page/default-buzzword-bingo.config';
 import { translateObject } from '../utils/translate-object.function';
 import {
   BasePageProps,

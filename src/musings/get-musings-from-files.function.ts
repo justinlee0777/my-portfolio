@@ -3,8 +3,8 @@ import matter from 'gray-matter';
 import { join } from 'path';
 
 import { markdownToHtmlString } from '../utils/markdown-to-html-string.function';
-import { MusingConfig } from './components/musing/musing.config';
 import readFile from '../utils/read-file.function';
+import { MusingConfig } from './components/musing/musing.config';
 
 const fileDirectory = join(process.cwd(), 'src/musings/musing-files');
 

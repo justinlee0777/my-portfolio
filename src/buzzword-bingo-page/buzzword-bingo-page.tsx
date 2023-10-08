@@ -6,12 +6,12 @@ import { useContext, useEffect, useRef, useState } from 'react';
 
 import Slide from '../components/slide/slide';
 import UnitTestCheck from '../components/unit-test-check/unit-test-check';
+import SettingsContext from '../contexts/settings/settings.context';
 import {
   AnimatedSlides,
   animateSlides,
 } from '../utils/animate-slides.function';
 import BuzzwordBingoProps from './models/buzzword-bingo-page-props.model';
-import SettingsContext from '../contexts/settings/settings.context';
 
 export default function BuzzwordBingoPage({
   buzzwordBingoConfig,

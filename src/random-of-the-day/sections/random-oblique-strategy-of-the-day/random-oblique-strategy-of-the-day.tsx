@@ -1,18 +1,18 @@
 import slideStyles from '../slide.module.scss';
 import styles from './random-oblique-strategy-of-the-day.module.scss';
 
+import classNames from 'classnames';
+import { useState } from 'react';
 import ErrorScreen from '../../../components/error-screen/error-screen';
 import LoadingScreen from '../../../components/loading-screen/loading-screen';
+import Slide from '../../../components/slide/slide';
+import UnitTestCheck from '../../../components/unit-test-check/unit-test-check';
+import createLinkElement from '../../../config/create-link-element.function';
+import LinkedString from '../../../models/linked-string.model';
 import { useApi } from '../../../utils/hooks/use-api.hook';
 import { ObliqueStrategy } from '../../oblique-strategy.interface';
 import { getObliqueStrategy } from '../../random-of-the-day.api';
 import { BaseSectionProps } from '../base-section.props';
-import UnitTestCheck from '../../../components/unit-test-check/unit-test-check';
-import Slide from '../../../components/slide/slide';
-import { useState } from 'react';
-import classNames from 'classnames';
-import LinkedString from '../../../models/linked-string.model';
-import createLinkElement from '../../../config/create-link-element.function';
 
 interface ObliqueStrategyProps extends BaseSectionProps {
   randomOfTheDayApiUrl: string;

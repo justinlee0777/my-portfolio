@@ -1,9 +1,9 @@
 import { createContext } from 'react';
 
-import SettingsContextData from './settings-context-data.model';
 import Font from '../../models/font.enum';
-import Theme from '../../models/theme.enum';
 import SlideAnimation from '../../models/slide-animation.enum';
+import Theme from '../../models/theme.enum';
+import SettingsContextData from './settings-context-data.model';
 
 const noop = () => {};
 

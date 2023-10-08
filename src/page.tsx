@@ -1,32 +1,32 @@
 import styles from './page.module.scss';
 
-import { useEffect, useMemo, useState } from 'react';
 import classNames from 'classnames';
 import Head from 'next/head';
+import { useEffect, useMemo, useState } from 'react';
 
 import LoadingScreen from './components/loading-screen/loading-screen';
+import { Navigation } from './components/navigation/navigation';
+import OpenSettings from './components/open-settings/open-settings';
 import Slide from './components/slide/slide';
+import UnitTestCheck from './components/unit-test-check/unit-test-check';
 import {
   getPageDefaults,
   setPageDefaults,
 } from './config/get-page-defaults.function';
-import OpenSettings from './components/open-settings/open-settings';
-import { Navigation } from './components/navigation/navigation';
-import { HomePageProps } from './page-utils/get-localized-homepage-props.function';
-import { BuzzwordBingoPageProps } from './page-utils/get-localized-buzzword-bingo-props.function';
-import { MusingPageProps } from './page-utils/get-musing-props.function';
-import { MusingsPageProps } from './page-utils/get-musings-props.function';
-import UnitTestCheck from './components/unit-test-check/unit-test-check';
-import { RandomOfTheDayPageProps } from './page-utils/get-localized-random-of-the-day-props.function';
-import { Modal } from './services/modal';
-import needsLoading from './config/needs-loading.function';
-import SlideAnimation from './models/slide-animation.enum';
-import Theme from './models/theme.enum';
-import Font from './models/font.enum';
 import loadFont from './config/load-font.function';
-import UnitTestContext from './contexts/unit-test/unit-test.context';
+import needsLoading from './config/needs-loading.function';
 import SettingsContextData from './contexts/settings/settings-context-data.model';
 import SettingsContext from './contexts/settings/settings.context';
+import UnitTestContext from './contexts/unit-test/unit-test.context';
+import Font from './models/font.enum';
+import SlideAnimation from './models/slide-animation.enum';
+import Theme from './models/theme.enum';
+import { BuzzwordBingoPageProps } from './page-utils/get-localized-buzzword-bingo-props.function';
+import { HomePageProps } from './page-utils/get-localized-homepage-props.function';
+import { RandomOfTheDayPageProps } from './page-utils/get-localized-random-of-the-day-props.function';
+import { MusingPageProps } from './page-utils/get-musing-props.function';
+import { MusingsPageProps } from './page-utils/get-musings-props.function';
+import { Modal } from './services/modal';
 
 export type PageProps =
   | HomePageProps

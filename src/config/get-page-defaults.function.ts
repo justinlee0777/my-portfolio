@@ -1,5 +1,5 @@
-import { getStorage } from '../utils/get-storage.function';
 import PageConfig from '../models/page-config.model';
+import { getStorage } from '../utils/get-storage.function';
 
 const storageKey = 'app-settings';
 

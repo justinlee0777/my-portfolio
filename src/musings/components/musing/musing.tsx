@@ -3,24 +3,24 @@ import styles from './index.module.scss';
 import Head from 'next/head';
 import Link from 'next/link';
 
-import { FlexibleBookComponent } from 'prospero/web/flexible-book';
-import { NewlineTransformer } from 'prospero/web/transformers';
-import {
-  listenToClickEvents,
-  listenToKeyboardEvents,
-} from 'prospero/web/book/listeners';
 import {
   DoublePageBookAnimation,
   SinglePageBookAnimation,
 } from 'prospero/web/book/animations';
+import {
+  listenToClickEvents,
+  listenToKeyboardEvents,
+} from 'prospero/web/book/listeners';
+import { FlexibleBookComponent } from 'prospero/web/flexible-book';
 import { useBook } from 'prospero/web/react';
+import { NewlineTransformer } from 'prospero/web/transformers';
 import { useRef, useState } from 'react';
 
 import Slide from '../../../components/slide/slide';
-import { MusingConfig } from './musing.config';
-import UnitTestCheck from '../../../components/unit-test-check/unit-test-check';
 import Switch from '../../../components/switch/switch';
+import UnitTestCheck from '../../../components/unit-test-check/unit-test-check';
 import Font from '../../../models/font.enum';
+import { MusingConfig } from './musing.config';
 
 export interface MusingPageProps {
   config: MusingConfig;

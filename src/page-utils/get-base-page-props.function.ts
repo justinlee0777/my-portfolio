@@ -1,11 +1,11 @@
-import { defaultOpenSettingsConfig } from '../config/default-open-settings.config';
-import { loadUnitTestResult } from '../utils/load-unit-test-result.function';
-import { translateObject } from '../utils/translate-object.function';
 import getOpenSettingsTranslationKeys from '../components/open-settings/constants/translation-keys.const';
 import OpenSettingsConfig from '../components/open-settings/models/open-settings-config.interface';
-import PageConfig from '../models/page-config.model';
+import { defaultOpenSettingsConfig } from '../config/default-open-settings.config';
 import getPageConfig from '../config/default-page.config';
 import { UnitTestResults } from '../contexts/unit-test/unit-test-results.model';
+import PageConfig from '../models/page-config.model';
+import { loadUnitTestResult } from '../utils/load-unit-test-result.function';
+import { translateObject } from '../utils/translate-object.function';
 
 export interface NavbarConfig {
   hide?: boolean;

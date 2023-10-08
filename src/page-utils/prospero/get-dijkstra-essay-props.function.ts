@@ -1,15 +1,15 @@
-import { Pages, IndentTransformer } from 'prospero/server';
-import { PagesOutput, PageStyles } from 'prospero/types';
 import { join } from 'path';
 import { cwd } from 'process';
+import { IndentTransformer, Pages } from 'prospero/server';
+import { PagesOutput, PageStyles } from 'prospero/types';
 
-import {
-  ProsperoPageProps,
-  getBaseProsperoProps,
-} from './get-base-props.function';
-import readFile from '../../utils/read-file.function';
 import getFontUrl from '../../config/get-font-url.function';
 import Font from '../../models/font.enum';
+import readFile from '../../utils/read-file.function';
+import {
+  getBaseProsperoProps,
+  ProsperoPageProps,
+} from './get-base-props.function';
 
 export interface DijkstraEssayPageProps extends ProsperoPageProps {
   galaxyFold: PagesOutput;

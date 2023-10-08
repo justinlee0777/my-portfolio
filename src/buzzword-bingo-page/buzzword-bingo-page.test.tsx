@@ -13,10 +13,10 @@ jest.mock('../utils/animate-slides.function', () => {
 
 import { cleanup, render, screen } from '@testing-library/react';
 
-import BuzzwordBingoPage from './buzzword-bingo-page';
-import SlideAnimation from '../models/slide-animation.enum';
-import BuzzwordBingoConfig from './models/buzzword-bingo-config.model';
 import SettingsContext from '../contexts/settings/settings.context';
+import SlideAnimation from '../models/slide-animation.enum';
+import BuzzwordBingoPage from './buzzword-bingo-page';
+import BuzzwordBingoConfig from './models/buzzword-bingo-config.model';
 
 describe('<BuzzwordBingoPage/>', () => {
   const buzzwordBingoConfig: BuzzwordBingoConfig = {

@@ -1,7 +1,7 @@
 import styles from './radiogroup.module.scss';
 
-import UnitTestCheck from '../unit-test-check/unit-test-check';
 import FieldSet from '../fieldset/fieldset';
+import UnitTestCheck from '../unit-test-check/unit-test-check';
 
 export interface RadioGroupOption {
   key: string;
