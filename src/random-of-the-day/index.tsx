@@ -1,7 +1,7 @@
 import styles from './index.module.scss';
 
 import Head from 'next/head';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import classNames from 'classnames';
 
 import { RandomOfTheDayConfig, RandomType } from './random-of-the-day.config';
@@ -17,12 +17,11 @@ import {
 } from '../utils/animate-slides.function';
 import { Modal } from '../services/modal';
 import RandomOfTheDaySection from './sections/random-of-the-day-section';
-import SlideAnimation from '../models/slide-animation.enum';
+import SettingsContext from '../contexts/settings/settings.context';
 
 export interface RandomOfTheDayPageProps {
   modal: Modal;
 
-  animation: SlideAnimation;
   randomOfTheDayConfig: RandomOfTheDayConfig;
   apiUrl: string;
 }
@@ -30,10 +29,11 @@ export interface RandomOfTheDayPageProps {
 export default function RandomOfTheDayPage({
   modal,
 
-  animation,
   randomOfTheDayConfig,
   apiUrl,
 }: RandomOfTheDayPageProps): JSX.Element {
+  const { animation } = useContext(SettingsContext);
+
   const [controlsShown, setControlsShown] = useState(true);
   const [randomOrder, setRandomOrder] = useState<Array<RandomType>>([]);
 

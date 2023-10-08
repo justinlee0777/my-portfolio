@@ -45,6 +45,7 @@ import SettingsConfig from './models/settings-config.interface';
 import Font from '../../models/font.enum';
 import Theme from '../../models/theme.enum';
 import SlideAnimation from '../../models/slide-animation.enum';
+import SettingsContext from '../../contexts/settings/settings.context';
 
 describe('<Settings/>', () => {
   const config: SettingsConfig = {
@@ -88,17 +89,20 @@ describe('<Settings/>', () => {
 
   beforeEach(() => {
     renderResult = render(
-      <Settings
-        config={config}
-        font={font}
-        theme={theme}
-        animation={animation}
-        developerMode={developerMode}
-        onFontChange={onFontChange}
-        onThemeChange={onThemeChange}
-        onAnimationChange={onAnimationChange}
-        onDeveloperModeChange={onDeveloperModeChange}
-      />
+      <SettingsContext.Provider
+        value={{
+          font,
+          theme,
+          animation,
+          developerMode,
+          onFontChange,
+          onThemeChange,
+          onAnimationChange,
+          onDeveloperModeChange,
+        }}
+      >
+        <Settings config={config} />
+      </SettingsContext.Provider>
     );
   });
 
@@ -161,17 +165,20 @@ describe('<Settings/>', () => {
 
   test('renders and shows marquee explanation', () => {
     renderResult.rerender(
-      <Settings
-        config={config}
-        font={font}
-        theme={theme}
-        animation={SlideAnimation.MARQUEE}
-        developerMode={developerMode}
-        onFontChange={onFontChange}
-        onThemeChange={onThemeChange}
-        onAnimationChange={onAnimationChange}
-        onDeveloperModeChange={onDeveloperModeChange}
-      />
+      <SettingsContext.Provider
+        value={{
+          font,
+          theme,
+          animation: SlideAnimation.MARQUEE,
+          developerMode,
+          onFontChange,
+          onThemeChange,
+          onAnimationChange,
+          onDeveloperModeChange,
+        }}
+      >
+        <Settings config={config} />
+      </SettingsContext.Provider>
     );
 
     const marqueeExplanation = screen.queryByText('Marquees are great.');
@@ -180,17 +187,20 @@ describe('<Settings/>', () => {
 
   test('renders and shows tilt prism explanation', () => {
     renderResult.rerender(
-      <Settings
-        config={config}
-        font={Font.TILT_PRISM}
-        theme={theme}
-        animation={animation}
-        developerMode={developerMode}
-        onFontChange={onFontChange}
-        onThemeChange={onThemeChange}
-        onAnimationChange={onAnimationChange}
-        onDeveloperModeChange={onDeveloperModeChange}
-      />
+      <SettingsContext.Provider
+        value={{
+          font: Font.TILT_PRISM,
+          theme,
+          animation,
+          developerMode,
+          onFontChange,
+          onThemeChange,
+          onAnimationChange,
+          onDeveloperModeChange,
+        }}
+      >
+        <Settings config={config} />
+      </SettingsContext.Provider>
     );
 
     const tiltPrismExplanation = screen.queryByText('Tilt prism is great.');
@@ -199,17 +209,20 @@ describe('<Settings/>', () => {
 
   test('renders and shows an eater explanation', () => {
     renderResult.rerender(
-      <Settings
-        config={config}
-        font={Font.EATER}
-        theme={theme}
-        animation={animation}
-        developerMode={developerMode}
-        onFontChange={onFontChange}
-        onThemeChange={onThemeChange}
-        onAnimationChange={onAnimationChange}
-        onDeveloperModeChange={onDeveloperModeChange}
-      />
+      <SettingsContext.Provider
+        value={{
+          font: Font.EATER,
+          theme,
+          animation,
+          developerMode,
+          onFontChange,
+          onThemeChange,
+          onAnimationChange,
+          onDeveloperModeChange,
+        }}
+      >
+        <Settings config={config} />
+      </SettingsContext.Provider>
     );
 
     const tiltPrismExplanation = screen.queryByText('Eater is great.');

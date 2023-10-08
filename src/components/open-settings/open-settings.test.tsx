@@ -10,9 +10,6 @@ import {
 
 import OpenSettings from './open-settings';
 import OpenSettingsConfig from './models/open-settings-config.interface';
-import Font from '../../models/font.enum';
-import Theme from '../../models/theme.enum';
-import SlideAnimation from '../../models/slide-animation.enum';
 
 describe('<OpenSettings/>', () => {
   const config: OpenSettingsConfig = {
@@ -50,32 +47,11 @@ describe('<OpenSettings/>', () => {
 
   const classname = 'openSettingsTest';
 
-  const font = Font.ARIAL;
-  const theme = Theme.MONOCHROME;
-  const animation = SlideAnimation.SWEEPY;
-  const developerMode = false;
-
-  const onFontChange = jest.fn();
-  const onThemeChange = jest.fn();
-  const onAnimationChange = jest.fn();
-  const onDeveloperModeChange = jest.fn();
-
   let renderResult: RenderResult;
 
   beforeEach(() => {
     renderResult = render(
-      <OpenSettings
-        className={classname}
-        config={config}
-        font={font}
-        theme={theme}
-        animation={animation}
-        developerMode={developerMode}
-        onFontChange={onFontChange}
-        onThemeChange={onThemeChange}
-        onAnimationChange={onAnimationChange}
-        onDeveloperModeChange={onDeveloperModeChange}
-      />
+      <OpenSettings className={classname} config={config} />
     );
   });
 

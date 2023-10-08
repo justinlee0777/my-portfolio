@@ -3,7 +3,7 @@ import styles from './unit-test-check.module.scss';
 import { CSSProperties, useState } from 'react';
 import classNames from 'classnames';
 
-import { UnitTestContext } from '../../contexts/unit-test.context';
+import UnitTestContext from '../../contexts/unit-test/unit-test.context';
 
 export interface UnitTestProps {
   componentName: string;

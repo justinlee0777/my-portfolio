@@ -12,7 +12,6 @@ import {
 } from './config/get-page-defaults.function';
 import OpenSettings from './components/open-settings/open-settings';
 import { Navigation } from './components/navigation/navigation';
-import { UnitTestContext } from './contexts/unit-test.context';
 import { HomePageProps } from './page-utils/get-localized-homepage-props.function';
 import { BuzzwordBingoPageProps } from './page-utils/get-localized-buzzword-bingo-props.function';
 import { MusingPageProps } from './page-utils/get-musing-props.function';
@@ -25,6 +24,9 @@ import SlideAnimation from './models/slide-animation.enum';
 import Theme from './models/theme.enum';
 import Font from './models/font.enum';
 import loadFont from './config/load-font.function';
+import UnitTestContext from './contexts/unit-test/unit-test.context';
+import SettingsContextData from './contexts/settings/settings-context-data.model';
+import SettingsContext from './contexts/settings/settings.context';
 
 export type PageProps =
   | HomePageProps
@@ -110,7 +112,7 @@ export default function Page({
     animationClass
   );
 
-  const stateProps = {
+  const settingsContextValue: SettingsContextData = {
     font,
     theme,
     animation,
@@ -133,7 +135,6 @@ export default function Page({
         className={styles.settingsMenu}
         config={pageProps.openSettingsConfig}
         route={pageProps.route}
-        {...stateProps}
       />
     );
   }
@@ -173,13 +174,14 @@ export default function Page({
         <UnitTestCheck componentName="App" style={{ zIndex: 5 }} />
         {topNavbar}
         <div id="main-content" className={styles.pageContent}>
-          <Component
-            className={styles.pageComponent}
-            modal={modalService}
-            {...pageProps}
-            {...stateProps}
-          />
-          {settingsIcon}
+          <SettingsContext.Provider value={settingsContextValue}>
+            <Component
+              className={styles.pageComponent}
+              modal={modalService}
+              {...pageProps}
+            />
+            {settingsIcon}
+          </SettingsContext.Provider>
           {loadingScreen}
           {modal}
         </div>

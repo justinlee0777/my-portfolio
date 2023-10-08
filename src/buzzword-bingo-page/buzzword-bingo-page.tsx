@@ -2,7 +2,7 @@ import styles from './index.module.scss';
 
 import BuzzwordBingo from 'buzzword-bingo-generator';
 import Head from 'next/head';
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 
 import Slide from '../components/slide/slide';
 import UnitTestCheck from '../components/unit-test-check/unit-test-check';
@@ -11,11 +11,13 @@ import {
   animateSlides,
 } from '../utils/animate-slides.function';
 import BuzzwordBingoProps from './models/buzzword-bingo-page-props.model';
+import SettingsContext from '../contexts/settings/settings.context';
 
 export default function BuzzwordBingoPage({
   buzzwordBingoConfig,
-  animation,
 }: BuzzwordBingoProps) {
+  const { animation } = useContext(SettingsContext);
+
   const headerRef = useRef<HTMLHeadingElement>(null);
   const explanationRef = useRef<HTMLDivElement>(null);
   const [animatedSlides, setAnimatedSlides] = useState<AnimatedSlides>({});

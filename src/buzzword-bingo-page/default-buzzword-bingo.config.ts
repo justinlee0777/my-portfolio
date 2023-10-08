@@ -1,4 +1,4 @@
-import BuzzwordBingoConfig from "./models/buzzword-bingo-config.model";
+import BuzzwordBingoConfig from './models/buzzword-bingo-config.model';
 
 const defaultBuzzwordBingoConfig: BuzzwordBingoConfig = {
   seo: {

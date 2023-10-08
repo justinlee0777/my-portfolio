@@ -16,19 +16,14 @@ jest.mock('../src/components/open-settings/open-settings', () => () => {
   return <div>Open Settings</div>;
 });
 
-jest.mock('../src/contexts/unit-test.context', () => {
-  return {
-    __esModule: true,
-    UnitTestContext: {
-      Provider: ({ children, value }) => (
-        <div>
-          <span>Developer mode: {value.developerMode?.toString()}</span>
-          {children}
-        </div>
-      ),
-    },
-  };
-});
+jest.mock('../src/contexts/unit-test/unit-test.context', () => ({
+  Provider: ({ children, value }) => (
+    <div>
+      <span>Developer mode: {value.developerMode?.toString()}</span>
+      {children}
+    </div>
+  ),
+}));
 
 jest.mock('../src/components/unit-test-check/unit-test-check', () => () => (
   <span></span>
@@ -72,11 +67,11 @@ import {
 } from '@testing-library/react';
 
 import PageConfig from '../src/models/page-config.model';
-import { UnitTestResults } from '../src/contexts/unit-test.context';
 import App from '../pages/_app';
 import Font from '../src/models/font.enum';
 import Theme from '../src/models/theme.enum';
 import SlideAnimation from '../src/models/slide-animation.enum';
+import { UnitTestResults } from '../src/contexts/unit-test/unit-test-results.model';
 
 describe('<App/>', () => {
   let mockComponent: jest.Mock;
@@ -127,39 +122,6 @@ describe('<App/>', () => {
     page: string,
     render: () => Promise<RenderResult>
   ): Promise<void> {
-    test(`changes settings for ${page}`, async () => {
-      const renderResult = await act(render);
-
-      let containerElement = renderResult.queryByTestId('page-container');
-
-      expect(containerElement.classList.toString()).toBe(
-        'page font-Arial theme-Monochrome animation-Sweepy'
-      );
-
-      loadFontReturnValue = Promise.resolve();
-
-      let [args] = mockComponent.mock.calls[0];
-
-      act(() => args.onFontChange(Font.EATER));
-
-      waitForElementToBeRemoved(() =>
-        renderResult.queryByText('Loading screen...')
-      );
-
-      containerElement = renderResult.queryByTestId('page-container');
-      expect(containerElement.classList.toString()).toBe(
-        'page font-Eater theme-Monochrome animation-Sweepy'
-      );
-
-      [args] = mockComponent.mock.calls[1];
-      await act(() => args.onThemeChange(Theme.SEA));
-
-      containerElement = renderResult.queryByTestId('page-container');
-      expect(containerElement.classList.toString()).toBe(
-        'page font-Eater theme-Sea animation-Sweepy'
-      );
-    });
-
     test(`initializes defaults for ${page}`, async () => {
       const config: PageConfig = {
         defaults: {

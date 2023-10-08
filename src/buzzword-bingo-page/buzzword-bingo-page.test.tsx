@@ -16,6 +16,7 @@ import { cleanup, render, screen } from '@testing-library/react';
 import BuzzwordBingoPage from './buzzword-bingo-page';
 import SlideAnimation from '../models/slide-animation.enum';
 import BuzzwordBingoConfig from './models/buzzword-bingo-config.model';
+import SettingsContext from '../contexts/settings/settings.context';
 
 describe('<BuzzwordBingoPage/>', () => {
   const buzzwordBingoConfig: BuzzwordBingoConfig = {
@@ -36,10 +37,15 @@ describe('<BuzzwordBingoPage/>', () => {
 
   test('renders', () => {
     render(
-      <BuzzwordBingoPage
-        buzzwordBingoConfig={buzzwordBingoConfig}
-        animation={SlideAnimation.SWEEPY}
-      />
+      <SettingsContext.Provider
+        value={
+          {
+            animation: SlideAnimation.SWEEPY,
+          } as any
+        }
+      >
+        <BuzzwordBingoPage buzzwordBingoConfig={buzzwordBingoConfig} />
+      </SettingsContext.Provider>
     );
 
     const header = screen.queryByText('Header');
@@ -58,10 +64,15 @@ describe('<BuzzwordBingoPage/>', () => {
 
   test('animates the page with marquee animation', () => {
     render(
-      <BuzzwordBingoPage
-        buzzwordBingoConfig={buzzwordBingoConfig}
-        animation={SlideAnimation.MARQUEE}
-      />
+      <SettingsContext.Provider
+        value={
+          {
+            animation: SlideAnimation.MARQUEE,
+          } as any
+        }
+      >
+        <BuzzwordBingoPage buzzwordBingoConfig={buzzwordBingoConfig} />
+      </SettingsContext.Provider>
     );
 
     const header = screen.queryByText('Header');

@@ -1,7 +1,6 @@
 import styles from './index.module.scss';
 
-import { useEffect, useRef, useState } from 'react';
-import classnames from 'classnames';
+import { useContext, useEffect, useRef, useState } from 'react';
 import Head from 'next/head';
 
 import DeveloperDescription from './components/developer-description/developer-description';
@@ -13,9 +12,7 @@ import {
   AnimatedSlides,
   animateSlides,
 } from '../utils/animate-slides.function';
-import Font from '../models/font.enum';
-import Theme from '../models/theme.enum';
-import SlideAnimation from '../models/slide-animation.enum';
+import SettingsContext from '../contexts/settings/settings.context';
 
 export interface HomepageProps {
   locale: string;
@@ -24,33 +21,14 @@ export interface HomepageProps {
 
   generatedProfilePictureUrl: string;
   profilePicturePrompt: string;
-
-  font: Font;
-  theme: Theme;
-  animation: SlideAnimation;
-  developerMode: boolean;
-
-  onFontChange: (font: Font) => void;
-  onThemeChange: (theme: Theme) => void;
-  onAnimationChange: (animation: SlideAnimation) => void;
-  onDeveloperModeChange: (developerMode: boolean) => void;
 }
 
 export default function HomePage({
   homepageConfig,
   generatedProfilePictureUrl,
   profilePicturePrompt,
-
-  font,
-  theme,
-  animation,
-  developerMode,
-
-  onFontChange,
-  onThemeChange,
-  onAnimationChange,
-  onDeveloperModeChange,
 }: HomepageProps): JSX.Element {
+  const { animation } = useContext(SettingsContext);
   const [animatedSlides, setAnimatedSlides] = useState<AnimatedSlides>({});
 
   const homepageRef = useRef<HTMLDivElement>(null);
@@ -70,21 +48,7 @@ export default function HomePage({
       generatedProfilePictureUrl={generatedProfilePictureUrl}
       profilePicturePrompt={profilePicturePrompt}
     />,
-    <Settings
-      key="settings"
-      config={homepageConfig.settings}
-      font={font}
-      theme={theme}
-      animation={animation}
-      developerMode={developerMode}
-      onFontChange={onFontChange}
-      onThemeChange={onThemeChange}
-      onAnimationChange={(animation) => {
-        onAnimationChange(animation);
-        setAnimatedSlides({});
-      }}
-      onDeveloperModeChange={onDeveloperModeChange}
-    />,
+    <Settings key="settings" config={homepageConfig.settings} />,
     <Resume key="resume" config={homepageConfig.resume} />,
   ];
 

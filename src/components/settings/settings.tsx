@@ -12,20 +12,27 @@ import Font from '../../models/font.enum';
 import Theme from '../../models/theme.enum';
 import SlideAnimation from '../../models/slide-animation.enum';
 import createLinkElement from '../../config/create-link-element.function';
+import { useContext } from 'react';
+import SettingsContext from '../../contexts/settings/settings.context';
 
 export default function Settings({
   config,
-  font,
-  theme,
-  animation,
-  developerMode,
-  onFontChange,
-  onThemeChange,
-  onAnimationChange,
-  onDeveloperModeChange,
-
   route = '',
 }: SettingsProps): JSX.Element {
+  const {
+    font,
+    onFontChange,
+
+    theme,
+    onThemeChange,
+
+    animation,
+    onAnimationChange,
+
+    developerMode,
+    onDeveloperModeChange,
+  } = useContext(SettingsContext);
+
   const sections: Array<SettingsSection> = [
     {
       enumeratedType: Font,
