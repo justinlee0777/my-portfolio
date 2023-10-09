@@ -1,19 +1,15 @@
 import styles from './unit-test-check.module.scss';
 
 import classNames from 'classnames';
-import { CSSProperties, useState } from 'react';
+import { useState } from 'react';
 
 import UnitTestContext from '../../contexts/unit-test/unit-test.context';
-
-export interface UnitTestProps {
-  componentName: string;
-  style?: CSSProperties;
-}
+import UnitTestCheckProps from './unit-test-check-props.interface';
 
 export default function UnitTestCheck({
   componentName,
   style,
-}: UnitTestProps): JSX.Element {
+}: UnitTestCheckProps): JSX.Element {
   const [tooltipOpened, setTooltipOpened] = useState(false);
 
   const checkmark = String.fromCharCode(10003);

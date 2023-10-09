@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import Link from 'next/link';
 import NavigationProps from './models/navigation-props.interface';
 
-export function Navigation({
+export default function Navigation({
   locale,
   links,
   className,

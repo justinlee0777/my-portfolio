@@ -5,7 +5,7 @@ import Head from 'next/head';
 import { useEffect, useMemo, useState } from 'react';
 
 import LoadingScreen from './components/loading-screen/loading-screen';
-import { Navigation } from './components/navigation/navigation';
+import Navigation from './components/navigation/navigation';
 import OpenSettings from './components/open-settings/open-settings';
 import Slide from './components/slide/slide';
 import UnitTestCheck from './components/unit-test-check/unit-test-check';

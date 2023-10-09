@@ -5,14 +5,7 @@ import { useState } from 'react';
 
 import Settings from '../settings/settings';
 import UnitTestCheck from '../unit-test-check/unit-test-check';
-import OpenSettingsConfig from './models/open-settings-config.interface';
-
-export interface OpenSettingsProps {
-  config: OpenSettingsConfig;
-
-  className?: string;
-  route?: string;
-}
+import OpenSettingsProps from './open-settings-props.interface';
 
 export default function OpenSettings({
   className,

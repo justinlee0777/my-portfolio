@@ -3,18 +3,7 @@ import styles from './orderable-list.module.scss';
 import classNames from 'classnames';
 
 import UnitTestCheck from '../unit-test-check/unit-test-check';
-
-export interface OrderableListProps {
-  id?: string;
-  className?: string;
-  animated?: 'activated' | 'unactivated';
-
-  listElements: Array<{
-    value: string | number;
-    element: JSX.Element;
-  }>;
-  onReorder: (items: Array<string | number>) => void;
-}
+import OrderableListProps from './orderable-list-props.interface';
 
 export default function OrderableList({
   id,

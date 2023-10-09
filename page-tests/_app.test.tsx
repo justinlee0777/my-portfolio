@@ -5,12 +5,9 @@ jest.mock('lodash-es', () => {
   };
 });
 
-jest.mock('../src/components/navigation/navigation', () => {
-  return {
-    __esModule: true,
-    Navigation: () => <div>Navigation here</div>,
-  };
-});
+jest.mock('../src/components/navigation/navigation', () => () => (
+  <div>Navigation here</div>
+));
 
 jest.mock('../src/components/open-settings/open-settings', () => () => {
   return <div>Open Settings</div>;
