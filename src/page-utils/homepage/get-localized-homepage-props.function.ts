@@ -1,21 +1,10 @@
-import createImage from '../api/openai/create-image.function';
-import { homepageConfig } from '../homepage/default-homepage.config';
-import {
-  getTranslationKeys,
-  HomepageConfig,
-} from '../homepage/homepage.config';
-import { saveImageFromUrl } from '../utils/save-image-from-url.function';
-import { translateObject } from '../utils/translate-object.function';
-import {
-  BasePageProps,
-  getBasePageProps,
-} from './get-base-page-props.function';
-
-export interface HomePageProps extends BasePageProps {
-  homepageConfig: HomepageConfig;
-  generatedProfilePictureUrl: string;
-  profilePicturePrompt: string;
-}
+import createImage from '../../api/openai/create-image.function';
+import { homepageConfig } from '../../homepage/default-homepage.config';
+import { getTranslationKeys } from '../../homepage/homepage.config';
+import { saveImageFromUrl } from '../../utils/save-image-from-url.function';
+import { translateObject } from '../../utils/translate-object.function';
+import { getBasePageProps } from '../get-base-page-props.function';
+import HomepagePageProps from './homepage-page-props.interface';
 
 const profilePicturePrompt = 'A photo of Justin Lee, a web developer';
 const savedFile = 'profile-picture.png';
@@ -38,8 +27,10 @@ async function saveProfileImage() {
 
 export function getLocalizedStaticProps(
   locale: string
-): () => Promise<{ props: HomePageProps }> {
-  return async function getStaticProps(): Promise<{ props: HomePageProps }> {
+): () => Promise<{ props: HomepagePageProps }> {
+  return async function getStaticProps(): Promise<{
+    props: HomepagePageProps;
+  }> {
     await saveProfileImage();
 
     let translatedConfig = homepageConfig;

@@ -1,4 +1,4 @@
-import styles from './index.module.scss';
+import styles from './homepage.module.scss';
 
 import Head from 'next/head';
 import { useContext, useEffect, useRef, useState } from 'react';
@@ -12,16 +12,7 @@ import {
 } from '../utils/animate-slides.function';
 import DeveloperDescription from './components/developer-description/developer-description';
 import Resume from './components/resume/resume';
-import { HomepageConfig } from './homepage.config';
-
-export interface HomepageProps {
-  locale: string;
-
-  homepageConfig: HomepageConfig;
-
-  generatedProfilePictureUrl: string;
-  profilePicturePrompt: string;
-}
+import HomepageProps from './models/homepage-props.interface';
 
 export default function HomePage({
   homepageConfig,

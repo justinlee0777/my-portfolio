@@ -22,14 +22,14 @@ import Font from './models/font.enum';
 import SlideAnimation from './models/slide-animation.enum';
 import Theme from './models/theme.enum';
 import BuzzwordBingoPageProps from './page-utils/buzzword-bingo/buzzword-bingo-page-props.model';
-import { HomePageProps } from './page-utils/get-localized-homepage-props.function';
 import { RandomOfTheDayPageProps } from './page-utils/get-localized-random-of-the-day-props.function';
 import { MusingPageProps } from './page-utils/get-musing-props.function';
 import { MusingsPageProps } from './page-utils/get-musings-props.function';
+import HomepagePageProps from './page-utils/homepage/homepage-page-props.interface';
 import { Modal } from './services/modal';
 
 export type PageProps =
-  | HomePageProps
+  | HomepagePageProps
   | BuzzwordBingoPageProps
   | MusingPageProps
   | MusingsPageProps
