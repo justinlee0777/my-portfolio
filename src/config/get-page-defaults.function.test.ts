@@ -1,7 +1,7 @@
-import { Font } from './font.enum';
+import Font from '../models/font.enum';
+import SlideAnimation from '../models/slide-animation.enum';
+import Theme from '../models/theme.enum';
 import { getPageDefaults, setPageDefaults } from './get-page-defaults.function';
-import { SlideAnimation } from './slide-animation.enum';
-import { Theme } from './theme.enum';
 
 describe('getPageDefaults() and setPageDefaults()', () => {
   afterEach(() => {
@@ -12,12 +12,10 @@ describe('getPageDefaults() and setPageDefaults()', () => {
     expect(getPageDefaults()).toBeNull();
 
     const defaults = {
-      defaults: {
-        font: Font.COMIC_SANS_MS,
-        theme: Theme.ULYSSES,
-        animation: SlideAnimation.MARQUEE,
-        developerMode: true,
-      },
+      font: Font.COMIC_SANS_MS,
+      theme: Theme.ULYSSES,
+      animation: SlideAnimation.MARQUEE,
+      developerMode: true,
     };
 
     setPageDefaults(defaults);

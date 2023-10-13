@@ -1,6 +1,6 @@
-import { BuzzwordBingoConfig } from './buzzword-bingo.config';
+import BuzzwordBingoConfig from './models/buzzword-bingo-config.model';
 
-export const defaultBuzzwordBingoConfig: BuzzwordBingoConfig = {
+const defaultBuzzwordBingoConfig: BuzzwordBingoConfig = {
   seo: {
     title: 'Buzzword Bingo Generator',
     description: 'Web app to generate buzzword bingo sheets.',
@@ -14,3 +14,5 @@ export const defaultBuzzwordBingoConfig: BuzzwordBingoConfig = {
     ],
   },
 };
+
+export default defaultBuzzwordBingoConfig;

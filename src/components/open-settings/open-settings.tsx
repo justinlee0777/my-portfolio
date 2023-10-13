@@ -3,20 +3,14 @@ import styles from './open-settings.module.scss';
 import classNames from 'classnames';
 import { useState } from 'react';
 
-import Settings, { SettingsProps } from '../settings/settings';
-import { OpenSettingsConfig } from '../../config/open-settings.config';
+import Settings from '../settings/settings';
 import UnitTestCheck from '../unit-test-check/unit-test-check';
-
-export interface OpenSettingsProps extends Omit<SettingsProps, 'config'> {
-  config: OpenSettingsConfig;
-
-  className?: string;
-}
+import OpenSettingsProps from './open-settings-props.interface';
 
 export default function OpenSettings({
   className,
+  route,
   config,
-  ...settingsProps
 }: OpenSettingsProps): JSX.Element {
   const [opened, setOpened] = useState(false);
 
@@ -40,7 +34,7 @@ export default function OpenSettings({
         <div className={styles.menuLine}></div>
       </button>
       <div className={styles.settings} tabIndex={Number(opened) - 1}>
-        <Settings {...settingsProps} config={config.settings} />
+        <Settings route={route} config={config.settings} />
       </div>
     </div>
   );

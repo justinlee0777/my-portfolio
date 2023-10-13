@@ -2,12 +2,7 @@ import styles from './switch.module.scss';
 
 import classNames from 'classnames';
 import UnitTestCheck from '../unit-test-check/unit-test-check';
-
-export interface SwitchProps {
-  className?: string;
-  value?: boolean;
-  onChange?: (toggled: boolean) => void;
-}
+import SwitchProps from './switch-props.interface';
 
 export default function Switch({
   className,

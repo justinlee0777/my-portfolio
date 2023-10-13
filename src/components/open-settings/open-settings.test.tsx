@@ -2,17 +2,13 @@ jest.mock('../settings/settings', () => () => <div></div>);
 
 import {
   cleanup,
-  render,
-  screen,
-  RenderResult,
   fireEvent,
+  render,
+  RenderResult,
+  screen,
 } from '@testing-library/react';
 
-import { Font } from '../../config/font.enum';
-import { OpenSettingsConfig } from '../../config/open-settings.config';
-import { SlideAnimation } from '../../config/slide-animation.enum';
-import { Theme } from '../../config/theme.enum';
-
+import OpenSettingsConfig from './models/open-settings-config.interface';
 import OpenSettings from './open-settings';
 
 describe('<OpenSettings/>', () => {
@@ -51,32 +47,11 @@ describe('<OpenSettings/>', () => {
 
   const classname = 'openSettingsTest';
 
-  const font = Font.ARIAL;
-  const theme = Theme.MONOCHROME;
-  const animation = SlideAnimation.SWEEPY;
-  const developerMode = false;
-
-  const onFontChange = jest.fn();
-  const onThemeChange = jest.fn();
-  const onAnimationChange = jest.fn();
-  const onDeveloperModeChange = jest.fn();
-
   let renderResult: RenderResult;
 
   beforeEach(() => {
     renderResult = render(
-      <OpenSettings
-        className={classname}
-        config={config}
-        font={font}
-        theme={theme}
-        animation={animation}
-        developerMode={developerMode}
-        onFontChange={onFontChange}
-        onThemeChange={onThemeChange}
-        onAnimationChange={onAnimationChange}
-        onDeveloperModeChange={onDeveloperModeChange}
-      />
+      <OpenSettings className={classname} config={config} />
     );
   });
 

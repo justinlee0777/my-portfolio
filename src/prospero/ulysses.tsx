@@ -1,22 +1,22 @@
 import styles from './index.module.scss';
 
+import { BookConfig, PageStyles } from 'prospero/types';
 import { BookComponent } from 'prospero/web/book';
-import { BooksComponent } from 'prospero/web/books';
 import {
   DoublePageBookAnimation,
   SinglePageBookAnimation,
 } from 'prospero/web/book/animations';
-import { DefaultBookTheme } from 'prospero/web/book/theming';
-import ServerPages from 'prospero/web/server-pages';
 import {
   listenToClickEvents,
   listenToKeyboardEvents,
 } from 'prospero/web/book/listeners';
-import { BookConfig, PageStyles } from 'prospero/types';
+import { DefaultBookTheme } from 'prospero/web/book/theming';
+import { BooksComponent } from 'prospero/web/books';
+import ServerPages from 'prospero/web/server-pages';
 import { useEffect, useMemo, useState } from 'react';
 
-import ProsperoPage from './base-page';
 import { ProsperoPageProps } from '../page-utils/prospero/get-base-props.function';
+import ProsperoPage from './base-page';
 
 export default function UlyssesPage({
   config,

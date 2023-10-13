@@ -1,4 +1,4 @@
-import { SlideAnimation } from '../config/slide-animation.enum';
+import SlideAnimation from '../models/slide-animation.enum';
 
 export interface AnimatedSlides {
   [slideId: string]: boolean;

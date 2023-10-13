@@ -1,22 +1,8 @@
 import styles from './radiogroup.module.scss';
 
-import UnitTestCheck from '../unit-test-check/unit-test-check';
 import FieldSet from '../fieldset/fieldset';
-
-export interface RadioGroupOption {
-  key: string;
-  label: string;
-  value: string;
-}
-
-export interface RadioGroupProps {
-  className?: string;
-  legend: string;
-  name: string;
-  options: Array<RadioGroupOption>;
-  selectedOption: string;
-  onSelect: (value: string) => void;
-}
+import UnitTestCheck from '../unit-test-check/unit-test-check';
+import RadioGroupProps from './radio-group-props.interface';
 
 export default function RadioGroup({
   className,

@@ -1,33 +1,35 @@
 import styles from './page.module.scss';
 
-import { useEffect, useMemo, useState } from 'react';
 import classNames from 'classnames';
 import Head from 'next/head';
+import { useEffect, useMemo, useState } from 'react';
 
-import { needsLoading } from './config/font.enum';
-import { loadFont } from './config/load-font.function';
-import { Font } from './config/font.enum';
-import { SlideAnimation } from './config/slide-animation.enum';
-import { Theme } from './config/theme.enum';
 import LoadingScreen from './components/loading-screen/loading-screen';
+import Navigation from './components/navigation/navigation';
+import OpenSettings from './components/open-settings/open-settings';
 import Slide from './components/slide/slide';
+import UnitTestCheck from './components/unit-test-check/unit-test-check';
 import {
   getPageDefaults,
   setPageDefaults,
 } from './config/get-page-defaults.function';
-import OpenSettings from './components/open-settings/open-settings';
-import { Navigation } from './components/navigation/navigation';
-import { UnitTestContext } from './contexts/unit-test.context';
-import { HomePageProps } from './page-utils/get-localized-homepage-props.function';
-import { BuzzwordBingoPageProps } from './page-utils/get-localized-buzzword-bingo-props.function';
+import loadFont from './config/load-font.function';
+import needsLoading from './config/needs-loading.function';
+import SettingsContextData from './contexts/settings/settings-context-data.model';
+import SettingsContext from './contexts/settings/settings.context';
+import UnitTestContext from './contexts/unit-test/unit-test.context';
+import Font from './models/font.enum';
+import SlideAnimation from './models/slide-animation.enum';
+import Theme from './models/theme.enum';
+import BuzzwordBingoPageProps from './page-utils/buzzword-bingo/buzzword-bingo-page-props.model';
 import { MusingPageProps } from './page-utils/get-musing-props.function';
 import { MusingsPageProps } from './page-utils/get-musings-props.function';
-import UnitTestCheck from './components/unit-test-check/unit-test-check';
-import { RandomOfTheDayPageProps } from './page-utils/get-localized-random-of-the-day-props.function';
+import HomepagePageProps from './page-utils/homepage/homepage-page-props.interface';
+import RandomOfTheDayPageProps from './page-utils/random-of-the-day/random-of-the-day-pages-props.interface';
 import { Modal } from './services/modal';
 
 export type PageProps =
-  | HomePageProps
+  | HomepagePageProps
   | BuzzwordBingoPageProps
   | MusingPageProps
   | MusingsPageProps
@@ -40,15 +42,15 @@ export default function Page({
   Component;
   pageProps: PageProps;
 }): JSX.Element {
-  const [font, setFont] = useState<Font>(pageProps.pageConfig.defaults.font);
-  const [theme, setTheme] = useState<Theme>(
-    pageProps.pageConfig.defaults.theme
-  );
+  const pageDefaults = pageProps.pageConfig.defaults;
+
+  const [font, setFont] = useState<Font>(pageDefaults.font);
+  const [theme, setTheme] = useState<Theme>(pageDefaults.theme);
   const [animation, setAnimation] = useState<SlideAnimation>(
-    pageProps.pageConfig.defaults.animation
+    pageDefaults.animation
   );
   const [developerMode, setDeveloperMode] = useState<boolean>(
-    pageProps.pageConfig.defaults.developerMode
+    pageDefaults.developerMode
   );
 
   const [fontLoading, setFontLoading] = useState(needsLoading(font));
@@ -60,22 +62,20 @@ export default function Page({
     const savedConfig = getPageDefaults();
 
     if (savedConfig) {
-      setFont(savedConfig.defaults.font);
-      setTheme(savedConfig.defaults.theme);
-      setAnimation(savedConfig.defaults.animation);
-      setDeveloperMode(savedConfig.defaults.developerMode);
+      setFont(savedConfig.font);
+      setTheme(savedConfig.theme);
+      setAnimation(savedConfig.animation);
+      setDeveloperMode(savedConfig.developerMode);
     }
   }, []);
 
   // Saving page defaults into session storage
   useEffect(() => {
     setPageDefaults({
-      defaults: {
-        font,
-        theme,
-        animation,
-        developerMode,
-      },
+      font,
+      theme,
+      animation,
+      developerMode,
     });
   }, [font, theme, animation, developerMode]);
 
@@ -112,7 +112,7 @@ export default function Page({
     animationClass
   );
 
-  const stateProps = {
+  const settingsContextValue: SettingsContextData = {
     font,
     theme,
     animation,
@@ -135,7 +135,6 @@ export default function Page({
         className={styles.settingsMenu}
         config={pageProps.openSettingsConfig}
         route={pageProps.route}
-        {...stateProps}
       />
     );
   }
@@ -153,24 +152,7 @@ export default function Page({
       <Navigation
         className={navigationClassnames}
         locale={pageProps.locale}
-        links={[
-          {
-            displayName: 'Random of the Day',
-            url: `/${pageProps.locale}/random-of-the-day`,
-          },
-          {
-            displayName: 'Prospero',
-            url: '/prospero',
-          },
-          {
-            displayName: 'Musings',
-            url: '/musings',
-          },
-          {
-            displayName: 'Buzzword Bingo',
-            url: `/${pageProps.locale}/buzzword-bingo`,
-          },
-        ]}
+        links={pageProps.pageConfig.navigationLinks}
       />
     );
 
@@ -192,13 +174,14 @@ export default function Page({
         <UnitTestCheck componentName="App" style={{ zIndex: 5 }} />
         {topNavbar}
         <div id="main-content" className={styles.pageContent}>
-          <Component
-            className={styles.pageComponent}
-            modal={modalService}
-            {...pageProps}
-            {...stateProps}
-          />
-          {settingsIcon}
+          <SettingsContext.Provider value={settingsContextValue}>
+            <Component
+              className={styles.pageComponent}
+              modal={modalService}
+              {...pageProps}
+            />
+            {settingsIcon}
+          </SettingsContext.Provider>
           {loadingScreen}
           {modal}
         </div>

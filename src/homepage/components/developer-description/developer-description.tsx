@@ -1,12 +1,12 @@
 import styles from './developer-description.module.scss';
 
-import { useEffect, useState } from 'react';
-import Image from 'next/image';
 import classNames from 'classnames';
+import Image from 'next/image';
+import { useEffect, useState } from 'react';
 
-import { DeveloperDescriptionConfig } from '../../homepage.config';
-import { createLinkElement } from '../../../config/link.model';
 import UnitTestCheck from '../../../components/unit-test-check/unit-test-check';
+import createLinkElement from '../../../config/create-link-element.function';
+import { DeveloperDescriptionConfig } from '../../homepage.config';
 
 export default function DeveloperDescription({
   config,

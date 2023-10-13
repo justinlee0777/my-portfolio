@@ -1,6 +1,6 @@
 import { cloneDeep, get, set } from 'lodash-es';
 
-import { translate } from '../api/google';
+import translate from '../api/google/translate.function';
 import { decodeHTMLEntities } from './decode-html-entities.function';
 
 /**

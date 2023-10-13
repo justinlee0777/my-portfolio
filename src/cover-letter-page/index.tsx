@@ -2,14 +2,14 @@ import styles from './index.module.scss';
 
 import { useRef } from 'react';
 
-import { CoverLetterPageProps } from '../page-utils/get-cover-letter-props.function';
-import Slide from '../components/slide/slide';
+import classNames from 'classnames';
 import LoadingScreen from '../components/loading-screen/loading-screen';
+import Slide from '../components/slide/slide';
+import { CoverLetterPageProps } from '../page-utils/get-cover-letter-props.function';
 import { useApi } from '../utils/hooks/use-api.hook';
+import secondsToTimestamp from '../utils/seconds-to-timestamp.function';
 import { getCompanySpecificCoverLetter } from './cover-letter.api';
 import { useHeaderAnimation } from './use-header-animation.hook';
-import classNames from 'classnames';
-import secondsToTimestamp from '../utils/seconds-to-timestamp.function';
 
 export default function CoverLetterPage({
   apiUrl,

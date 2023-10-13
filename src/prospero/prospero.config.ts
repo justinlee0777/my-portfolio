@@ -1,4 +1,4 @@
-import { Link } from '../config/link.model';
+import LinkedString from '../models/linked-string.model';
 
 export default interface ProsperoConfig {
   seo: {
@@ -7,7 +7,7 @@ export default interface ProsperoConfig {
   };
   textContent: {
     header: string;
-    description: Array<string | Link>;
+    description: Array<string | LinkedString>;
   };
   links: Array<{
     url: string;

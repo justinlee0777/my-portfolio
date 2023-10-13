@@ -1,13 +1,13 @@
 import slideStyles from '../slide.module.scss';
 import styles from './random-poem-of-the-day.module.scss';
 
-import Slide from '../../../components/slide/slide';
-import { Poem } from '../../poem.interface';
-import LoadingScreen from '../../../components/loading-screen/loading-screen';
 import ErrorScreen from '../../../components/error-screen/error-screen';
+import LoadingScreen from '../../../components/loading-screen/loading-screen';
+import Slide from '../../../components/slide/slide';
 import UnitTestCheck from '../../../components/unit-test-check/unit-test-check';
 import { useApi } from '../../../utils/hooks/use-api.hook';
-import { getPoem } from '../../random-of-the-day.api';
+import getPoem from '../../api/get-poem.function';
+import { Poem } from '../../models/poem.interface';
 import { BaseSectionProps } from '../base-section.props';
 
 interface PoemProps extends BaseSectionProps {
@@ -29,14 +29,27 @@ export default function RandomPoemOfTheDay({
   } else if (!poem) {
     content = <LoadingScreen />;
   } else {
+    let lines: Array<string>;
+    let lineClassName: string | undefined;
+
+    if ('lines' in poem) {
+      lines = poem.lines;
+      lineClassName = styles.poemLine;
+    } else if ('text' in poem) {
+      lines = poem.text.split('\n');
+      lineClassName = styles.proseLine;
+    } else {
+      lines = [];
+    }
+
     content = (
       <section>
         <h3>{poem.title}</h3>
         <p>{poem.author}</p>
         {poem.translator && <p>Translated by {poem.translator}</p>}
         <div className={styles.poemSeparator}></div>
-        {poem.lines.map((line, i) => (
-          <p className={styles.poemLine} key={i}>
+        {lines.map((line, i) => (
+          <p className={lineClassName} key={i}>
             {line}
           </p>
         ))}

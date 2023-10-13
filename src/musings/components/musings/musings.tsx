@@ -2,8 +2,8 @@ import styles from './index.module.scss';
 
 import Link from 'next/link';
 
-import { MusingConfig } from '../musing/musing.config';
 import UnitTestCheck from '../../../components/unit-test-check/unit-test-check';
+import { MusingConfig } from '../musing/musing.config';
 
 export interface MusingsProps {
   musings: Array<MusingConfig>;

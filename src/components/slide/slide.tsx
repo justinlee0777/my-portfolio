@@ -1,17 +1,9 @@
 import styles from './slide.module.scss';
 
 import classNames from 'classnames';
-import { RefObject } from 'react';
 
 import UnitTestCheck from '../unit-test-check/unit-test-check';
-
-export interface SlideProps {
-  children: JSX.Element;
-  className?: string;
-  animated?: 'activated' | 'unactivated';
-  id?: string;
-  slideRef?: RefObject<HTMLElement>;
-}
+import SlideProps from './slide-props.interface';
 
 export default function Slide({
   className,

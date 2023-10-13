@@ -1,7 +1,7 @@
 import styles from './loading-screen.module.scss';
 
-import { useEffect, useState } from 'react';
 import classNames from 'classnames';
+import { useEffect, useState } from 'react';
 
 import UnitTestCheck from '../unit-test-check/unit-test-check';
 

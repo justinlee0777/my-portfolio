@@ -1,5 +1,6 @@
 import { Modal } from '../../services/modal';
-import { RandomOfTheDayConfig, RandomType } from '../random-of-the-day.config';
+import RandomOfTheDayConfig from '../models/random-of-the-day-config.interface';
+import RandomType from '../models/random-type.enum';
 import { BaseSectionProps } from './base-section.props';
 import RandomFactOfTheDay from './random-fact-of-the-day/random-fact-of-the-day';
 import RandomObliqueStrategyOfTheDay from './random-oblique-strategy-of-the-day/random-oblique-strategy-of-the-day';

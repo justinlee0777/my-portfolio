@@ -1,21 +1,21 @@
 import styles from './index.module.scss';
 
-import { BooksComponent } from 'prospero/web/books';
+import { BookConfig } from 'prospero/types';
 import { BookComponent } from 'prospero/web/book';
-import { DefaultBookTheme } from 'prospero/web/book/theming';
-import {
-  listenToClickEvents,
-  listenToKeyboardEvents,
-} from 'prospero/web/book/listeners';
 import {
   DoublePageBookAnimation,
   SinglePageBookAnimation,
 } from 'prospero/web/book/animations';
-import { BookConfig } from 'prospero/types';
+import {
+  listenToClickEvents,
+  listenToKeyboardEvents,
+} from 'prospero/web/book/listeners';
+import { DefaultBookTheme } from 'prospero/web/book/theming';
+import { BooksComponent } from 'prospero/web/books';
 
-import ProsperoPage from './base-page';
-import { DijkstraEssayPageProps } from '../page-utils/prospero/get-dijkstra-essay-props.function';
 import { useMemo } from 'react';
+import { DijkstraEssayPageProps } from '../page-utils/prospero/get-dijkstra-essay-props.function';
+import ProsperoPage from './base-page';
 
 export default function DijkstraEssayPage({
   config,

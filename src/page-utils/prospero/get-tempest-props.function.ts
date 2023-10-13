@@ -1,15 +1,13 @@
-import { Pages } from 'prospero/server';
-import { PagesOutput, PageStyles } from 'prospero/types';
 import { join } from 'path';
 import { cwd } from 'process';
+import { Pages } from 'prospero/server';
+import { PagesOutput, PageStyles } from 'prospero/types';
 
-import { getFontUrl } from '../../config/load-font.function';
-import { Font } from '../../config/font.enum';
+import readFile from '../../utils/read-file.function';
 import {
   getBaseProsperoProps,
   ProsperoPageProps,
 } from './get-base-props.function';
-import readFile from '../../utils/read-file.function';
 
 export interface TempestPageProps extends ProsperoPageProps {
   pages: PagesOutput;

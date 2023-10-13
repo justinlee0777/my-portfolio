@@ -1,6 +1,6 @@
 import {
-  ProsperoPageProps,
   getBaseProsperoProps,
+  ProsperoPageProps,
 } from './get-base-props.function';
 
 export type UlyssesPageProps = ProsperoPageProps;

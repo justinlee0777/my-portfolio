@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { loadImage } from '../load-image.function';
 
 /**
  * @returns 2-tuple: [ Data, ErrorMessage ]

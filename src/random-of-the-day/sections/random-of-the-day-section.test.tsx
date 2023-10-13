@@ -32,10 +32,11 @@ jest.mock(
   }
 );
 
-import { RenderResult, cleanup, render, waitFor } from '@testing-library/react';
-import RandomOfTheDaySection from './random-of-the-day-section';
+import { cleanup, render, RenderResult, waitFor } from '@testing-library/react';
 import { Modal } from '../../services/modal';
-import { RandomOfTheDayConfig, RandomType } from '../random-of-the-day.config';
+import RandomOfTheDayConfig from '../models/random-of-the-day-config.interface';
+import RandomType from '../models/random-type.enum';
+import RandomOfTheDaySection from './random-of-the-day-section';
 
 describe('<RandomOfTheDaySection/>', () => {
   let renderResult: RenderResult;

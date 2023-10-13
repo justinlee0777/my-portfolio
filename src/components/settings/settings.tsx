@@ -2,50 +2,38 @@ import styles from './settings.module.scss';
 
 import Link from 'next/link';
 
-import RadioGroup, { RadioGroupOption } from '../radiogroup/radiogroup';
-import { Font } from '../../config/font.enum';
-import { SlideAnimation } from '../../config/slide-animation.enum';
-import { Theme } from '../../config/theme.enum';
-import { createLinkElement } from '../../config/link.model';
-import { SettingsConfig } from '../../config/settings.config';
-import UnitTestCheck from '../unit-test-check/unit-test-check';
-import Switch from '../switch/switch';
+import { useContext } from 'react';
+import createLinkElement from '../../config/create-link-element.function';
+import SettingsContext from '../../contexts/settings/settings.context';
+import Font from '../../models/font.enum';
+import SlideAnimation from '../../models/slide-animation.enum';
+import Theme from '../../models/theme.enum';
 import { locales } from '../../page-utils/locales.config';
-
-export interface SettingsProps {
-  config: SettingsConfig;
-  font: string;
-  theme: string;
-  animation: string;
-  developerMode: boolean;
-  onFontChange: (font: Font) => void;
-  onThemeChange: (theme: Theme) => void;
-  onAnimationChange: (animation: SlideAnimation) => void;
-  onDeveloperModeChange: (developerMode: boolean) => void;
-
-  route?: string;
-}
-
-interface SettingsSection {
-  enumeratedType: { [key: string]: string };
-  legend: string;
-  selectedValue: string;
-  onChange: (value: string) => void;
-}
+import RadioGroupOption from '../radiogroup/radio-group-option.interface';
+import RadioGroup from '../radiogroup/radiogroup';
+import Switch from '../switch/switch';
+import UnitTestCheck from '../unit-test-check/unit-test-check';
+import SettingsProps from './models/settings-props.interface';
+import SettingsSection from './models/settings-section.interface';
 
 export default function Settings({
   config,
-  font,
-  theme,
-  animation,
-  developerMode,
-  onFontChange,
-  onThemeChange,
-  onAnimationChange,
-  onDeveloperModeChange,
-
   route = '',
 }: SettingsProps): JSX.Element {
+  const {
+    font,
+    onFontChange,
+
+    theme,
+    onThemeChange,
+
+    animation,
+    onAnimationChange,
+
+    developerMode,
+    onDeveloperModeChange,
+  } = useContext(SettingsContext);
+
   const sections: Array<SettingsSection> = [
     {
       enumeratedType: Font,

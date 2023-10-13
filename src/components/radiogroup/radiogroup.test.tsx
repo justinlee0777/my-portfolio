@@ -10,7 +10,8 @@ import {
   waitFor,
 } from '@testing-library/react';
 
-import RadioGroup, { RadioGroupOption } from './radiogroup';
+import RadioGroupOption from './radio-group-option.interface';
+import RadioGroup from './radiogroup';
 
 describe('<RadioGroup/>', () => {
   const options: Array<RadioGroupOption> = [

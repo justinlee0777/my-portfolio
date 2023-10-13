@@ -1,21 +1,21 @@
 import styles from './index.module.scss';
 
-import { BooksComponent } from 'prospero/web/books';
+import { BookConfig } from 'prospero/types';
 import { BookComponent } from 'prospero/web/book';
-import { DefaultBookTheme } from 'prospero/web/book/theming';
-import {
-  listenToClickEvents,
-  listenToKeyboardEvents,
-} from 'prospero/web/book/listeners';
 import {
   DoublePageBookAnimation,
   SinglePageBookAnimation,
 } from 'prospero/web/book/animations';
-import { BookConfig } from 'prospero/types';
+import {
+  listenToClickEvents,
+  listenToKeyboardEvents,
+} from 'prospero/web/book/listeners';
+import { DefaultBookTheme } from 'prospero/web/book/theming';
+import { BooksComponent } from 'prospero/web/books';
 import { useMemo } from 'react';
 
-import ProsperoPage from './base-page';
 import { TempestPageProps } from '../page-utils/prospero/get-tempest-props.function';
+import ProsperoPage from './base-page';
 
 export default function TempestPage({
   config,
