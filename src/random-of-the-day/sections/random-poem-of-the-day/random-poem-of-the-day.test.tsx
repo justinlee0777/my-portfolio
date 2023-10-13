@@ -84,4 +84,34 @@ describe('<RandomPoemOfTheDay/>', () => {
     expect(sectionChildren[5].textContent).toBe('');
     expect(sectionChildren[6].textContent).toBe('Baz');
   });
+
+  test('renders prose', async () => {
+    getPoem.mockReturnValue(
+      Promise.resolve({
+        author: 'Justin Lee',
+        title: 'Foo',
+        text: 'The foo was fooing.\nThe bar was barring.\nAnd oh how the baz was bazing.',
+        translator: 'Me',
+      })
+    );
+
+    await renderComponent();
+
+    const header = renderResult.queryByText('Poem of the day');
+    expect(header).toBeTruthy();
+
+    const poemTitle = renderResult.queryByText('Foo');
+    expect(poemTitle).toBeTruthy();
+
+    const translatorCredit = renderResult.queryByText('Translated by Me');
+    expect(translatorCredit).toBeTruthy();
+
+    const section = renderResult.container.querySelector('section');
+    const sectionChildren = section.children;
+    expect(sectionChildren[4].textContent).toBe('The foo was fooing.');
+    expect(sectionChildren[5].textContent).toBe('The bar was barring.');
+    expect(sectionChildren[6].textContent).toBe(
+      'And oh how the baz was bazing.'
+    );
+  });
 });

@@ -29,14 +29,27 @@ export default function RandomPoemOfTheDay({
   } else if (!poem) {
     content = <LoadingScreen />;
   } else {
+    let lines: Array<string>;
+    let lineClassName: string | undefined;
+
+    if ('lines' in poem) {
+      lines = poem.lines;
+      lineClassName = styles.poemLine;
+    } else if ('text' in poem) {
+      lines = poem.text.split('\n');
+      lineClassName = styles.proseLine;
+    } else {
+      lines = [];
+    }
+
     content = (
       <section>
         <h3>{poem.title}</h3>
         <p>{poem.author}</p>
         {poem.translator && <p>Translated by {poem.translator}</p>}
         <div className={styles.poemSeparator}></div>
-        {poem.lines.map((line, i) => (
-          <p className={styles.poemLine} key={i}>
+        {lines.map((line, i) => (
+          <p className={lineClassName} key={i}>
             {line}
           </p>
         ))}
