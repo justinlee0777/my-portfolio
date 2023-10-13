@@ -1,5 +1,5 @@
 import { getStorage } from '../../utils/get-storage.function';
-import { RandomType } from '../random-of-the-day.config';
+import RandomType from '../models/random-type.enum';
 
 export interface SavedRandomOfTheDayConfig {
   sections: Array<RandomType>;

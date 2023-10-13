@@ -1,19 +1,10 @@
-import { defaultRandomOfTheDayConfig } from '../random-of-the-day/default-random-of-the-day.config';
-import {
-  getTranslationKeys,
-  RandomOfTheDayConfig,
-} from '../random-of-the-day/random-of-the-day.config';
-import { translateObject } from '../utils/translate-object.function';
-import {
-  BasePageProps,
-  getBasePageProps,
-} from './get-base-page-props.function';
+import defaultRandomOfTheDayConfig from '../../random-of-the-day/default-random-of-the-day.config';
+import { getTranslationKeys } from '../../random-of-the-day/translations/get-translation-keys.function';
+import { translateObject } from '../../utils/translate-object.function';
+import { getBasePageProps } from '../get-base-page-props.function';
+import RandomOfTheDayPageProps from './random-of-the-day-pages-props.interface';
 
-export interface RandomOfTheDayPageProps extends BasePageProps {
-  randomOfTheDayConfig: RandomOfTheDayConfig;
-}
-
-export function getLocalizedStaticProps(
+export default function getLocalizedStaticProps(
   locale: string
 ): () => Promise<{ props: RandomOfTheDayPageProps }> {
   return async function getStaticProps() {

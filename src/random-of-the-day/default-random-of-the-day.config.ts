@@ -1,6 +1,7 @@
-import { RandomOfTheDayConfig, RandomType } from './random-of-the-day.config';
+import RandomOfTheDayConfig from './models/random-of-the-day-config.interface';
+import RandomType from './models/random-type.enum';
 
-export const defaultRandomOfTheDayConfig: RandomOfTheDayConfig = {
+const defaultRandomOfTheDayConfig: RandomOfTheDayConfig = {
   seo: {
     title: 'Random of the Day',
     description:
@@ -59,3 +60,5 @@ export const defaultRandomOfTheDayConfig: RandomOfTheDayConfig = {
     },
   },
 };
+
+export default defaultRandomOfTheDayConfig;

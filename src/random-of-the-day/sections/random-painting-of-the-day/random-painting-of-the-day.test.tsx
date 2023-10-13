@@ -11,12 +11,7 @@ jest.mock('../../../components/loading-screen/loading-screen', () => () => {
 
 const getPainting = jest.fn();
 
-jest.mock('../../random-of-the-day.api', () => {
-  return {
-    __esModule: true,
-    getPainting,
-  };
-});
+jest.mock('../../api/get-painting.function', () => getPainting);
 
 const loadImage = jest.fn();
 

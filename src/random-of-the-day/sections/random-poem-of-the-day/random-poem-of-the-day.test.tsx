@@ -11,12 +11,7 @@ jest.mock('../../../components/loading-screen/loading-screen', () => () => {
 
 const getPoem = jest.fn();
 
-jest.mock('../../random-of-the-day.api', () => {
-  return {
-    __esModule: true,
-    getPoem,
-  };
-});
+jest.mock('../../api/get-poem.function', () => getPoem);
 
 import { cleanup, render, RenderResult, waitFor } from '@testing-library/react';
 

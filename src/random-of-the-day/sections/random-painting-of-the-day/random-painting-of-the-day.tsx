@@ -11,8 +11,8 @@ import createLinkElement from '../../../config/create-link-element.function';
 import { Modal } from '../../../services/modal';
 import { useApi } from '../../../utils/hooks/use-api.hook';
 import { loadImage } from '../../../utils/load-image.function';
-import { Painting } from '../../painting.interface';
-import { getPainting } from '../../random-of-the-day.api';
+import getPainting from '../../api/get-painting.function';
+import { Painting } from '../../models/painting.interface';
 import { BaseSectionProps } from '../base-section.props';
 import HighResImageDialog from './high-res-image-dialog/high-res-image-dialog';
 

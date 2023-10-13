@@ -6,8 +6,8 @@ import LoadingScreen from '../../../components/loading-screen/loading-screen';
 import Slide from '../../../components/slide/slide';
 import UnitTestCheck from '../../../components/unit-test-check/unit-test-check';
 import { useApi } from '../../../utils/hooks/use-api.hook';
-import { Poem } from '../../poem.interface';
-import { getPoem } from '../../random-of-the-day.api';
+import getPoem from '../../api/get-poem.function';
+import { Poem } from '../../models/poem.interface';
 import { BaseSectionProps } from '../base-section.props';
 
 interface PoemProps extends BaseSectionProps {

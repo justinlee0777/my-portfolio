@@ -10,8 +10,8 @@ import UnitTestCheck from '../../../components/unit-test-check/unit-test-check';
 import createLinkElement from '../../../config/create-link-element.function';
 import LinkedString from '../../../models/linked-string.model';
 import { useApi } from '../../../utils/hooks/use-api.hook';
-import { ObliqueStrategy } from '../../oblique-strategy.interface';
-import { getObliqueStrategy } from '../../random-of-the-day.api';
+import getObliqueStrategy from '../../api/get-oblique-strategy.function';
+import { ObliqueStrategy } from '../../models/oblique-strategy.interface';
 import { BaseSectionProps } from '../base-section.props';
 
 interface ObliqueStrategyProps extends BaseSectionProps {

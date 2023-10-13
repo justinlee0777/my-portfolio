@@ -11,12 +11,7 @@ jest.mock('../../../components/loading-screen/loading-screen', () => () => {
 
 const getObliqueStrategy = jest.fn();
 
-jest.mock('../../random-of-the-day.api', () => {
-  return {
-    __esModule: true,
-    getObliqueStrategy,
-  };
-});
+jest.mock('../../api/get-oblique-strategy.function', () => getObliqueStrategy);
 
 import {
   cleanup,
