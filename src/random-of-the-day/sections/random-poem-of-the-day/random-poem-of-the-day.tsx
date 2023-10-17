@@ -32,10 +32,10 @@ export default function RandomPoemOfTheDay({
     let lines: Array<string>;
     let lineClassName: string | undefined;
 
-    if ('lines' in poem) {
+    if (poem.lines) {
       lines = poem.lines;
       lineClassName = styles.poemLine;
-    } else if ('text' in poem) {
+    } else if (poem.text) {
       lines = poem.text.split('\n');
       lineClassName = styles.proseLine;
     } else {
