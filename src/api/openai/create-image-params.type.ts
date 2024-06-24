@@ -1,5 +1,5 @@
-import { CreateImageRequest } from 'openai';
+import { ImageGenerateParams } from "openai/resources/images";
 
-type CreateImageParams = Omit<CreateImageRequest, 'n'>;
+type CreateImageParams = Omit<ImageGenerateParams, 'n'>;
 
 export default CreateImageParams;
