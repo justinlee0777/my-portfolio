@@ -31,7 +31,8 @@ export function getLocalizedStaticProps(
   return async function getStaticProps(): Promise<{
     props: HomepagePageProps;
   }> {
-    await saveProfileImage();
+    // TODO: Call this operation only once per build.
+    // await saveProfileImage();
 
     let translatedConfig = homepageConfig;
 

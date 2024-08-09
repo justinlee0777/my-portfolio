@@ -1,4 +1,4 @@
-import { ImageGenerateParams } from "openai/resources/images";
+import { ImageGenerateParams } from 'openai/resources/images';
 
 type CreateImageParams = Omit<ImageGenerateParams, 'n'>;
 

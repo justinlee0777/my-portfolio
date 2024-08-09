@@ -3,13 +3,15 @@
     "dev": "next dev",
     "build": "npm run test && next build",
     "build:analyze": "ANALYZE=true yarn build",
-    "build:zip": "npm run build && rm -f out.zip && zip -r out out/*",
-    "start": "next start",
+    "build:zip": "npm run build && rm -f out.zip && zip -r out server.js package.json package-lock.json .next public",
+    "start": "NODE_ENV=production node server.js",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "lint": "next lint",
     "format": "prettier --write ."
   },
   "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.624.0",
+    "@aws-sdk/client-s3": "^3.624.0",
     "@google-cloud/translate": "^8.3.0",
     "buzzword-bingo-generator": "^0.0.22",
     "canvas": "^2.11.2",

@@ -1,8 +1,8 @@
+import { Fact } from '../../models/fact.interface';
 import { failHttpResponse } from '../../utils/fail-http-response.function';
-import { Fact } from '../models/fact.interface';
 
-export default async function getFact(apiUrl: string): Promise<Fact> {
-  const response = await fetch(`${apiUrl}/fact`);
+export default async function getFact(): Promise<Fact> {
+  const response = await fetch(`/api/fact`);
   failHttpResponse(response);
   return response.json();
 }

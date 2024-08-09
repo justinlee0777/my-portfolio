@@ -5,9 +5,9 @@ import ErrorScreen from '../../../components/error-screen/error-screen';
 import LoadingScreen from '../../../components/loading-screen/loading-screen';
 import Slide from '../../../components/slide/slide';
 import UnitTestCheck from '../../../components/unit-test-check/unit-test-check';
+import { Poem } from '../../../models/poem.interface';
 import { useApi } from '../../../utils/hooks/use-api.hook';
 import getPoem from '../../api/get-poem.function';
-import { Poem } from '../../models/poem.interface';
 import { BaseSectionProps } from '../base-section.props';
 
 interface PoemProps extends BaseSectionProps {
@@ -18,9 +18,8 @@ export default function RandomPoemOfTheDay({
   id,
   animated,
   header,
-  randomOfTheDayApiUrl,
 }: PoemProps): JSX.Element {
-  const [poem, error] = useApi<Poem>(() => getPoem(randomOfTheDayApiUrl));
+  const [poem, error] = useApi<Poem>(() => getPoem());
 
   let content: JSX.Element;
 
