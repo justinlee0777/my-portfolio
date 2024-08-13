@@ -15,7 +15,23 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === 'GET') {
-    const result = await getProsperoPages('ulysses', 'desktop', 1, 10);
+    const {
+      pageNumber,
+      pageSize,
+    } = req.query;
+
+    let finalPageNumber = Number(pageNumber);
+    let finalPageSize = Number(pageSize);
+
+    if (!finalPageNumber) {
+      finalPageNumber = 1;
+    }
+
+    if (!finalPageSize) {
+      finalPageSize = 10;
+    }
+
+    const result = await getProsperoPages('ulysses', 'desktop', finalPageNumber, finalPageSize);
 
     res.status(200).json(result);
   } else if (req.method === 'PUT') {
