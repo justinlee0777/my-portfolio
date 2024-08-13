@@ -21,7 +21,7 @@ import ProsperoPage from './base-page';
 export default function UlyssesPage({
   config,
 }: ProsperoPageProps): JSX.Element {
-  const endpointBase = 'https://api.iamjustinlee.com/prospero/texts';
+  const endpointBase = 'https://iamjustinlee.com/api/prospero/texts';
 
   const [mobileStyles, setMobileStyles] = useState<PageStyles | null>(null);
 
