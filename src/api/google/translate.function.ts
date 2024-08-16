@@ -1,4 +1,4 @@
-import googleTranslateClient from './translate.client';
+import getGoogleTranslateClient from './translate.client';
 
 /**
  * @returns the strings translated preserved in the order they were sent (as I trust Google to preserve ordinality).
@@ -8,6 +8,8 @@ export default async function translate(
   targetLang: string,
   sourceLang = 'en'
 ): Promise<Array<string>> {
+  const googleTranslateClient = getGoogleTranslateClient();
+
   const projectId = await googleTranslateClient.getProjectId();
 
   const response = await googleTranslateClient.translateText({
