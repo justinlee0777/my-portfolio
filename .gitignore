@@ -8,7 +8,6 @@ out.zip
 // Dynamically created assets
 public/profile-picture.png
 public/rpg-game-source
-public/unit-test-results.json
 
 .env
 
