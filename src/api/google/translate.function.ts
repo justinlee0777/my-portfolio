@@ -10,13 +10,15 @@ export default async function translate(
 ): Promise<Array<string>> {
   const googleTranslateClient = getGoogleTranslateClient();
 
-  const projectId = await googleTranslateClient.getProjectId();
+  const {
+    GCP_PROJECT_ID,
+  } = process.env;
 
   const response = await googleTranslateClient.translateText({
     contents: strings,
     targetLanguageCode: targetLang,
     sourceLanguageCode: sourceLang,
-    parent: `projects/${projectId}/locations/global`,
+    parent: `projects/${GCP_PROJECT_ID}/locations/global`
   });
 
   return response[0].translations.map(
