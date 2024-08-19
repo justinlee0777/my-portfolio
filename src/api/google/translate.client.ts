@@ -1,7 +1,6 @@
 import { TranslationServiceClient } from '@google-cloud/translate';
+import getGCPCredentials from '../../utils/get-gcpc-credentials.function';
 
-const googleTranslateClient = new TranslationServiceClient({
-  projectId: process.env.googleCloudProjectId,
-});
-
-export default googleTranslateClient;
+export default function getGoogleTranslateClient() {
+  return new TranslationServiceClient(getGCPCredentials());
+}

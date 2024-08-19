@@ -9,9 +9,9 @@ import Slide from '../../../components/slide/slide';
 import UnitTestCheck from '../../../components/unit-test-check/unit-test-check';
 import createLinkElement from '../../../config/create-link-element.function';
 import LinkedString from '../../../models/linked-string.model';
+import { ObliqueStrategy } from '../../../models/oblique-strategy.interface';
 import { useApi } from '../../../utils/hooks/use-api.hook';
 import getObliqueStrategy from '../../api/get-oblique-strategy.function';
-import { ObliqueStrategy } from '../../models/oblique-strategy.interface';
 import { BaseSectionProps } from '../base-section.props';
 
 interface ObliqueStrategyProps extends BaseSectionProps {
@@ -23,11 +23,10 @@ export default function RandomObliqueStrategyOfTheDay({
   id,
   animated,
   header,
-  randomOfTheDayApiUrl,
   explanation,
 }: ObliqueStrategyProps): JSX.Element {
   const [obliqueStrategy, error] = useApi<ObliqueStrategy>(() =>
-    getObliqueStrategy(randomOfTheDayApiUrl)
+    getObliqueStrategy()
   );
   const [flipped, setFlipped] = useState(false);
 

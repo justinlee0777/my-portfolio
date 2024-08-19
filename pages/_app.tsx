@@ -1,3 +1,4 @@
+import 'buzzword-bingo-generator/index.css';
 import './styles.scss';
 
 import Page, { PageProps } from '../src/page';

@@ -5,9 +5,9 @@ import LoadingScreen from '../../../components/loading-screen/loading-screen';
 import Slide from '../../../components/slide/slide';
 import UnitTestCheck from '../../../components/unit-test-check/unit-test-check';
 import createLinkElement from '../../../config/create-link-element.function';
+import { Fact } from '../../../models/fact.interface';
 import { useApi } from '../../../utils/hooks/use-api.hook';
 import getFact from '../../api/get-fact.function';
-import { Fact } from '../../models/fact.interface';
 import { BaseSectionProps } from '../base-section.props';
 
 interface RandomFactOfTheDayProps extends BaseSectionProps {
@@ -21,9 +21,8 @@ export default function RandomFactOfTheDay({
 
   header,
   credit,
-  randomOfTheDayApiUrl,
 }: RandomFactOfTheDayProps): JSX.Element {
-  const [fact, error] = useApi<Fact>(() => getFact(randomOfTheDayApiUrl));
+  const [fact, error] = useApi<Fact>(() => getFact());
 
   let content: JSX.Element;
 

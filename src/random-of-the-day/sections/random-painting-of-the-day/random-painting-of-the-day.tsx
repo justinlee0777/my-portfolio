@@ -8,11 +8,11 @@ import LoadingScreen from '../../../components/loading-screen/loading-screen';
 import Slide from '../../../components/slide/slide';
 import UnitTestCheck from '../../../components/unit-test-check/unit-test-check';
 import createLinkElement from '../../../config/create-link-element.function';
+import { Painting } from '../../../models/painting.interface';
 import { Modal } from '../../../services/modal';
 import { useApi } from '../../../utils/hooks/use-api.hook';
 import { loadImage } from '../../../utils/load-image.function';
 import getPainting from '../../api/get-painting.function';
-import { Painting } from '../../models/painting.interface';
 import { BaseSectionProps } from '../base-section.props';
 import HighResImageDialog from './high-res-image-dialog/high-res-image-dialog';
 
@@ -35,14 +35,11 @@ export default function RandomPaintingOfTheDay({
   credit,
   openHighResImage,
   highResImageLoadFailed,
-  randomOfTheDayApiUrl,
 }: RandomPaintingOfTheDayProps): JSX.Element {
   const [highResImageLoaded, setHighResImageLoaded] = useState<boolean>(false);
   const [highResImageFailed, setHighResImageFailed] = useState<boolean>(false);
 
-  const [painting, error] = useApi<Painting>(() =>
-    getPainting(randomOfTheDayApiUrl)
-  );
+  const [painting, error] = useApi<Painting>(() => getPainting());
 
   useEffect(() => {
     if (painting) {

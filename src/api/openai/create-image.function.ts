@@ -4,10 +4,10 @@ import openAIApi from './open-ai.client';
 export default async function createImage(
   params: CreateImageParams
 ): Promise<string> {
-  return openAIApi
-    .createImage({
+  return openAIApi.images
+    .generate({
       ...params,
       n: 1,
     })
-    .then((response) => response.data.data[0].url);
+    .then((response) => response.data[0].url);
 }
