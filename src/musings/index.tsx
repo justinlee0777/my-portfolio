@@ -3,22 +3,13 @@ import styles from './index.module.scss';
 import Head from 'next/head';
 
 import Slide from '../components/slide/slide';
-import { MusingConfig } from './components/musing/musing.config';
 import Musings from './components/musings/musings';
-import { MusingsPageConfig } from './musings-page.config';
-
-export interface MusingsPageProps {
-  config: MusingsPageConfig;
-
-  musings: Array<MusingConfig>;
-
-  children?: JSX.Element;
-}
+import MusingsProps from './models/musings-props.interface';
 
 export default function MusingsPage({
   config,
   musings,
-}: MusingsPageProps): JSX.Element {
+}: MusingsProps): JSX.Element {
   return (
     <>
       <Head>

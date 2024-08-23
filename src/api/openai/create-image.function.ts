@@ -1,9 +1,11 @@
 import CreateImageParams from './create-image-params.type';
-import openAIApi from './open-ai.client';
+import getOpenAIApi from './open-ai.client';
 
 export default async function createImage(
   params: CreateImageParams
 ): Promise<string> {
+  const openAIApi = getOpenAIApi();
+
   return openAIApi.images
     .generate({
       ...params,
