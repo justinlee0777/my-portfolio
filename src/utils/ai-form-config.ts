@@ -54,12 +54,15 @@ export class FormMetadata {
       if (this.isFormMetadataValueConfig(value)) {
         const newPath = currentPath.concat(key);
 
-        this.config[key] = new FormDataValue({
+        const formDataValue = new FormDataValue({
           ...value,
           label: value.label ?? newPath.join('.'),
           path: newPath,
         });
-        this.config[key].value = values?.[key];
+
+        formDataValue.value = values?.[key];
+
+        this.config[key] = formDataValue;
       } else {
         this.config[key] = new FormMetadata(value, values?.[key], [key]);
       }

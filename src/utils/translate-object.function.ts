@@ -9,7 +9,7 @@ import { decodeHTMLEntities } from './decode-html-entities.function';
  * @param keysToTranslate strings can be in the format used by lodash.get.
  * @throws if a key in keysToTranslate does not need to a string.
  */
-export async function translateObject<T = Object>(
+export async function translateObject<T extends Object>(
   object: T,
   keysToTranslate: Array<string>,
   targetLanguage: string
