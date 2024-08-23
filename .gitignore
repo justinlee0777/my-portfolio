@@ -5,9 +5,6 @@ node_modules
 out
 out.zip
 
-// Dynamically created assets
-public/rpg-game-source
-
 .env
 
 .DS_Store

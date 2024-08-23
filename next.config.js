@@ -12,21 +12,6 @@ const config = {
   experimental: {
     optimizeCss: false,
   },
-  webpack: (config) => {
-    return {
-      ...config,
-      plugins: config.plugins.concat(
-        new CopyPlugin({
-          patterns: [
-            {
-              from: './node_modules/rpg-game-poc',
-              to: '../public/rpg-game-source',
-            },
-          ],
-        })
-      ),
-    };
-  },
 };
 
 module.exports = withBundleAnalyzer(config);

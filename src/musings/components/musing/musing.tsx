@@ -16,20 +16,18 @@ import { useBook } from 'prospero/web/react';
 import { NewlineTransformer } from 'prospero/web/transformers';
 import { useRef, useState } from 'react';
 
+import dynamic from 'next/dynamic';
 import Slide from '../../../components/slide/slide';
 import Switch from '../../../components/switch/switch';
 import UnitTestCheck from '../../../components/unit-test-check/unit-test-check';
-import Font from '../../../models/font.enum';
-import { MusingConfig } from './musing.config';
+import MusingPageProps from '../../models/musing-props.interface';
 
-export interface MusingPageProps {
-  config: MusingConfig;
-  font: Font;
-}
+const AIForm = dynamic(() => import('../../../components/ai-form/ai-form'));
 
 export default function MusingPage({
   config,
   font,
+  showAIForm,
 }: MusingPageProps): JSX.Element {
   const mainRef = useRef<HTMLElement>(null);
 
@@ -110,6 +108,7 @@ export default function MusingPage({
             Show as book
           </p>
           <main className={styles.musingArticle} ref={mainRef}>
+            {showAIForm && <AIForm />}
             {!bookMode && (
               <div
                 dangerouslySetInnerHTML={{

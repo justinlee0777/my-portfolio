@@ -1,7 +1,7 @@
 import { ClientOptions, OpenAI } from 'openai';
 
-const configuration: ClientOptions = {};
+export default function getOpenAIApi() {
+  const configuration: ClientOptions = {};
 
-const openAIApi = new OpenAI(configuration);
-
-export default openAIApi;
+  return new OpenAI(configuration);
+}
