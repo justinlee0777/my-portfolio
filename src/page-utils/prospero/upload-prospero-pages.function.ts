@@ -1,7 +1,8 @@
 import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
 import PagesAsIndicesOutput from 'prospero/models/pages-as-indices-output.interface';
-import sendMySQLQuery from '../../utils/send-mysql-query.function';
-import getMySQLClient from './get-mysql-client.function';
+import { ProsperoPageDataModel } from '../../models/propsero-page-data.model';
+import { ProsperoPageStyleDataModel } from '../../models/prospero-page-style-data.model';
+import connectToMongoDB from './connect-to-mongodb.function';
 
 export default async function uploadProsperoPages(
   textTitle: string,
@@ -18,7 +19,7 @@ export default async function uploadProsperoPages(
 
   await s3Client.send(command);
 
-  const mySQLClient = getMySQLClient();
+  await connectToMongoDB();
 
   const {
     width,
@@ -48,48 +49,40 @@ export default async function uploadProsperoPages(
 
   const { html } = textData;
 
-  mySQLClient.connect();
-
-  const updateStylesQuery = `REPLACE INTO page_styles \
-                       VALUES (\
-                       ${width}, \
-                       ${height}, \
-                       '${computedFontSize}', \
-                       '${computedFontFamily}', \
-                       ${paddingTop}, \
-                       ${paddingRight}, \
-                       ${paddingBottom}, \
-                       ${paddingLeft}, \
-                       ${marginTop}, \
-                       ${marginRight}, \
-                       ${marginBottom}, \
-                       ${marginLeft}, \
-                       ${borderTop}, \
-                       ${borderRight}, \
-                       ${borderBottom}, \
-                       ${borderLeft}, \
-                       '${textDescription}', \
-                       '${textTitle}', \
-                       ${lineHeight}, \
-                       ${html} \
-                       )`;
-
-  await sendMySQLQuery(mySQLClient, updateStylesQuery);
-
-  const deleteOldPagesQuery = `DELETE FROM pages WHERE text_title = '${textTitle}' AND text_description = '${textDescription}'`;
-
-  await sendMySQLQuery(mySQLClient, deleteOldPagesQuery);
-
-  const pageValues = textData.pages.map(
-    (page, index) =>
-      `('${textTitle}',${index + 1},${page.beginIndex},${
-        page.endIndex
-      },'${textDescription}')`
+  await ProsperoPageStyleDataModel.updateOne(
+    { textTitle, textDescription },
+    {
+      width,
+      height,
+      computedFontFamily,
+      computedFontSize,
+      paddingTop,
+      paddingRight,
+      paddingBottom,
+      paddingLeft,
+      marginTop,
+      marginRight,
+      marginBottom,
+      marginLeft,
+      borderTop,
+      borderRight,
+      borderBottom,
+      borderLeft,
+      lineHeight,
+      html,
+    },
+    { upsert: true }
   );
 
-  const insertPagesQuery = `INSERT INTO pages VALUES${pageValues.join(', ')}`;
+  await ProsperoPageDataModel.deleteMany({ textTitle, textDescription });
 
-  await sendMySQLQuery(mySQLClient, insertPagesQuery);
-
-  mySQLClient.end();
+  await ProsperoPageDataModel.insertMany(
+    textData.pages.map((page, index) => ({
+      textTitle,
+      textDescription,
+      pageNumber: index + 1,
+      beginIndex: page.beginIndex,
+      endIndex: page.endIndex,
+    }))
+  );
 }
