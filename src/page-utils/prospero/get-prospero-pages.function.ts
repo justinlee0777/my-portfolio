@@ -29,8 +29,8 @@ export default async function getProsperoPages(
   const pages = await ProsperoPageDataModel.find({
     textTitle,
     textDescription,
-    pageNumber: { $gt: startingPage, $lt: endPage },
-  }).lean();
+    pageNumber: { $gte: startingPage, $lte: endPage },
+  }).sort({ pageNumber: 1 }).lean();
 
   const pageStyles = await ProsperoPageStyleDataModel.findOne({
     textTitle,
