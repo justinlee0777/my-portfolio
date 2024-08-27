@@ -20,4 +20,4 @@ const ProsperoPageDataModelName = 'ProsperoPageData';
 
 export const ProsperoPageDataModel: Model<ProsperoPageData> =
   models[ProsperoPageDataModelName] ||
-  model('ProsperoPageData', ProsperoPageDataSchema);
+  model(ProsperoPageDataModelName, ProsperoPageDataSchema);
