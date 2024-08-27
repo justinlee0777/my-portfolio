@@ -2,12 +2,14 @@ import { model, Model, models, Schema } from 'mongoose';
 
 export interface EldenRingEmbeddings {
   itemName: string;
+  itemType: 'remembrance';
   text: string;
   embedding: Array<number>;
 }
 
 const EldenRingEmbeddingsSchema = new Schema<EldenRingEmbeddings>({
   itemName: { type: String, required: true },
+  itemType: { type: String, required: true },
   text: { type: String, required: true },
   embedding: [{ type: Number }],
 });
