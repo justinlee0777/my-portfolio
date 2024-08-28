@@ -32,7 +32,7 @@ export default async function handler(
 
     const s3Key = 'objectName';
 
-    if (poem[s3Key]) {
+    if (typeof poem[s3Key] === 'string') {
       const s3Client = new S3Client({ region: 'us-east-1' });
 
       const command = new GetObjectCommand({
