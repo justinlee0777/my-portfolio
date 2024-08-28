@@ -37,5 +37,8 @@ export default interface RandomOfTheDayConfig {
       header: string;
       explanation: LinkedString;
     };
+    frogSoundOfTheDay: {
+      header: string;
+    };
   };
 }

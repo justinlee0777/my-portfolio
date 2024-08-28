@@ -26,6 +26,10 @@ const defaultRandomOfTheDayConfig: RandomOfTheDayConfig = {
         text: 'Oblique strategy',
         type: RandomType.OBLIQUE_STRATEGY,
       },
+      {
+        text: 'Frog sound',
+        type: RandomType.FROG_SOUND,
+      },
     ],
     description: [
       'The Daily Scrum is the most visible face of Scrum.',
@@ -57,6 +61,9 @@ const defaultRandomOfTheDayConfig: RandomOfTheDayConfig = {
         templateString: 'The origin and use of the ${Oblique Strategies}',
         urls: ['https://en.wikipedia.org/wiki/Oblique_Strategies'],
       },
+    },
+    frogSoundOfTheDay: {
+      header: 'Frog sound of the day',
     },
   },
 };
