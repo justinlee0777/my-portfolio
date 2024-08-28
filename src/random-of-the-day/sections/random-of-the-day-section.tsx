@@ -3,6 +3,7 @@ import RandomOfTheDayConfig from '../models/random-of-the-day-config.interface';
 import RandomType from '../models/random-type.enum';
 import { BaseSectionProps } from './base-section.props';
 import RandomFactOfTheDay from './random-fact-of-the-day/random-fact-of-the-day';
+import RandomFrogSoundOfTheDay from './random-frog-sound-of-the-day/random-frog-sound-of-the-day';
 import RandomObliqueStrategyOfTheDay from './random-oblique-strategy-of-the-day/random-oblique-strategy-of-the-day';
 import RandomPaintingOfTheDay from './random-painting-of-the-day/random-painting-of-the-day';
 import RandomPoemOfTheDay from './random-poem-of-the-day/random-poem-of-the-day';
@@ -63,6 +64,14 @@ export default function RandomOfTheDaySection({
           animated={animated}
           {...config.textContent.obliqueStrategyOfTheDay}
           randomOfTheDayApiUrl={apiUrl}
+        />
+      );
+    case RandomType.FROG_SOUND:
+      return (
+        <RandomFrogSoundOfTheDay
+          id={elementId}
+          animated={animated}
+          {...config.textContent.frogSoundOfTheDay}
         />
       );
   }
