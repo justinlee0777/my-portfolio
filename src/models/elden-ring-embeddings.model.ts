@@ -2,7 +2,7 @@ import { model, Model, models, Schema } from 'mongoose';
 
 export interface EldenRingEmbeddings {
   itemName: string;
-  itemType: 'remembrance';
+  itemType: 'remembrance' | 'weapon';
   text: string;
   embedding: Array<number>;
 }

@@ -1,4 +1,4 @@
-import { EldenRingEmbeddings } from '../models/elden-ring-embeddings.model';
+import { EldenRingEmbeddings } from '../../models/elden-ring-embeddings.model';
 
 export default interface EldenRingScrapeResults {
   itemName: string;

@@ -47,8 +47,8 @@ export default async function handler(
           $vectorSearch: {
             index: 'default',
             path: 'embedding',
-            limit: 3,
-            numCandidates: 30,
+            limit: 10,
+            numCandidates: 100,
             queryVector: fixArrayPrecision(
               queryEmbeddingsResponse.data.at(0).embedding
             ),
@@ -65,7 +65,9 @@ export default async function handler(
       ]);
 
     results = results.filter((result) => result.score > 0.5);
-
+    console.log({
+      results,
+    });
     const finalMessages = messages.slice(-1).concat({
       content: `
         Please answer the query using only the provided texts.
