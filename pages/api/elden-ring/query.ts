@@ -31,14 +31,16 @@ export default async function handler(
 
     await connectToMongoDB();
 
+    const limit = 10;
+
     const vectorSearchResults: Array<EldenRingEmbeddings & { score: number }> =
       await EldenRingEmbeddingsModel.aggregate([
         {
           $vectorSearch: {
             index: 'default',
             path: 'embedding',
-            limit: 10,
-            numCandidates: 100,
+            limit,
+            numCandidates: limit * 10,
             queryVector: fixArrayPrecision(
               queryEmbeddingsResponse.data.at(0).embedding
             ),
