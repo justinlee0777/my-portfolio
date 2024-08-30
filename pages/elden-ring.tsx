@@ -1,6 +1,6 @@
 import { ChatCompletionMessageParam } from 'openai/resources';
-import { useState } from 'react';
-import Chatbot from '../src/components/chatbot/chatbot';
+import { useEffect, useRef, useState } from 'react';
+import Chatbot, { ChatbotRef } from '../src/components/chatbot/chatbot';
 import { getBasePageProps } from '../src/page-utils/get-base-page-props.function';
 
 export async function getStaticProps() {
@@ -10,6 +10,8 @@ export async function getStaticProps() {
 }
 
 export default function EldenRingPage() {
+  const chatbotRef = useRef<ChatbotRef>();
+
   const [messages, setMessages] = useState<Array<ChatCompletionMessageParam>>([
     {
       content: `Hi, I'm an Elden Ring bot. Ask me questions about Elden Ring lore.`,
@@ -19,8 +21,13 @@ export default function EldenRingPage() {
 
   const [disabled, setDisabled] = useState(false);
 
+  useEffect(() => {
+    chatbotRef.current.scrollDown();
+  }, [chatbotRef, messages]);
+
   return (
     <Chatbot
+      ref={chatbotRef}
       messages={messages}
       disabled={disabled}
       onSubmit={async (query) => {

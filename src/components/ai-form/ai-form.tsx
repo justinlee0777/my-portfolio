@@ -1,9 +1,9 @@
 import set from 'lodash-es/set';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 import { ChatCompletionMessageParam } from 'openai/resources';
 import FormMetadataConfig, { FormMetadata } from '../../utils/ai-form-config';
-import Chatbot from '../chatbot/chatbot';
+import Chatbot, { ChatbotRef } from '../chatbot/chatbot';
 
 export default function AIForm(): JSX.Element {
   const formConfig: FormMetadataConfig = useMemo(
@@ -38,6 +38,8 @@ export default function AIForm(): JSX.Element {
     []
   );
 
+  const chatbotRef = useRef<ChatbotRef>();
+
   const [formValue, setFormValue] = useState<any>({});
 
   const [messages, setMessages] = useState<Array<ChatCompletionMessageParam>>(
@@ -71,8 +73,13 @@ export default function AIForm(): JSX.Element {
 
   const [disabled, setDisabled] = useState(false);
 
+  useEffect(() => {
+    chatbotRef.current.scrollDown();
+  }, [chatbotRef, messages]);
+
   return (
     <Chatbot
+      ref={chatbotRef}
       messages={messages}
       disabled={disabled}
       headerContent={
