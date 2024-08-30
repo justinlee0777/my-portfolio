@@ -2,7 +2,7 @@ import { chromium, Locator } from 'playwright';
 import { EldenRingEmbeddings } from '../../models/elden-ring-embeddings.model';
 import EldenRingScrapeResults from './elden-ring-scrape-results.interface';
 
-export default async function* scrapeEldenRingArmor(): AsyncGenerator<
+export default async function* scrapeEldenRingSpells(): AsyncGenerator<
   Array<EldenRingScrapeResults>
 > {
   const browser = await chromium.launch();
@@ -17,10 +17,8 @@ export default async function* scrapeEldenRingArmor(): AsyncGenerator<
     url: string;
     itemType: EldenRingEmbeddings['itemType'];
   }> = [
-    { url: `${baseUrl}/wiki/Head`, itemType: 'helm' },
-    // chest not specified in this script
-    { url: `${baseUrl}/wiki/Arms`, itemType: 'gauntlets' },
-    { url: `${baseUrl}/wiki/Legs`, itemType: 'leg armor' },
+    // { url: `${baseUrl}/wiki/Sorceries`, itemType: 'sorcery' },
+    { url: `${baseUrl}/wiki/Incantations`, itemType: 'incantation' },
   ];
 
   for (const { url, itemType } of pageConfigs) {
@@ -28,8 +26,8 @@ export default async function* scrapeEldenRingArmor(): AsyncGenerator<
     await page.goto(url, { waitUntil: 'domcontentloaded' });
 
     const tableRowSelectors = await page
-      .locator('.wds-tabber')
-      .locator('.wikia-gallery-item')
+      .locator('.wds-tab__content.wds-is-current')
+      .locator('.wikia-gallery:visible')
       .locator('a')
       .all();
 

@@ -8,7 +8,9 @@ export interface EldenRingEmbeddings {
     | 'helm'
     | 'chest armor'
     | 'gauntlets'
-    | 'leg armor';
+    | 'leg armor'
+    | 'sorcery'
+    | 'incantation';
   text: string;
   embedding: Array<number>;
 }
