@@ -1,6 +1,9 @@
+import styles from './elden-ring.module.scss';
+
 import { ChatCompletionMessageParam } from 'openai/resources';
 import { useEffect, useRef, useState } from 'react';
 import Chatbot, { ChatbotRef } from '../src/components/chatbot/chatbot';
+import Slide from '../src/components/slide/slide';
 import { getBasePageProps } from '../src/page-utils/get-base-page-props.function';
 
 export async function getStaticProps() {
@@ -26,33 +29,51 @@ export default function EldenRingPage() {
   }, [chatbotRef, messages]);
 
   return (
-    <Chatbot
-      ref={chatbotRef}
-      messages={messages}
-      disabled={disabled}
-      onSubmit={async (query) => {
-        const newMessages = messages.concat({ content: query, role: 'user' });
+    <Slide className={styles.eldenRingPage}>
+      <>
+        <h1>Elden Ring lore chatbot</h1>
+        <p>I am such an Elden Ring nerd.</p>
+        <p>
+          One of the peculiarities of Elden Ring is that most of the story is
+          told through text, usually item descriptions.
+        </p>
+        <p>
+          I thought it would be funny to sum up my current knowledge on AI by
+          making a bot that answers Elden Ring lore questions using a database
+          fed with Elden Ring item descriptions.
+        </p>
+        <Chatbot
+          ref={chatbotRef}
+          messages={messages}
+          disabled={disabled}
+          onSubmit={async (query) => {
+            const newMessages = messages.concat({
+              content: query,
+              role: 'user',
+            });
 
-        setDisabled(true);
+            setDisabled(true);
 
-        try {
-          setMessages(newMessages);
+            try {
+              setMessages(newMessages);
 
-          const response = await fetch('/api/elden-ring/query', {
-            method: 'POST',
-            body: JSON.stringify({ messages: newMessages }),
-            headers: { 'Content-Type': 'application/json' },
-          });
+              const response = await fetch('/api/elden-ring/query', {
+                method: 'POST',
+                body: JSON.stringify({ messages: newMessages }),
+                headers: { 'Content-Type': 'application/json' },
+              });
 
-          const content = await response.json();
+              const content = await response.json();
 
-          setMessages((currentMessages) =>
-            currentMessages.concat({ role: 'system', content })
-          );
-        } finally {
-          setDisabled(false);
-        }
-      }}
-    />
+              setMessages((currentMessages) =>
+                currentMessages.concat({ role: 'system', content })
+              );
+            } finally {
+              setDisabled(false);
+            }
+          }}
+        />
+      </>
+    </Slide>
   );
 }
