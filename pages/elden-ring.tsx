@@ -13,7 +13,7 @@ export async function getStaticProps() {
 }
 
 export default function EldenRingPage() {
-  const chatbotRef = useRef<ChatbotRef>();
+  const chatbotRef = useRef<ChatbotRef>(null);
 
   const [messages, setMessages] = useState<Array<ChatCompletionMessageParam>>([
     {
@@ -25,7 +25,7 @@ export default function EldenRingPage() {
   const [disabled, setDisabled] = useState(false);
 
   useEffect(() => {
-    chatbotRef.current.scrollDown();
+    chatbotRef.current?.scrollDown();
   }, [chatbotRef, messages]);
 
   return (
@@ -63,11 +63,20 @@ export default function EldenRingPage() {
                 headers: { 'Content-Type': 'application/json' },
               });
 
-              const content = await response.json();
+              const stream = response.body!.getReader();
 
-              setMessages((currentMessages) =>
-                currentMessages.concat({ role: 'system', content })
-              );
+              let streamDone = false;
+              let content = '';
+
+              while (!streamDone) {
+                const { done, value } = await stream.read();
+
+                content += new TextDecoder().decode(value);
+
+                setMessages(newMessages.concat({ role: 'system', content }));
+
+                streamDone = done;
+              }
             } finally {
               setDisabled(false);
             }
