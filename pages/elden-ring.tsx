@@ -1,9 +1,12 @@
 import styles from './elden-ring.module.scss';
 
 import { ChatCompletionMessageParam } from 'openai/resources';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { GoCrossReference } from 'react-icons/go';
+import { Tooltip } from 'react-tooltip';
 import Chatbot, { ChatbotRef } from '../src/components/chatbot/chatbot';
 import Slide from '../src/components/slide/slide';
+import { EldenRingEmbeddings } from '../src/models/elden-ring-embeddings.model';
 import { getBasePageProps } from '../src/page-utils/get-base-page-props.function';
 
 export async function getStaticProps() {
@@ -12,10 +15,14 @@ export async function getStaticProps() {
   };
 }
 
+type EldenRingMessage = ChatCompletionMessageParam & {
+  references?: Array<Pick<EldenRingEmbeddings, 'itemName' | 'referenceUrl'>>;
+};
+
 export default function EldenRingPage() {
   const chatbotRef = useRef<ChatbotRef>(null);
 
-  const [messages, setMessages] = useState<Array<ChatCompletionMessageParam>>([
+  const [messages, setMessages] = useState<Array<EldenRingMessage>>([
     {
       content: `Hi, I'm an Elden Ring bot. Ask me questions about Elden Ring lore.`,
       role: 'system',
@@ -27,6 +34,8 @@ export default function EldenRingPage() {
   useEffect(() => {
     chatbotRef.current?.scrollDown();
   }, [chatbotRef, messages]);
+
+  const tooltipId = useMemo(() => `message-reference`, []);
 
   return (
     <Slide className={styles.eldenRingPage}>
@@ -46,6 +55,39 @@ export default function EldenRingPage() {
           ref={chatbotRef}
           messages={messages}
           disabled={disabled}
+          messageActions={[
+            (message: EldenRingMessage, i) => {
+              if (message.role === 'system' && i > 0) {
+                return (
+                  <>
+                    <button
+                      className={styles.eldenRingCitationButton}
+                      data-tooltip-id={tooltipId}
+                      data-tooltip-content="Click to see references"
+                      onClick={() => {
+                        chatbotRef.current?.openSidebar({
+                          header: `References for "${messages[i - 1].content}"`,
+                          content: (
+                            <ol>
+                              {message.references?.map((reference) => (
+                                <li className={styles.reference}>
+                                  <a href={reference.referenceUrl}>
+                                    {reference.itemName}
+                                  </a>
+                                </li>
+                              ))}
+                            </ol>
+                          ),
+                        });
+                      }}
+                    >
+                      <GoCrossReference />
+                    </button>
+                  </>
+                );
+              }
+            },
+          ]}
           onSubmit={async (query) => {
             const newMessages = messages.concat({
               content: query,
@@ -67,13 +109,36 @@ export default function EldenRingPage() {
 
               let streamDone = false;
               let content = '';
+              let references: Array<
+                Pick<EldenRingEmbeddings, 'itemName' | 'referenceUrl'>
+              > = [];
 
               while (!streamDone) {
                 const { done, value } = await stream.read();
 
-                content += new TextDecoder().decode(value);
+                const decodedValue = new TextDecoder().decode(value);
 
-                setMessages(newMessages.concat({ role: 'system', content }));
+                /*
+                 * It looks like the reader can ingest multiple chunks at a time.
+                 * So... I will try to split them up.
+                 */
+                const payloadRegex = /(\{.+?\})/g;
+
+                const matches = [...decodedValue.matchAll(payloadRegex)];
+
+                for (const match of matches) {
+                  const payload = JSON.parse(match[1]);
+
+                  if (payload.content) {
+                    content += payload.content;
+                  } else if (payload.referenceUrl) {
+                    references.push(payload);
+                  }
+                }
+
+                setMessages(
+                  newMessages.concat({ role: 'system', content, references })
+                );
 
                 streamDone = done;
               }
@@ -81,6 +146,11 @@ export default function EldenRingPage() {
               setDisabled(false);
             }
           }}
+        />
+        <Tooltip
+          id={tooltipId}
+          place="top"
+          style={{ backgroundColor: '#0f0f0f' }}
         />
       </>
     </Slide>

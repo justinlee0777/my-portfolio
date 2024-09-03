@@ -77,17 +77,13 @@ export async function POST(req: NextRequest) {
       `,
     role: 'user',
   });
-  console.log({
-    finalMessage: finalMessages.at(-1),
-  });
+
   const completionsResponse = await chat.completions.create({
     model: 'gpt-4o-mini',
     messages: finalMessages,
     stream: true,
   });
 
-  // Should return citations.
-  // Should add URL to mongo. Use item name in underscore_convention
   return new Response(
     completionsResponse.toReadableStream().pipeThrough(
       new TransformStream({
@@ -99,8 +95,22 @@ export async function POST(req: NextRequest) {
           const chunkContent = chatChunk.choices.at(0)?.delta.content;
 
           if (typeof chunkContent === 'string') {
-            controller.enqueue(new TextEncoder().encode(chunkContent));
+            const payload = {
+              content: chunkContent,
+            };
+
+            const stringifiedPayload = JSON.stringify(payload);
+
+            controller.enqueue(new TextEncoder().encode(stringifiedPayload));
           } else {
+            results.forEach(({ itemName, referenceUrl }) => {
+              const payload = { itemName, referenceUrl };
+
+              const stringifiedPayload = JSON.stringify(payload);
+
+              controller.enqueue(new TextEncoder().encode(stringifiedPayload));
+            });
+
             controller.terminate();
           }
         },

@@ -14,6 +14,7 @@ export interface EldenRingEmbeddings {
     | 'key item';
   text: string;
   embedding: Array<number>;
+  referenceUrl: string;
 }
 
 const EldenRingEmbeddingsSchema = new Schema<EldenRingEmbeddings>({
@@ -21,6 +22,7 @@ const EldenRingEmbeddingsSchema = new Schema<EldenRingEmbeddings>({
   itemType: { type: String, required: true },
   text: { type: String, required: true },
   embedding: [{ type: Number }],
+  referenceUrl: { type: String },
 });
 
 EldenRingEmbeddingsSchema.index({ itemName: 1, text: 1 }, { unique: true });
