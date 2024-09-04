@@ -4,16 +4,9 @@ import { ChatCompletionMessageParam } from 'openai/resources';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { GoCrossReference } from 'react-icons/go';
 import { Tooltip } from 'react-tooltip';
-import Chatbot, { ChatbotRef } from '../src/components/chatbot/chatbot';
-import Slide from '../src/components/slide/slide';
-import { EldenRingEmbeddings } from '../src/models/elden-ring-embeddings.model';
-import { getBasePageProps } from '../src/page-utils/get-base-page-props.function';
-
-export async function getStaticProps() {
-  return {
-    props: await getBasePageProps('en', '', true),
-  };
-}
+import Chatbot, { ChatbotRef } from '../components/chatbot/chatbot';
+import Slide from '../components/slide/slide';
+import { EldenRingEmbeddings } from '../models/elden-ring-embeddings.model';
 
 type EldenRingMessage = ChatCompletionMessageParam & {
   references?: Array<Pick<EldenRingEmbeddings, 'itemName' | 'referenceUrl'>>;
