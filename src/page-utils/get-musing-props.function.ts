@@ -11,7 +11,7 @@ export async function getStaticProps({
   params,
 }): Promise<{ props: MusingPageProps }> {
   const files = await MusingFiles.getMusingsFromFiles();
-  const config = files.find((file) => file.slug === params.musing);
+  const config = files.find((file) => file.slug === params.musing)!;
 
   const baseProps = await getBasePageProps('en', '', true);
 

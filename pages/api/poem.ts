@@ -42,7 +42,7 @@ export default async function handler(
 
       const result = await s3Client.send(command);
 
-      const text = await result.Body.transformToString();
+      const text = await result.Body!.transformToString();
 
       poem.text = text;
       delete poem.lines;

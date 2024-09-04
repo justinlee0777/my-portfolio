@@ -46,7 +46,7 @@ export class FormMetadata {
   constructor(
     config: FormMetadataConfig,
     values?: { [key: string]: { [key: string]: any } | any },
-    currentPath = []
+    currentPath: Array<string> = []
   ) {
     this.config = {};
 
@@ -99,6 +99,7 @@ export class FormMetadata {
   ): value is ClientFormMetadataValueConfig {
     if (
       typeof value === 'object' &&
+      value !== null &&
       'type' in value &&
       typeof value.type === 'string'
     ) {

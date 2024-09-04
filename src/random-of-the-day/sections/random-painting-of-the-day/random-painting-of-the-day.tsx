@@ -56,7 +56,7 @@ export default function RandomPaintingOfTheDay({
   } else if (!painting) {
     content = <LoadingScreen />;
   } else {
-    let creditTemplateString: string;
+    let creditTemplateString: string = '';
 
     const allowList = [
       'https://metmuseum.github.io',

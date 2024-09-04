@@ -14,7 +14,7 @@ export function getRandomOfTheDayConfig():
   const stringifiedObject = getStorage().getItem(storageKey);
 
   try {
-    return JSON.parse(stringifiedObject);
+    return JSON.parse(stringifiedObject!);
   } catch {
     return undefined;
   }

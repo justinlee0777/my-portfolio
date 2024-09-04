@@ -38,7 +38,7 @@ export default function AIForm(): JSX.Element {
     []
   );
 
-  const chatbotRef = useRef<ChatbotRef>();
+  const chatbotRef = useRef<ChatbotRef>(null);
 
   const [formValue, setFormValue] = useState<any>({});
 
@@ -74,7 +74,7 @@ export default function AIForm(): JSX.Element {
   const [disabled, setDisabled] = useState(false);
 
   useEffect(() => {
-    chatbotRef.current.scrollDown();
+    chatbotRef.current?.scrollDown();
   }, [chatbotRef, messages]);
 
   return (
@@ -96,7 +96,7 @@ export default function AIForm(): JSX.Element {
           const response = await fetch('/api/ai-form/answer', {
             method: 'POST',
             body: JSON.stringify({
-              formConfig: currentQuestion.config,
+              formConfig: currentQuestion!.config,
               answer: inputValue,
             }),
           });
@@ -108,7 +108,7 @@ export default function AIForm(): JSX.Element {
           if (coercedInputValue !== null) {
             const newFormValue = set(
               formValue,
-              currentQuestion.config.path,
+              currentQuestion!.config.path,
               coercedInputValue
             );
 

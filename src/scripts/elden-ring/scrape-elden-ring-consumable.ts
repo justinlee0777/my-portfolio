@@ -66,13 +66,13 @@ export default async function* scrapeEldenRingConsumables(): AsyncGenerator<
 
           await consumablePage.close();
 
-          const trimmedItemName = itemName.trim();
+          const trimmedItemName = itemName!.trim();
 
           return {
             itemName: trimmedItemName,
             chunks: [
               textContent
-                .map((text) => text.trim())
+                .map((text) => text!.trim())
                 .filter((text) => text.length !== 0)
                 .join('\n'),
             ],
@@ -87,7 +87,9 @@ export default async function* scrapeEldenRingConsumables(): AsyncGenerator<
     );
 
     content.push(
-      ...descriptions.filter((description) => description?.chunks.at(0))
+      ...(descriptions.filter((description) =>
+        description?.chunks.at(0)
+      ) as any)
     );
 
     console.log({

@@ -64,17 +64,18 @@ export default async function* scrapeEldenRingChestArmor(): AsyncGenerator<
 
           await weaponPage.close();
 
-          const trimmedItemName = itemName.trim();
+          const trimmedItemName = itemName!.trim();
 
           return {
             itemName: trimmedItemName,
             chunks: [
               textContent
-                .map((text) => text.trim())
+                .map((text) => text!.trim())
                 .filter((text) => text.length !== 0)
                 .join('\n'),
             ],
             itemType: 'chest armor' as const,
+            referenceUrl: weaponPage.url(),
           };
         } catch (error) {
           console.log(error);
@@ -84,7 +85,9 @@ export default async function* scrapeEldenRingChestArmor(): AsyncGenerator<
     );
 
     content.push(
-      ...descriptions.filter((description) => description?.chunks.at(0))
+      ...(descriptions.filter((description) =>
+        description?.chunks.at(0)
+      ) as any)
     );
 
     console.log({

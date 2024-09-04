@@ -35,7 +35,7 @@ export async function translateObject<T extends Object>(
 
       return filteredValues;
     },
-    [[], []]
+    [[], []] as [Array<string>, Array<string>]
   );
 
   const translatedStrings = await translate(stringsToTranslate, targetLanguage);

@@ -13,7 +13,7 @@ export function animateSlides(
   animation: SlideAnimation,
   slides: Array<HTMLElement>,
   state: AnimatedSlidesState
-): () => void {
+): (() => void) | undefined {
   switch (animation) {
     case SlideAnimation.SWEEPY:
     case SlideAnimation.SWOOPY:

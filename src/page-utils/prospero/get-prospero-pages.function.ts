@@ -18,7 +18,7 @@ export default async function getProsperoPages(
 
   const result = await s3Client.send(command);
 
-  const text = await result.Body.transformToString();
+  const text = await result.Body!.transformToString();
 
   await connectToMongoDB();
 
@@ -34,10 +34,10 @@ export default async function getProsperoPages(
     .sort({ pageNumber: 1 })
     .lean();
 
-  const pageStyles = await ProsperoPageStyleDataModel.findOne({
+  const pageStyles = (await ProsperoPageStyleDataModel.findOne({
     textTitle,
     textDescription,
-  }).lean();
+  }).lean())!;
 
   const totalSize = await ProsperoPageDataModel.countDocuments({
     textDescription,

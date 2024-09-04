@@ -29,7 +29,7 @@ export function useHeaderAnimation(
 
   async function runAnimation() {
     const [beginContentAnimation, endHeaderAnimation] = fillHeader(
-      headerElement,
+      headerElement!,
       textContent
     );
 

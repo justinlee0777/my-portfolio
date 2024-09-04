@@ -88,7 +88,7 @@ export default function Page({
     }
   }, [fontLoading, font]);
 
-  let loadingScreen: JSX.Element;
+  let loadingScreen: JSX.Element = <></>;
 
   if (fontLoading) {
     loadingScreen = (
@@ -127,13 +127,13 @@ export default function Page({
       setDeveloperMode(developerMode),
   };
 
-  let settingsIcon: JSX.Element;
+  let settingsIcon: JSX.Element = <></>;
 
   if ('openSettingsConfig' in pageProps) {
     settingsIcon = (
       <OpenSettings
         className={styles.settingsMenu}
-        config={pageProps.openSettingsConfig}
+        config={pageProps.openSettingsConfig!}
         route={pageProps.route}
       />
     );

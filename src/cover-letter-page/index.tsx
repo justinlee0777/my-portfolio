@@ -26,7 +26,7 @@ export default function CoverLetterPage({
 
   const [startAnimation, contentAnimationBegun, headerAnimatonDone] =
     useHeaderAnimation(
-      headerRef.current?.querySelector('span'),
+      headerRef.current?.querySelector('span')!,
       config.textContent.header
     );
 
@@ -58,7 +58,7 @@ export default function CoverLetterPage({
       <>
         <h1
           ref={(ref) => {
-            headerRef.current = ref;
+            (headerRef as any).current = ref;
             startAnimation();
           }}
         >

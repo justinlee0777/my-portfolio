@@ -81,6 +81,8 @@ export default function MusingPage({
             },
           }
         );
+      } else {
+        return null;
       }
     },
     [font, bookMode]

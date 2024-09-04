@@ -31,7 +31,7 @@ export default function RandomFactOfTheDay({
   } else if (!fact) {
     content = <LoadingScreen />;
   } else {
-    let creditTemplateString: string;
+    let creditTemplateString: string = '';
 
     const allowList = [
       'https://api-ninjas.com',

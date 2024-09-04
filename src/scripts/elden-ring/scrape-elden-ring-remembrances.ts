@@ -63,17 +63,18 @@ export default async function scrapeEldenRingRemembrances(): Promise<
 
         await remembrancePage.close();
 
-        const trimmedItemName = itemName.trim();
+        const trimmedItemName = itemName!.trim();
 
         return {
           itemName: trimmedItemName,
           chunks: [
             textContent
-              .map((text) => text.trim())
+              .map((text) => text!.trim())
               .filter((text) => text.length !== 0)
               .join('\n'),
           ],
           itemType: 'remembrance' as const,
+          referenceUrl: remembrancePage.url(),
         };
       })
     );

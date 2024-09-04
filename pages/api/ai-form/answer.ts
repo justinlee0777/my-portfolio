@@ -57,7 +57,7 @@ export default async function handler(
       ),
     });
 
-    res.status(200).json(completions.choices.at(0).message.parsed);
+    res.status(200).json(completions.choices.at(0)!.message.parsed);
   } else {
     res.status(404).end();
   }

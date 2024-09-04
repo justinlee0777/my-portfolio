@@ -74,17 +74,18 @@ export default async function* scrapeEldenRingArmor(): AsyncGenerator<
 
             await weaponPage.close();
 
-            const trimmedItemName = itemName.trim();
+            const trimmedItemName = itemName!.trim();
 
             return {
               itemName: trimmedItemName,
               chunks: [
                 textContent
-                  .map((text) => text.trim())
+                  .map((text) => text!.trim())
                   .filter((text) => text.length !== 0)
                   .join('\n'),
               ],
               itemType,
+              referenceUrl: weaponPage.url(),
             };
           } catch (error) {
             console.log(error);
@@ -94,7 +95,9 @@ export default async function* scrapeEldenRingArmor(): AsyncGenerator<
       );
 
       content.push(
-        ...descriptions.filter((description) => description?.chunks.at(0))
+        ...(descriptions.filter((description) =>
+          description?.chunks.at(0)
+        ) as any)
       );
 
       console.log({
