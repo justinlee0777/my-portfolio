@@ -28,6 +28,10 @@ export default function getPageConfig(locale: string): PageConfig {
         displayName: 'Buzzword Bingo',
         url: `/${locale}/buzzword-bingo`,
       },
+      {
+        displayName: 'Elden Ring Bot',
+        url: '/elden-ring',
+      },
     ],
   };
 }

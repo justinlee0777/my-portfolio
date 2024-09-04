@@ -1,6 +1,6 @@
 import styles from './index.module.scss';
 
-import { BookConfig, PageStyles } from 'prospero/types';
+import { BookConfig, BooksElement, PageStyles } from 'prospero/types';
 import { BookComponent } from 'prospero/web/book';
 import {
   DoublePageBookAnimation,
@@ -47,7 +47,7 @@ export default function UlyssesPage({
         return {
           showBookmark: {
             storage: {
-              get: () => JSON.parse(localStorage.getItem(bookmarkKey)),
+              get: () => JSON.parse(localStorage.getItem(bookmarkKey)!),
               save: (bookmarkData) =>
                 localStorage.setItem(bookmarkKey, JSON.stringify(bookmarkData)),
             },
@@ -111,7 +111,7 @@ export default function UlyssesPage({
   return (
     <ProsperoPage
       config={config}
-      createBooks={createBooks}
+      createBooks={createBooks as () => BooksElement}
       bookTitle="Ulysses"
       bookAuthor="James Joyce"
     ></ProsperoPage>

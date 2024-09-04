@@ -32,19 +32,19 @@ export default async function uploadProsperoPages(
       right: paddingRight,
       bottom: paddingBottom,
       left: paddingLeft,
-    },
+    } = {},
     margin: {
       top: marginTop,
       right: marginRight,
       bottom: marginBottom,
       left: marginLeft,
-    },
+    } = {},
     border: {
       top: borderTop,
       right: borderRight,
       bottom: borderBottom,
       left: borderLeft,
-    },
+    } = {},
   } = textData.pageStyles;
 
   const { html } = textData;

@@ -25,11 +25,13 @@ export default function HomePage({
   const homepageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    return animateSlides(
-      animation,
-      [...homepageRef.current.childNodes] as Array<HTMLElement>,
-      { get: animatedSlides, set: setAnimatedSlides }
-    );
+    if (homepageRef.current) {
+      return animateSlides(
+        animation,
+        [...homepageRef.current.childNodes] as Array<HTMLElement>,
+        { get: animatedSlides, set: setAnimatedSlides }
+      );
+    }
   }, [animation, animatedSlides]);
 
   const content = [

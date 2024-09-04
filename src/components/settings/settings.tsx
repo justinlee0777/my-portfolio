@@ -65,8 +65,8 @@ export default function Settings({
         value: value[0],
       }));
 
-      let settingExplanation: JSX.Element;
-      let explanationHtmlString: string;
+      let settingExplanation: JSX.Element | undefined;
+      let explanationHtmlString: string | undefined;
 
       if ((explanationHtmlString = setExplanation(legend, selectedValue))) {
         settingExplanation = (

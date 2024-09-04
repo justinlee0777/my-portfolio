@@ -17,7 +17,7 @@ export function fillHeader(
   const animationDone = new Promise<void>(async (resolve) => {
     for (const childElement of childElements) {
       if (childElement.nodeName === '#text') {
-        await fillIn(headerElement, childElement.textContent);
+        await fillIn(headerElement, childElement.textContent!);
       } else {
         const cachedTextContent = childElement.textContent;
         childElement.textContent = '';
@@ -26,7 +26,7 @@ export function fillHeader(
 
         resolveNotifyClient();
 
-        await fillIn(childElement as HTMLElement, cachedTextContent);
+        await fillIn(childElement as HTMLElement, cachedTextContent!);
       }
     }
 

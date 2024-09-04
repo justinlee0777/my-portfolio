@@ -16,7 +16,7 @@ export default function OrderableList({
 
   const lastIndex = listElements.length - 1;
 
-  let content: JSX.Element;
+  let content: JSX.Element = <></>;
 
   if (listElements.length > 1) {
     content = (

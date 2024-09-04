@@ -19,7 +19,7 @@ export default async function translate(
     parent: `projects/${GCP_PROJECT_ID}/locations/global`,
   });
 
-  return response[0].translations.map(
-    (translation) => translation.translatedText
+  return response[0].translations!.map(
+    (translation) => translation.translatedText ?? ''
   );
 }

@@ -11,5 +11,5 @@ export default async function createImage(
       ...params,
       n: 1,
     })
-    .then((response) => response.data[0].url);
+    .then((response) => response.data[0].url as string);
 }

@@ -25,7 +25,7 @@ export default function TempestPage({
     return {
       showBookmark: {
         storage: {
-          get: () => JSON.parse(localStorage.getItem(bookmarkKey)),
+          get: () => JSON.parse(localStorage.getItem(bookmarkKey)!),
           save: (bookmarkData) =>
             localStorage.setItem(bookmarkKey, JSON.stringify(bookmarkData)),
         },

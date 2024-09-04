@@ -7,7 +7,7 @@ export default function unwrapAWSValue(v: { [key: string]: any }): any {
     return Object.fromEntries(
       Object.entries(newValue).map(([key, value]) => [
         key,
-        unwrapAWSValue(value),
+        unwrapAWSValue(value as any),
       ])
     );
   } else {

@@ -63,7 +63,7 @@ export namespace MusingFiles {
           },
         };
 
-        delete newConfig.timestamp;
+        delete (newConfig as any).timestamp;
 
         return newConfig;
       });

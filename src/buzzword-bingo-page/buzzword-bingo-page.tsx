@@ -23,11 +23,13 @@ export default function BuzzwordBingoPage({
   const [animatedSlides, setAnimatedSlides] = useState<AnimatedSlides>({});
 
   useEffect(() => {
-    return animateSlides(
-      animation,
-      [headerRef.current, explanationRef.current],
-      { get: animatedSlides, set: setAnimatedSlides }
-    );
+    if (headerRef.current && explanationRef.current) {
+      return animateSlides(
+        animation,
+        [headerRef.current, explanationRef.current],
+        { get: animatedSlides, set: setAnimatedSlides }
+      );
+    }
   }, [animation, animatedSlides]);
 
   return (
