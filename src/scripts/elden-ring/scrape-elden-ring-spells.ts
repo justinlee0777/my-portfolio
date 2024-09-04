@@ -83,6 +83,7 @@ export default async function* scrapeEldenRingSpells(): AsyncGenerator<
                   .join('\n'),
               ],
               itemType,
+              referenceUrl: weaponPage.url(),
             };
           } catch (error) {
             console.log(error);

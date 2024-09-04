@@ -11,7 +11,9 @@ export interface EldenRingEmbeddings {
     | 'leg armor'
     | 'sorcery'
     | 'incantation'
-    | 'key item';
+    | 'key item'
+    | 'consumable'
+    | 'crafting material';
   text: string;
   embedding: Array<number>;
   referenceUrl: string;
@@ -32,5 +34,3 @@ const EldenRingEmbeddingsModelName = 'EldenRingEmbeddings';
 export const EldenRingEmbeddingsModel: Model<EldenRingEmbeddings> =
   models[EldenRingEmbeddingsModelName] ||
   model(EldenRingEmbeddingsModelName, EldenRingEmbeddingsSchema);
-
-// Decide whether to copy Langchain's MongoDBAtlasVectorSearch or import the library https://github.com/langchain-ai/langchainjs/blob/3cc45fe7d82bbfeb8b0a86c7c5a7547291c94218/libs/langchain-mongodb/src/vectorstores.ts#L51

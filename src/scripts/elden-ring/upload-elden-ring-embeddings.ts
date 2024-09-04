@@ -3,10 +3,10 @@ import 'dotenv/config';
 import getOpenAIApi from '../../api/openai/open-ai.client';
 import { EldenRingEmbeddingsModel } from '../../models/elden-ring-embeddings.model';
 import connectToMongoDB from '../../page-utils/prospero/connect-to-mongodb.function';
-import scrapeEldenRingKeyItems from './scrape-elden-ring-key-items';
+import scrapeEldenRingConsumables from './scrape-elden-ring-consumable';
 
 async function uploadEldenRingEmbeddings() {
-  for await (const content of scrapeEldenRingKeyItems()) {
+  for await (const content of scrapeEldenRingConsumables()) {
     for (const { itemName, chunks, itemType } of content) {
       console.log(`working on ${itemName}...`);
       const { embeddings } = getOpenAIApi();
