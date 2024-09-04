@@ -69,8 +69,8 @@ export default function EldenRingPage() {
                           header: `References for "${messages[i - 1].content}"`,
                           content: (
                             <ol>
-                              {message.references?.map((reference) => (
-                                <li className={styles.reference}>
+                              {message.references?.map((reference, i) => (
+                                <li className={styles.reference} key={i}>
                                   <a href={reference.referenceUrl}>
                                     {reference.itemName}
                                   </a>
