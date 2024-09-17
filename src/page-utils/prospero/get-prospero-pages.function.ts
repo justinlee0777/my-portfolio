@@ -13,7 +13,7 @@ export default async function getProsperoPages(
 
   const command = new GetObjectCommand({
     Bucket: 'prospero-texts',
-    Key: textTitle,
+    Key: `${textTitle}-${textDescription}`,
   });
 
   const result = await s3Client.send(command);

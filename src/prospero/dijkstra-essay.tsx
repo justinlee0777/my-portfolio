@@ -1,7 +1,4 @@
-import styles from './index.module.scss';
-
 import { BookConfig } from 'prospero/types';
-import { BookComponent } from 'prospero/web/book';
 import {
   DoublePageBookAnimation,
   SinglePageBookAnimation,
@@ -11,71 +8,102 @@ import {
   listenToKeyboardEvents,
 } from 'prospero/web/book/listeners';
 import { DefaultBookTheme } from 'prospero/web/book/theming';
-import { BooksComponent } from 'prospero/web/books';
+import { FlexibleBookComponent } from 'prospero/web/flexible-book';
+import { IndentTransformer } from 'prospero/web/transformers';
 
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { DijkstraEssayPageProps } from '../page-utils/prospero/get-dijkstra-essay-props.function';
 import ProsperoPage from './base-page';
 
 export default function DijkstraEssayPage({
   config,
-  galaxyFold,
-  iphoneXR,
 }: DijkstraEssayPageProps): JSX.Element {
-  function getBookConfig(bookmarkKey: string): BookConfig {
-    return {
-      showBookmark: {
-        storage: {
-          get: () => JSON.parse(localStorage.getItem(bookmarkKey)!),
-          save: (bookmarkData) =>
-            localStorage.setItem(bookmarkKey, JSON.stringify(bookmarkData)),
-        },
-      },
-      showPagePicker: true,
-      theme: DefaultBookTheme,
-    };
-  }
+  const [text, setText] = useState<string | null>(null);
 
-  const createBooks = useMemo(
-    () => () =>
-      BooksComponent({
-        children: [
-          BookComponent(
-            galaxyFold,
-            {
-              ...getBookConfig('dijkstra-galaxy-fold-bookmark'),
-              pagesShown: 1,
-              listeners: [listenToClickEvents],
-              animation: new SinglePageBookAnimation(),
+  useEffect(() => {
+    async function loadText() {
+      if (!text) {
+        const response = await fetch(
+          '/prospero/on-the-cruelty-of-really-teaching-computing-science.txt'
+        );
+
+        const text = await response.text();
+
+        setText(text);
+      }
+    }
+
+    loadText();
+  }, [text, setText]);
+
+  const getBookConfig = useMemo(
+    () =>
+      (bookmarkKey: string): BookConfig => {
+        return {
+          showBookmark: {
+            storage: {
+              get: () => JSON.parse(localStorage.getItem(bookmarkKey)!),
+              save: (bookmarkData) =>
+                localStorage.setItem(bookmarkKey, JSON.stringify(bookmarkData)),
             },
-            { classnames: [styles.book] }
-          ),
-          BookComponent(
-            iphoneXR,
-            {
-              media: { minWidth: 414 },
-              ...getBookConfig('dijkstra-iphone-bookmark'),
-              pagesShown: 1,
-              listeners: [listenToClickEvents],
-              animation: new SinglePageBookAnimation(),
-            },
-            { classnames: [styles.book] }
-          ),
-          BookComponent(
-            iphoneXR,
-            {
-              media: { minWidth: 818 },
-              ...getBookConfig('dijkstra-iphone-bookmark'),
-              pagesShown: 2,
-              listeners: [listenToClickEvents, listenToKeyboardEvents],
-              animation: new DoublePageBookAnimation(),
-            },
-            { classnames: [styles.book] }
-          ),
-        ],
-      }),
+          },
+          showPagePicker: true,
+          theme: DefaultBookTheme,
+        };
+      },
     []
   );
+
+  const createBooks = useMemo(() => {
+    if (text) {
+      return () =>
+        FlexibleBookComponent(
+          {
+            text,
+            pageStyles: {
+              computedFontFamily: 'Bookerly',
+              computedFontSize: '14px',
+              lineHeight: 28,
+              padding: {
+                top: 36,
+                right: 18,
+                bottom: 36,
+                left: 18,
+              },
+            },
+            mediaQueryList: [
+              {
+                ...getBookConfig('dijkstra-mobile-key'),
+                pagesShown: 1,
+                listeners: [listenToClickEvents],
+                animation: new SinglePageBookAnimation(),
+              },
+              {
+                pattern: {
+                  minWidth: 800,
+                },
+                config: {
+                  ...getBookConfig('dijkstra-desktop-key'),
+                  pagesShown: 2,
+                  listeners: [listenToClickEvents, listenToKeyboardEvents],
+                  theme: DefaultBookTheme,
+                  animation: new DoublePageBookAnimation(),
+                },
+              },
+            ],
+          },
+          { transformers: [new IndentTransformer(4)] },
+          {
+            styles: {
+              width: '80vw',
+              height: '80vh',
+              maxWidth: '1200px',
+              margin: 'auto',
+            },
+          }
+        );
+    }
+  }, [getBookConfig, text]);
 
   return (
     <ProsperoPage

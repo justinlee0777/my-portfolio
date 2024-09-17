@@ -13,7 +13,6 @@ import {
 } from 'prospero/web/book/listeners';
 import { FlexibleBookComponent } from 'prospero/web/flexible-book';
 import { useBook } from 'prospero/web/react';
-import { NewlineTransformer } from 'prospero/web/transformers';
 import { useRef, useState } from 'react';
 
 import dynamic from 'next/dynamic';
@@ -68,10 +67,7 @@ export default function MusingPage({
               },
             ],
           },
-          {
-            transformers: [new NewlineTransformer()],
-            forHTML: true,
-          },
+          undefined,
           {
             styles: {
               width: '80vw',
