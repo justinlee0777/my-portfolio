@@ -13,7 +13,7 @@ export default async function uploadProsperoPages(
 
   const command = new PutObjectCommand({
     Bucket: 'prospero-texts',
-    Key: textTitle,
+    Key: `${textTitle}-${textDescription}`,
     Body: textData.text,
   });
 
@@ -47,8 +47,6 @@ export default async function uploadProsperoPages(
     } = {},
   } = textData.pageStyles;
 
-  const { html } = textData;
-
   await ProsperoPageStyleDataModel.updateOne(
     { textTitle, textDescription },
     {
@@ -69,7 +67,6 @@ export default async function uploadProsperoPages(
       borderBottom,
       borderLeft,
       lineHeight,
-      html,
     },
     { upsert: true }
   );

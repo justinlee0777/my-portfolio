@@ -12,7 +12,7 @@ import ProsperoConfig from './prospero.config';
 
 export interface BaseProsperoProps {
   config: ProsperoConfig;
-  createBooks: () => BooksElement;
+  createBooks: (() => BooksElement) | undefined;
   bookTitle: string;
   bookAuthor: string;
 }
@@ -30,11 +30,13 @@ export default function ProsperoPage({
   }, []);
 
   useEffect(() => {
-    const books = createBooks();
+    if (createBooks) {
+      const books = createBooks();
 
-    if (containerRef.current && books) {
-      containerRef.current.appendChild(books);
-      return () => books.prospero.destroy();
+      if (containerRef.current && books) {
+        containerRef.current.appendChild(books);
+        return () => books.prospero.destroy();
+      }
     }
   }, [containerRef, createBooks]);
 
