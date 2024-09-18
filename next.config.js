@@ -12,6 +12,14 @@ const config = {
   experimental: {
     optimizeCss: false,
   },
+  async headers() {
+    return [
+      {
+        source: '/source/:path*',
+        headers: [{ key: 'Access-Control-Allow-Origin', value: '*' }],
+      },
+    ];
+  },
 };
 
 module.exports = withBundleAnalyzer(config);
