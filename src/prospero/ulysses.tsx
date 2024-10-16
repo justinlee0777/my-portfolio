@@ -1,6 +1,7 @@
 import styles from './index.module.scss';
 
-import { BookConfig, BooksElement, PageStyles } from 'prospero/types';
+import { BookConfig, BooksElement } from 'prospero/types';
+import { LoadingScreenComponent } from 'prospero/web';
 import { BookComponent } from 'prospero/web/book';
 import {
   DoublePageBookAnimation,
@@ -13,8 +14,9 @@ import {
 import { DefaultBookTheme } from 'prospero/web/book/theming';
 import { BooksComponent } from 'prospero/web/books';
 import ServerPages from 'prospero/web/server-pages';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 
+import { desktopStyles, mobileStyles } from '../consts/ulysses-styles.const';
 import { ProsperoPageProps } from '../page-utils/prospero/get-base-props.function';
 import ProsperoPage from './base-page';
 
@@ -22,10 +24,6 @@ export default function UlyssesPage({
   config,
 }: ProsperoPageProps): JSX.Element {
   const endpointBase = '/api/prospero/texts';
-
-  const [mobileStyles, setMobileStyles] = useState<PageStyles | null>(null);
-
-  const [desktopStyles, setDesktopStyles] = useState<PageStyles | null>(null);
 
   const mobilePages = useMemo(
     () => new ServerPages(`${endpointBase}/ulysses/mobile`),
@@ -39,10 +37,6 @@ export default function UlyssesPage({
 
   const createBooks = useMemo(
     () => () => {
-      if (!(mobileStyles && desktopStyles)) {
-        return null;
-      }
-
       function getBookConfig(bookmarkKey: string): BookConfig {
         return {
           showBookmark: {
@@ -54,6 +48,7 @@ export default function UlyssesPage({
           },
           showPagePicker: true,
           theme: DefaultBookTheme,
+          loading: LoadingScreenComponent,
         };
       }
 
@@ -94,17 +89,6 @@ export default function UlyssesPage({
     },
     [mobileStyles, desktopStyles]
   );
-
-  useEffect(() => {
-    Promise.all([
-      mobilePages.getPageStyles(),
-      desktopPages.getPageStyles(),
-    ]).then(([mobilePageStyles, desktopPageStyles]) => {
-      setMobileStyles(mobilePageStyles);
-
-      setDesktopStyles(desktopPageStyles);
-    });
-  }, []);
 
   return (
     <ProsperoPage

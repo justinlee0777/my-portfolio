@@ -14,3 +14,6 @@ To build a zip to deploy, run
 ```
 yarn build:zip
 ```
+
+Hide navbar
+Focus mode?
