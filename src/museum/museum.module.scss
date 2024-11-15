@@ -1,0 +1,22 @@
+.museumPage {
+  align-items: stretch !important;
+  flex: 1;
+  justify-content: flex-start !important;
+  margin: 0 auto;
+  margin: 0 auto;
+  max-width: 66%; // for desktop size
+  padding: 18px;
+}
+
+.museumContainer {
+  background: url('https://images.metmuseum.org/CRDImages/as/original/DP120313.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 75vh;
+  text-align: center;
+}
+
+.museum {
+  height: 100%;
+  max-width: 100% !important;
+}
