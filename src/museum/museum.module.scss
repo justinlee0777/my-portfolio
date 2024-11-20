@@ -17,6 +17,17 @@
 }
 
 .museum {
-  height: 100%;
   max-width: 100% !important;
+}
+
+@media (max-width: 800px) {
+  .museum {
+    max-height: 300px;
+  }
+}
+
+@media (min-width: 800px) {
+  .museum {
+    max-height: 500px;
+  }
 }

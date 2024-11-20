@@ -55,7 +55,7 @@ export const registries: MuseumArgs['registries'] = {
         throw new Error('Long paintings need a width.');
       }
 
-      const { sprite, width } = object;
+      const { sprite, width, height, metadata } = object;
 
       const image = new Image();
 
@@ -121,6 +121,137 @@ export const registries: MuseumArgs['registries'] = {
             };
 
             image.src = '/museum/painting.png';
+            break;
+          case 'glass-display':
+            const vertical = height > 1;
+            const horizontal = width > 1;
+
+            if (!(vertical || horizontal)) {
+              throw new Error(
+                'Glass display must be at least 2 tiles in length.'
+              );
+            }
+
+            image.onload = () => {
+              if (vertical) {
+                // top
+                drawSprite(image, 0, 0, SPRITE_SIZE, SPRITE_SIZE, 0, 0);
+
+                // middle
+                Array(height - 2)
+                  .fill(undefined)
+                  .forEach((_, i) => {
+                    drawSprite(
+                      image,
+                      0,
+                      SPRITE_SIZE,
+                      SPRITE_SIZE,
+                      SPRITE_SIZE,
+                      0,
+                      i + 1
+                    );
+                  });
+
+                // bottom
+                drawSprite(
+                  image,
+                  0,
+                  SPRITE_SIZE * 2,
+                  SPRITE_SIZE,
+                  SPRITE_SIZE,
+                  0,
+                  height - 1
+                );
+              } else {
+                const hOffset = metadata?.flipHorizontal ? SPRITE_SIZE : 0;
+
+                // left side
+                drawSprite(
+                  image,
+                  SPRITE_SIZE,
+                  hOffset,
+                  SPRITE_SIZE,
+                  SPRITE_SIZE,
+                  0,
+                  0
+                );
+
+                // middle
+                Array(width - 2)
+                  .fill(undefined)
+                  .forEach((_, i) => {
+                    drawSprite(
+                      image,
+                      SPRITE_SIZE * 2,
+                      hOffset,
+                      SPRITE_SIZE,
+                      SPRITE_SIZE,
+                      i + 1,
+                      0
+                    );
+                  });
+
+                // right side
+                drawSprite(
+                  image,
+                  SPRITE_SIZE * 3,
+                  hOffset,
+                  SPRITE_SIZE,
+                  SPRITE_SIZE,
+                  width - 1,
+                  0
+                );
+              }
+            };
+
+            image.src = '/museum/glass-display.png';
+
+            resolve();
+            break;
+        }
+      });
+    },
+  },
+  frame: {
+    async drawFrame(drawSprite, { frameHeight, position: [, y] }) {
+      const image = new Image();
+
+      return new Promise((resolve) => {
+        image.onload = () => {
+          if (y === frameHeight - 1) {
+            drawSprite(image, 0, SPRITE_SIZE, SPRITE_SIZE, SPRITE_SIZE);
+          } else {
+            drawSprite(image, 0, 0, SPRITE_SIZE, SPRITE_SIZE);
+          }
+
+          resolve();
+        };
+
+        image.src = '/museum/frame.png';
+      });
+    },
+    async drawObject(drawSprite, interaction) {
+      const image = new Image();
+
+      return new Promise((resolve) => {
+        switch (interaction.sprite) {
+          case 'painting':
+            image.onload = () => {
+              drawSprite(image, 0, 0, SPRITE_SIZE, SPRITE_SIZE);
+
+              resolve();
+            };
+
+            image.src = '/museum/painting.png';
+            break;
+          case 'placard':
+            image.onload = () => {
+              drawSprite(image, 0, 0, SPRITE_SIZE, SPRITE_SIZE);
+
+              resolve();
+            };
+
+            image.src = '/museum/placard.png';
             break;
         }
       });

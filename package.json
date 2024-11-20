@@ -20,7 +20,7 @@
     "gray-matter": "^4.0.3",
     "lodash-es": "^4.17.21",
     "mongoose": "^8.5.4",
-    "museum-html": "^0.0.3",
+    "museum-html": "^0.0.4",
     "next": "^14.2.4",
     "openai": "^4.56.0",
     "prospero": "^1.0.2",

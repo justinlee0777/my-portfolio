@@ -3,15 +3,14 @@
   flex-direction: row;
   height: 50vh;
   margin: 1em auto 0;
-  width: 66%;
 }
 
 .sidebar {
   border: 1px solid black;
   display: flex;
   flex-direction: column;
+  max-width: 200px;
   padding: 1em;
-  width: 200px;
 }
 
 .sidebarHeader {

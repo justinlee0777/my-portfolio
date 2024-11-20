@@ -28,8 +28,6 @@ export default function MuseumPage() {
         });
 
         museum.onexit = async (exitPoint: TestExitPoint) => {
-          console.log('exitPoint', exitPoint);
-
           let room: MuseumPartial;
 
           ({ museumArgs: room } = await import(
@@ -71,7 +69,7 @@ export default function MuseumPage() {
         <p>This is probably the weirdest idea I have ever had.</p>
         <p>
           I was interested if there were any benefits to an audience by
-          organizing data in a two-dimensional grid.
+          organizing data in a two-dimensional grid.*
         </p>
         <p>
           Nothing came to mind, except for a museum. Curators can reveal
@@ -90,6 +88,20 @@ export default function MuseumPage() {
         <p>
           All of this could not be done without the Met Museum's{' '}
           <a href="https://metmuseum.github.io">public api</a>.
+        </p>
+        <p>
+          The sprites, you may recognize, come from{' '}
+          <a href="https://www.spriters-resource.com/game_boy_gbc/pokemongoldsilver/">
+            Pokemon Gold / Silver
+          </a>
+          .
+        </p>
+        <p>
+          * A table is technically n-dimensional but the value of data is
+          heavily skewed in favor of its edges i.e. the axes' labels. I was
+          thinking more in line with a book: you in theory could pick up any
+          page in a book and receive as equally valuable data as any other page
+          in it.
         </p>
       </>
     </Slide>

@@ -3,6 +3,16 @@ import { MuseumPartial, TestExitPoint } from '../museum-partial.model';
 const height = 8;
 const width = 16;
 
+const northExitPoint: TestExitPoint = {
+  origin: [0, 0],
+  height: 1,
+  width,
+  metadata: {
+    enteringRoomId: 'room-212',
+    playerPosition: [3, 4],
+  },
+};
+
 const southExitPoint: TestExitPoint = {
   origin: [0, height - 1],
   height: 1,
@@ -58,5 +68,5 @@ export const museumArgs: MuseumPartial = {
       height: 2,
     },
   ],
-  exitPoints: [southExitPoint, eastExitPoint],
+  exitPoints: [northExitPoint, southExitPoint, eastExitPoint],
 };

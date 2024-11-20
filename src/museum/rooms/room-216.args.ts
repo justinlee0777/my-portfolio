@@ -1,7 +1,7 @@
 import { MuseumPartial, TestExitPoint } from '../museum-partial.model';
 
 const height = 8;
-const width = 21;
+const width = 26;
 
 const westExitPoint: TestExitPoint = {
   origin: [width - 1, 3],
@@ -135,7 +135,7 @@ export const museumArgs: MuseumPartial = {
       sprite: 'painting',
       interactions: [
         {
-          url: 'https://images.metmuseum.org/CRDImages/as/original/DP-33644-001.jpg',
+          url: 'https://images.metmuseum.org/CRDImages/as/original/DP-33644-006.jpg',
           sameAsObject: true,
         },
       ],
@@ -147,7 +147,7 @@ export const museumArgs: MuseumPartial = {
       sprite: 'painting',
       interactions: [
         {
-          url: 'https://images.metmuseum.org/CRDImages/as/original/DP-33644-004.jpg',
+          url: 'https://images.metmuseum.org/CRDImages/as/original/DP-33644-005.jpg',
           sameAsObject: true,
         },
       ],
@@ -159,7 +159,7 @@ export const museumArgs: MuseumPartial = {
       sprite: 'painting',
       interactions: [
         {
-          url: 'https://images.metmuseum.org/CRDImages/as/original/DP-33644-005.jpg',
+          url: 'https://images.metmuseum.org/CRDImages/as/original/DP-33644-008.jpg',
           sameAsObject: true,
         },
       ],
@@ -171,7 +171,7 @@ export const museumArgs: MuseumPartial = {
       sprite: 'painting',
       interactions: [
         {
-          url: 'https://images.metmuseum.org/CRDImages/as/original/DP-33644-007.jpg',
+          url: 'https://images.metmuseum.org/CRDImages/as/original/DP-33644-001.jpg',
           sameAsObject: true,
         },
       ],
@@ -183,13 +183,49 @@ export const museumArgs: MuseumPartial = {
       sprite: 'painting',
       interactions: [
         {
-          url: 'https://images.metmuseum.org/CRDImages/as/original/DP-33644-008.jpg',
+          url: 'https://images.metmuseum.org/CRDImages/as/original/DP-33644-002.jpg',
+          sameAsObject: true,
+        },
+      ],
+    },
+    {
+      origin: [8, height - 1],
+      height: 1,
+      width: 1,
+      sprite: 'painting',
+      interactions: [
+        {
+          url: 'https://images.metmuseum.org/CRDImages/as/original/DP-33644-003.jpg',
           sameAsObject: true,
         },
       ],
     },
     {
       origin: [9, height - 1],
+      height: 1,
+      width: 1,
+      sprite: 'painting',
+      interactions: [
+        {
+          url: 'https://images.metmuseum.org/CRDImages/as/original/DP-33644-003.jpg',
+          sameAsObject: true,
+        },
+      ],
+    },
+    {
+      origin: [10, height - 1],
+      height: 1,
+      width: 1,
+      sprite: 'painting',
+      interactions: [
+        {
+          url: 'https://images.metmuseum.org/CRDImages/as/original/DP-33644-007.jpg',
+          sameAsObject: true,
+        },
+      ],
+    },
+    {
+      origin: [12, height - 1],
       height: 1,
       width: 1,
       sprite: 'placard',
@@ -206,49 +242,13 @@ export const museumArgs: MuseumPartial = {
       ],
     },
     {
-      origin: [10, height - 1],
-      height: 1,
-      width: 1,
-      sprite: 'painting',
-      interactions: [
-        {
-          url: 'https://images.metmuseum.org/CRDImages/as/original/DP120313.jpg',
-          sameAsObject: true,
-        },
-      ],
-    },
-    {
-      origin: [11, height - 1],
-      height: 1,
-      width: 1,
-      sprite: 'painting',
-      interactions: [
-        {
-          url: 'https://images.metmuseum.org/CRDImages/as/original/DP120314.jpg',
-          sameAsObject: true,
-        },
-      ],
-    },
-    {
-      origin: [12, height - 1],
-      height: 1,
-      width: 1,
-      sprite: 'painting',
-      interactions: [
-        {
-          url: 'https://images.metmuseum.org/CRDImages/as/original/DP120315.jpg',
-          sameAsObject: true,
-        },
-      ],
-    },
-    {
       origin: [13, height - 1],
       height: 1,
       width: 1,
       sprite: 'painting',
       interactions: [
         {
-          url: 'https://images.metmuseum.org/CRDImages/as/original/DP120316.jpg',
+          url: 'https://images.metmuseum.org/CRDImages/as/original/DP120312.jpg',
           sameAsObject: true,
         },
       ],
@@ -260,7 +260,7 @@ export const museumArgs: MuseumPartial = {
       sprite: 'painting',
       interactions: [
         {
-          url: 'https://images.metmuseum.org/CRDImages/as/original/DP120317.jpg',
+          url: 'https://images.metmuseum.org/CRDImages/as/original/DP120313.jpg',
           sameAsObject: true,
         },
       ],
@@ -272,7 +272,7 @@ export const museumArgs: MuseumPartial = {
       sprite: 'painting',
       interactions: [
         {
-          url: 'https://images.metmuseum.org/CRDImages/as/original/DP120318.jpg',
+          url: 'https://images.metmuseum.org/CRDImages/as/original/DP120314.jpg',
           sameAsObject: true,
         },
       ],
@@ -284,7 +284,7 @@ export const museumArgs: MuseumPartial = {
       sprite: 'painting',
       interactions: [
         {
-          url: 'https://images.metmuseum.org/CRDImages/as/original/DP120319.jpg',
+          url: 'https://images.metmuseum.org/CRDImages/as/original/DP120315.jpg',
           sameAsObject: true,
         },
       ],
@@ -296,7 +296,7 @@ export const museumArgs: MuseumPartial = {
       sprite: 'painting',
       interactions: [
         {
-          url: 'https://images.metmuseum.org/CRDImages/as/original/DP120320.jpg',
+          url: 'https://images.metmuseum.org/CRDImages/as/original/DP120316.jpg',
           sameAsObject: true,
         },
       ],
@@ -308,7 +308,7 @@ export const museumArgs: MuseumPartial = {
       sprite: 'painting',
       interactions: [
         {
-          url: 'https://images.metmuseum.org/CRDImages/as/original/DP120321.jpg',
+          url: 'https://images.metmuseum.org/CRDImages/as/original/DP120317.jpg',
           sameAsObject: true,
         },
       ],
@@ -320,7 +320,67 @@ export const museumArgs: MuseumPartial = {
       sprite: 'painting',
       interactions: [
         {
+          url: 'https://images.metmuseum.org/CRDImages/as/original/DP120318.jpg',
+          sameAsObject: true,
+        },
+      ],
+    },
+    {
+      origin: [20, height - 1],
+      height: 1,
+      width: 1,
+      sprite: 'painting',
+      interactions: [
+        {
+          url: 'https://images.metmuseum.org/CRDImages/as/original/DP120319.jpg',
+          sameAsObject: true,
+        },
+      ],
+    },
+    {
+      origin: [21, height - 1],
+      height: 1,
+      width: 1,
+      sprite: 'painting',
+      interactions: [
+        {
+          url: 'https://images.metmuseum.org/CRDImages/as/original/DP120320.jpg',
+          sameAsObject: true,
+        },
+      ],
+    },
+    {
+      origin: [22, height - 1],
+      height: 1,
+      width: 1,
+      sprite: 'painting',
+      interactions: [
+        {
+          url: 'https://images.metmuseum.org/CRDImages/as/original/DP120321.jpg',
+          sameAsObject: true,
+        },
+      ],
+    },
+    {
+      origin: [23, height - 1],
+      height: 1,
+      width: 1,
+      sprite: 'painting',
+      interactions: [
+        {
           url: 'https://images.metmuseum.org/CRDImages/as/original/DP120322.jpg',
+          sameAsObject: true,
+        },
+      ],
+    },
+    {
+      origin: [24, height - 1],
+      height: 1,
+      width: 1,
+      sprite: 'painting',
+      interactions: [
+        {
+          url: 'https://images.metmuseum.org/CRDImages/as/original/DP120323.jpg',
           sameAsObject: true,
         },
       ],

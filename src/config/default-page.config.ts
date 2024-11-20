@@ -32,6 +32,10 @@ export default function getPageConfig(locale: string): PageConfig {
         displayName: 'Elden Ring Bot',
         url: '/elden-ring',
       },
+      {
+        displayName: 'Museum',
+        url: '/museum',
+      },
     ],
   };
 }
