@@ -9,7 +9,7 @@ const eastExitPoint: TestExitPoint = {
   width: 1,
   metadata: {
     enteringRoomId: 'room-216',
-    playerPosition: [19, 4],
+    playerPosition: [24, 4],
   },
 };
 

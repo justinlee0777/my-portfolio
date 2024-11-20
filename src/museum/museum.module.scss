@@ -12,7 +12,6 @@
   background: url('https://images.metmuseum.org/CRDImages/as/original/DP120313.jpg');
   background-repeat: no-repeat;
   background-size: cover;
-  height: 75vh;
   text-align: center;
 }
 
@@ -21,12 +20,20 @@
 }
 
 @media (max-width: 800px) {
+  .museumContainer {
+    height: 300px;
+  }
+
   .museum {
     max-height: 300px;
   }
 }
 
 @media (min-width: 800px) {
+  .museumContainer {
+    height: 500px;
+  }
+
   .museum {
     max-height: 500px;
   }
