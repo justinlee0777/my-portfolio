@@ -86,7 +86,7 @@ export default function MuseumPage() {
         </p>
         <p>This is - or should be - mobile-friendly.</p>
         <p>
-          All of this could not be done without the Met Museum's{' '}
+          All of this could not be done without the Met Museum&apos;s{' '}
           <a href="https://metmuseum.github.io">public api</a>.
         </p>
         <p>
@@ -97,11 +97,11 @@ export default function MuseumPage() {
           .
         </p>
         <p>
-          * A table is technically n-dimensional but the value of data is
+          {`* A table is technically n-dimensional but the value of data is
           heavily skewed in favor of its edges i.e. the axes' labels. I was
           thinking more in line with a book: you in theory could pick up any
           page in a book and receive as equally valuable data as any other page
-          in it.
+          in it.`}
         </p>
       </>
     </Slide>
