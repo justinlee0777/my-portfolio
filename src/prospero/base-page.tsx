@@ -51,34 +51,35 @@ export default function ProsperoPage({
       <Slide className={styles.prosperoPage}>
         <>
           <h1 className={styles.prosperoHeader}>{config.textContent.header}</h1>
-          <main ref={containerRef}>
-            <div className={styles.description}>
-              {config.textContent.description.map((line, i) => {
-                if (typeof line === 'object') {
-                  return (
-                    <p
-                      key={i}
-                      dangerouslySetInnerHTML={{
-                        __html: createLinkElement(line),
-                      }}
-                    />
-                  );
-                } else {
-                  return <p key={i}>{line}</p>;
-                }
-              })}
-            </div>
-            <h2 className={styles.bookTitle}>{bookTitle}</h2>
-            <h3 className={styles.bookAuthor}>{bookAuthor}</h3>
-          </main>
-          <h4>Other readings</h4>
-          <ul>
-            {config.links.map(({ text, url }) => (
-              <li key={url}>
-                <a href={url}>{text}</a>
-              </li>
-            ))}
-          </ul>
+          <h2 className={styles.bookTitle}>{bookTitle}</h2>
+          <h3 className={styles.bookAuthor}>{bookAuthor}</h3>
+          <main ref={containerRef}></main>
+          <div className={styles.description}>
+            {config.textContent.description.map((line, i) => {
+              if (typeof line === 'object') {
+                return (
+                  <p
+                    key={i}
+                    dangerouslySetInnerHTML={{
+                      __html: createLinkElement(line),
+                    }}
+                  />
+                );
+              } else {
+                return <p key={i}>{line}</p>;
+              }
+            })}
+          </div>
+          <div className={styles.otherReadings}>
+            <h4>Other readings</h4>
+            <ul className={styles.otherReadingsList}>
+              {config.links.map(({ text, url }) => (
+                <li key={url}>
+                  <a href={url}>{text}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
         </>
       </Slide>
     </>

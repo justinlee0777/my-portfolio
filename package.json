@@ -1,7 +1,7 @@
 {
   "scripts": {
     "dev": "next dev",
-    "build": "mkdir ./public/source && cp -r ./node_modules/prospero ./public/source/prospero && next build",
+    "build": "mkdir -p ./public/source && cp -r ./node_modules/prospero ./public/source/prospero && next build",
     "build:analyze": "ANALYZE=true yarn build",
     "build:zip": "npm run build && rm -f out.zip && zip -r out server.js package.json package-lock.json .next public",
     "start": "NODE_ENV=production node server.js",
@@ -20,6 +20,7 @@
     "gray-matter": "^4.0.3",
     "lodash-es": "^4.17.21",
     "mongoose": "^8.5.4",
+    "museum-html": "^0.0.5",
     "next": "^14.2.4",
     "openai": "^4.56.0",
     "prospero": "^1.0.2",
