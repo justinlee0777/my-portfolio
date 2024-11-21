@@ -20,8 +20,15 @@ export default function MuseumPage() {
       ) {
         museumContainer.innerHTML = '';
 
+        let cellSize: number;
+
+        if (window.innerWidth > 800) {
+          cellSize = 48;
+        } else {
+          cellSize = 32;
+        }
         const museum = new Museum({
-          cellSize: 48,
+          cellSize,
           playerPosition,
           registries,
           ...museumArgs,
