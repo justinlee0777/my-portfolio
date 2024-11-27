@@ -1,8 +1,10 @@
 import 'picture-in-picture-js/index.css';
 import styles from './picture-in-picture-js.module.scss';
 
+import Link from 'next/link';
 import { createTriggerElement } from 'picture-in-picture-js';
 import { ReactNode, useEffect, useRef } from 'react';
+
 import Slide from '../components/slide/slide';
 
 export default function PictureInPictureJS(): ReactNode {
@@ -49,10 +51,10 @@ export default function PictureInPictureJS(): ReactNode {
         </p>
         <p>
           I had a need to develop this solution for{' '}
-          <a href="/prospero">prospero</a> specifically but it's still
-          applicable for traditional web.
+          <Link href="/prospero">prospero</Link> specifically but it&apos;s
+          still applicable for traditional web.
         </p>
-        <p>Say we are discussing Bruegel the Elder's "Tower of Babel".</p>
+        <p>{`Say we are discussing Bruegel the Elder's "Tower of Babel".`}</p>
         <p>
           <img
             className={styles.towerOfBabelImg}
@@ -61,11 +63,12 @@ export default function PictureInPictureJS(): ReactNode {
           />
         </p>
         <p>
-          We are then reading the following passage by Juan Benet in the essay
-          "The Construction of the Tower of Babel":
+          {`We are then reading the following passage by Juan Benet in the essay
+          "The Construction of the Tower of Babel"`}
+          :
         </p>
         <p>
-          "The tower is shown on a calm day, the sky furrowed with the odd
+          &quot;The tower is shown on a calm day, the sky furrowed with the odd
           innocuous cloud that sieves the light of morning, evading, thereby, a
           profusion of scattered shadows; judging by those cast, albeit timidly,
           by the counterforts, one may assume the midday hour is near. At this
@@ -81,7 +84,7 @@ export default function PictureInPictureJS(): ReactNode {
           the landscape, from the earth to the sky, the seaside to the ramparts.
         </p>
         <p>
-          "... Brueghel's tower soars up not in the midst of the Babylonian
+          {`... Brueghel's tower soars up not in the midst of the Babylonian
           deserts or on the banks of the Euphrates, but rather on the coast of a
           wealthy country with fertile soil, on the outskirts of a seaport
           graced with a harbor of some significance; part of it is borne by a
@@ -93,11 +96,11 @@ export default function PictureInPictureJS(): ReactNode {
           Antwerp; it is crossed by a navigable river that Brueghel's fancy has
           made to empty into the sea through a tunnel hollowed out in the
           promontory, or else through a gorge carved through the same and later
-          covered by the tower."
+          covered by the tower."`}
         </p>
         <p>
-          Rather than scrolling up and down constantly, wouldn't it be useful to
-          have the image on hand to verify Benet's argument?
+          {`Rather than scrolling up and down constantly, wouldn't it be useful to
+          have the image on hand to verify Benet's argument?`}
         </p>
         <p>
           You can see how this would be useful for Medium-style articles or blog
