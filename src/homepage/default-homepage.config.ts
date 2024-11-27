@@ -4,7 +4,7 @@ export const homepageConfig: HomepageConfig = {
   seo: {
     title: 'Justin Lee - Web Developer',
     description:
-      'Tongue-in-cheek portfolio site for Justin Lee, web developer. Contains open-source apps like an RPG and buzzword bingo.',
+      'Tongue-in-cheek portfolio site for Justin Lee, web developer. Contains demos of several open-source apps.',
   },
   developerDescription: {
     textContent: {
@@ -56,26 +56,68 @@ export const homepageConfig: HomepageConfig = {
   resume: {
     textContent: {
       lines: [
-        'I am a web developer. I built this site using React and Next.js, and I host it myself. All for fun.',
+        `I am a web developer. This site's stack uses Next.JS for the backend, MongoDB for database, and React (naturally from Next.JS).`,
         {
-          templateString:
-            'I have worked with ${Unbound Commerce} and ${SAP} to make B2B websites a bit more complex than this one.',
-          urls: [
-            'https://www.unboundcommerce.com',
-            'https://www.sap.com/products/crm/e-commerce-platforms.html',
-          ],
+          templateString: `I have quite a bit of experience with Progressive Web Apps, RESTful server design, and product development from my time at \${SAP}.`,
+          urls: ['https://www.sap.com/products/crm/commerce-cloud.html'],
         },
-        'Though these are more fun.',
+        {
+          templateString: `I have full-stack experience working with various \${startup} \${companies}.`,
+          urls: ['https://www.distro.app', 'https://www.unboundcommerce.com'],
+        },
         {
           templateString:
             'Contact me at ${leej40@outlook.com} if the site amuses you or for anything else.',
           urls: ['mailto:leej40@outlook.com'],
         },
-        {
-          templateString: 'The source code of the site is on ${GitHub}.',
-          urls: ['https://github.com/justinlee0777'],
-        },
       ],
     },
+  },
+  projects: {
+    header: 'Projects',
+    description: [
+      `In hindsight, and to my misfortune, I have not preserved any of the frontend projects I have developed for those companies. Perhaps one day with considerable downtime in my hands I will recreate them for posterity.`,
+      `Most of my GitHub projects are written in Vanilla JS, so as to be framework-agnostic.`,
+    ],
+    entries: [
+      {
+        header: 'Prospero',
+        thumbnail: '/projects/prospero.gif',
+        description: 'Render text on the web as a book.',
+        url: '/prospero',
+      },
+      {
+        header: 'Random of the Day',
+        thumbnail: '/projects/random-of-the-day.png',
+        description: 'Random neat thing of the day.',
+        url: '/en/random-of-the-day',
+      },
+      {
+        header: 'Buzzword Bingo',
+        thumbnail: '/projects/buzzword-bingo.png',
+        description:
+          'Library that takes in bingo cells and renders them as a bingosheet.',
+        url: '/en/buzzword-bingo',
+      },
+      {
+        header: 'Picture-in-Picture JS',
+        thumbnail: '/projects/picture-in-picture-js.gif',
+        description: 'Render media on a webpage in a draggable overlay.',
+        url: '/picture-in-picture-js',
+      },
+      {
+        header: 'Elden Ring Bot',
+        thumbnail: '/projects/elden-ring-chatbot.gif',
+        description:
+          'Extremely silly bot that pulls data about Elden Ring from a database and answers your queries.',
+        url: '/elden-ring',
+      },
+      {
+        header: 'Museum',
+        thumbnail: '/projects/museum.gif',
+        description: 'Renders a museum on the webpage. Another silly idea.',
+        url: '/museum',
+      },
+    ],
   },
 };

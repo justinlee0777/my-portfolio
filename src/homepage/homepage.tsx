@@ -11,6 +11,7 @@ import {
   animateSlides,
 } from '../utils/animate-slides.function';
 import DeveloperDescription from './components/developer-description/developer-description';
+import Projects from './components/projects/projects';
 import Resume from './components/resume/resume';
 import HomepageProps from './models/homepage-props.interface';
 
@@ -42,6 +43,7 @@ export default function HomePage({
       profilePicturePrompt={profilePicturePrompt}
     />,
     <Settings key="settings" config={homepageConfig.settings} />,
+    <Projects key="projects" {...homepageConfig.projects} />,
     <Resume key="resume" config={homepageConfig.resume} />,
   ];
 

@@ -19,6 +19,19 @@ export interface ResumeConfig {
   };
 }
 
+export interface ProjectConfig {
+  thumbnail: string;
+  description: string;
+  header: string;
+  url: string;
+}
+
+export interface ProjectsConfig {
+  header: string;
+  description: Array<string>;
+  entries: Array<ProjectConfig>;
+}
+
 export interface HomepageConfig {
   seo: {
     title: string;
@@ -27,6 +40,7 @@ export interface HomepageConfig {
   developerDescription: DeveloperDescriptionConfig;
   settings: SettingsConfig;
   resume: ResumeConfig;
+  projects: ProjectsConfig;
 }
 
 const developerDescriptionKeys = [

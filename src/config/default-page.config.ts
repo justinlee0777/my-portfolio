@@ -36,6 +36,10 @@ export default function getPageConfig(locale: string): PageConfig {
         displayName: 'Museum',
         url: '/museum',
       },
+      {
+        displayName: 'Picture-in-Picture JS',
+        url: '/picture-in-picture-js',
+      },
     ],
   };
 }

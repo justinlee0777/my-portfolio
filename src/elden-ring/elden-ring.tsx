@@ -46,6 +46,7 @@ export default function EldenRingPage() {
         </p>
         <Chatbot
           ref={chatbotRef}
+          className={styles.eldenRingChatbot}
           messages={messages}
           disabled={disabled}
           messageActions={[

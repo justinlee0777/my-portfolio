@@ -1,0 +1,21 @@
+.pictureInPicturePage {
+  align-items: stretch !important;
+  box-sizing: border-box;
+  flex: 1;
+  justify-content: flex-start !important;
+  margin: 0 auto;
+  margin: 0 auto;
+  max-width: 800px;
+  padding: 18px;
+}
+
+.triggerContainer {
+  text-align: center;
+}
+
+.towerOfBabelImg {
+  max-height: 75vh;
+  object-fit: contain;
+  overflow: auto;
+  max-width: 75vw;
+}

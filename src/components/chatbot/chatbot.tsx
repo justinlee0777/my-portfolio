@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { ChatCompletionMessageParam } from 'openai/resources';
 import {
   ForwardedRef,
@@ -13,6 +14,7 @@ import styles from './chatbot.module.scss';
 interface Props {
   messages: Array<ChatCompletionMessageParam>;
 
+  className?: string;
   disabled?: boolean;
   headerContent?: ReactNode;
   messageActions?: Array<
@@ -35,6 +37,7 @@ export interface ChatbotRef {
 
 export default forwardRef(function Chatbot(
   {
+    className,
     messages,
     disabled,
     headerContent,
@@ -61,7 +64,7 @@ export default forwardRef(function Chatbot(
   }));
 
   return (
-    <div className={styles.chatbot}>
+    <div className={clsx(styles.chatbot, className)}>
       {sidebarConfig && (
         <div className={styles.sidebar}>
           <div className={styles.sidebarHeader}>
