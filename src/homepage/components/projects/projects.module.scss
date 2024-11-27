@@ -14,7 +14,8 @@
 .projects {
   display: flex;
   flex-direction: column;
-  gap: 1em;
+  gap: 2em;
+  padding: 1em 0;
 }
 
 .projectsHeader {
@@ -24,13 +25,12 @@
 
 .project {
   display: flex;
-  flex-flow: column wrap;
+  flex-direction: row;
   gap: 0 1em;
   max-height: 250px;
 }
 
 .projectThumbnail {
-  flex: 1 1 200px;
   margin: 0 1em 1em 0;
   object-fit: cover;
   width: 200px;

@@ -23,8 +23,10 @@ export default function Projects({
                 className={styles.projectThumbnail}
                 src={entry.thumbnail}
               ></img>
-              <h4 className={styles.projectHeader}>{entry.header}</h4>
-              <p>{entry.description}</p>
+              <div>
+                <h4 className={styles.projectHeader}>{entry.header}</h4>
+                <p>{entry.description}</p>
+              </div>
             </a>
           );
         })}
