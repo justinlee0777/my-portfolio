@@ -76,7 +76,7 @@ export const homepageConfig: HomepageConfig = {
   projects: {
     header: 'Projects',
     description: [
-      `In hindsight, and to my misfortune, I have not preserved any of the frontend projects I have developed for those companies. Perhaps one day with considerable downtime in my hands I will recreate them for posterity.`,
+      `In hindsight, and to my misfortune, I have not preserved any of the frontend projects I have developed professionally. Perhaps one day with considerable downtime in my hands I will recreate them for posterity.`,
       `Most of my GitHub projects are written in Vanilla JS, so as to be framework-agnostic.`,
     ],
     entries: [
