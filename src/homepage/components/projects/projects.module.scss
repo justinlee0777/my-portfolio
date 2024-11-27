@@ -2,12 +2,12 @@
   box-sizing: border-box;
   max-width: 100vw;
   padding: 1em;
-  width: 50%; // Default size for phone-sized screens.
+  width: 66%; // Default size for phone-sized screens.
 }
 
 @media (min-width: 600px) {
   .projectsContainer {
-    width: 33%;
+    width: 50%;
   }
 }
 
