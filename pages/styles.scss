@@ -12,3 +12,12 @@ button {
     filter: brightness(85%);
   }
 }
+
+.prospero__tableOfContentsButton {
+  background-color: transparent !important;
+}
+
+.prospero__closeButton {
+  background-color: black !important;
+  color: white !important;
+}

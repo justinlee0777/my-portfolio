@@ -1,5 +1,9 @@
-import type { PagesAsIndicesOutput } from 'prospero/types';
+import type {
+  PagesAsIndicesOutput,
+  TableOfContentsSection,
+} from 'prospero/types';
 
+import { capitalize } from 'lodash-es';
 import {
   desktopStyles,
   mobileStyles,
@@ -28,13 +32,14 @@ const chapters = [
 ];
 
 const responses = await Promise.all(
-  chapters.map((chapter) =>
-    workOnChapter({
+  chapters.map(async (chapter) => ({
+    ...(await workOnChapter({
       mobileStyles,
       desktopStyles,
       filename: `./src/assets/pages/ulysses/${chapter}.txt`,
-    })
-  )
+    })),
+    chapter,
+  }))
 );
 
 let desktopCompiledText = '';
@@ -46,7 +51,21 @@ let mobileIndex = 0;
 let desktop: PagesAsIndicesOutput['pages'] = [];
 let desktopIndex = 0;
 
+const mobileChapters: Array<TableOfContentsSection> = [],
+  desktopChapters: Array<TableOfContentsSection> = [];
+
 responses.forEach((response) => {
+  const chapterTitle = response.chapter.split('-').map(capitalize).join(' ');
+
+  mobileChapters.push({
+    title: chapterTitle,
+    pageNumber: mobile.length,
+  });
+  desktopChapters.push({
+    title: chapterTitle,
+    pageNumber: desktop.length,
+  });
+
   desktopCompiledText += response.desktop.text;
   mobileCompiledText += response.mobile.text;
 
@@ -74,16 +93,22 @@ responses.forEach((response) => {
   desktopIndex += response.desktop.pages.at(-1).endIndex;
 });
 
-const mobilePages: PagesAsIndicesOutput = {
+const mobilePages: PagesAsIndicesOutput & {
+  chapters: Array<TableOfContentsSection>;
+} = {
   pages: mobile,
   pageStyles: mobileStyles,
   text: mobileCompiledText,
+  chapters: mobileChapters,
 };
 
-const desktopPages: PagesAsIndicesOutput = {
+const desktopPages: PagesAsIndicesOutput & {
+  chapters: Array<TableOfContentsSection>;
+} = {
   pages: desktop,
   pageStyles: desktopStyles,
   text: desktopCompiledText,
+  chapters: desktopChapters,
 };
 
 const url = 'https://iamjustinlee.com/api';

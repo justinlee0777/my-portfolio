@@ -64,6 +64,9 @@ export default function UlyssesPage({
           media: {
             minWidth: 750,
           },
+          tableOfContents: fetch(
+            `${endpointBase}/ulysses/table-of-contents/desktop`
+          ).then((response) => response.json()),
           ...getBookConfig('desktop-ulysses-bookmark'),
         },
         { classnames: [styles.book] }
@@ -78,6 +81,9 @@ export default function UlyssesPage({
           animation: new SinglePageBookAnimation(),
           listeners: [listenToClickEvents],
           pagesShown: 1,
+          tableOfContents: fetch(
+            `${endpointBase}/ulysses/table-of-contents/mobile`
+          ).then((response) => response.json()),
           ...getBookConfig('mobile-ulysses-bookmark'),
         },
         { classnames: [styles.book] }

@@ -1,13 +1,15 @@
 import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
 import PagesAsIndicesOutput from 'prospero/models/pages-as-indices-output.interface';
+import { TableOfContentsSection } from 'prospero/models/table-of-contents.interface';
 import { ProsperoPageDataModel } from '../../models/propsero-page-data.model';
 import { ProsperoPageStyleDataModel } from '../../models/prospero-page-style-data.model';
+import { ProsperoTableOfContentsModel } from '../../models/prospero-table-of-contents.model';
 import connectToMongoDB from './connect-to-mongodb.function';
 
 export default async function uploadProsperoPages(
   textTitle: string,
   textDescription: string,
-  textData: PagesAsIndicesOutput
+  textData: PagesAsIndicesOutput & { chapters: Array<TableOfContentsSection> }
 ) {
   const s3Client = new S3Client();
 
@@ -81,5 +83,13 @@ export default async function uploadProsperoPages(
       beginIndex: page.beginIndex,
       endIndex: page.endIndex,
     }))
+  );
+
+  await ProsperoTableOfContentsModel.updateOne(
+    { textTitle, textDescription },
+    {
+      sections: textData.chapters,
+    },
+    { upsert: true }
   );
 }
