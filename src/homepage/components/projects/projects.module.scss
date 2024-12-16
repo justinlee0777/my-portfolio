@@ -5,12 +5,6 @@
   width: 66%; // Default size for phone-sized screens.
 }
 
-@media (min-width: 600px) {
-  .projectsContainer {
-    width: 50%;
-  }
-}
-
 .projects {
   display: flex;
   flex-direction: column;
@@ -25,9 +19,8 @@
 
 .project {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: 0 1em;
-  max-height: 250px;
 }
 
 .projectThumbnail {
@@ -38,4 +31,15 @@
 
 .projectHeader {
   margin-top: 0;
+}
+
+@media (min-width: 600px) {
+  .projectsContainer {
+    width: 50%;
+  }
+
+  .project {
+    flex-direction: row;
+    max-height: 250px;
+  }
 }
