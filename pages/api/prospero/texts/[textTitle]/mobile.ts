@@ -14,6 +14,8 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  const textTitle = req.query.textTitle as string;
+
   if (req.method === 'GET') {
     const { pageNumber, pageSize } = req.query;
 
@@ -29,7 +31,7 @@ export default async function handler(
     }
 
     const result = await getProsperoPages(
-      'ulysses',
+      textTitle,
       'mobile',
       finalPageNumber,
       finalPageSize
@@ -37,7 +39,7 @@ export default async function handler(
 
     res.status(200).json(result);
   } else if (req.method === 'PUT') {
-    await uploadProsperoPages('ulysses', 'mobile', JSON.parse(req.body));
+    await uploadProsperoPages(textTitle, 'mobile', JSON.parse(req.body));
 
     res.status(204).end();
   } else {

@@ -7,7 +7,7 @@ export default async function handler(
 ) {
   if (req.method === 'GET') {
     const result = await ProsperoTableOfContentsModel.findOne({
-      textTitle: 'ulysses',
+      textTitle: req.query.textTitle,
       textDescription: req.query.textDescription,
     });
 
