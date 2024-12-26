@@ -18,6 +18,10 @@ const config = {
         source: '/source/:path*',
         headers: [{ key: 'Access-Control-Allow-Origin', value: '*' }],
       },
+      {
+        source: '/api/prospero/:path*',
+        headers: [{ key: 'Access-Control-Allow-Origin', value: 'https://popularthoughts.blog' }],
+      },
     ];
   },
 };
