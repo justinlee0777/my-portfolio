@@ -2,6 +2,7 @@ import styles from './museum.module.scss';
 
 import { Museum, Position } from 'museum-html';
 
+import { throttle } from 'lodash-es';
 import { useEffect, useRef } from 'react';
 import Slide from '../components/slide/slide';
 import { MuseumPartial, TestExitPoint } from './museum-partial.model';
@@ -52,13 +53,21 @@ export default function MuseumPage() {
 
         museumContainer.appendChild(museumElement);
 
-        museumElement.focus();
+        museumElement.focus({ preventScroll: true });
       }
 
       import('./rooms/room-216.args').then(
         ({ museumArgs: initialRoomArgs }) => {
           const playerPosition: Position = [1, 4];
           drawMuseum(initialRoomArgs, playerPosition);
+
+          window.addEventListener(
+            'resize',
+            throttle(
+              () => drawMuseum(initialRoomArgs, playerPosition),
+              1000 / 3
+            )
+          );
         }
       );
 

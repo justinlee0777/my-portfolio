@@ -1,10 +1,4 @@
-import styles from './player-sprite.module.css';
-
-import {
-  PlayerSprite,
-  PlayerSpriteAction,
-  PlayerSpriteArgs,
-} from 'museum-html';
+import { DrawSprite, PlayerSprite, PlayerSpriteAction } from 'museum-html';
 
 export enum SpritePosture {
   RIGHT_FOOT_DOWN,
@@ -23,119 +17,100 @@ export enum SpritePosture {
 }
 
 export default class TestPlayerSprite implements PlayerSprite {
-  sprite: HTMLCanvasElement | undefined;
+  private readonly SPRITE_SIZE = 16;
 
-  private lastPosture: SpritePosture | undefined;
+  private spriteSheet: HTMLCanvasElement | undefined;
+  private postureSequence: Array<SpritePosture> = [];
 
   async draw(
-    { cellSize }: PlayerSpriteArgs,
+    drawSprite: DrawSprite,
     action?: PlayerSpriteAction
   ): Promise<void> {
+    if (!this.spriteSheet) {
+      const spriteSheet = (this.spriteSheet = document.createElement('canvas'));
+
+      const image = new Image();
+
+      const load = new Promise<void>((resolve) => {
+        image.onload = () => {
+          const context = spriteSheet.getContext('2d')!;
+          context.drawImage(image, 0, 0);
+          resolve();
+        };
+      });
+
+      image.src = '/museum/player-sprite-sheet.png';
+
+      await load;
+    }
+
+    const { postureSequence } = this;
+
+    let finalPose: SpritePosture;
+
     if (action) {
       if (action.type === 'walk') {
-        let postureSequence: Array<SpritePosture>;
-
         switch (action.direction) {
           case 'up':
-            let upPose: SpritePosture;
-            if (this.lastPosture === SpritePosture.RIGHT_FOOT_UP) {
-              upPose = SpritePosture.LEFT_FOOT_UP;
-            } else {
-              upPose = SpritePosture.RIGHT_FOOT_UP;
-            }
-
-            this.lastPosture = upPose;
-            postureSequence = [upPose, SpritePosture.UP_STANDING];
+            finalPose ??= SpritePosture.LEFT_FOOT_UP;
             break;
 
           case 'right':
-            this.lastPosture = SpritePosture.RIGHT_WALKING;
-            postureSequence = [
-              SpritePosture.RIGHT_WALKING,
-              SpritePosture.RIGHT_STANDING,
-            ];
+            finalPose = SpritePosture.RIGHT_WALKING;
             break;
 
           case 'down':
-            let downPose: SpritePosture;
-            if (this.lastPosture === SpritePosture.RIGHT_FOOT_DOWN) {
-              downPose = SpritePosture.LEFT_FOOT_DOWN;
-            } else {
-              downPose = SpritePosture.RIGHT_FOOT_DOWN;
-            }
-
-            this.lastPosture = downPose;
-            postureSequence = [downPose, SpritePosture.DOWN_STANDING];
+            finalPose ??= SpritePosture.LEFT_FOOT_DOWN;
             break;
-
           case 'left':
-            this.lastPosture = SpritePosture.LEFT_WALKING;
-            postureSequence = [
-              SpritePosture.LEFT_WALKING,
-              SpritePosture.LEFT_STANDING,
-            ];
+            finalPose = SpritePosture.LEFT_WALKING;
             break;
         }
+      } else if (action.type === 'stand') {
+        switch (action.direction) {
+          case 'up':
+            finalPose = SpritePosture.UP_STANDING;
+            break;
+          case 'right':
+            finalPose = SpritePosture.RIGHT_STANDING;
+            break;
 
-        const { animationTime } = action;
-
-        const finalPose = postureSequence.pop()!;
-        const slicedTime = animationTime / postureSequence.length;
-
-        for (const posture of postureSequence) {
-          this.drawSprite(posture, cellSize);
-
-          await new Promise((resolve) => setTimeout(resolve, slicedTime));
+          case 'down':
+            finalPose = SpritePosture.DOWN_STANDING;
+            break;
+          case 'left':
+            finalPose = SpritePosture.LEFT_STANDING;
+            break;
         }
-
-        this.drawSprite(finalPose, cellSize);
       }
-    } else {
-      this.drawSprite(SpritePosture.DOWN_STANDING, cellSize);
     }
+    finalPose ??= SpritePosture.DOWN_STANDING;
+
+    this.postureSequence.push(finalPose);
+
+    this.drawSprite(finalPose, drawSprite);
+
+    // Only need to track the last two postures.
+    this.postureSequence = postureSequence.slice(-2);
   }
 
-  private drawSprite(posture: SpritePosture, cellSize: number): void {
-    const SPRITE_SIZE = 16;
+  private drawSprite(posture: SpritePosture, drawSprite: DrawSprite): void {
+    const { SPRITE_SIZE } = this;
+    drawSprite.context.imageSmoothingEnabled = false;
 
-    let sprite = this.sprite;
-
-    if (!sprite) {
-      this.sprite = sprite = document.createElement('canvas');
-      sprite.width = cellSize;
-      sprite.height = cellSize;
-
-      sprite.className = styles.playerSprite;
-    }
-
-    const image = new Image();
-
-    image.onload = () => {
-      const context = sprite!.getContext('2d')!;
-      context.imageSmoothingEnabled = false;
-
-      context.clearRect(0, 0, cellSize, cellSize);
-
-      context.drawImage(
-        image,
-        posture * SPRITE_SIZE,
-        0,
-        SPRITE_SIZE,
-        SPRITE_SIZE,
-        0,
-        0,
-        cellSize,
-        cellSize
-      );
-    };
-
-    image.src = '/museum/player-sprite-sheet.png';
-
-    this.sprite = sprite;
+    drawSprite(
+      this.spriteSheet!,
+      posture * SPRITE_SIZE,
+      0,
+      SPRITE_SIZE,
+      SPRITE_SIZE
+    );
   }
 
   getDirection(): 'Up' | 'Right' | 'Down' | 'Left' {
-    switch (this.lastPosture) {
+    const lastPosture = this.postureSequence.at(-1);
+
+    switch (lastPosture) {
       case undefined:
       case SpritePosture.RIGHT_FOOT_DOWN:
       case SpritePosture.DOWN_STANDING:

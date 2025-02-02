@@ -9,14 +9,15 @@
 }
 
 .museumContainer {
-  background: url('https://images.metmuseum.org/CRDImages/as/original/DP120313.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   text-align: center;
 }
 
 .museum {
-  max-width: 100% !important;
+  background: url('https://images.metmuseum.org/CRDImages/as/original/DP120313.jpg');
+  height: 100%;
+  width: 100%;
 }
 
 @media (max-width: 800px) {
@@ -24,18 +25,10 @@
     font-size: 12px;
     height: 300px;
   }
-
-  .museum {
-    max-height: 300px;
-  }
 }
 
 @media (min-width: 800px) {
   .museumContainer {
     height: 500px;
-  }
-
-  .museum {
-    max-height: 500px;
   }
 }

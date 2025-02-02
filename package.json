@@ -21,7 +21,7 @@
     "gray-matter": "^4.0.3",
     "lodash-es": "^4.17.21",
     "mongoose": "^8.5.4",
-    "museum-html": "^0.0.6",
+    "museum-html": "^0.1.7",
     "next": "^14.2.4",
     "openai": "^4.56.0",
     "picture-in-picture-js": "^0.2.1",

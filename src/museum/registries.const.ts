@@ -202,11 +202,12 @@ export const registries: MuseumArgs['registries'] = {
                   0
                 );
               }
+
+              resolve();
             };
 
             image.src = '/museum/glass-display.png';
 
-            resolve();
             break;
         }
       });

@@ -20,7 +20,12 @@ const config = {
       },
       {
         source: '/api/prospero/:path*',
-        headers: [{ key: 'Access-Control-Allow-Origin', value: 'https://popularthoughts.blog' }],
+        headers: [
+          {
+            key: 'Access-Control-Allow-Origin',
+            value: 'https://popularthoughts.blog',
+          },
+        ],
       },
     ];
   },
