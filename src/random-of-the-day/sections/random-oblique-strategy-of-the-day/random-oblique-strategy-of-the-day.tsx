@@ -2,7 +2,8 @@ import slideStyles from '../slide.module.scss';
 import styles from './random-oblique-strategy-of-the-day.module.scss';
 
 import classNames from 'classnames';
-import { useState } from 'react';
+import { useState, type JSX } from 'react';
+
 import ErrorScreen from '../../../components/error-screen/error-screen';
 import LoadingScreen from '../../../components/loading-screen/loading-screen';
 import Slide from '../../../components/slide/slide';

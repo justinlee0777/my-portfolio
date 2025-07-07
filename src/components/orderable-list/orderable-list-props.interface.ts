@@ -1,3 +1,5 @@
+import { type JSX } from 'react';
+
 export default interface OrderableListProps {
   id?: string;
   className?: string;

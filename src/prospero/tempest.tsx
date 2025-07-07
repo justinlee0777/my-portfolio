@@ -9,7 +9,7 @@ import {
 } from 'prospero/web/book/listeners';
 import { DefaultBookTheme } from 'prospero/web/book/theming';
 import { FlexibleBookComponent } from 'prospero/web/flexible-book';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState, type JSX } from 'react';
 
 import { TempestPageProps } from '../page-utils/prospero/get-tempest-props.function';
 import ProsperoPage from './base-page';

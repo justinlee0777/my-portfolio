@@ -1,6 +1,8 @@
 import slideStyles from '../slide.module.scss';
 import styles from './random-poem-of-the-day.module.scss';
 
+import { type JSX } from 'react';
+
 import ErrorScreen from '../../../components/error-screen/error-screen';
 import LoadingScreen from '../../../components/loading-screen/loading-screen';
 import Slide from '../../../components/slide/slide';

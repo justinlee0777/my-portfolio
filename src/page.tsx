@@ -2,7 +2,7 @@ import styles from './page.module.scss';
 
 import classNames from 'classnames';
 import Head from 'next/head';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState, type JSX } from 'react';
 
 import LoadingScreen from './components/loading-screen/loading-screen';
 import Navigation from './components/navigation/navigation';

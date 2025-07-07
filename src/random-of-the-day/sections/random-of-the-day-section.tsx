@@ -1,3 +1,5 @@
+import { type JSX } from 'react';
+
 import { Modal } from '../../services/modal';
 import RandomOfTheDayConfig from '../models/random-of-the-day-config.interface';
 import RandomType from '../models/random-type.enum';

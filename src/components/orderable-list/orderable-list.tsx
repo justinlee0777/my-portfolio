@@ -1,6 +1,7 @@
 import styles from './orderable-list.module.scss';
 
 import classNames from 'classnames';
+import { type JSX } from 'react';
 
 import UnitTestCheck from '../unit-test-check/unit-test-check';
 import OrderableListProps from './orderable-list-props.interface';

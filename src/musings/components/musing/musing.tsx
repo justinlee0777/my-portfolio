@@ -13,7 +13,7 @@ import {
 } from 'prospero/web/book/listeners';
 import { FlexibleBookComponent } from 'prospero/web/flexible-book';
 import { useBook } from 'prospero/web/react';
-import { useRef, useState } from 'react';
+import { useRef, useState, type JSX } from 'react';
 
 import dynamic from 'next/dynamic';
 import Slide from '../../../components/slide/slide';

@@ -1,6 +1,7 @@
 import 'buzzword-bingo-generator/index.css';
 import './styles.scss';
 
+import { type JSX } from 'react';
 import Page, { PageProps } from '../src/page';
 
 interface ErrorPageProps {

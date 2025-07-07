@@ -1,4 +1,4 @@
-import { RefObject } from 'react';
+import { RefObject, type JSX } from 'react';
 
 export default interface SlideProps {
   children: JSX.Element;

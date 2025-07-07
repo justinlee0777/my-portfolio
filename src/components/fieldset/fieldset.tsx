@@ -1,7 +1,7 @@
 import styles from './fieldset.module.scss';
 
 import classNames from 'classnames';
-import { useState } from 'react';
+import { useState, type JSX } from 'react';
 import UnitTestCheck from '../unit-test-check/unit-test-check';
 
 export interface FieldSetProps {

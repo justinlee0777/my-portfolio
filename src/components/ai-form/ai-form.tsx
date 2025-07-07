@@ -1,5 +1,5 @@
 import set from 'lodash-es/set';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState, type JSX } from 'react';
 
 import { ChatCompletionMessageParam } from 'openai/resources';
 import FormMetadataConfig, { FormMetadata } from '../../utils/ai-form-config';

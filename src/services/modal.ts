@@ -1,3 +1,5 @@
+import { type JSX } from 'react';
+
 export class Modal {
   constructor(private setModal: (component: JSX.Element | null) => void) {}
 

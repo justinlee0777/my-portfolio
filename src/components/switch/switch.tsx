@@ -1,6 +1,8 @@
 import styles from './switch.module.scss';
 
 import classNames from 'classnames';
+import { type JSX } from 'react';
+
 import UnitTestCheck from '../unit-test-check/unit-test-check';
 import SwitchProps from './switch-props.interface';
 

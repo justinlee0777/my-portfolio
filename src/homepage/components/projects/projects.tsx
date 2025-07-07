@@ -1,5 +1,7 @@
 import styles from './projects.module.scss';
 
+import { type JSX } from 'react';
+
 import { ProjectsConfig } from '../../homepage.config';
 
 interface Props extends ProjectsConfig {}

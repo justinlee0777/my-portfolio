@@ -2,7 +2,7 @@ import styles from './developer-description.module.scss';
 
 import classNames from 'classnames';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type JSX } from 'react';
 
 import UnitTestCheck from '../../../components/unit-test-check/unit-test-check';
 import createLinkElement from '../../../config/create-link-element.function';

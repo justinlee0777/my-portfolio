@@ -1,7 +1,7 @@
 import styles from './elden-ring.module.scss';
 
 import { ChatCompletionMessageParam } from 'openai/resources';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { ElementType, useEffect, useMemo, useRef, useState } from 'react';
 import { GoCrossReference } from 'react-icons/go';
 import { Tooltip } from 'react-tooltip';
 import Chatbot, { ChatbotRef } from '../components/chatbot/chatbot';
@@ -29,6 +29,8 @@ export default function EldenRingPage() {
   }, [chatbotRef, messages]);
 
   const tooltipId = useMemo(() => `message-reference`, []);
+
+  const CrossReferenceIcon = GoCrossReference as ElementType;
 
   return (
     <Slide className={styles.eldenRingPage}>
@@ -75,7 +77,7 @@ export default function EldenRingPage() {
                         });
                       }}
                     >
-                      <GoCrossReference />
+                      <CrossReferenceIcon />
                     </button>
                   </>
                 );

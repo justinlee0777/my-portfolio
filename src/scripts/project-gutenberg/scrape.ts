@@ -75,7 +75,7 @@ export default async function scrapeProjectGutenbergPage() {
 
       if (sectionFound) {
         sections.push({
-          title: child.textContent.trim(),
+          title: (child.textContent ?? '').trim(),
           content: [],
         });
       }
@@ -89,7 +89,7 @@ export default async function scrapeProjectGutenbergPage() {
       const { content } = mostRecentSection;
 
       content.push(
-        child.textContent
+        (child.textContent ?? '')
           .trim()
           .replaceAll(/\n/g, '')
           .replaceAll(/\s{2,}/g, ' ')
@@ -188,12 +188,12 @@ export default async function scrapeProjectGutenbergPage() {
 
       // Add an empty page.
       desktop.push({
-        beginIndex: desktop.at(-1).endIndex,
-        endIndex: desktop.at(-1).endIndex,
+        beginIndex: desktop.at(-1)!.endIndex,
+        endIndex: desktop.at(-1)!.endIndex,
       });
 
-      mobileIndex += response.mobile.pages.at(-1).endIndex;
-      desktopIndex += response.desktop.pages.at(-1).endIndex;
+      mobileIndex += response.mobile.pages.at(-1)!.endIndex;
+      desktopIndex += response.desktop.pages.at(-1)!.endIndex;
     });
 
     const mobilePages: PagesAsIndicesOutput & {

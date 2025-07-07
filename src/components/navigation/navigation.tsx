@@ -2,6 +2,7 @@ import styles from './navigation.module.scss';
 
 import classNames from 'classnames';
 import Link from 'next/link';
+import { type JSX } from 'react';
 import NavigationProps from './models/navigation-props.interface';
 
 export default function Navigation({

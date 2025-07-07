@@ -1,7 +1,7 @@
 import styles from './unit-test-check.module.scss';
 
 import classNames from 'classnames';
-import { useState } from 'react';
+import { useState, type JSX } from 'react';
 
 import UnitTestContext from '../../contexts/unit-test/unit-test.context';
 import UnitTestCheckProps from './unit-test-check-props.interface';

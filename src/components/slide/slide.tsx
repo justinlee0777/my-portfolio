@@ -1,6 +1,7 @@
 import styles from './slide.module.scss';
 
 import classNames from 'classnames';
+import { type JSX } from 'react';
 
 import UnitTestCheck from '../unit-test-check/unit-test-check';
 import SlideProps from './slide-props.interface';

@@ -11,7 +11,7 @@ import { DefaultBookTheme } from 'prospero/web/book/theming';
 import { FlexibleBookComponent } from 'prospero/web/flexible-book';
 import { IndentTransformer } from 'prospero/web/transformers';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState, type JSX } from 'react';
 import { DijkstraEssayPageProps } from '../page-utils/prospero/get-dijkstra-essay-props.function';
 import ProsperoPage from './base-page';
 

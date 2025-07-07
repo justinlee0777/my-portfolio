@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, type JSX } from 'react';
 import UnitTestCheck from '../../../../components/unit-test-check/unit-test-check';
 
 import styles from './high-res-image-dialog.module.scss';

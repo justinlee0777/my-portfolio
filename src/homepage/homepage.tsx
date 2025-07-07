@@ -1,7 +1,7 @@
 import styles from './homepage.module.scss';
 
 import Head from 'next/head';
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState, type JSX } from 'react';
 
 import Settings from '../components/settings/settings';
 import Slide from '../components/slide/slide';

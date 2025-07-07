@@ -2,7 +2,7 @@ import styles from './settings.module.scss';
 
 import Link from 'next/link';
 
-import { useContext } from 'react';
+import { useContext, type JSX } from 'react';
 import createLinkElement from '../../config/create-link-element.function';
 import SettingsContext from '../../contexts/settings/settings.context';
 import Font from '../../models/font.enum';

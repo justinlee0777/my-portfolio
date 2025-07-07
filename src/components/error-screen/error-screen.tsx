@@ -1,3 +1,5 @@
+import { type JSX } from 'react';
+
 import createLinkElement from '../../config/create-link-element.function';
 import LinkedString from '../../models/linked-string.model';
 import UnitTestCheck from '../unit-test-check/unit-test-check';

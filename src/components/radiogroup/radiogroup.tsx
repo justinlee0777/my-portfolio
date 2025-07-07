@@ -1,5 +1,7 @@
 import styles from './radiogroup.module.scss';
 
+import { type JSX } from 'react';
+
 import FieldSet from '../fieldset/fieldset';
 import UnitTestCheck from '../unit-test-check/unit-test-check';
 import RadioGroupProps from './radio-group-props.interface';

@@ -1,12 +1,14 @@
 import clsx from 'clsx';
 import { ChatCompletionMessageParam } from 'openai/resources';
 import {
+  ElementType,
   ForwardedRef,
   forwardRef,
   ReactNode,
   useImperativeHandle,
   useRef,
   useState,
+  type JSX,
 } from 'react';
 import { MdOutlineClose } from 'react-icons/md';
 import styles from './chatbot.module.scss';
@@ -63,6 +65,8 @@ export default forwardRef(function Chatbot(
     },
   }));
 
+  const CloseIcon = MdOutlineClose as ElementType;
+
   return (
     <div className={clsx(styles.chatbot, className)}>
       {sidebarConfig && (
@@ -73,7 +77,7 @@ export default forwardRef(function Chatbot(
               className={styles.closeSidebar}
               onClick={() => setSidebarConfig(null)}
             >
-              <MdOutlineClose />
+              <CloseIcon />
             </button>
           </div>
           <div className={styles.sidebarContent}>{sidebarConfig.content}</div>

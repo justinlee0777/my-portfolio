@@ -1,3 +1,5 @@
+import { type JSX } from 'react';
+
 import UnitTestCheck from '../../../components/unit-test-check/unit-test-check';
 import createLinkElement from '../../../config/create-link-element.function';
 import { ResumeConfig } from '../../homepage.config';

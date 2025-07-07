@@ -1,7 +1,7 @@
 import slideStyles from '../slide.module.scss';
 import styles from './random-painting-of-the-day.module.scss';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type JSX } from 'react';
 
 import ErrorScreen from '../../../components/error-screen/error-screen';
 import LoadingScreen from '../../../components/loading-screen/loading-screen';

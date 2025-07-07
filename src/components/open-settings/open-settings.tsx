@@ -1,7 +1,7 @@
 import styles from './open-settings.module.scss';
 
 import classNames from 'classnames';
-import { useState } from 'react';
+import { useState, type JSX } from 'react';
 
 import Settings from '../settings/settings';
 import UnitTestCheck from '../unit-test-check/unit-test-check';

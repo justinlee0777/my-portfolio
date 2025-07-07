@@ -2,7 +2,7 @@ import styles from './random-of-the-day.module.scss';
 
 import classNames from 'classnames';
 import Head from 'next/head';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState, type JSX } from 'react';
 
 import FieldSet from '../components/fieldset/fieldset';
 import OrderableList from '../components/orderable-list/orderable-list';

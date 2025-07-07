@@ -1,6 +1,6 @@
 import styles from './index.module.scss';
 
-import { useRef } from 'react';
+import { useRef, type JSX } from 'react';
 
 import classNames from 'classnames';
 import LoadingScreen from '../components/loading-screen/loading-screen';

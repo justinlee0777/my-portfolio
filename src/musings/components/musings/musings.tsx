@@ -1,6 +1,7 @@
 import styles from './index.module.scss';
 
 import Link from 'next/link';
+import { type JSX } from 'react';
 
 import UnitTestCheck from '../../../components/unit-test-check/unit-test-check';
 import { MusingConfig } from '../musing/musing.config';
