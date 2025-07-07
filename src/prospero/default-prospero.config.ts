@@ -31,6 +31,10 @@ const defaultProsperoConfig: ProsperoConfig = {
       text: 'Ulysses by James Joyce',
       url: '/prospero/ulysses',
     },
+    {
+      text: 'A Christmas Carol by Charles Dickens',
+      url: '/prospero/a-christmas-carol',
+    },
   ],
 };
 

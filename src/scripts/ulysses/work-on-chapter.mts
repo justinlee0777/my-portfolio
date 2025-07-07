@@ -6,6 +6,7 @@ import {
   Pages,
   TextToHTMLTransformer,
 } from 'prospero/server';
+import { Transformer } from 'prospero/types';
 
 export default async function workOnChapter({
   mobileStyles,
@@ -18,7 +19,7 @@ export default async function workOnChapter({
     )
   );
 
-  const processors = function () {
+  const processors = function (): Array<Transformer> {
     return [
       new TextToHTMLTransformer(),
       new IndentTransformer(5),

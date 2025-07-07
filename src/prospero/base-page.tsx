@@ -2,7 +2,7 @@ import styles from './index.module.scss';
 
 import Head from 'next/head';
 import { BooksElement } from 'prospero/types';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, type JSX } from 'react';
 
 import Slide from '../components/slide/slide';
 import createLinkElement from '../config/create-link-element.function';

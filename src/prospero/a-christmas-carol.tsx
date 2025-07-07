@@ -20,18 +20,18 @@ import { desktopStyles, mobileStyles } from '../consts/ulysses-styles.const';
 import { ProsperoPageProps } from '../page-utils/prospero/get-base-props.function';
 import ProsperoPage from './base-page';
 
-export default function UlyssesPage({
+export default function AChristmasCarolPage({
   config,
 }: ProsperoPageProps): JSX.Element {
   const endpointBase = '/api/prospero/texts';
 
   const mobilePages = useMemo(
-    () => new ServerPages(`${endpointBase}/ulysses/mobile`),
+    () => new ServerPages(`${endpointBase}/a-christmas-carol/mobile`),
     []
   );
 
   const desktopPages = useMemo(
-    () => new ServerPages(`${endpointBase}/ulysses/desktop`),
+    () => new ServerPages(`${endpointBase}/a-christmas-carol/desktop`),
     []
   );
 
@@ -65,9 +65,9 @@ export default function UlyssesPage({
             minWidth: 750,
           },
           tableOfContents: fetch(
-            `${endpointBase}/ulysses/table-of-contents/desktop`
+            `${endpointBase}/a-christmas-carol/table-of-contents/desktop`
           ).then((response) => response.json()),
-          ...getBookConfig('desktop-ulysses-bookmark'),
+          ...getBookConfig('desktop-a-christmas-carol-bookmark'),
         },
         { classnames: [styles.book] }
       );
@@ -82,9 +82,9 @@ export default function UlyssesPage({
           listeners: [listenToClickEvents],
           pagesShown: 1,
           tableOfContents: fetch(
-            `${endpointBase}/ulysses/table-of-contents/mobile`
+            `${endpointBase}/a-christmas-carol/table-of-contents/mobile`
           ).then((response) => response.json()),
-          ...getBookConfig('mobile-ulysses-bookmark'),
+          ...getBookConfig('mobile-a-christmas-carol-bookmark'),
         },
         { classnames: [styles.book] }
       );
@@ -100,8 +100,8 @@ export default function UlyssesPage({
     <ProsperoPage
       config={config}
       createBooks={createBooks as () => BooksElement}
-      bookTitle="Ulysses"
-      bookAuthor="James Joyce"
+      bookTitle="A Christmas Carol"
+      bookAuthor="Charles Dickens"
     ></ProsperoPage>
   );
 }
