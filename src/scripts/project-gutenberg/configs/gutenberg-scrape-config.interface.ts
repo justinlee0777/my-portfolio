@@ -3,4 +3,5 @@ export interface GutenbergScrapeConfig {
   sectionHeadingSelector: string;
 
   contentContainerSelector?: string;
+  ignore?: string;
 }

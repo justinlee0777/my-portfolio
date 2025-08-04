@@ -46,7 +46,8 @@ export default async function scrapeProjectGutenbergPage() {
     await import(`./${configDir}/${configFile}`)
   ).config;
 
-  const { url, sectionHeadingSelector, contentContainerSelector } = config;
+  const { url, sectionHeadingSelector, contentContainerSelector, ignore } =
+    config;
 
   const pageResponse = await fetch(url);
 
@@ -83,6 +84,8 @@ export default async function scrapeProjectGutenbergPage() {
       const mostRecentSection = sections.at(-1);
 
       if (!mostRecentSection) {
+        continue;
+      } else if (ignore && child.matches(ignore)) {
         continue;
       }
 
