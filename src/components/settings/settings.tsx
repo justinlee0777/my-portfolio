@@ -1,14 +1,11 @@
 import styles from './settings.module.scss';
 
-import Link from 'next/link';
-
 import { useContext, type JSX } from 'react';
 import createLinkElement from '../../config/create-link-element.function';
 import SettingsContext from '../../contexts/settings/settings.context';
 import Font from '../../models/font.enum';
 import SlideAnimation from '../../models/slide-animation.enum';
 import Theme from '../../models/theme.enum';
-import { locales } from '../../page-utils/locales.config';
 import RadioGroupOption from '../radiogroup/radio-group-option.interface';
 import RadioGroup from '../radiogroup/radiogroup';
 import Switch from '../switch/switch';
@@ -47,12 +44,14 @@ export default function Settings({
       selectedValue: theme,
       onChange: onThemeChange,
     },
+    /*
     {
       enumeratedType: SlideAnimation,
       legend: 'Animation',
       selectedValue: animation,
       onChange: onAnimationChange,
     },
+    */
   ];
 
   const selects = sections.map(
@@ -101,27 +100,6 @@ export default function Settings({
       <h3>{config.textContent.subheader}</h3>
       <div className={styles.settingsContainer}>
         <p>{config.textContent.prompt}</p>
-        <div className={styles.localizedSites}>
-          <label className={styles.localizedSitesHeader}>Language</label>
-          {locales.map((locale) => (
-            <Link
-              className={styles.localizedSite}
-              key={locale.code}
-              href={`/${locale.code}${route}`}
-              prefetch={false}
-            >
-              {locale.displayName}
-            </Link>
-          ))}
-          <p
-            className={styles.languageExplanation}
-            dangerouslySetInnerHTML={{
-              __html: createLinkElement(
-                config.textContent.explanation.translation
-              ),
-            }}
-          />
-        </div>
         {selects}
         <p className={styles.developerMode}>
           {config.textContent.explanation.developerMode}

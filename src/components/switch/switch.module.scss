@@ -9,15 +9,15 @@ $switchHeight: 14px;
   height: $switchHeight;
   position: relative;
   transition: 0.333s filter;
-  width: $switchHeight * 5 / 2;
+  width: calc($switchHeight * 5 / 2);
 
   &Knob {
     border-radius: 50%;
     border-style: solid;
     box-sizing: border-box;
-    height: $switchHeight * 3 / 2;
-    min-width: $switchHeight * 3 / 2;
-    transform: translateX(-($switchHeight * 3 / 2));
+    height: calc($switchHeight * 3 / 2);
+    min-width: calc($switchHeight * 3 / 2);
+    transform: translateX(calc($switchHeight * -3 / 2));
     transition: transform 0.333s;
   }
 }

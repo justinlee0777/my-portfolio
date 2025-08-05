@@ -8,7 +8,7 @@ $animationTime: 1s;
   padding: 8px;
   transition: $animationTime width ease-in, $animationTime max-height ease-in,
     $animationTime box-shadow, $animationTime ease-in background-color;
-  width: $iconWidth + $iconMargin;
+  width: calc($iconWidth + $iconMargin);
 
   & &Triangle {
     border-color: transparent currentColor transparent transparent !important;
@@ -22,7 +22,7 @@ $animationTime: 1s;
 
 @media (max-width: 800px) {
   .menu {
-    max-height: $iconWidth + $iconMargin;
+    max-height: calc($iconWidth + $iconMargin);
 
     &,
     &.menuOpened {

@@ -1,6 +1,8 @@
 $backgroundColorAnimation: 1s background-color ease-in;
 
 .page {
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
   position: relative;
   transition: 1s color, $backgroundColorAnimation;
@@ -17,6 +19,7 @@ $backgroundColorAnimation: 1s background-color ease-in;
 
 .pageContent {
   display: flex;
+  flex: 1;
   flex-direction: row;
   overflow-x: hidden;
   position: relative;

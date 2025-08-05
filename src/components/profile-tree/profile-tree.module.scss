@@ -1,0 +1,58 @@
+.profileTreeContainer {
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto;
+  max-width: 80vw;
+}
+
+.profileTreeView {
+  border: 1px solid black;
+  box-sizing: border-box;
+  flex: 4;
+  height: 60vh;
+  margin: auto;
+  overflow: auto;
+}
+
+.profileTreeNode {
+  height: 1em;
+  width: 1em;
+}
+
+.customRootNode {
+  max-width: 50vw;
+}
+
+.customTreeNode:not(.customTitleNode) {
+  cursor: pointer;
+}
+
+.customTitleNode {
+  background-color: black !important;
+  color: white !important;
+  text-align: center;
+}
+
+.profileTreeTooltip {
+  background-color: #0f0f0f !important;
+}
+
+.profileTreePane {
+  flex: 1;
+  line-height: 1.5;
+  min-width: 0;
+  padding: 1em;
+  text-indent: 1em;
+}
+
+.treeImage {
+  border-radius: 50%;
+  display: block;
+  height: 10em;
+  margin: auto;
+  width: 10em;
+}
+
+.nodeLabel {
+  text-align: center;
+}
