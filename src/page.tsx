@@ -5,8 +5,8 @@ import Head from 'next/head';
 import { useEffect, useMemo, useState, type JSX } from 'react';
 
 import LoadingScreen from './components/loading-screen/loading-screen';
+import NavigationPane from './components/navigation-pane/navigation-pane';
 import Navigation from './components/navigation/navigation';
-import OpenSettings from './components/open-settings/open-settings';
 import Slide from './components/slide/slide';
 import UnitTestCheck from './components/unit-test-check/unit-test-check';
 import {
@@ -131,7 +131,7 @@ export default function Page({
 
   if ('openSettingsConfig' in pageProps) {
     settingsIcon = (
-      <OpenSettings
+      <NavigationPane
         className={styles.settingsMenu}
         config={pageProps.openSettingsConfig!}
         route={pageProps.route}

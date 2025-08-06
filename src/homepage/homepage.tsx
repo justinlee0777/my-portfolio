@@ -17,8 +17,6 @@ import HomepageProps from './models/homepage-props.interface';
 
 export default function HomePage({
   homepageConfig,
-  generatedProfilePictureUrl,
-  profilePicturePrompt,
 }: HomepageProps): JSX.Element {
   const { animation } = useContext(SettingsContext);
   const [animatedSlides, setAnimatedSlides] = useState<AnimatedSlides>({});
@@ -39,8 +37,6 @@ export default function HomePage({
     <DeveloperDescription
       key="developer-description"
       config={homepageConfig.developerDescription}
-      generatedProfilePictureUrl={generatedProfilePictureUrl}
-      profilePicturePrompt={profilePicturePrompt}
     />,
     <Settings key="settings" config={homepageConfig.settings} />,
     <Projects key="projects" {...homepageConfig.projects} />,

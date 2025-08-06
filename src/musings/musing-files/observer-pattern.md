@@ -108,7 +108,7 @@ class HungrySubscriber implements Subscriber {
 }
 
 const observer = new TastyObserver();
-observer.add(new HungryObserver());
+observer.add(new HungrySubscriber());
 
 observer.notify('tasty sandwich');
 observer.notify('nasty pasta');

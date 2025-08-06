@@ -12,6 +12,7 @@ export default function getPageConfig(locale: string): PageConfig {
       developerMode: false,
     },
     navigationLinks: [
+      /*
       {
         displayName: 'Random of the Day',
         url: `/${locale}/random-of-the-day`,
@@ -20,10 +21,12 @@ export default function getPageConfig(locale: string): PageConfig {
         displayName: 'Prospero',
         url: '/prospero',
       },
+      */
       {
         displayName: 'Musings',
         url: '/musings',
       },
+      /*
       {
         displayName: 'Buzzword Bingo',
         url: `/${locale}/buzzword-bingo`,
@@ -40,6 +43,7 @@ export default function getPageConfig(locale: string): PageConfig {
         displayName: 'Picture-in-Picture JS',
         url: '/picture-in-picture-js',
       },
+      */
     ],
   };
 }

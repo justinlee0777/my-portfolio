@@ -1,3 +1,4 @@
+import { defaultProjectsConfig } from '../config/default-projects.config';
 import { HomepageConfig } from './homepage.config';
 
 export const homepageConfig: HomepageConfig = {
@@ -79,45 +80,6 @@ export const homepageConfig: HomepageConfig = {
       `In hindsight, and to my misfortune, I have not preserved any of the frontend projects I have developed professionally. Perhaps one day with considerable downtime in my hands I will recreate them for posterity.`,
       `Most of my GitHub projects are written in Vanilla JS, so as to be framework-agnostic.`,
     ],
-    entries: [
-      {
-        header: 'Prospero',
-        thumbnail: '/projects/prospero.gif',
-        description: 'Render text on the web as a book.',
-        url: '/prospero',
-      },
-      {
-        header: 'Random of the Day',
-        thumbnail: '/projects/random-of-the-day.png',
-        description: 'Random neat thing of the day.',
-        url: '/en/random-of-the-day',
-      },
-      {
-        header: 'Buzzword Bingo',
-        thumbnail: '/projects/buzzword-bingo.png',
-        description:
-          'Library that takes in bingo cells and renders them as a bingosheet.',
-        url: '/en/buzzword-bingo',
-      },
-      {
-        header: 'Picture-in-Picture JS',
-        thumbnail: '/projects/picture-in-picture-js.gif',
-        description: 'Render media on a webpage in a draggable overlay.',
-        url: '/picture-in-picture-js',
-      },
-      {
-        header: 'Elden Ring Bot',
-        thumbnail: '/projects/elden-ring-chatbot.gif',
-        description:
-          'Extremely silly bot that pulls data about Elden Ring from a database and answers your queries.',
-        url: '/elden-ring',
-      },
-      {
-        header: 'Museum',
-        thumbnail: '/projects/museum.gif',
-        description: 'Renders a museum on the webpage. Another silly idea.',
-        url: '/museum',
-      },
-    ],
+    entries: defaultProjectsConfig,
   },
 };

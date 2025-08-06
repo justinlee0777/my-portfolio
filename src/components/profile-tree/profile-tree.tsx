@@ -168,7 +168,9 @@ const treeNode: CustomTreeNode = {
 };
 
 export function ProfileTree(): JSX.Element {
-  const [activatedNodeId, setActivatedNodeId] = useState<NodeId | undefined>();
+  const [activatedNodeId, setActivatedNodeId] = useState<NodeId>([
+    { position: 0 },
+  ]);
 
   const tooltipId = useMemo(() => `node-tooltip`, []);
 
@@ -191,7 +193,7 @@ export function ProfileTree(): JSX.Element {
           root={treeNode}
           classes={{
             node: (nodeId, node) =>
-              clsx('customTreeNode', {
+              clsx(styles.customTreeNode, {
                 [styles.customRootNode]: nodeId.length === 1,
                 [styles.customTitleNode]: !Boolean(node.text),
               }),

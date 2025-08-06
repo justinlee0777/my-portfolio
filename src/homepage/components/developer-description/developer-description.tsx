@@ -10,8 +10,6 @@ export default function DeveloperDescription({
   config,
 }: {
   config: DeveloperDescriptionConfig;
-  generatedProfilePictureUrl: string;
-  profilePicturePrompt: string;
 }): JSX.Element {
   return (
     <>

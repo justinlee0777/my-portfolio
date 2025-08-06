@@ -1,6 +1,6 @@
-import getOpenSettingsTranslationKeys from '../components/open-settings/constants/translation-keys.const';
-import OpenSettingsConfig from '../components/open-settings/models/open-settings-config.interface';
-import { defaultOpenSettingsConfig } from '../config/default-open-settings.config';
+import getOpenSettingsTranslationKeys from '../components/navigation-pane/constants/translation-keys.const';
+import NavigationPaneConfig from '../components/navigation-pane/models/navigation-pane-config.interface';
+import { defaultNavigationPaneConfig } from '../config/default-open-settings.config';
 import getPageConfig from '../config/default-page.config';
 import { UnitTestResults } from '../contexts/unit-test/unit-test-results.model';
 import PageConfig from '../models/page-config.model';
@@ -21,7 +21,7 @@ export interface BasePageProps {
   apiUrl: string;
 
   navbar?: NavbarConfig;
-  openSettingsConfig?: OpenSettingsConfig;
+  openSettingsConfig?: NavigationPaneConfig;
 }
 
 export async function getBasePageProps(
@@ -38,7 +38,7 @@ export async function getBasePageProps(
   };
 
   if (showSettings) {
-    let openSettingsConfig = defaultOpenSettingsConfig;
+    let openSettingsConfig = defaultNavigationPaneConfig;
 
     if (locale !== 'en') {
       openSettingsConfig = await translateObject(

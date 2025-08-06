@@ -1,6 +1,6 @@
-import OpenSettingsConfig from '../components/open-settings/models/open-settings-config.interface';
+import NavigationPaneConfig from '../components/navigation-pane/models/navigation-pane-config.interface';
 
-export const defaultOpenSettingsConfig: OpenSettingsConfig = {
+export const defaultNavigationPaneConfig: NavigationPaneConfig = {
   settings: {
     textContent: {
       header: '',
