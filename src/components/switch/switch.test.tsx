@@ -28,7 +28,7 @@ describe('<Switch/>', () => {
   });
 
   test('toggles the component state', () => {
-    const switchElement = renderResult.queryByRole('switch');
+    const switchElement = renderResult.queryByRole('switch')!;
 
     fireEvent.click(switchElement);
 

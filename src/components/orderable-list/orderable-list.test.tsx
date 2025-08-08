@@ -55,7 +55,7 @@ describe('<OrderableList/>', () => {
 
     // Test arrows
 
-    const fooMoveUp = renderResult.queryByLabelText('Move "foo" section up');
+    const fooMoveUp = renderResult.queryByLabelText('Move "foo" section up')!;
     expect(fooMoveUp.className).toBe('arrow arrowHidden');
 
     const fooMoveDown = renderResult.queryByLabelText(
@@ -76,20 +76,20 @@ describe('<OrderableList/>', () => {
 
     const bazMoveDown = renderResult.queryByLabelText(
       'Move "baz" section down'
-    );
+    )!;
     expect(bazMoveDown.className).toBe('arrow arrowHidden');
   });
 
   test('swaps elements', () => {
     const fooMoveDown = renderResult.queryByLabelText(
       'Move "foo" section down'
-    );
+    )!;
 
     fireEvent.click(fooMoveDown);
 
     expect(onReorder.mock.calls[0]).toEqual([['bar', 'foo', 'baz']]);
 
-    const bazMoveUp = renderResult.queryByLabelText('Move "baz" section up');
+    const bazMoveUp = renderResult.queryByLabelText('Move "baz" section up')!;
 
     fireEvent.click(bazMoveUp);
 

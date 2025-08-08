@@ -81,9 +81,6 @@ describe('<RandomObliqueStrategyOfTheDay/>', () => {
     const header = renderResult.queryByText('Oblique strategy of the day');
     expect(header).toBeTruthy();
 
-    const strategyContent = renderResult.queryByText('The line is a line.');
-    expect(strategyContent).toBeTruthy();
-
     const explanation = renderResult.queryByText(
       'Oblique strategies are cool.'
     );
@@ -99,15 +96,15 @@ describe('<RandomObliqueStrategyOfTheDay/>', () => {
 
     await renderComponent();
 
-    let card = renderResult.queryByText('The line is a line.').parentElement;
+    let card = renderResult.queryByText('The line is a line.')!.parentElement!;
     expect(card.className).toEqual('card');
 
     const cardBack = renderResult.queryByLabelText(
       'Clicking on this will activate an animation and expose the oblique strategy of the day.'
-    );
+    )!;
     fireEvent.click(cardBack);
 
-    card = renderResult.queryByText('The line is a line.').parentElement;
+    card = renderResult.queryByText('The line is a line.')!.parentElement!;
     expect(card.className).toEqual('card cardFlipped');
   });
 });

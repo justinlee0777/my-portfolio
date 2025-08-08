@@ -70,9 +70,11 @@ describe('<RandomFactOfTheDay/>', () => {
 
     await renderComponent();
 
-    const header = renderResult.queryByRole('heading');
+    const header = renderResult.queryByRole('heading')!;
     expect(header).toBeTruthy();
     expect(header.textContent).toBe('Fact of the day');
+
+    await new Promise(process.nextTick);
 
     const fact = renderResult.queryByText(
       'According to a 2014 study, the melting properties of mozzarella make it the best cheese for topping pizza.'

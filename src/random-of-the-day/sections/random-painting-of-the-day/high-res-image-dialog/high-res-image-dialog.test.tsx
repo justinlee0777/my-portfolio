@@ -37,7 +37,7 @@ describe('<HighResImageDialog/>', () => {
   });
 
   test('closes the dialog', () => {
-    const button = renderResult.queryByText(String.fromCharCode(10799));
+    const button = renderResult.queryByText(String.fromCharCode(10799))!;
 
     fireEvent.click(button);
 

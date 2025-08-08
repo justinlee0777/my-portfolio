@@ -9,7 +9,7 @@ jest.mock('../src/components/navigation/navigation', () => () => (
   <div>Navigation here</div>
 ));
 
-jest.mock('../src/components/open-settings/open-settings', () => () => {
+jest.mock('../src/components/navigation-pane/navigation-pane', () => () => {
   return <div>Open Settings</div>;
 });
 
@@ -128,7 +128,7 @@ describe('<App/>', () => {
 
       const renderResult = await act(render);
 
-      const containerElement = renderResult.queryByTestId('page-container');
+      const containerElement = renderResult.queryByTestId('page-container')!;
 
       expect(containerElement.classList.toString()).toBe(
         'page font-ComicSansMS theme-Ulysses animation-Swoopy'
@@ -161,8 +161,6 @@ describe('<App/>', () => {
             route: '',
             pageConfig,
             homepageConfig: {} as any,
-            generatedProfilePictureUrl: '',
-            profilePicturePrompt: '',
             unitTestResult,
             apiUrl: 'http://api.example.com',
           }}

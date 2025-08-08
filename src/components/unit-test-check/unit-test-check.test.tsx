@@ -77,7 +77,7 @@ describe('UnitTestCheck', () => {
 
     const checkmark = screen.queryByRole('button', {
       name: 'Click to see the unit test results for this component.',
-    });
+    })!;
     fireEvent.click(checkmark);
 
     const tooltip = screen.queryByRole('tooltip');

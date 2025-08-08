@@ -45,19 +45,13 @@ describe('<DeveloperDescription/>', () => {
   });
 
   test('renders', async () => {
-    render(
-      <DeveloperDescription
-        config={config}
-        generatedProfilePictureUrl={generatedProfilePictureUrl}
-        profilePicturePrompt={profilePicturePrompt}
-      />
-    );
+    render(<DeveloperDescription config={config} />);
 
     const profileName = await waitFor(() => screen.findByText('Bob Test'));
     expect(profileName).toBeTruthy();
     expect(profileName.tagName).toBe('H1');
 
-    const profilePrompt = screen.queryByText('Who is Bob Test?');
+    const profilePrompt = screen.queryByText('Who is Bob Test?')!;
     expect(profilePrompt).toBeTruthy();
     expect(profilePrompt.tagName).toBe('H2');
 
@@ -77,13 +71,7 @@ describe('<DeveloperDescription/>', () => {
   });
 
   test('renders an error message when the image is invalid', async () => {
-    render(
-      <DeveloperDescription
-        config={config}
-        generatedProfilePictureUrl="/foo"
-        profilePicturePrompt={profilePicturePrompt}
-      />
-    );
+    render(<DeveloperDescription config={config} />);
 
     fireEvent.error(screen.getByAltText('Bob'));
 

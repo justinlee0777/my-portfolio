@@ -141,7 +141,7 @@ describe('<CoverLetterPage/>', () => {
       )
     );
 
-    let header = renderResult.container.querySelector('h1');
+    let header = renderResult.container.querySelector('h1')!;
     expect(header).toBeTruthy();
     expect(header.textContent).toBe(' ');
 
@@ -150,24 +150,24 @@ describe('<CoverLetterPage/>', () => {
       jest.advanceTimersByTime('Hello'.length * renderingTimeInMS)
     );
 
-    header = renderResult.container.querySelector('h1');
+    header = renderResult.container.querySelector('h1')!;
     expect(header.textContent).toBe('Hello ');
 
     await act(async () =>
       jest.advanceTimersByTime((", I'm ".length + 1) * renderingTimeInMS)
     );
 
-    header = renderResult.container.querySelector('h1');
+    header = renderResult.container.querySelector('h1')!;
     expect(header.textContent).toBe("Hello, I'm  ");
 
     await act(async () =>
       jest.advanceTimersByTime('Justin'.length * renderingTimeInMS)
     );
 
-    header = renderResult.container.querySelector('h1');
+    header = renderResult.container.querySelector('h1')!;
     expect(header.textContent).toBe("Hello, I'm Justin ");
 
-    let renderedSpan = header.querySelector('#justin-lee');
+    let renderedSpan = header.querySelector('#justin-lee')!;
     expect(renderedSpan).toBeTruthy();
     expect(renderedSpan.textContent).toBe('Justin');
 
@@ -184,10 +184,10 @@ describe('<CoverLetterPage/>', () => {
       jest.advanceTimersByTime('.'.length * renderingTimeInMS)
     );
 
-    header = renderResult.container.querySelector('h1');
+    header = renderResult.container.querySelector('h1')!;
     expect(header.textContent).toBe("Hello, I'm Justin Lee. ");
 
-    renderedSpan = header.querySelector('#justin-lee');
+    renderedSpan = header.querySelector('#justin-lee')!;
     expect(renderedSpan.textContent).toBe('Justin Lee.');
   });
 });

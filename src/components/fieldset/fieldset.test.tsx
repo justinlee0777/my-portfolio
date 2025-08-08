@@ -36,7 +36,7 @@ describe('<FieldSet/>', () => {
   test('renders', async () => {
     const legend = await waitFor(() => screen.findByText('Test legend'));
     expect(legend).toBeTruthy();
-    expect(legend.parentElement.tagName).toBe('FIELDSET');
+    expect(legend.parentElement!.tagName).toBe('FIELDSET');
 
     const fooOption = screen.queryByLabelText('Foo');
     expect(fooOption).toBeFalsy();
@@ -49,7 +49,7 @@ describe('<FieldSet/>', () => {
   });
 
   test('expands to show options', async () => {
-    fireEvent.click(screen.queryByText('+'));
+    fireEvent.click(screen.queryByText('+')!);
 
     const fooOption: HTMLInputElement = await waitFor(() =>
       screen.findByLabelText('Foo')

@@ -78,7 +78,7 @@ describe('<RandomPoemOfTheDay/>', () => {
     const translatorCredit = renderResult.queryByText('Translated by Me');
     expect(translatorCredit).toBeTruthy();
 
-    const section = renderResult.container.querySelector('section');
+    const section = renderResult.container.querySelector('section')!;
     const sectionChildren = section.children;
     expect(sectionChildren[4].textContent).toBe('Bar');
     expect(sectionChildren[5].textContent).toBe('');
@@ -106,7 +106,7 @@ describe('<RandomPoemOfTheDay/>', () => {
     const translatorCredit = renderResult.queryByText('Translated by Me');
     expect(translatorCredit).toBeTruthy();
 
-    const section = renderResult.container.querySelector('section');
+    const section = renderResult.container.querySelector('section')!;
     const sectionChildren = section.children;
     expect(sectionChildren[4].textContent).toBe('The foo was fooing.');
     expect(sectionChildren[5].textContent).toBe('The bar was barring.');

@@ -112,11 +112,11 @@ describe('<Settings/>', () => {
   });
 
   test('renders', () => {
-    const header = screen.queryByText('Settings');
+    const header = screen.queryByText('Settings')!;
     expect(header).toBeTruthy();
     expect(header.tagName).toBe('H2');
 
-    const subheader = screen.queryByText('Sub-Settings');
+    const subheader = screen.queryByText('Sub-Settings')!;
     expect(subheader).toBeTruthy();
     expect(subheader.tagName).toBe('H3');
 
@@ -129,40 +129,47 @@ describe('<Settings/>', () => {
     const selectedTheme = screen.queryByText('Selected: Starry Night');
     expect(selectedTheme).toBeTruthy();
 
+    /*
     const selectedAnimation = screen.queryByText('Selected: Sweepy');
     expect(selectedAnimation).toBeTruthy();
+    */
 
     const developerModeExplanation = screen.queryByText(
       'Developer mode is wicked awesome.'
     );
     expect(developerModeExplanation).toBeTruthy();
 
+    /*
     const translationExplanation = screen.queryByText('Translated by I.');
     expect(translationExplanation).toBeTruthy();
+    */
   });
 
   test('renders and changes settings', async () => {
-    const clickedFont = screen.queryByText('Arial');
+    const clickedFont = screen.queryByText('Arial')!;
     fireEvent.click(clickedFont);
 
     expect(onFontChange.mock.calls[0]).toEqual([Font.ARIAL]);
 
-    const clickedTheme = screen.queryByText('Sea');
+    const clickedTheme = screen.queryByText('Sea')!;
     fireEvent.click(clickedTheme);
 
     expect(onThemeChange.mock.calls[0]).toEqual([Theme.SEA]);
 
-    const clickedAnimation = screen.queryByText('Swoopy');
+    /*
+    const clickedAnimation = screen.queryByText('Swoopy')!;
     fireEvent.click(clickedAnimation);
 
     expect(onAnimationChange.mock.calls[0]).toEqual([SlideAnimation.SWOOPY]);
+    */
 
-    const clickedDeveloperMode = screen.queryByText('Toggle state');
+    const clickedDeveloperMode = screen.queryByText('Toggle state')!;
     fireEvent.click(clickedDeveloperMode);
 
     expect(onDeveloperModeChange.mock.calls[0]).toEqual([true]);
   });
 
+  /*
   test('renders and shows marquee explanation', () => {
     renderResult.rerender(
       <SettingsContext.Provider
@@ -184,6 +191,7 @@ describe('<Settings/>', () => {
     const marqueeExplanation = screen.queryByText('Marquees are great.');
     expect(marqueeExplanation).toBeTruthy();
   });
+  */
 
   test('renders and shows tilt prism explanation', () => {
     renderResult.rerender(

@@ -73,7 +73,7 @@ describe('<RadioGroup/>', () => {
   });
 
   test('selects one', async () => {
-    fireEvent.click(screen.queryByLabelText('Baz'));
+    fireEvent.click(screen.queryByLabelText('Baz')!);
 
     expect(onSelect.mock.calls[0]).toEqual(['baz']);
   });
