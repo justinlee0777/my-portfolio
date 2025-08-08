@@ -43,3 +43,14 @@
     max-height: 250px;
   }
 }
+
+@media (min-width: 1200px) {
+  .projectsContainer {
+    width: 83%;
+  }
+
+  .projects {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

@@ -1,0 +1,12 @@
+.ai-ui__chatbot {
+  .ai-ui__userMessage,
+  .ai-ui__queryList > button {
+    background-color: var(--background-color) !important;
+  }
+
+  .ai-ui__userMessage {
+    border-style: solid;
+    border-width: 1px;
+    color: var(--color);
+  }
+}

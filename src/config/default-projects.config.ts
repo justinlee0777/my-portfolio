@@ -27,6 +27,12 @@ export const defaultProjectsConfig: Array<ProjectConfig> = [
     url: '/picture-in-picture-js',
   },
   {
+    header: 'Chatbot UI Ideas',
+    description: `User interfaces adapted for specific chatbot needs.`,
+    url: '/chatbot-ideas',
+    thumbnail: '/projects/chatbot-ideas.gif',
+  },
+  {
     header: 'Elden Ring Bot',
     thumbnail: '/projects/elden-ring-chatbot.gif',
     description:

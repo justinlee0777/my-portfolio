@@ -2,7 +2,7 @@ import styles from './museum.module.scss';
 
 import { Museum, Position } from 'museum-html';
 
-import { throttle } from 'lodash-es';
+import throttle from 'lodash-es/throttle';
 import { useEffect, useRef } from 'react';
 import Slide from '../components/slide/slide';
 import { MuseumPartial, TestExitPoint } from './museum-partial.model';

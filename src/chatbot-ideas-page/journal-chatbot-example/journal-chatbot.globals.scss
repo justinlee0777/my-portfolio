@@ -1,0 +1,17 @@
+.ai-ui__journalPage {
+  background-color: var(--background-color) !important;
+  border-color: var(--color) !important;
+
+  border-style: solid;
+  border-width: 1px;
+  height: 80vh;
+
+  .ai-ui__userMessage {
+    background-color: transparent;
+    max-width: none;
+  }
+
+  .ai-ui__sidePane {
+    background-color: var(--background-color) !important;
+  }
+}

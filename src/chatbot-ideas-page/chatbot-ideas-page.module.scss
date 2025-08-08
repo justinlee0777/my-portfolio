@@ -1,0 +1,46 @@
+.slide {
+  flex: 1;
+  justify-content: flex-start;
+  overflow-x: hidden;
+  padding: 18px;
+  width: 80%;
+}
+
+.chatbotIdeasPageContainer {
+  line-height: 1.5;
+  width: 66%;
+}
+
+@media (max-width: 800px) {
+  .chatbotIdeasPageContainer {
+    width: 83%;
+  }
+}
+
+.tabs {
+  width: 100%;
+}
+
+.tabList {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  padding: 0;
+
+  > * {
+    border-style: solid;
+    border-width: 1px;
+    cursor: pointer;
+    flex: 1;
+    padding: 0.5em;
+
+    &:nth-of-type(n + 2) {
+      border-left-width: 0;
+    }
+
+    &:hover,
+    &[aria-selected='true'] {
+      filter: brightness(65%);
+    }
+  }
+}

@@ -145,6 +145,11 @@ $backgroundColorAnimation: 1s background-color ease-in;
   background-color: $backgroundColor;
   color: $color;
 
+  & {
+    --background-color: #{$backgroundColor};
+    --color: #{$color};
+  }
+
   button,
   td,
   input,

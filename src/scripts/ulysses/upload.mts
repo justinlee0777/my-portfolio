@@ -3,7 +3,7 @@ import type {
   TableOfContentsSection,
 } from 'prospero/types';
 
-import { capitalize } from 'lodash-es';
+import capitalize from 'lodash-es/capitalize';
 import {
   desktopStyles,
   mobileStyles,

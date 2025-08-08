@@ -99,7 +99,8 @@ $animationTime: 1s;
   flex-direction: column;
   padding: 1em;
 
-  button {
+  > button,
+  > a > button {
     border: none;
     padding: 1em;
     width: 100%;

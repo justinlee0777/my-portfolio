@@ -1,7 +1,7 @@
 import { readdir } from 'fs/promises';
 import { JSDOM } from 'jsdom';
-import { chunk } from 'lodash-es';
 import capitalize from 'lodash-es/capitalize';
+import chunk from 'lodash-es/chunk';
 import {
   IndentTransformer,
   NewlineTransformer,
