@@ -1,4 +1,4 @@
-import OpenSettingsConfig from './models/open-settings-config.interface';
+import OpenSettingsConfig from './models/navigation-pane-config.interface';
 
 export default interface OpenSettingsProps {
   config: OpenSettingsConfig;

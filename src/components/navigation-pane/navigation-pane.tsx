@@ -34,7 +34,7 @@ export default function NavigationPane({
           <>
             {defaultProjectsConfig.map(({ header, url }) => {
               return (
-                <a href={url}>
+                <a key={url} href={url}>
                   <button>{header}</button>
                 </a>
               );
@@ -49,7 +49,7 @@ export default function NavigationPane({
         ariaLabel: `Open up the Settings to configure the website's appearance.`,
       },
     ],
-    []
+    [config.settings, route]
   );
 
   const menuClassName = classNames(styles.menu, className, {

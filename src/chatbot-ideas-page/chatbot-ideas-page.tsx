@@ -15,16 +15,16 @@ export function ChatbotIdeasPage(): JSX.Element {
       <div className={styles.chatbotIdeasPageContainer}>
         <h2>Chatbot UI ideas</h2>
         <p>
-          Everyone and their mother has opinions about chatbots. I don't see
-          them as being much different from search engines, except, whereas a
-          search engine will present to you an impartial set of links that 1.
+          Everyone and their mother has opinions about chatbots. I don&apos;t
+          see them as being much different from search engines, except, whereas
+          a search engine will present to you an impartial set of links that 1.
           contradict one another and 2. contain your query and a whole bunch of
           other information, the chatbot will make some attempt to resolve the
           contradictions (maybe arbitrarily, but the internet has always been
           somewhat arbitrary) and provide you the direct response to your query.
-          Ergo, I don't have to spend all my time parsing through information
-          and spend more of my time intaking information; I can resolve the
-          chatbot's BS on my own time. Technology!
+          Ergo, I don&apos;t have to spend all my time parsing through
+          information and spend more of my time intaking information; I can
+          resolve the chatbot&apos;s BS on my own time. Technology!
         </p>
         <p>
           In the course of using chatbots I found the vertical design to
@@ -35,8 +35,8 @@ export function ChatbotIdeasPage(): JSX.Element {
 
         <h3>Tree</h3>
         <p>
-          Very quickly I found the chatbot's vertical design to be limiting for
-          any technical interrogation. Sometimes the response to a question
+          Very quickly I found the chatbot&apos;s vertical design to be limiting
+          for any technical interrogation. Sometimes the response to a question
           inspired more questions, and in the course of asking questions the bot
           would make assumptions about my queries when, in fact, I am just
           asking questions and putting out hypothetical scenarios.
@@ -59,11 +59,11 @@ export function ChatbotIdeasPage(): JSX.Element {
         <h3>Journal</h3>
         <p>
           In developing the ideas of psychotherapy, Freud demonstrates very
-          early that the patient's cognitive distress is not like a disease,
-          which can be palliated with medicine. A patient has to "cure"
-          themselves - they must have a revelation concerning their own
-          thoughts; the therapist is merely an aide to help the patient look at
-          their own way of thinking in an external sense.
+          early that the patient&apos;s cognitive distress is not like a
+          disease, which can be palliated with medicine. A patient has to
+          &quot;cure&quot; themselves - they must have a revelation concerning
+          their own thoughts; the therapist is merely an aide to help the
+          patient look at their own way of thinking in an external sense.
         </p>
         <p>
           I began recording a dream journal and found a chatbot was quite useful
@@ -89,7 +89,7 @@ export function ChatbotIdeasPage(): JSX.Element {
 
         <h3>Form</h3>
         <p>
-          This is an odd one: a friend of mine wanted to build a New Year's
+          This is an odd one: a friend of mine wanted to build a New Year&apos;s
           Resolution app. While brainstorming for ways to make it work, I
           developed this prototype to simplify the user shaping their needs into
           a prompt.
@@ -99,8 +99,8 @@ export function ChatbotIdeasPage(): JSX.Element {
           whatever.
         </p>
         <p>
-          Honestly, I don't know if this is actually useful, but this is within
-          the lens of myself.
+          Honestly, I don&apos;t know if this is actually useful, but this is
+          within the lens of myself.
         </p>
         <FormChatbotExample />
 
