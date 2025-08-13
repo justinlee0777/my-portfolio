@@ -11,6 +11,10 @@ export default interface ProsperoConfig {
   };
   links: Array<{
     url: string;
+    author: {
+      firstName: string;
+      lastName: string;
+    };
     text: string;
   }>;
 }

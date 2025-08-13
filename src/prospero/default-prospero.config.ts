@@ -20,20 +20,36 @@ const defaultProsperoConfig: ProsperoConfig = {
   },
   links: [
     {
-      text: 'The Tempest by William Shakespeare',
+      text: 'The Tempest',
       url: '/prospero',
+      author: {
+        firstName: 'William',
+        lastName: 'Shakespeare',
+      },
     },
     {
-      text: 'On The Cruelty Of Really Teaching Computing Science by Edsger Dijkstra',
+      text: 'On The Cruelty Of Really Teaching Computing Science',
       url: '/prospero/on-the-cruelty-of-really-teaching-computing-science',
+      author: {
+        firstName: 'Edsger',
+        lastName: 'Dijkstra',
+      },
     },
     {
-      text: 'Ulysses by James Joyce',
+      text: 'Ulysses',
       url: '/prospero/ulysses',
+      author: {
+        firstName: 'James',
+        lastName: 'Joyce',
+      },
     },
     {
-      text: 'A Christmas Carol by Charles Dickens',
+      text: 'A Christmas Carol',
       url: '/prospero/a-christmas-carol',
+      author: {
+        firstName: 'Charles',
+        lastName: 'Dickens',
+      },
     },
   ],
 };

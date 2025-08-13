@@ -4,6 +4,7 @@ import Head from 'next/head';
 import { BooksElement } from 'prospero/types';
 import { useEffect, useRef, type JSX } from 'react';
 
+import { Bookshelf } from '../components/bookshelf/bookshelf';
 import Slide from '../components/slide/slide';
 import createLinkElement from '../config/create-link-element.function';
 import loadFont from '../config/load-font.function';
@@ -50,6 +51,16 @@ export default function ProsperoPage({
       </Head>
       <Slide className={styles.prosperoPage}>
         <>
+          <Bookshelf
+            className={styles.bookshelf}
+            books={config.links.map((link) => {
+              return {
+                author: link.author,
+                title: link.text,
+                url: link.url,
+              };
+            })}
+          />
           <h1 className={styles.prosperoHeader}>{config.textContent.header}</h1>
           <h2 className={styles.bookTitle}>{bookTitle}</h2>
           <h3 className={styles.bookAuthor}>{bookAuthor}</h3>
