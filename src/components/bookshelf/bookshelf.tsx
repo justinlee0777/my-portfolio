@@ -35,7 +35,7 @@ export function Bookshelf({ className, books }: Props): JSX.Element {
       <div className={clsx(styles.bookshelfEdge, styles.bookshelfBack)}>
         {books.sort(bookSort).map((book) => {
           return (
-            <a className={styles.book} href={book.url}>
+            <a key={book.url} className={styles.book} href={book.url}>
               <h4 className={styles.bookTitle}>{book.title}</h4>
               <p className={styles.bookAuthor}>
                 {book.author.lastName}, {book.author.firstName}

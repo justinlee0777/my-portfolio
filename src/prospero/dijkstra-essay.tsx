@@ -12,12 +12,12 @@ import { FlexibleBookComponent } from 'prospero/web/flexible-book';
 import { IndentTransformer } from 'prospero/web/transformers';
 
 import { useEffect, useMemo, useState, type JSX } from 'react';
-import { DijkstraEssayPageProps } from '../page-utils/prospero/get-dijkstra-essay-props.function';
+import { ProsperoPageProps } from '../page-utils/prospero/get-base-props.function';
 import ProsperoPage from './base-page';
 
 export default function DijkstraEssayPage({
   config,
-}: DijkstraEssayPageProps): JSX.Element {
+}: ProsperoPageProps): JSX.Element {
   const [text, setText] = useState<string | null>(null);
 
   useEffect(() => {

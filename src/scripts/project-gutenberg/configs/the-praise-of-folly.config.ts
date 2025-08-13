@@ -5,4 +5,6 @@ export const config: GutenbergScrapeConfig = {
   sectionHeadingSelector: '.t3',
   contentContainerSelector: 'body',
   ignore: 'h3',
+  transform: (textContent) =>
+    textContent.replaceAll(/\n/g, ' ').replaceAll(/\s{2,}/g, ' '),
 };

@@ -46,8 +46,13 @@ export default async function scrapeProjectGutenbergPage() {
     await import(`./${configDir}/${configFile}`)
   ).config;
 
-  const { url, sectionHeadingSelector, contentContainerSelector, ignore } =
-    config;
+  const {
+    url,
+    sectionHeadingSelector,
+    contentContainerSelector,
+    ignore,
+    transform = (textContent) => textContent,
+  } = config;
 
   const pageResponse = await fetch(url);
 
@@ -91,12 +96,7 @@ export default async function scrapeProjectGutenbergPage() {
 
       const { content } = mostRecentSection;
 
-      content.push(
-        (child.textContent ?? '')
-          .trim()
-          .replaceAll(/\n/g, '')
-          .replaceAll(/\s{2,}/g, ' ')
-      );
+      content.push(transform((child.textContent ?? '').trim()));
     }
   }
 

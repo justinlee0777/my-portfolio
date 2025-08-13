@@ -5,8 +5,10 @@ import {
 
 export interface TempestPageProps extends ProsperoPageProps {}
 
-export async function getStaticProps(): Promise<{ props: TempestPageProps }> {
-  const props = await getBaseProsperoProps();
+export async function getStaticProps(
+  args
+): Promise<{ props: TempestPageProps }> {
+  const props = await getBaseProsperoProps(args);
 
   return {
     props,

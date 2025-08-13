@@ -4,4 +4,5 @@ export interface GutenbergScrapeConfig {
 
   contentContainerSelector?: string;
   ignore?: string;
+  transform?: (textContent: string) => string;
 }

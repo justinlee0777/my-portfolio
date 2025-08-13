@@ -4,4 +4,6 @@ export const config: GutenbergScrapeConfig = {
   url: `https://www.gutenberg.org/files/46/46-h/46-h.htm`,
   sectionHeadingSelector: 'h4',
   contentContainerSelector: '.book',
+  transform: (textContent) =>
+    textContent.replaceAll(/\n/g, '').replaceAll(/\s{2,}/g, ' '),
 };

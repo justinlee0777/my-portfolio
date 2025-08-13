@@ -9,6 +9,7 @@ import Slide from '../components/slide/slide';
 import createLinkElement from '../config/create-link-element.function';
 import loadFont from '../config/load-font.function';
 import Font from '../models/font.enum';
+import { bookConfigs } from './book-config.const';
 import ProsperoConfig from './prospero.config';
 
 export interface BaseProsperoProps {
@@ -53,11 +54,11 @@ export default function ProsperoPage({
         <>
           <Bookshelf
             className={styles.bookshelf}
-            books={config.links.map((link) => {
+            books={bookConfigs.map((link) => {
               return {
                 author: link.author,
-                title: link.text,
-                url: link.url,
+                title: link.title,
+                url: `/prospero/${link.urlSlug}`,
               };
             })}
           />
@@ -80,16 +81,6 @@ export default function ProsperoPage({
                 return <p key={i}>{line}</p>;
               }
             })}
-          </div>
-          <div className={styles.otherReadings}>
-            <h4>Other readings</h4>
-            <ul className={styles.otherReadingsList}>
-              {config.links.map(({ text, url }) => (
-                <li key={url}>
-                  <a href={url}>{text}</a>
-                </li>
-              ))}
-            </ul>
           </div>
         </>
       </Slide>

@@ -29,7 +29,7 @@
   display: grid;
   gap: 1em;
   grid-auto-rows: 60%;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   height: 85%;
   margin: 0 auto;
   overflow-y: auto;
@@ -41,13 +41,14 @@
 
 @media (max-width: 600px) {
   .bookshelfBack {
-    grid-template-columns: repeat(4, 1fr) !important;
+    font-size: 0.8em;
+    grid-template-columns: repeat(3, 1fr) !important;
   }
 }
 
 @media (max-width: 1200px) {
   .bookshelfBack {
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 
