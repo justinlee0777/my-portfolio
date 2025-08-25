@@ -15,7 +15,10 @@
 }
 
 .bookshelf {
+  box-sizing: border-box;
   height: 80vh;
+  margin: auto;
+  width: 80%;
 }
 
 .prosperoHeader {

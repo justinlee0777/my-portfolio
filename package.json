@@ -9,7 +9,8 @@
     "lint": "next lint",
     "format": "prettier --write .",
     "upload-ulysses": "tsx ./src/scripts/ulysses/upload.mts",
-    "scrape:gutenberg": "tsx ./src/scripts/project-gutenberg/scrape.ts"
+    "scrape:gutenberg": "tsx ./src/scripts/project-gutenberg/scrape.ts",
+    "upload-books": "tsx ./upload-books.ts"
   },
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.624.0",

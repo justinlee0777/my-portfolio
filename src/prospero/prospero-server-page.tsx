@@ -1,3 +1,5 @@
+'use client';
+
 import styles from './index.module.scss';
 
 import { BookConfig, BooksElement } from 'prospero/types';
@@ -19,7 +21,6 @@ import { useMemo, type JSX } from 'react';
 import { desktopStyles, mobileStyles } from '../consts/ulysses-styles.const';
 import { ProsperoPageProps } from '../page-utils/prospero/get-base-props.function';
 import ProsperoPage from './base-page';
-import { bookConfigs } from './book-config.const';
 
 export function ProsperoServerPage({
   config,
@@ -27,7 +28,7 @@ export function ProsperoServerPage({
 }: ProsperoPageProps): JSX.Element {
   const endpointBase = '/api/prospero/texts';
 
-  const bookTitle = book.title,
+  const bookTitle = book.name,
     urlSlug = book.urlSlug;
 
   const mobilePages = useMemo(
@@ -101,14 +102,14 @@ export function ProsperoServerPage({
     [mobileStyles, desktopStyles]
   );
 
-  const { author } = bookConfigs.find((config) => config.urlSlug === urlSlug)!;
+  const { authorFirstName, authorLastName } = book;
 
   return (
     <ProsperoPage
       config={config}
       createBooks={createBooks as () => BooksElement}
       bookTitle={bookTitle}
-      bookAuthor={`${author.firstName} ${author.lastName}`}
+      bookAuthor={`${authorFirstName} ${authorLastName}`}
     ></ProsperoPage>
   );
 }

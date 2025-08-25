@@ -1,37 +1,17 @@
 import styles from './index.module.scss';
 
 import Head from 'next/head';
-import { useEffect, useRef, type JSX } from 'react';
+import { JSX } from 'react';
 
+import { Bookshelf } from '../components/bookshelf/bookshelf';
 import Slide from '../components/slide/slide';
 import createLinkElement from '../config/create-link-element.function';
-import loadFont from '../config/load-font.function';
-import Font from '../models/font.enum';
-import { ProsperoBookProps } from './base-prospero-props.model';
+import { ProsperoLibraryProps } from './base-prospero-props.model';
 
-export default function ProsperoPage({
+export function ProsperoLibraryPage({
   config,
-  createBooks,
-  bookTitle,
-  bookAuthor,
-}: ProsperoBookProps): JSX.Element {
-  const containerRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    loadFont(Font.BOOKERLY);
-  }, []);
-
-  useEffect(() => {
-    if (createBooks) {
-      const books = createBooks();
-
-      if (containerRef.current && books) {
-        containerRef.current.appendChild(books);
-        return () => books.prospero.destroy();
-      }
-    }
-  }, [containerRef, createBooks]);
-
+  books,
+}: ProsperoLibraryProps): JSX.Element {
   return (
     <>
       <Head>
@@ -43,9 +23,7 @@ export default function ProsperoPage({
       <Slide className={styles.prosperoPage}>
         <>
           <h1 className={styles.prosperoHeader}>{config.textContent.header}</h1>
-          <h2 className={styles.bookTitle}>{bookTitle}</h2>
-          <h3 className={styles.bookAuthor}>{bookAuthor}</h3>
-          <main ref={containerRef}></main>
+          <Bookshelf className={styles.bookshelf} books={books} />
           <div className={styles.description}>
             {config.textContent.description.map((line, i) => {
               if (typeof line === 'object') {

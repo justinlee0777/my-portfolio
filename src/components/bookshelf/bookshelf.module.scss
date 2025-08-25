@@ -10,7 +10,7 @@
 }
 
 .bookshelfEdge {
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.8), 0 1px 2px -1px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0px 2px 0 rgba(0, 0, 0, 0.8);
   opacity: 0.5;
 }
 
@@ -20,7 +20,7 @@
   height: var(--height);
   transform: translateZ(-100px) rotateX(-90deg) translateX(-11%);
   position: relative;
-  width: 129%;
+  width: 128%;
 }
 
 .bookshelfBack {
@@ -28,7 +28,7 @@
   box-sizing: border-box;
   display: grid;
   gap: 1em;
-  grid-auto-rows: 60%;
+  grid-auto-rows: 1fr;
   grid-template-columns: repeat(5, 1fr);
   height: 85%;
   margin: 0 auto;
@@ -37,6 +37,15 @@
   position: relative;
   transform-style: preserve-3d;
   width: 80%;
+}
+
+.bookshelfFloor {
+  background-color: rgb(155, 125, 80);
+  bottom: 0;
+  height: 1em;
+  position: absolute;
+  width: 100%;
+  z-index: 10;
 }
 
 @media (max-width: 600px) {
@@ -53,7 +62,7 @@
 }
 
 .bookshelfShadow {
-  box-shadow: inset 0 10px 10px 0 #653b17;
+  box-shadow: inset 0 5px 5px 0 #653b17;
   height: 100%;
   left: 0;
   pointer-events: none;
@@ -67,9 +76,11 @@
   border-radius: 4px;
   border-style: solid;
   border-width: 2px;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  gap: 1em;
   text-align: center;
   padding: 1em 0.5em;
 
@@ -79,5 +90,9 @@
 
   .bookAuthor {
     margin-top: auto;
+  }
+
+  > * {
+    margin: 0;
   }
 }
