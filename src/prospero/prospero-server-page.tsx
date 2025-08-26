@@ -1,3 +1,5 @@
+'use client';
+
 import styles from './index.module.scss';
 
 import { BookConfig, BooksElement } from 'prospero/types';
@@ -20,18 +22,22 @@ import { desktopStyles, mobileStyles } from '../consts/ulysses-styles.const';
 import { ProsperoPageProps } from '../page-utils/prospero/get-base-props.function';
 import ProsperoPage from './base-page';
 
-export default function UlyssesPage({
+export function ProsperoServerPage({
   config,
+  book,
 }: ProsperoPageProps): JSX.Element {
   const endpointBase = '/api/prospero/texts';
 
+  const bookTitle = book.name,
+    urlSlug = book.urlSlug;
+
   const mobilePages = useMemo(
-    () => new ServerPages(`${endpointBase}/ulysses/mobile`),
+    () => new ServerPages(`${endpointBase}/${urlSlug}/mobile`),
     []
   );
 
   const desktopPages = useMemo(
-    () => new ServerPages(`${endpointBase}/ulysses/desktop`),
+    () => new ServerPages(`${endpointBase}/${urlSlug}/desktop`),
     []
   );
 
@@ -65,9 +71,9 @@ export default function UlyssesPage({
             minWidth: 750,
           },
           tableOfContents: fetch(
-            `${endpointBase}/ulysses/table-of-contents/desktop`
+            `${endpointBase}/${urlSlug}/table-of-contents/desktop`
           ).then((response) => response.json()),
-          ...getBookConfig('desktop-ulysses-bookmark'),
+          ...getBookConfig(`desktop-${urlSlug}-bookmark`),
         },
         { classnames: [styles.book] }
       );
@@ -82,9 +88,9 @@ export default function UlyssesPage({
           listeners: [listenToClickEvents],
           pagesShown: 1,
           tableOfContents: fetch(
-            `${endpointBase}/ulysses/table-of-contents/mobile`
+            `${endpointBase}/${urlSlug}/table-of-contents/mobile`
           ).then((response) => response.json()),
-          ...getBookConfig('mobile-ulysses-bookmark'),
+          ...getBookConfig(`mobile-${urlSlug}-bookmark`),
         },
         { classnames: [styles.book] }
       );
@@ -96,12 +102,14 @@ export default function UlyssesPage({
     [mobileStyles, desktopStyles]
   );
 
+  const { authorFirstName, authorLastName } = book;
+
   return (
     <ProsperoPage
       config={config}
       createBooks={createBooks as () => BooksElement}
-      bookTitle="Ulysses"
-      bookAuthor="James Joyce"
+      bookTitle={bookTitle}
+      bookAuthor={`${authorFirstName} ${authorLastName}`}
     ></ProsperoPage>
   );
 }

@@ -8,21 +8,17 @@ import {
 } from '../get-base-page-props.function';
 import connectToMongoDB from './connect-to-mongodb.function';
 
-export interface ProsperoPageProps extends BasePageProps {
-  book: ProsperoLibraryTitle;
+export interface ProsperoLibraryProps extends BasePageProps {
+  books: Array<ProsperoLibraryTitle>;
   config: ProsperoConfig;
 }
 
-export async function getBaseProsperoProps({
-  params,
-}): Promise<ProsperoPageProps> {
+export async function getLibraryProps(): Promise<ProsperoLibraryProps> {
   const baseProps = await getBasePageProps('en', '', true);
-
-  const bookTitle = params?.bookTitle ?? '';
 
   await connectToMongoDB();
 
-  const book = await ProsperoLibraryTitleModel.findOne({ urlSlug: bookTitle })
+  const books = await ProsperoLibraryTitleModel.find()
     .select('-_id')
     .lean()
     .orFail();
@@ -30,6 +26,6 @@ export async function getBaseProsperoProps({
   return {
     ...baseProps,
     config: defaultProsperoConfig,
-    book,
+    books,
   };
 }

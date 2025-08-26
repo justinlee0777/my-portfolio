@@ -1,28 +1,20 @@
 import styles from './index.module.scss';
 
 import Head from 'next/head';
-import { BooksElement } from 'prospero/types';
 import { useEffect, useRef, type JSX } from 'react';
 
 import Slide from '../components/slide/slide';
 import createLinkElement from '../config/create-link-element.function';
 import loadFont from '../config/load-font.function';
 import Font from '../models/font.enum';
-import ProsperoConfig from './prospero.config';
-
-export interface BaseProsperoProps {
-  config: ProsperoConfig;
-  createBooks: (() => BooksElement) | undefined;
-  bookTitle: string;
-  bookAuthor: string;
-}
+import { ProsperoBookProps } from './base-prospero-props.model';
 
 export default function ProsperoPage({
   config,
   createBooks,
   bookTitle,
   bookAuthor,
-}: BaseProsperoProps): JSX.Element {
+}: ProsperoBookProps): JSX.Element {
   const containerRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -69,16 +61,6 @@ export default function ProsperoPage({
                 return <p key={i}>{line}</p>;
               }
             })}
-          </div>
-          <div className={styles.otherReadings}>
-            <h4>Other readings</h4>
-            <ul className={styles.otherReadingsList}>
-              {config.links.map(({ text, url }) => (
-                <li key={url}>
-                  <a href={url}>{text}</a>
-                </li>
-              ))}
-            </ul>
           </div>
         </>
       </Slide>

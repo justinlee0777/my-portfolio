@@ -9,8 +9,4 @@ export default interface ProsperoConfig {
     header: string;
     description: Array<string | LinkedString>;
   };
-  links: Array<{
-    url: string;
-    text: string;
-  }>;
 }
