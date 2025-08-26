@@ -59,6 +59,9 @@ export function Bookshelf({ className, books }: Props): JSX.Element {
     }
   }, [bookListRef.current, updateScrollButtons]);
 
+  const MdArrowBackIcon = MdArrowBack as () => JSX.Element,
+    MdArrowForwardIcon = MdArrowForward as () => JSX.Element;
+
   return (
     <div className={clsx(styles.bookshelf, className)}>
       <div className={clsx(styles.bookshelfEdge, styles.bookshelfBack)}></div>
@@ -77,7 +80,7 @@ export function Bookshelf({ className, books }: Props): JSX.Element {
             }
           }}
         >
-          <MdArrowBack />
+          <MdArrowBackIcon />
         </button>
         <div
           className={styles.bookList}
@@ -111,7 +114,7 @@ export function Bookshelf({ className, books }: Props): JSX.Element {
             }
           }}
         >
-          <MdArrowForward />
+          <MdArrowForwardIcon />
         </button>
       </div>
       <div className={clsx(styles.bookshelfEdge, styles.bookshelfBottom)}></div>
