@@ -20,11 +20,6 @@ export default function NavigationPane({
   config,
 }: NavigationPaneProps): JSX.Element {
   const [opened, setOpened] = useState(false);
-  const [openedSection, setOpenedSection] = useState<
-    NavigationPaneSection | undefined
-  >();
-
-  const navigationPaneRef = useRef<HTMLDivElement | null>(null);
 
   const sections: Array<NavigationPaneSection> = useMemo(
     () => [
@@ -51,6 +46,13 @@ export default function NavigationPane({
     ],
     [config.settings, route]
   );
+
+  // Initializing with Projects section for SEO.
+  const [openedSection, setOpenedSection] = useState<
+    NavigationPaneSection | undefined
+  >(sections[0]);
+
+  const navigationPaneRef = useRef<HTMLDivElement | null>(null);
 
   const menuClassName = classNames(styles.menu, className, {
     [styles.menuOpened]: opened,

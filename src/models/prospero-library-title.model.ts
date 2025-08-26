@@ -1,25 +1,5 @@
 import { model, Model, models, Schema } from 'mongoose';
-
-export type TitleTag = 'essay' | 'novel' | 'play' | 'novella';
-
-export type TitleField =
-  | 'fiction'
-  | 'computer science'
-  | 'philosophy'
-  | 'satire';
-
-export type TitleSource = 'Project Gutenberg' | 'Other';
-
-export interface ProsperoLibraryTitle {
-  name: string;
-  authorFirstName: string;
-  authorLastName: string;
-  fields: Array<TitleField>;
-  tags: Array<TitleTag>;
-  urlSlug: string;
-  source: TitleSource;
-  sourceUrl: string;
-}
+import { ProsperoLibraryTitle } from './prospero-library-title-models';
 
 const ProsperoLibraryTitleSchema = new Schema<ProsperoLibraryTitle>({
   name: { type: String, required: true },

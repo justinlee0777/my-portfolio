@@ -14,9 +14,16 @@
   }
 }
 
+.filters {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  margin: 1em auto auto auto;
+  max-width: 60%;
+}
+
 .bookshelf {
   box-sizing: border-box;
-  height: 80vh;
   margin: auto;
   width: 80%;
 }

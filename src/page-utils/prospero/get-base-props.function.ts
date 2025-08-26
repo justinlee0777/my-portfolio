@@ -1,7 +1,5 @@
-import {
-  ProsperoLibraryTitle,
-  ProsperoLibraryTitleModel,
-} from '../../models/prospero-library-title.model';
+import { ProsperoLibraryTitle } from '../../models/prospero-library-title-models';
+import { ProsperoLibraryTitleModel } from '../../models/prospero-library-title.model';
 import defaultProsperoConfig from '../../prospero/default-prospero.config';
 import ProsperoConfig from '../../prospero/prospero.config';
 import {

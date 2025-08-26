@@ -11,14 +11,14 @@ export const defaultProjectsConfig: Array<ProjectConfig> = [
     header: 'Random of the Day',
     thumbnail: '/projects/random-of-the-day.png',
     description: 'Random neat thing of the day.',
-    url: '/en/random-of-the-day',
+    url: '/random-of-the-day',
   },
   {
     header: 'Buzzword Bingo',
     thumbnail: '/projects/buzzword-bingo.png',
     description:
       'Library that takes in bingo cells and renders them as a bingosheet.',
-    url: '/en/buzzword-bingo',
+    url: '/buzzword-bingo',
   },
   {
     header: 'Picture-in-Picture JS',

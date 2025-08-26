@@ -1,5 +1,5 @@
 .bookshelf {
-  --height: 400px;
+  --height: 300px;
 
   background-color: rgb(149, 110, 57);
   box-sizing: border-box;
@@ -16,27 +16,76 @@
 
 .bookshelfBottom {
   background-color: rgb(121, 88, 50);
-  bottom: 29%;
+  bottom: 33%;
   height: var(--height);
-  transform: translateZ(-100px) rotateX(-90deg) translateX(-11%);
+  transform: translateZ(-100px) rotateX(-90deg) translateX(-8%);
   position: relative;
-  width: 128%;
+  width: 120%;
 }
+
+$bookshelf-back-width: 80%;
 
 .bookshelfBack {
   background-color: rgb(161, 121, 65);
   box-sizing: border-box;
-  display: grid;
-  gap: 1em;
-  grid-auto-rows: 1fr;
-  grid-template-columns: repeat(5, 1fr);
   height: 85%;
   margin: 0 auto;
-  overflow-y: auto;
   padding: 1em;
   position: relative;
   transform-style: preserve-3d;
-  width: 80%;
+  width: $bookshelf-back-width;
+}
+
+.books {
+  $books-width: $bookshelf-back-width;
+
+  bottom: 10%;
+  box-sizing: border-box;
+  left: calc((100% - $books-width) / 2);
+  padding: 0 1em;
+  perspective: 500px;
+  position: absolute;
+  width: $books-width;
+  z-index: 100;
+
+  > button {
+    border-radius: 50%;
+    border-style: solid;
+    height: 2em;
+    line-height: 2em;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: 0.3s background-color, 0.3s border-color;
+    vertical-align: middle;
+    width: 2em;
+
+    &:first-of-type {
+      left: 0;
+    }
+
+    &:last-of-type {
+      right: 0;
+    }
+  }
+}
+
+.bookList {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+  overflow: auto hidden;
+
+  > .book {
+    flex: none;
+    height: 150px;
+    width: 100px;
+  }
+}
+
+.hideScrollButton {
+  display: none;
 }
 
 .bookshelfFloor {
@@ -49,15 +98,13 @@
 }
 
 @media (max-width: 600px) {
-  .bookshelfBack {
+  .books {
     font-size: 0.8em;
-    grid-template-columns: repeat(3, 1fr) !important;
   }
 }
 
 @media (max-width: 1200px) {
-  .bookshelfBack {
-    grid-template-columns: repeat(4, 1fr);
+  .books {
   }
 }
 
@@ -85,10 +132,15 @@
   padding: 1em 0.5em;
 
   .bookTitle {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
     margin: 0;
+    overflow: hidden;
   }
 
   .bookAuthor {
+    font-size: 0.8em;
     margin-top: auto;
   }
 

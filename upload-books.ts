@@ -1,9 +1,7 @@
 import 'dotenv/config';
 
-import {
-  ProsperoLibraryTitle,
-  ProsperoLibraryTitleModel,
-} from './src/models/prospero-library-title.model';
+import { ProsperoLibraryTitle } from './src/models/prospero-library-title-models';
+import { ProsperoLibraryTitleModel } from './src/models/prospero-library-title.model';
 import connectToMongoDB from './src/page-utils/prospero/connect-to-mongodb.function';
 
 const titles: Array<ProsperoLibraryTitle> = [

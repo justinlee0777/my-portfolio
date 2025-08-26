@@ -1,5 +1,5 @@
 import { type BooksElement } from 'prospero/types';
-import { type ProsperoLibraryTitle } from '../models/prospero-library-title.model';
+import { ProsperoLibraryTitle } from '../models/prospero-library-title-models';
 import type ProsperoConfig from './prospero.config';
 
 export interface BaseProsperoProps {
