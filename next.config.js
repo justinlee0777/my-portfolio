@@ -4,7 +4,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 });
 
 const config = {
-  transpilePackages: ['prospero', 'ai-ui-components'],
+  transpilePackages: ['prospero', 'ai-ui-components', 'author-map-ui'],
   trailingSlash: true,
   images: {
     unoptimized: true,

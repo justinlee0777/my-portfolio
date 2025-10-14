@@ -18,9 +18,13 @@
     "@google-cloud/translate": "^8.3.0",
     "@types/lodash-es": "^4.17.12",
     "ai-ui-components": "^0.0.0-beta.6",
+    "author-map-ui": "^0.0.0-beta.3",
     "buzzword-bingo-generator": "^0.0.23",
     "classnames": "^2.3.2",
     "clsx": "^2.1.1",
+    "d3-color": "^3.1.0",
+    "d3-interpolate": "^3.0.1",
+    "d3-transition": "^3.0.1",
     "gray-matter": "^4.0.3",
     "lodash-es": "^4.17.21",
     "mongoose": "^8.5.4",
@@ -63,5 +67,17 @@
     "ts-jest": "^29.0.5",
     "tsx": "^4.19.1",
     "typescript": "^4.9.5"
+  },
+  "overrides": {
+    "react-simple-maps": {
+      "d3-zoom": "^3.0.0",
+      "d3-interpolate": "^3.0.1",
+      "d3-color": "^3.1.0",
+      "d3-geo": "^3.1.0",
+      "d3-transition": "^3.0.1",
+      "d3-selection": "^3.0.0",
+      "react": "^16.8.0 || 17.x || 18.x || 19.x",
+      "react-dom": "^16.8.0 || 17.x || 18.x || 19.x"
+    }
   }
 }
