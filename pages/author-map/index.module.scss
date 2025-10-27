@@ -1,4 +1,14 @@
 .authorMap {
+  display: flex;
   flex: 1;
   width: 100%;
+}
+
+.loadingScreen {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 600px;
+  margin: auto;
 }

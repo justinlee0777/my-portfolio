@@ -163,7 +163,8 @@ $backgroundColorAnimation: 1s background-color ease-in;
   }
 
   button,
-  input {
+  input,
+  [role='tooltip'] {
     color: $color;
   }
 
