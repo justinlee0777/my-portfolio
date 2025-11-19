@@ -1,9 +1,11 @@
-import type {
-  Author,
-  AuthorLocation,
-  MilestoneEvent,
-  PortraitData,
-  TimelineEvent,
+import {
+  TimeSpan,
+  type Author,
+  type AuthorGroup,
+  type AuthorLocation,
+  type MilestoneEvent,
+  type PortraitData,
+  type TimelineEvent,
 } from 'author-map-ui';
 import { model, Model, models, Schema } from 'mongoose';
 
@@ -41,11 +43,36 @@ const PortraitDataSchema = new Schema<PortraitData>(
   { _id: false }
 );
 
+const TimeSpanSchema = new Schema<TimeSpan>(
+  {
+    startDate: { type: String },
+    endDate: { type: String },
+  },
+  { _id: false }
+);
+
+const AuthorGroupSchema = new Schema<AuthorGroup>({
+  id: { type: String, required: true, unique: true },
+  name: { type: String, required: true },
+  description: { type: String, required: true },
+  span: {
+    type: TimeSpanSchema,
+  },
+  link: { type: String },
+});
+
+const AuthorGroupModelName = 'AuthorGroup';
+
+export const AuthorGroupModel: Model<AuthorGroup> =
+  models[AuthorGroupModelName] ||
+  model(AuthorGroupModelName, AuthorGroupSchema);
+
 const AuthorSchema = new Schema<Author>({
   id: { type: String, required: true, unique: true },
   authorFirstName: { type: String, required: true },
   authorLastName: { type: String, required: true },
   authorFullName: { type: String },
+  authorDisplayName: { type: String },
   birthDate: { type: MilestoneEventSchema, required: true },
   deathDate: { type: MilestoneEventSchema },
   timeline: [{ type: TimelineEventSchema }],
@@ -53,6 +80,7 @@ const AuthorSchema = new Schema<Author>({
     type: String,
   },
   portrait: { type: PortraitDataSchema },
+  groups: [{ type: String }],
 });
 
 const AuthorModelName = 'Author';

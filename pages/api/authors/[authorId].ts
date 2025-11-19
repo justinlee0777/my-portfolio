@@ -1,3 +1,4 @@
+import type { Author } from 'author-map-ui';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { AuthorModel } from '../../../src/models/author.model';
 import connectToMongoDB from '../../../src/page-utils/prospero/connect-to-mongodb.function';
@@ -13,10 +14,10 @@ export default async function handler(
     const exists = await AuthorModel.exists({ id: authorId });
     const stringifiedAuthor = req.body;
     if (exists) {
-      await AuthorModel.updateOne(
-        { id: authorId },
-        JSON.parse(stringifiedAuthor)
-      );
+      const parsedAuthor: Author = JSON.parse(stringifiedAuthor);
+      delete parsedAuthor['_id'];
+
+      await AuthorModel.updateOne({ id: authorId }, parsedAuthor);
 
       res.status(204).end();
     } else {
