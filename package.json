@@ -18,7 +18,7 @@
     "@google-cloud/translate": "^8.3.0",
     "@types/lodash-es": "^4.17.12",
     "ai-ui-components": "^0.0.0-beta.6",
-    "author-map-ui": "^0.0.0-beta.15",
+    "author-map-ui": "^0.0.0-beta.18",
     "buzzword-bingo-generator": "^0.0.23",
     "classnames": "^2.3.2",
     "clsx": "^2.1.1",

@@ -1,7 +1,7 @@
-import type { AuthorGroup } from 'author-map-ui/models';
+import type { MajorEvent } from 'author-map-ui/models';
 import { Types } from 'mongoose';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { AuthorGroupModel } from '../../src/models/author.model';
+import { AuthorMajorEventModel } from '../../src/models/author.model';
 import connectToMongoDB from '../../src/page-utils/prospero/connect-to-mongodb.function';
 
 export default async function handler(
@@ -11,22 +11,22 @@ export default async function handler(
   if (req.method === 'GET') {
     await connectToMongoDB();
 
-    const authorGroups = await AuthorGroupModel.find().lean();
+    const authorMajorEvents = await AuthorMajorEventModel.find().lean();
 
-    res.status(200).json(authorGroups);
+    res.status(200).json(authorMajorEvents);
   } else if (req.method === 'POST') {
     await connectToMongoDB();
 
     const id = new Types.ObjectId();
 
-    const group: AuthorGroup = {
+    const event: MajorEvent = {
       ...JSON.parse(req.body),
       id: id.toString(),
     };
 
-    await AuthorGroupModel.create({ ...group, _id: id });
+    await AuthorMajorEventModel.create({ ...event, _id: id });
 
-    res.status(201).json(group);
+    res.status(201).json(event);
   } else {
     res.status(404).end();
   }

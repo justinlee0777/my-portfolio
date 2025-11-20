@@ -1,4 +1,5 @@
 import {
+  MajorEvent,
   TimeSpan,
   type Author,
   type AuthorGroup,
@@ -11,7 +12,7 @@ import { model, Model, models, Schema } from 'mongoose';
 
 const AuthorLocationSchema = new Schema<AuthorLocation>(
   {
-    address: { type: String, required: true },
+    address: { type: String },
     state: { type: String },
   },
   { _id: false }
@@ -30,9 +31,10 @@ const TimelineEventSchema = new Schema<TimelineEvent>(
   {
     location: AuthorLocationSchema,
     notes: { type: String },
-    startDate: { type: String, required: true },
-    endDate: { type: String, required: true },
-  },
+    startDate: { type: String },
+    endDate: { type: String },
+    date: { type: String },
+  } as any,
   { _id: false }
 );
 
@@ -50,6 +52,18 @@ const TimeSpanSchema = new Schema<TimeSpan>(
   },
   { _id: false }
 );
+
+const AuthorMajorEventSchema = new Schema<MajorEvent>({
+  ...MilestoneEventSchema.obj,
+  id: { type: String, required: true, unique: true },
+  referenceUrl: { type: String },
+});
+
+const AuthorMajorEventModelName = 'AuthorMajorEvent';
+
+export const AuthorMajorEventModel: Model<MajorEvent> =
+  models[AuthorMajorEventModelName] ||
+  model(AuthorMajorEventModelName, AuthorMajorEventSchema);
 
 const AuthorGroupSchema = new Schema<AuthorGroup>({
   id: { type: String, required: true, unique: true },
