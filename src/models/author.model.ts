@@ -1,4 +1,6 @@
 import {
+  AuthorAwardAchievement,
+  AuthorWorkAchievement,
   MajorEvent,
   TimeSpan,
   type Author,
@@ -27,14 +29,27 @@ const MilestoneEventSchema = new Schema<MilestoneEvent>(
   { _id: false }
 );
 
-const TimelineEventSchema = new Schema<TimelineEvent>(
+const AuthorAchievementSchema = new Schema<
+  AuthorWorkAchievement | AuthorAwardAchievement
+>(
+  {
+    type: { type: String, required: true },
+    workTitle: { type: String },
+    awardName: { type: String },
+    referenceUrl: { type: String },
+  },
+  { _id: false }
+);
+
+const TimelineEventSchema = new Schema<TimelineEvent & MilestoneEvent>(
   {
     location: AuthorLocationSchema,
     notes: { type: String },
     startDate: { type: String },
     endDate: { type: String },
     date: { type: String },
-  } as any,
+    achievement: AuthorAchievementSchema,
+  },
   { _id: false }
 );
 

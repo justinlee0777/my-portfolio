@@ -6,7 +6,6 @@ import { type JSX } from 'react';
 import NavigationProps from './models/navigation-props.interface';
 
 export default function Navigation({
-  locale,
   links,
   className,
 }: NavigationProps): JSX.Element {
@@ -19,7 +18,7 @@ export default function Navigation({
       </a>
       <Link
         className={classNames(styles.navigationLink, styles.homeLink)}
-        href={`/${locale}/`}
+        href={`/`}
         prefetch={false}
       >
         Justin Lee

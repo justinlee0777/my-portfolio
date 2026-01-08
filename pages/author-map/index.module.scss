@@ -13,3 +13,49 @@
   max-width: 600px;
   margin: auto;
 }
+
+.signIn {
+  cursor: pointer;
+  left: 2em;
+  position: absolute;
+  top: 2em;
+}
+
+.signInModal {
+  align-items: center;
+  background: rgba(0, 0, 0, 0.5);
+  border: 0;
+  box-sizing: border-box;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  left: 0;
+  max-height: 100vh;
+  max-width: 100vw;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+.signInModalContainer {
+  background-color: var(--background-color);
+  box-sizing: border-box;
+  height: 200px;
+  padding: 1em;
+  width: 200px;
+
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  label,
+  button {
+    margin-top: 1em;
+  }
+
+  input {
+    margin-top: 0.5em;
+  }
+}
