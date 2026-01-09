@@ -14,6 +14,12 @@ export const defaultProjectsConfig: Array<ProjectConfig> = [
     url: '/random-of-the-day',
   },
   {
+    header: 'Author Map',
+    thumbnail: '/projects/author-map.gif',
+    description: 'Project for documenting American literary history.',
+    url: '/author-map',
+  },
+  {
     header: 'Buzzword Bingo',
     thumbnail: '/projects/buzzword-bingo.png',
     description:

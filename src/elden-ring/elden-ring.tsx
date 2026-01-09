@@ -143,11 +143,7 @@ export default function EldenRingPage() {
             }
           }}
         />
-        <Tooltip
-          id={tooltipId}
-          place="top"
-          style={{ backgroundColor: '#0f0f0f' }}
-        />
+        <Tooltip id={tooltipId} place="top" />
       </>
     </Slide>
   );
