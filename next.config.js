@@ -23,8 +23,19 @@ const config = {
         headers: [
           {
             key: 'Access-Control-Allow-Origin',
-            value: 'https://popularthoughts.blog',
+            value: 'https://jayleewriter.com',
           },
+          { key: 'Access-Control-Allow-Methods', value: 'GET' },
+        ],
+      },
+      {
+        source: '/api/author(.*)',
+        headers: [
+          {
+            key: 'Access-Control-Allow-Origin',
+            value: 'https://jayleewriter.com',
+          },
+          { key: 'Access-Control-Allow-Methods', value: 'GET' },
         ],
       },
     ];
