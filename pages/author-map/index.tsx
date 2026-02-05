@@ -3,6 +3,7 @@ import styles from './index.module.scss';
 
 import { MajorEvent, type Author, type AuthorGroup } from 'author-map-ui';
 import dynamic from 'next/dynamic';
+import Head from 'next/head';
 import { JSX, useEffect, useState } from 'react';
 import LoadingScreen from '../../src/components/loading-screen/loading-screen';
 import { getBasePageProps } from '../../src/page-utils/get-base-page-props.function';
@@ -71,6 +72,18 @@ export default function AuthorMapPage({
   } else {
     return (
       <>
+        <Head>
+          <title>Author Map</title>
+          <meta
+            name="description"
+            content="A literary map of the United States of America."
+          />
+          <meta property="og:title" content="Author Map" />
+          <meta
+            property="og:description"
+            content="A literary map of the United States of America."
+          />
+        </Head>
         <AuthorMap
           className={styles.authorMap}
           authors={loadedAuthors}
