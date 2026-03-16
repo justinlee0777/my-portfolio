@@ -1,7 +1,8 @@
 import type { Author } from 'author-map-ui/models';
 import { Types } from 'mongoose';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { AuthorModel } from '../../src/models/author.model';
+import { ZodError } from 'zod';
+import { AuthorModel, AuthorValidator } from '../../src/models/author.model';
 import connectToMongoDB from '../../src/page-utils/prospero/connect-to-mongodb.function';
 import { validateAuthorMapUser } from '../../src/utils/auth';
 
@@ -25,12 +26,23 @@ export default async function handler(
       return;
     }
 
+    const parsedAuthor = JSON.parse(req.body);
+
+    try {
+      AuthorValidator.parse(parsedAuthor);
+    } catch (err) {
+      if (err instanceof ZodError) {
+        res.status(400).end();
+        return;
+      }
+    }
+
     await connectToMongoDB();
 
     const id = new Types.ObjectId();
 
     const author: Author = {
-      ...JSON.parse(req.body),
+      ...parsedAuthor,
       id: id.toString(),
     };
 

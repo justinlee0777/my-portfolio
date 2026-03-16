@@ -32,7 +32,7 @@ export default async function handler(
         break;
     }
 
-    const completions = await openaiAPI.beta.chat.completions.parse({
+    const completions = await openaiAPI.chat.completions.parse({
       model: 'gpt-4o-mini',
       messages: [
         {

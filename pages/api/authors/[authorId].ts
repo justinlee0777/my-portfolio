@@ -1,6 +1,8 @@
 import type { Author } from 'author-map-ui';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { AuthorModel } from '../../../src/models/author.model';
+
+import { ZodError } from 'zod';
+import { AuthorModel, AuthorValidator } from '../../../src/models/author.model';
 import connectToMongoDB from '../../../src/page-utils/prospero/connect-to-mongodb.function';
 import { validateAuthorMapUser } from '../../../src/utils/auth';
 
@@ -18,13 +20,24 @@ export default async function handler(
       return;
     }
 
+    const stringifiedAuthor = req.body;
+    const parsedAuthor: Author = JSON.parse(stringifiedAuthor);
+
+    try {
+      AuthorValidator.parse(parsedAuthor);
+    } catch (err) {
+      if (err instanceof ZodError) {
+        res.status(400).end();
+        return;
+      }
+    }
+
     await connectToMongoDB();
 
     const authorId = req.query.authorId;
     const exists = await AuthorModel.exists({ id: authorId });
-    const stringifiedAuthor = req.body;
+
     if (exists) {
-      const parsedAuthor: Author = JSON.parse(stringifiedAuthor);
       delete parsedAuthor['_id'];
 
       await AuthorModel.updateOne({ id: authorId }, parsedAuthor);

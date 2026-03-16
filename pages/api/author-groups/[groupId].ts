@@ -1,6 +1,11 @@
 import type { AuthorGroup } from 'author-map-ui';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { AuthorGroupModel } from '../../../src/models/author.model';
+import { ZodError } from 'zod';
+
+import {
+  AuthorGroupModel,
+  AuthorGroupValidator,
+} from '../../../src/models/author.model';
 import connectToMongoDB from '../../../src/page-utils/prospero/connect-to-mongodb.function';
 import { validateAuthorMapUser } from '../../../src/utils/auth';
 
@@ -18,13 +23,25 @@ export default async function handler(
       return;
     }
 
+    const stringifiedGroup = req.body;
+
+    const parsedGroup: AuthorGroup = JSON.parse(stringifiedGroup);
+
+    try {
+      AuthorGroupValidator.parse(parsedGroup);
+    } catch (err) {
+      if (err instanceof ZodError) {
+        res.status(400).end();
+        return;
+      }
+    }
+
     await connectToMongoDB();
 
     const groupId = req.query.groupId;
     const exists = await AuthorGroupModel.exists({ id: groupId });
-    const stringifiedGroup = req.body;
+
     if (exists) {
-      const parsedGroup: AuthorGroup = JSON.parse(stringifiedGroup);
       delete parsedGroup['_id'];
 
       await AuthorGroupModel.updateOne({ id: groupId }, parsedGroup);

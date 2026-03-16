@@ -1,16 +1,17 @@
-import {
+import type {
+  Author,
   AuthorAwardAchievement,
+  AuthorGroup,
+  AuthorLocation,
   AuthorWorkAchievement,
   MajorEvent,
+  MilestoneEvent,
+  PortraitData,
+  TimelineEvent,
   TimeSpan,
-  type Author,
-  type AuthorGroup,
-  type AuthorLocation,
-  type MilestoneEvent,
-  type PortraitData,
-  type TimelineEvent,
 } from 'author-map-ui';
 import { model, Model, models, Schema } from 'mongoose';
+import z, { ZodType } from 'zod';
 
 const AuthorLocationSchema = new Schema<AuthorLocation>(
   {
@@ -116,3 +117,37 @@ const AuthorModelName = 'Author';
 
 export const AuthorModel: Model<Author> =
   models[AuthorModelName] || model(AuthorModelName, AuthorSchema);
+
+// Validators
+
+export const MilestoneEventValidator = z.object({
+  date: z.iso.date(),
+}) satisfies ZodType<MilestoneEvent>;
+
+export const AuthorValidator = z.object({
+  authorFirstName: z
+    .string()
+    .regex(/^[a-zA-Z0-9]+$/)
+    .max(100),
+  authorLastName: z
+    .string()
+    .regex(/^[a-zA-Z0-9]+$/)
+    .max(100),
+  birthDate: MilestoneEventValidator,
+  timeline: z.array(
+    z.xor([
+      z.object({
+        startDate: z.iso.date(),
+        endDate: z.iso.date(),
+      }) satisfies ZodType<TimelineEvent>,
+      z.object({
+        date: z.iso.date(),
+      }) satisfies ZodType<MilestoneEvent>,
+    ])
+  ),
+}) satisfies ZodType<Omit<Author, 'id'>>;
+
+export const AuthorGroupValidator = z.object({
+  name: z.string().max(100),
+  description: z.string().max(4000),
+}) satisfies ZodType<Omit<AuthorGroup, 'id'>>;

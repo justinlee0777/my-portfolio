@@ -6,7 +6,7 @@ import {
 import getOpenAIApi from '../../../../src/api/openai/open-ai.client';
 
 export async function POST(req: NextRequest) {
-  const { embeddings, chat } = getOpenAIApi();
+  const { chat } = getOpenAIApi();
 
   const { messages }: { messages: Array<ChatCompletionMessageParam> } =
     await req.json();
