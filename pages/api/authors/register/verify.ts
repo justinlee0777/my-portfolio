@@ -53,6 +53,7 @@ export default async function handler(
       await AuthorMapUserModel.updateOne({ username }, { token: null });
 
       const credental = new AuthorMapCredentialModel({
+        username,
         publicKey: Buffer.from(
           verification.registrationInfo.credential.publicKey
         ).toString('base64url'),
