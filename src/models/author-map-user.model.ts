@@ -1,9 +1,8 @@
-import bcrypt from 'bcrypt';
 import { model, Model, models, Schema } from 'mongoose';
 
 export interface AuthorMapUser {
   username: string;
-  password: string;
+  token?: string;
 }
 
 export const AuthorMapUserSchema = new Schema<AuthorMapUser>({
@@ -12,26 +11,33 @@ export const AuthorMapUserSchema = new Schema<AuthorMapUser>({
     required: true,
     unique: true,
   },
-  password: {
+  token: {
     type: String,
-    required: true,
   },
 });
 
-AuthorMapUserSchema.methods.validatePassword = function (password) {
-  return bcrypt.compareSync(password, this.password);
-};
-
-export interface IAuthorMapUserMethods {
-  validatePassword(candidatePassword: string): boolean;
-}
-
 const AuthorMapUserModelName = 'AuthorMapUser';
 
-export type AuthorMapUserDocument = Document &
-  AuthorMapUser &
-  IAuthorMapUserMethods;
-
-export const AuthorMapUserModel: Model<AuthorMapUserDocument> =
+export const AuthorMapUserModel: Model<AuthorMapUser> =
   models[AuthorMapUserModelName] ||
   model(AuthorMapUserModelName, AuthorMapUserSchema);
+
+export interface AuthorMapCredential {
+  username: string;
+  id: string;
+  publicKey: string;
+  counter: number;
+}
+
+export const AuthorMapCredentialSchema = new Schema<AuthorMapCredential>({
+  username: { type: String, required: true },
+  id: { type: String, required: true },
+  publicKey: { type: String, required: true },
+  counter: { type: Number, required: true },
+});
+
+const AuthorMapCredentialModelName = 'AuthorMapCredential';
+
+export const AuthorMapCredentialModel: Model<AuthorMapCredential> =
+  models[AuthorMapCredentialModelName] ||
+  model(AuthorMapCredentialModelName, AuthorMapCredentialSchema);

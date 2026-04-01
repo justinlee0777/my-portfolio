@@ -4,10 +4,11 @@ import styles from './index.module.scss';
 import { MajorEvent, type Author, type AuthorGroup } from 'author-map-ui';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
-import { JSX, useEffect, useState } from 'react';
+import { JSX, useCallback, useEffect, useState } from 'react';
 import LoadingScreen from '../../src/components/loading-screen/loading-screen';
 import { getBasePageProps } from '../../src/page-utils/get-base-page-props.function';
 import { Modal } from '../../src/services/modal';
+import { login, register } from '../../src/utils/webauthn';
 
 const AuthorMap = dynamic(
   () => import('author-map-ui').then(({ AuthorMap }) => AuthorMap),
@@ -43,6 +44,80 @@ export default function AuthorMapPage({
 
     readAuthToken();
   }, []);
+
+  const LoginRegisterModal = useCallback(
+    ({ registering }: { registering?: boolean }) => {
+      return (
+        <dialog className={styles.signInModal} onClick={() => modal.close()}>
+          <div
+            className={styles.signInModalContainer}
+            onClick={(event) => {
+              event.preventDefault();
+              event.stopPropagation();
+            }}
+          >
+            <form
+              onSubmit={async (event) => {
+                event.preventDefault();
+
+                const formData = new FormData(event.target as HTMLFormElement);
+
+                const username = formData.get('username');
+
+                if (registering) {
+                  const password = formData.get('password');
+
+                  if (
+                    typeof username === 'string' &&
+                    typeof password === 'string'
+                  ) {
+                    await register(username, password);
+                  }
+                } else {
+                  if (typeof username === 'string') {
+                    await login(username);
+
+                    setUserSignedIn(true);
+                    modal.close();
+                  }
+                }
+              }}
+            >
+              <label htmlFor="authorUsername">Username</label>
+              <input
+                id="authorUsername"
+                name="username"
+                type="text"
+                required
+                autoComplete="username"
+              />
+
+              {registering && (
+                <>
+                  <label htmlFor="authorPassword">Token</label>
+                  <input
+                    id="authorPassword"
+                    name="password"
+                    type="password"
+                    required
+                    autoComplete="current-password"
+                  />
+                </>
+              )}
+
+              <button
+                type="submit"
+                onClick={(event) => event.stopPropagation()}
+              >
+                Submit
+              </button>
+            </form>
+          </div>
+        </dialog>
+      );
+    },
+    []
+  );
 
   useEffect(() => {
     if (!loadedAuthors) {
@@ -153,79 +228,28 @@ export default function AuthorMapPage({
             }
           }}
         />
-        <button
-          className={styles.signIn}
-          onClick={() => {
-            modal.set(
-              <dialog
-                className={styles.signInModal}
-                onClick={() => modal.close()}
-              >
-                <div
-                  className={styles.signInModalContainer}
-                  onClick={(event) => {
-                    event.preventDefault();
-                    event.stopPropagation();
-                  }}
-                >
-                  <form
-                    onSubmit={async (event) => {
-                      event.preventDefault();
-
-                      const formData = new FormData(
-                        event.target as HTMLFormElement
-                      );
-
-                      const authToken = `${formData.get(
-                        'username'
-                      )}:${formData.get('password')}`;
-
-                      const encodedToken = btoa(authToken);
-
-                      const response = await fetch('/api/authors/check-login', {
-                        headers: {
-                          Authorization: encodedToken,
-                        },
-                      });
-
-                      if (response.status === 200) {
-                        setUserSignedIn(true);
-                        modal.close();
-                      }
-                    }}
-                  >
-                    <label htmlFor="authorUsername">Username</label>
-                    <input
-                      id="authorUsername"
-                      name="username"
-                      type="text"
-                      required
-                      autoComplete="username"
-                    />
-
-                    <label htmlFor="authorPassword">Password</label>
-                    <input
-                      id="authorPassword"
-                      name="password"
-                      type="password"
-                      required
-                      autoComplete="current-password"
-                    />
-
-                    <button
-                      type="submit"
-                      onClick={(event) => event.stopPropagation()}
-                    >
-                      Submit
-                    </button>
-                  </form>
-                </div>
-              </dialog>
-            );
-          }}
-        >
-          {userSignedIn ? `You're signed in.` : 'Sign in'}
-        </button>
+        {userSignedIn ? (
+          <>
+            <button
+              className={styles.signIn}
+              onClick={() => {
+                modal.set(<LoginRegisterModal registering />);
+              }}
+            >
+              Register
+            </button>
+            <button
+              className={styles.signIn}
+              onClick={() => {
+                modal.set(<LoginRegisterModal />);
+              }}
+            >
+              Login
+            </button>
+          </>
+        ) : (
+          <p>User signed in.</p>
+        )}
       </>
     );
   }
