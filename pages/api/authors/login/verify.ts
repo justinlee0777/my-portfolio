@@ -78,25 +78,21 @@ export default async function handler(
       { expiresIn: '1h' }
     );
 
-    res.setHeader(
-      'Set-Cookie',
-      serialize(cookieName, '', {
-        httpOnly: true,
-        path: urlPath,
-        maxAge: 0,
-      })
-    );
+    const resetChallenge = serialize(cookieName, '', {
+      httpOnly: true,
+      path: urlPath,
+      maxAge: 0,
+    });
 
-    res.setHeader(
-      'Set-Cookie',
-      serialize(sessionName, token, {
-        httpOnly: true,
-        secure: true,
-        sameSite: 'lax',
-        path: urlPath,
-        maxAge: 60 * 60,
-      })
-    );
+    const sessionCookie = serialize(sessionName, token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'lax',
+      path: urlPath,
+      maxAge: 60 * 60,
+    });
+
+    res.setHeader('Set-Cookie', [resetChallenge, sessionCookie]);
 
     res.status(200).end();
   } else {

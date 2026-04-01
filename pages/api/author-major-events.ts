@@ -1,7 +1,7 @@
 import type { MajorEvent } from 'author-map-ui/models';
 import { Types } from 'mongoose';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { cookieName } from '../../src/consts/author-map-webauthn';
+import { sessionName } from '../../src/consts/author-map-webauthn';
 import { AuthorMajorEventModel } from '../../src/models/author.model';
 import connectToMongoDB from '../../src/page-utils/prospero/connect-to-mongodb.function';
 import { validateSession } from '../../src/utils/webauthn';
@@ -17,7 +17,7 @@ export default async function handler(
 
     res.status(200).json(authorMajorEvents);
   } else if (req.method === 'POST') {
-    const authToken = req.cookies[cookieName];
+    const authToken = req.cookies[sessionName];
 
     if (!(authToken && (await validateSession(authToken)))) {
       res.status(401).json({

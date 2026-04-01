@@ -2,7 +2,7 @@ import type { Author } from 'author-map-ui';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 import { ZodError } from 'zod';
-import { cookieName } from '../../../src/consts/author-map-webauthn';
+import { sessionName } from '../../../src/consts/author-map-webauthn';
 import { AuthorModel, AuthorValidator } from '../../../src/models/author.model';
 import connectToMongoDB from '../../../src/page-utils/prospero/connect-to-mongodb.function';
 import { validateSession } from '../../../src/utils/webauthn';
@@ -12,7 +12,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === 'POST') {
-    const authToken = req.cookies[cookieName];
+    const authToken = req.cookies[sessionName];
 
     if (!(authToken && (await validateSession(authToken)))) {
       res.status(401).json({
