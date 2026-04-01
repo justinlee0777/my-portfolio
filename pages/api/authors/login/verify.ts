@@ -91,7 +91,7 @@ export default async function handler(
       'Set-Cookie',
       serialize(sessionName, token, {
         httpOnly: true,
-        secure: false,
+        secure: true,
         sameSite: 'lax',
         path: urlPath,
         maxAge: 60 * 60,
