@@ -1,4 +1,7 @@
-import { startRegistration } from '@simplewebauthn/browser';
+import {
+  startAuthentication,
+  startRegistration,
+} from '@simplewebauthn/browser';
 import jwt from 'jsonwebtoken';
 
 export async function register(username: string, token: string) {
@@ -37,7 +40,7 @@ export async function login(username: string) {
 
   const options = await optionsResponse.json();
 
-  const credential = await startRegistration(options);
+  const credential = await startAuthentication(options);
 
   const verifyResponse = await fetch('/api/authors/login/verify', {
     method: 'POST',

@@ -12,6 +12,7 @@ import {
   AuthorMapCredentialModel,
   AuthorMapUserModel,
 } from '../../../../src/models/author-map-user.model';
+import connectToMongoDB from '../../../../src/page-utils/prospero/connect-to-mongodb.function';
 
 export default async function handler(
   req: NextApiRequest,
@@ -49,6 +50,8 @@ export default async function handler(
           maxAge: 0,
         })
       );
+
+      await connectToMongoDB();
 
       await AuthorMapUserModel.updateOne({ username }, { token: null });
 

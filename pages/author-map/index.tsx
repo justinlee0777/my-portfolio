@@ -231,9 +231,8 @@ export default function AuthorMapPage({
         {userSignedIn ? (
           <p>User signed in.</p>
         ) : (
-          <>
+          <div className={styles.signIn}>
             <button
-              className={styles.signIn}
               onClick={() => {
                 modal.set(<LoginRegisterModal registering />);
               }}
@@ -241,14 +240,13 @@ export default function AuthorMapPage({
               Register
             </button>
             <button
-              className={styles.signIn}
               onClick={() => {
                 modal.set(<LoginRegisterModal />);
               }}
             >
               Login
             </button>
-          </>
+          </div>
         )}
       </>
     );

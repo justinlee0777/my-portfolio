@@ -15,10 +15,13 @@
 }
 
 .signIn {
-  cursor: pointer;
   left: 2em;
   position: absolute;
   top: 2em;
+
+  & > button {
+    cursor: pointer;
+  }
 }
 
 .signInModal {
