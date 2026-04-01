@@ -2,7 +2,11 @@ import { verifyAuthenticationResponse } from '@simplewebauthn/server';
 import { parse, serialize } from 'cookie';
 import jwt from 'jsonwebtoken';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { cookieName, rpID } from '../../../../src/consts/author-map-webauthn';
+import {
+  cookieName,
+  expectedOrigin,
+  rpID,
+} from '../../../../src/consts/author-map-webauthn';
 import {
   AuthorMapCredentialModel,
   AuthorMapUserModel,
@@ -45,7 +49,7 @@ export default async function handler(
     const verification = await verifyAuthenticationResponse({
       response: body,
       expectedChallenge: challenge,
-      expectedOrigin: origin,
+      expectedOrigin,
       expectedRPID: rpID,
       credential: {
         id: credential.id,

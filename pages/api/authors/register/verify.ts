@@ -4,8 +4,8 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 import {
   cookieName,
+  expectedOrigin,
   rpID,
-  rpName,
   urlPath,
 } from '../../../../src/consts/author-map-webauthn';
 import {
@@ -35,7 +35,7 @@ export default async function handler(
     const verification = await verifyRegistrationResponse({
       response,
       expectedChallenge: challenge,
-      expectedOrigin: rpName,
+      expectedOrigin,
       expectedRPID: rpID,
     });
 
