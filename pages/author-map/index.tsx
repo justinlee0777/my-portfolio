@@ -229,6 +229,8 @@ export default function AuthorMapPage({
           }}
         />
         {userSignedIn ? (
+          <p>User signed in.</p>
+        ) : (
           <>
             <button
               className={styles.signIn}
@@ -247,8 +249,6 @@ export default function AuthorMapPage({
               Login
             </button>
           </>
-        ) : (
-          <p>User signed in.</p>
         )}
       </>
     );
