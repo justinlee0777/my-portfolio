@@ -15,7 +15,7 @@ export default async function handler(
     const session = cookies[sessionName];
 
     if (!session) {
-      return res.status(401).end();
+      return res.status(401).json({ message: 'No session.' });
     }
 
     const JWT_SECRET = process.env.AUTHOR_AUTH_SECRET!;
@@ -29,7 +29,7 @@ export default async function handler(
     });
 
     if (!credential) {
-      return res.status(401).end();
+      return res.status(401).json({ message: 'Invalid payload.' });
     }
 
     return res.status(200).end();
