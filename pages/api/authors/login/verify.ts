@@ -81,6 +81,8 @@ export default async function handler(
     const resetChallenge = serialize(cookieName, '', {
       httpOnly: true,
       path: urlPath,
+      secure: true,
+      sameSite: 'strict',
       maxAge: 0,
     });
 

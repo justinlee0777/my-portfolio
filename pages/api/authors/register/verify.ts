@@ -46,6 +46,8 @@ export default async function handler(
         'Set-Cookie',
         serialize(cookieName, '', {
           httpOnly: true,
+          secure: true,
+          sameSite: 'strict',
           path: urlPath,
           maxAge: 0,
         })
