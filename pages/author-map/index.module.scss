@@ -15,6 +15,9 @@
 }
 
 .signIn {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
   left: 2em;
   position: absolute;
   top: 2em;

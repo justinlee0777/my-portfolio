@@ -6,6 +6,7 @@ import {
   cookieName,
   expectedOrigin,
   rpID,
+  urlPath,
 } from '../../../../src/consts/author-map-webauthn';
 import {
   AuthorMapCredentialModel,
@@ -78,11 +79,20 @@ export default async function handler(
 
     res.setHeader(
       'Set-Cookie',
+      serialize(cookieName, '', {
+        httpOnly: true,
+        path: urlPath,
+        maxAge: 0,
+      })
+    );
+
+    res.setHeader(
+      'Set-Cookie',
       serialize('session', token, {
         httpOnly: true,
         secure: false,
         sameSite: 'lax',
-        path: '/',
+        path: urlPath,
         maxAge: 60 * 60,
       })
     );

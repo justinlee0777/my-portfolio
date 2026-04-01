@@ -122,15 +122,22 @@ export default function AuthorMapPage({
   useEffect(() => {
     if (!loadedAuthors) {
       (async () => {
-        const [authors, authorGroups, majorEvents] = await Promise.all([
-          fetch('/api/authors').then((response) => response.json()),
-          fetch('/api/author-groups').then((response) => response.json()),
-          fetch('/api/author-major-events').then((response) => response.json()),
-        ]);
+        const [authors, authorGroups, majorEvents, loggedIn] =
+          await Promise.all([
+            fetch('/api/authors').then((response) => response.json()),
+            fetch('/api/author-groups').then((response) => response.json()),
+            fetch('/api/author-major-events').then((response) =>
+              response.json()
+            ),
+            fetch('/api/authors/me', { credentials: 'include' }).then(
+              (response) => response.ok
+            ),
+          ]);
 
         setLoadedAuthors(authors);
         setLoadedGroups(authorGroups);
         setLoadedMajorEvents(majorEvents);
+        setUserSignedIn(loggedIn);
       })();
     }
   }, [
@@ -140,6 +147,7 @@ export default function AuthorMapPage({
     setLoadedGroups,
     loadedMajorEvents,
     setLoadedMajorEvents,
+    setUserSignedIn,
   ]);
 
   if (!(loadedAuthors && loadedGroups && loadedMajorEvents)) {
