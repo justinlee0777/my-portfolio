@@ -7,4 +7,4 @@ export const cookieName = '__Host-webauthn_challenge';
 
 export const sessionName = '__Host-session';
 
-export const urlPath = '/author-map';
+export const urlPath = '/';
