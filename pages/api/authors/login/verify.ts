@@ -47,7 +47,7 @@ export default async function handler(
     }
 
     const verification = await verifyAuthenticationResponse({
-      response: body,
+      response,
       expectedChallenge: challenge,
       expectedOrigin,
       expectedRPID: rpID,
