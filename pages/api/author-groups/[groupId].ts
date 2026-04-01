@@ -2,21 +2,22 @@ import type { AuthorGroup } from 'author-map-ui';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { ZodError } from 'zod';
 
+import { cookieName } from '../../../src/consts/author-map-webauthn';
 import {
   AuthorGroupModel,
   AuthorGroupValidator,
 } from '../../../src/models/author.model';
 import connectToMongoDB from '../../../src/page-utils/prospero/connect-to-mongodb.function';
-import { validateAuthorMapUser } from '../../../src/utils/auth';
+import { validateSession } from '../../../src/utils/webauthn';
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   if (req.method === 'POST') {
-    const authToken = req.cookies.auth;
+    const authToken = req.cookies[cookieName];
 
-    if (!(authToken && (await validateAuthorMapUser(authToken)))) {
+    if (!(authToken && (await validateSession(authToken)))) {
       res.status(401).json({
         message: `You are not allowed to modify this resource.`,
       });

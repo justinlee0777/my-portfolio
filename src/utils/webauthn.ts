@@ -1,4 +1,5 @@
 import { startRegistration } from '@simplewebauthn/browser';
+import jwt from 'jsonwebtoken';
 
 export async function register(username: string, token: string) {
   const optionsResponse = await fetch('/api/authors/register/options', {
@@ -46,4 +47,8 @@ export async function login(username: string) {
   if (!verifyResponse.ok) {
     throw new Error('Verification failed.');
   }
+}
+
+export async function validateSession(token: string): Promise<boolean> {
+  return Boolean(jwt.verify(token, process.env.AUTHOR_MAP_SECRET!));
 }
