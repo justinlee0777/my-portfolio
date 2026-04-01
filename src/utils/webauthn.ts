@@ -53,5 +53,5 @@ export async function login(username: string) {
 }
 
 export async function validateSession(token: string): Promise<boolean> {
-  return Boolean(jwt.verify(token, process.env.AUTHOR_MAP_SECRET!));
+  return Boolean(jwt.verify(token, process.env.AUTHOR_AUTH_SECRET!));
 }

@@ -72,7 +72,7 @@ export default async function handler(
     // issue session
     const token = jwt.sign(
       { userId: credential.id },
-      process.env.AUTHOR_MAP_SECRET!,
+      process.env.AUTHOR_AUTH_SECRET!,
       { expiresIn: '1h' }
     );
 
