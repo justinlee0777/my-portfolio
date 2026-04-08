@@ -2,9 +2,11 @@ import type { Author } from 'author-map-ui/models';
 import { Types } from 'mongoose';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { ZodError } from 'zod';
+
 import { sessionName } from '../../src/consts/author-map-webauthn';
 import { AuthorModel, AuthorValidator } from '../../src/models/author.model';
 import connectToMongoDB from '../../src/page-utils/prospero/connect-to-mongodb.function';
+import { getAuthors } from '../../src/utils/author-map/utils';
 import { validateSession } from '../../src/utils/webauthn';
 
 export default async function handler(
@@ -12,9 +14,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === 'GET') {
-    await connectToMongoDB();
-
-    const authors = await AuthorModel.find().lean();
+    const authors = await getAuthors();
 
     res.status(200).json(authors);
   } else if (req.method === 'POST') {

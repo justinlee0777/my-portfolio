@@ -8,6 +8,7 @@ import { JSX, useCallback, useEffect, useState } from 'react';
 import LoadingScreen from '../../src/components/loading-screen/loading-screen';
 import { getBasePageProps } from '../../src/page-utils/get-base-page-props.function';
 import { Modal } from '../../src/services/modal';
+import type { AuthorMapData } from '../../src/utils/author-map/utils';
 import { login, register } from '../../src/utils/webauthn';
 
 const AuthorMap = dynamic(
@@ -122,20 +123,17 @@ export default function AuthorMapPage({
   useEffect(() => {
     if (!loadedAuthors) {
       (async () => {
-        const [authors, authorGroups, majorEvents, loggedIn] =
-          await Promise.all([
-            fetch('/api/authors').then((response) => response.json()),
-            fetch('/api/author-groups').then((response) => response.json()),
-            fetch('/api/author-major-events').then((response) =>
-              response.json()
-            ),
-            fetch('/api/authors/me', { credentials: 'include' }).then(
-              (response) => response.ok
-            ),
-          ]);
+        const [{ authors, groups, majorEvents }, loggedIn] = await Promise.all([
+          fetch('/api/author-map').then(
+            (response) => response.json() as Promise<AuthorMapData>
+          ),
+          fetch('/api/authors/me', { credentials: 'include' }).then(
+            (response) => response.ok
+          ),
+        ]);
 
         setLoadedAuthors(authors);
-        setLoadedGroups(authorGroups);
+        setLoadedGroups(groups);
         setLoadedMajorEvents(majorEvents);
         setUserSignedIn(loggedIn);
       })();

@@ -5,6 +5,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { sessionName } from '../../src/consts/author-map-webauthn';
 import { AuthorGroupModel } from '../../src/models/author.model';
 import connectToMongoDB from '../../src/page-utils/prospero/connect-to-mongodb.function';
+import { getAuthorGroups } from '../../src/utils/author-map/utils';
 import { validateSession } from '../../src/utils/webauthn';
 
 export default async function handler(
@@ -12,9 +13,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === 'GET') {
-    await connectToMongoDB();
-
-    const authorGroups = await AuthorGroupModel.find().lean();
+    const authorGroups = await getAuthorGroups();
 
     res.status(200).json(authorGroups);
   } else if (req.method === 'POST') {
