@@ -1,7 +1,6 @@
 import './index.globals.scss';
 import styles from './index.module.scss';
 
-import { MajorEvent, type Author, type AuthorGroup } from 'author-map-ui';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { JSX, useCallback, useEffect, useState } from 'react';
@@ -23,10 +22,7 @@ export default function AuthorMapPage({
 }: {
   modal: Modal;
 }): JSX.Element {
-  const [loadedAuthors, setLoadedAuthors] = useState<Array<Author> | null>(),
-    [loadedGroups, setLoadedGroups] = useState<Array<AuthorGroup> | null>(),
-    [loadedMajorEvents, setLoadedMajorEvents] =
-      useState<Array<MajorEvent> | null>();
+  const [loadedData, setLoadedData] = useState<AuthorMapData | null>();
 
   const [userSignedIn, setUserSignedIn] = useState<boolean>(false);
 
@@ -121,9 +117,9 @@ export default function AuthorMapPage({
   );
 
   useEffect(() => {
-    if (!loadedAuthors) {
+    if (!loadedData) {
       (async () => {
-        const [{ authors, groups, majorEvents }, loggedIn] = await Promise.all([
+        const [data, loggedIn] = await Promise.all([
           fetch('/api/author-map').then(
             (response) => response.json() as Promise<AuthorMapData>
           ),
@@ -132,25 +128,17 @@ export default function AuthorMapPage({
           ),
         ]);
 
-        setLoadedAuthors(authors);
-        setLoadedGroups(groups);
-        setLoadedMajorEvents(majorEvents);
+        setLoadedData(data);
         setUserSignedIn(loggedIn);
       })();
     }
-  }, [
-    loadedAuthors,
-    setLoadedAuthors,
-    loadedGroups,
-    setLoadedGroups,
-    loadedMajorEvents,
-    setLoadedMajorEvents,
-    setUserSignedIn,
-  ]);
+  }, [loadedData, setLoadedData, setUserSignedIn]);
 
-  if (!(loadedAuthors && loadedGroups && loadedMajorEvents)) {
+  if (!loadedData) {
     return <LoadingScreen className={styles.loadingScreen} />;
   } else {
+    const { authors, groups, majorEvents, coordinates } = loadedData;
+
     return (
       <>
         <Head>
@@ -165,11 +153,32 @@ export default function AuthorMapPage({
             content="A literary map of the United States of America."
           />
         </Head>
+        {userSignedIn ? (
+          <p>User signed in.</p>
+        ) : (
+          <div className={styles.signIn}>
+            <button
+              onClick={() => {
+                modal.set(<LoginRegisterModal registering />);
+              }}
+            >
+              Register
+            </button>
+            <button
+              onClick={() => {
+                modal.set(<LoginRegisterModal />);
+              }}
+            >
+              Login
+            </button>
+          </div>
+        )}
         <AuthorMap
           className={styles.authorMap}
-          authors={loadedAuthors}
-          groups={loadedGroups}
-          majorEvents={loadedMajorEvents}
+          authors={authors}
+          groups={groups}
+          majorEvents={majorEvents}
+          cityCoordinates={coordinates}
           disabled={!userSignedIn && 'You are not permitted to edit the map.'}
           syncAuthorAdded={async (author) => {
             const response = await fetch('/api/authors', {
@@ -204,7 +213,10 @@ export default function AuthorMapPage({
             } else {
               group.id = (await response.json()).id;
 
-              setLoadedGroups((currentGroups) => currentGroups!.concat(group));
+              setLoadedData((currentData) => ({
+                ...currentData!,
+                groups: currentData!.groups.concat(group),
+              }));
             }
           }}
           onGroupUpdated={async (group) => {
@@ -227,33 +239,13 @@ export default function AuthorMapPage({
               throw new Error(await response.text());
             } else {
               event.id = (await response.json()).id;
-
-              setLoadedMajorEvents((currentEvents) =>
-                currentEvents!.concat(event)
-              );
+              setLoadedData((currentData) => ({
+                ...currentData!,
+                majorEvents: currentData!.majorEvents.concat(event),
+              }));
             }
           }}
         />
-        {userSignedIn ? (
-          <p>User signed in.</p>
-        ) : (
-          <div className={styles.signIn}>
-            <button
-              onClick={() => {
-                modal.set(<LoginRegisterModal registering />);
-              }}
-            >
-              Register
-            </button>
-            <button
-              onClick={() => {
-                modal.set(<LoginRegisterModal />);
-              }}
-            >
-              Login
-            </button>
-          </div>
-        )}
       </>
     );
   }

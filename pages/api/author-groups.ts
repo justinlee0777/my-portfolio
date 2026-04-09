@@ -3,7 +3,7 @@ import { Types } from 'mongoose';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 import { sessionName } from '../../src/consts/author-map-webauthn';
-import { AuthorGroupModel } from '../../src/models/author.model';
+import { AuthorGroupModel } from '../../src/models/author-map/author.model';
 import connectToMongoDB from '../../src/page-utils/prospero/connect-to-mongodb.function';
 import { getAuthorGroups } from '../../src/utils/author-map/utils';
 import { validateSession } from '../../src/utils/webauthn';

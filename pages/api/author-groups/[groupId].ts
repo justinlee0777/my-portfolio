@@ -6,7 +6,7 @@ import { sessionName } from '../../../src/consts/author-map-webauthn';
 import {
   AuthorGroupModel,
   AuthorGroupValidator,
-} from '../../../src/models/author.model';
+} from '../../../src/models/author-map/author.model';
 import connectToMongoDB from '../../../src/page-utils/prospero/connect-to-mongodb.function';
 import { validateSession } from '../../../src/utils/webauthn';
 

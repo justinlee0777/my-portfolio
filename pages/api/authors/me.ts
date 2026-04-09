@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import { sessionName } from '../../../src/consts/author-map-webauthn';
-import { AuthorMapCredentialModel } from '../../../src/models/author-map-user.model';
+import { AuthorMapCredentialModel } from '../../../src/models/author-map/author-map-user.model';
 import connectToMongoDB from '../../../src/page-utils/prospero/connect-to-mongodb.function';
 
 export default async function handler(
